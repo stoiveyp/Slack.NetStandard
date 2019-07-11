@@ -28,5 +28,16 @@ namespace Slack.NetStandard.Tests
             Assert.True(command.Payload.ContainsKey("test"));
             Assert.Equal("1", command.Payload["test"]);
         }
+
+        [Fact]
+        public void CorrectlyWraps()
+        {
+            var command = new SlashCommand(payload + "&ssl_check=1");
+            Assert.True(command.IsSslCheck);
+            Assert.Equal("U2147483697",command.UserId);
+            Assert.Equal("Steve",command.Username);
+            Assert.Equal("C2147483705",command.ChannelId);
+            Assert.Equal("test",command.ChannelName);
+        }
     }
 }
