@@ -10,7 +10,7 @@ namespace Slack.NetStandard.Messages.Blocks
         {
             BlockId = blockId;
         }
-        [JsonProperty("type")] public string Type => "divider";
+        [JsonProperty("type")] public string Type => nameof(Divider).ToLower();
 
         [JsonProperty("block_id",NullValueHandling = NullValueHandling.Ignore)]
         public string BlockId { get; set; }

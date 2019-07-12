@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Slack.NetStandard.JsonConverters;
+using Slack.NetStandard.Messages.Blocks;
 
 namespace Slack.NetStandard.Messages
 {
     [JsonConverter(typeof(TextObjectConverter))]
-    public abstract class TextObject
+    public abstract class TextObject:IContextElement
     {
         protected TextObject() { }
 
