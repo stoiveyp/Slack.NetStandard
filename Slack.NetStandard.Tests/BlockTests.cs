@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.MessageBlocks;
+using Slack.NetStandard.Messages.Blocks;
 using Xunit;
 
 namespace Slack.NetStandard.Tests

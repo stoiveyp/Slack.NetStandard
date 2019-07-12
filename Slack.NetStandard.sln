@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Slack.NetStandard", "Slack.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Slack.NetStandard.Tests", "Slack.NetStandard.Tests\Slack.NetStandard.Tests.csproj", "{20AF74EC-8E81-46B8-9E16-CF4F5EB6C4DA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{39D759D3-4767-4E34-8B69-E6D673F858DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
