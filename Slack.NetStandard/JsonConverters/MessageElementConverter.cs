@@ -32,6 +32,8 @@ namespace Slack.NetStandard.JsonConverters
         {
             {nameof(Image).ToLower(), typeof(Image)},
             {nameof(Button).ToLower(), typeof(Button)},
+            {nameof(Overflow).ToLower(),typeof(Overflow) },
+            {nameof(DatePicker).ToLower(),typeof(DatePicker)},
             {"static_select",typeof(StaticSelect) }
         };
 
