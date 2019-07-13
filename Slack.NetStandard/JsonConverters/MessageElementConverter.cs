@@ -37,7 +37,8 @@ namespace Slack.NetStandard.JsonConverters
             {"static_select",typeof(StaticSelect) },
             {"external_select",typeof(ExternalSelect) },
             {"users_select",typeof(UsersSelect) },
-            {"conversations_select",typeof(ConversationsSelect) }
+            {"conversations_select",typeof(ConversationsSelect) },
+            {"channels_select",typeof(ChannelsSelect) }
         };
 
         private IMessageElement GetComponent(string type)
