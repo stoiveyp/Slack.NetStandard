@@ -30,9 +30,4 @@ namespace Slack.NetStandard.Messages.Elements
         [JsonProperty("confirm",NullValueHandling = NullValueHandling.Ignore)]
         public Confirmation Confirm { get; set; }
     }
-
-    public class StaticSelect:IMessageElement
-    {
-        [JsonProperty("type")] public string Type => "static_select";
-    }
 }

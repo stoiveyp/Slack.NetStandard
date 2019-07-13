@@ -3,12 +3,12 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.Messages.Elements
 {
-    public class OptionGroup
+    public class OptionGroup:IOption
     {
-        [JsonProperty("label",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("label")]
         public PlainText Label { get; set; }
 
-        [JsonProperty("options",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("options")]
         public IList<Option> Options { get; set; }
     }
 }

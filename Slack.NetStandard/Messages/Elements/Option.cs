@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.Messages.Elements
 {
-    public class Option
+    public class Option:IOption
     {
         [JsonProperty("text")]
         public PlainText Text { get; set; }
