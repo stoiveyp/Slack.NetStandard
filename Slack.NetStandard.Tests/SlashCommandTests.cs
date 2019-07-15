@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.SlashCommand;
 using Xunit;
@@ -49,6 +53,23 @@ namespace Slack.NetStandard.Tests
             var expected = new JObject(new JProperty("response_type", "in_channel"),
                 new JProperty("text", "It's 80 degrees right now."));
             Assert.True(JToken.DeepEquals(expected,JObject.FromObject(message)));
+        }
+
+        [Fact]
+        public async Task RespondSendCorrectRequest()
+        {
+            var command = new SlashCommand.SlashCommand(payload + "&test=1");
+            var message = new SlashCommandMessage(ResponseType.InChannel) { Text = "It's 80 degrees right now." };
+
+            var client = new HttpClient(new ActionHandler(async req =>
+            {
+                Assert.Equal(HttpMethod.Post,req.Method);
+                Assert.Equal(command.ResponseUrl,req.RequestUri.ToString());
+                Assert.Equal(JsonConvert.SerializeObject(message),await req.Content.ReadAsStringAsync());
+            },HttpStatusCode.OK));
+            
+            
+            await command.Respond(message, client);
         }
     }
 }
