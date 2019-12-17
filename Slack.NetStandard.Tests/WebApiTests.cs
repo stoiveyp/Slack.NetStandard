@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
+using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Chat;
 using Xunit;
 
@@ -38,6 +39,41 @@ namespace Slack.NetStandard.Tests
             {
                 Blocks = new List<IMessageBlock>{new Section { Text = new PlainText("stuff")}}
             });
+            Assert.True(response.OK);
+        }
+
+        [Fact]
+        public async Task Chat_DeleteMessage()
+        {
+            var http = new HttpClient(new ActionHandler(async req =>
+            {
+                Assert.Equal("https://slack.com/api/chat.delete", req.RequestUri.ToString());
+                Assert.Equal("application/json", req.Content.Headers.ContentType.MediaType);
+                var jobject = JObject.Parse(await req.Content.ReadAsStringAsync());
+                Assert.Equal("C1234567890",jobject.Value<string>("channel"));
+                Assert.Equal("1405894322.002768", jobject.Value<string>("ts"));
+            }, Utility.ExampleFileContent<DeleteResponse>("DeleteResponse.json")));
+            var client = new SlackWebApiClient(http);
+            var response = await client.Chat.Delete("C1234567890","1405894322.002768");
+            Assert.True(response.OK);
+            Assert.Equal("C024BE91L",response.Channel);
+            Assert.Equal("1401383885.000061", response.Timestamp);
+        }
+
+        [Fact]
+        public async Task Chat_DeleteScheduledMessage()
+        {
+            var http = new HttpClient(new ActionHandler(async req =>
+            {
+                Assert.Equal("https://slack.com/api/chat.deleteScheduledMessage", req.RequestUri.ToString());
+                Assert.Equal("application/json", req.Content.Headers.ContentType.MediaType);
+                var jobject = JObject.Parse(await req.Content.ReadAsStringAsync());
+                Assert.Equal("C1234567890", jobject.Value<string>("channel"));
+                Assert.Equal("Q1234ABCD", jobject.Value<string>("scheduled_message_id"));
+                Assert.True(jobject.Value<bool>("as_user"));
+            }, new WebApiResponse{OK=true}));
+            var client = new SlackWebApiClient(http);
+            var response = await client.Chat.DeleteScheduledMessage("C1234567890", "Q1234ABCD",true);
             Assert.True(response.OK);
         }
     }
