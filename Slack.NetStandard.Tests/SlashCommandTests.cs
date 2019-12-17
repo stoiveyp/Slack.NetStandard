@@ -1,6 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Slack.NetStandard.SlashCommand;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -24,7 +30,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void SlashCommandParsesCorrectly()
         {
-            var command = new SlashCommand(payload + "&test=1");
+            var command = new SlashCommand.SlashCommand(payload + "&test=1");
             Assert.True(command.Payload.ContainsKey("test"));
             Assert.Equal("1", command.Payload["test"]);
         }
@@ -32,12 +38,38 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void CorrectlyWraps()
         {
-            var command = new SlashCommand(payload + "&ssl_check=1");
+            var command = new SlashCommand.SlashCommand(payload + "&ssl_check=1");
             Assert.True(command.IsSslCheck);
             Assert.Equal("U2147483697",command.UserId);
             Assert.Equal("Steve",command.Username);
             Assert.Equal("C2147483705",command.ChannelId);
             Assert.Equal("test",command.ChannelName);
+        }
+
+        [Fact]
+        public void SlashCommandMessageRendersCorrectly()
+        {
+            var message = new SlashCommandMessage(ResponseType.InChannel) {Text = "It's 80 degrees right now."};
+            var expected = new JObject(new JProperty("response_type", "in_channel"),
+                new JProperty("text", "It's 80 degrees right now."));
+            Assert.True(JToken.DeepEquals(expected,JObject.FromObject(message)));
+        }
+
+        [Fact]
+        public async Task RespondSendCorrectRequest()
+        {
+            var command = new SlashCommand.SlashCommand(payload + "&test=1");
+            var message = new SlashCommandMessage(ResponseType.InChannel) { Text = "It's 80 degrees right now." };
+
+            var client = new HttpClient(new ActionHandler(async req =>
+            {
+                Assert.Equal(HttpMethod.Post,req.Method);
+                Assert.Equal(command.ResponseUrl,req.RequestUri.ToString());
+                Assert.Equal(JsonConvert.SerializeObject(message),await req.Content.ReadAsStringAsync());
+            },HttpStatusCode.OK));
+            
+            
+            await command.Respond(message, client);
         }
     }
 }

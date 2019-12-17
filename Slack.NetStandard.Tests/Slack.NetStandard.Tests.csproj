@@ -16,4 +16,13 @@
     <ProjectReference Include="..\Slack.NetStandard\Slack.NetStandard.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Examples\PostMessageResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\StaticSelect.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

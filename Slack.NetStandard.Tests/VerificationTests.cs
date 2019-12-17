@@ -20,13 +20,15 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void VerifierValidatesExpectedSig()
         {
-            Assert.True(RequestVerifier.Verify(ExpectedSig, SigningSecret, Timestamp, Body));
+            var verifier = new RequestVerifier(SigningSecret,int.MaxValue);
+            Assert.True(verifier.Verify(ExpectedSig, Timestamp, Body));
         }
 
         [Fact]
         public void VerifierFailsAlteredSig()
         {
-            Assert.False(RequestVerifier.Verify(ExpectedSig, SigningSecret, Timestamp + 1, Body));
+            var verifier = new RequestVerifier(SigningSecret, int.MaxValue);
+            Assert.False(verifier.Verify(ExpectedSig, Timestamp + 1, Body));
         }
     }
 }

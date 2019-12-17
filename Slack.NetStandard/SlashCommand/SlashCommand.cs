@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-namespace Slack.NetStandard
+namespace Slack.NetStandard.SlashCommand
 {
     public class SlashCommand
     {
@@ -58,5 +63,12 @@ namespace Slack.NetStandard
         public string EnterpriseId => KeyOrNull("enterprise_id");
 
         public string EnterpriseName => KeyOrNull("enterprise_name");
+
+        public async Task Respond(SlashCommandMessage message, HttpClient client = null)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(message),Encoding.UTF8,"application/json");
+            var currentClient = client ?? new HttpClient();
+            await currentClient.PostAsync(new Uri(ResponseUrl, UriKind.Absolute), content);
+        }
     }
 }
