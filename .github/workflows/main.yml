@@ -1,0 +1,33 @@
+name: Build and Test
+on:
+  push:
+    branches:
+    - master
+jobs:
+  runner:
+    name: Package Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip based on commit message
+        uses: veggiemonk/skip-commit@1.0.0
+        env:
+          COMMIT_FILTER: skip-ci
+      - uses: actions/checkout@master
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+      - name: Build Solution
+        run:  dotnet build -c Release
+      - name: Test Solution
+        run:  dotnet test
+      - name: GH Deploy Workaround
+        run: |
+           export REPO_NAME=$(echo ${GITHUB_REPOSITORY} | sed 's/stoiveyp\///')
+           for f in ./${REPO_NAME}/bin/Release/Slack*.nupkg
+           do
+             curl -vX PUT -u "stoiveyp:${{ secrets.GH_PACKAGE }}" -F package=@$f https://nuget.pkg.github.com/stoiveyp/
+           done
+        shell: bash
+      - name: Deploy to NuGet
+        run: |
+          export REPO_NAME=$(echo ${GITHUB_REPOSITORY} | sed 's/stoiveyp\///')
+          dotnet nuget push ./${REPO_NAME}/bin/Release/Slack*.nupkg -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json
