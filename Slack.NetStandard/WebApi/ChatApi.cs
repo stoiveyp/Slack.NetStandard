@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi.Chat;
 
 namespace Slack.NetStandard.WebApi
@@ -23,7 +26,9 @@ namespace Slack.NetStandard.WebApi
         {
             try
             {
-                var message = await _client.Client.PostAsync();
+                var content = new StringContent(JsonConvert.SerializeObject(request));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var message = await _client.Client.PostAsync("chat.postMessage",content);
                 return DeserializeResponse<PostMessageResponse>(await message.Content.ReadAsStreamAsync());
             }
             catch (WebException ex)

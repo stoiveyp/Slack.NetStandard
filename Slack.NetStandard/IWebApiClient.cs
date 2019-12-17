@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard
 {
-    public interface IWebApiClient
+    internal interface IWebApiClient
     {
         HttpClient Client { get; set; }
         JsonSerializer Serializer { get; set; }
