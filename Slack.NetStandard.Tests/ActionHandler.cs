@@ -31,14 +31,32 @@ namespace Slack.NetStandard.Tests
             };
         }
 
+        public ActionHandler(Func<HttpRequestMessage, Task> run, object response, HttpStatusCode code = HttpStatusCode.OK)
+        {
+            Run = async req =>
+            {
+                await run(req);
+                return new HttpResponseMessage(code) { Content = new StringContent(JObject.FromObject(response).ToString()) };
+            };
+        }
+
+        public ActionHandler(Func<HttpRequestMessage, Task> run, HttpStatusCode code = HttpStatusCode.OK)
+        {
+            Run = async req =>
+            {
+                await run(req);
+                return new HttpResponseMessage(code);
+            };
+        }
+
         public ActionHandler(Func<HttpRequestMessage, Task<HttpResponseMessage>> run)
         {
             Run = run;
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            return Run(request);
+            return await Run(request);
         }
     }
 }

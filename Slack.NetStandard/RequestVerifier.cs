@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -9,19 +6,38 @@ namespace Slack.NetStandard
 {
     public class RequestVerifier
     {
-        private string _secret;
-        public RequestVerifier(string signingSecret)
+        private readonly string _secret;
+        private readonly int _tolerance;
+        public static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+
+        public RequestVerifier(string signingSecret, int timestampTolerance = 180)
         {
-            _secret = signingSecret;
+            _secret = signingSecret ?? throw new ArgumentNullException(nameof(signingSecret));
+            _tolerance = timestampTolerance;
         }
 
         public bool Verify(string expectedSig,long timestamp, string body)
         {
-            return Verify(expectedSig,_secret, timestamp, body);
+            return Verify(expectedSig,_secret, timestamp, body, _tolerance);
         }
 
-        public static bool Verify(string expectedSig, string signingSecret, long timestamp, string body)
+        private static bool Verify(string expectedSig, string signingSecret, long timestamp, string body, int tolerance)
         {
+            if (string.IsNullOrWhiteSpace(expectedSig))
+            {
+                throw new ArgumentNullException(nameof(expectedSig));
+            }
+
+            if (string.IsNullOrWhiteSpace(body))
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
+            if (DateTime.Now.Subtract(Epoch).TotalSeconds - timestamp > tolerance)
+            {
+                return false;
+            }
+
             return expectedSig == GenerateSignature(signingSecret, timestamp, body);
         }
 
