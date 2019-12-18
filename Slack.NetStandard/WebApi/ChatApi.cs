@@ -24,9 +24,9 @@ namespace Slack.NetStandard.WebApi
             return MakeJsonCall<PostMessageRequest, PostMessageResponse>("chat.postMessage", request);
         }
 
-        public Task<DeleteResponse> Delete(string channel, string timestamp, bool? asUser = null)
+        public Task<MessageResponse> Delete(string channel, string timestamp, bool? asUser = null)
         {
-            return MakeJsonCall<DeleteRequest, DeleteResponse>("chat.delete", new DeleteRequest
+            return MakeJsonCall<DeleteRequest, MessageResponse>("chat.delete", new DeleteRequest
             {
                 Channel = channel,
                 Timestamp = timestamp,
@@ -51,6 +51,15 @@ namespace Slack.NetStandard.WebApi
             {
                 Channel = channel,
                 Timestamp = timestamp
+            });
+        }
+
+        public Task<MessageResponse> MeMessage(string channel, string text)
+        {
+            return MakeJsonCall<MeMessageRequest, MessageResponse>("chat.meMessage", new MeMessageRequest
+            {
+                Channel = channel,
+                Text = text
             });
         }
 

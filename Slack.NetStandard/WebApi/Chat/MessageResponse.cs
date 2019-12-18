@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.WebApi.Chat
 {
-    public class DeleteResponse:WebApiResponse
+    public class MessageResponse:WebApiResponse
     {
         [JsonProperty("channel")]
         public string Channel { get; set; }
