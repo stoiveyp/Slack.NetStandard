@@ -14,7 +14,7 @@ namespace Slack.NetStandard.WebApi.Chat
         public string Timestamp { get; set; }
 
         [JsonProperty("message")]
-        public Message Message { get; set; }
+        public ResponseMessage Message { get; set; }
         
     }
 }
