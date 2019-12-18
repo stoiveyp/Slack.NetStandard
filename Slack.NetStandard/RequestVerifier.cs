@@ -7,13 +7,12 @@ namespace Slack.NetStandard
     public class RequestVerifier
     {
         private readonly string _secret;
-        private readonly int _tolerance;
-        public static readonly DateTime Epoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        private readonly TimeSpan _tolerance;
 
-        public RequestVerifier(string signingSecret, int timestampTolerance = 180)
+        public RequestVerifier(string signingSecret, TimeSpan? timestampTolerance = null)
         {
             _secret = signingSecret ?? throw new ArgumentNullException(nameof(signingSecret));
-            _tolerance = timestampTolerance;
+            _tolerance = timestampTolerance ?? TimeSpan.FromMinutes(3);
         }
 
         public bool Verify(string expectedSig,long timestamp, string body)
@@ -21,7 +20,7 @@ namespace Slack.NetStandard
             return Verify(expectedSig,_secret, timestamp, body, _tolerance);
         }
 
-        private static bool Verify(string expectedSig, string signingSecret, long timestamp, string body, int tolerance)
+        private static bool Verify(string expectedSig, string signingSecret, long timestamp, string body, TimeSpan tolerance)
         {
             if (string.IsNullOrWhiteSpace(expectedSig))
             {
@@ -33,7 +32,7 @@ namespace Slack.NetStandard
                 throw new ArgumentNullException(nameof(body));
             }
 
-            if (DateTime.Now.Subtract(Epoch).TotalSeconds - timestamp > tolerance)
+            if (!Epoch.Within(timestamp,tolerance))
             {
                 return false;
             }

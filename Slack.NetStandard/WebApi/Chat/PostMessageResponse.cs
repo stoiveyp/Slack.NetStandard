@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-using Slack.NetStandard.Messages;
-using Slack.NetStandard.Messages.Blocks;
+﻿using Newtonsoft.Json;
 
 namespace Slack.NetStandard.WebApi.Chat
 {
@@ -14,7 +11,7 @@ namespace Slack.NetStandard.WebApi.Chat
         public string Timestamp { get; set; }
 
         [JsonProperty("message")]
-        public Message Message { get; set; }
+        public ResponseMessage Message { get; set; }
         
     }
 }
