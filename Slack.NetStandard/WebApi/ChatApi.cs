@@ -24,6 +24,20 @@ namespace Slack.NetStandard.WebApi
             return MakeJsonCall<PostMessageRequest, PostMessageResponse>("chat.postMessage", request);
         }
 
+        public Task<EphemeralResponse> PostEphemeral(PostMessageRequest request)
+        {
+            return MakeJsonCall<PostMessageRequest, EphemeralResponse>("chat.postEphemeral", request);
+        }
+
+        public Task<ScheduledMessageResponse> PostScheduled(ScheduledMessageRequest request)
+        {
+            if (request.PostAt == 0 || request.PostAt < Epoch.Current )
+            {
+                throw new InvalidOperationException($"{nameof(request.PostAt)} zero or before now");
+            }
+            return MakeJsonCall<ScheduledMessageRequest, ScheduledMessageResponse>("chat.scheduleMessage", request);
+        }
+
         public Task<MessageResponse> Delete(string channel, string timestamp, bool? asUser = null)
         {
             return MakeJsonCall<DeleteRequest, MessageResponse>("chat.delete", new DeleteRequest

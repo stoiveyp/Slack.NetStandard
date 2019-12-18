@@ -37,6 +37,19 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public async Task Chat_PostEphemeral()
+        {
+            var response = await CheckApi(c => c.Chat.PostEphemeral(new PostMessageRequest
+                {
+                    Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
+                }), "chat.postEphemeral",
+                jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); },
+                new EphemeralResponse{OK=true,Timestamp = "123.456"});
+            Assert.True(response.OK);
+            Assert.Equal("123.456",response.Timestamp);
+        }
+
+        [Fact]
         public async Task Chat_DeleteMessage()
         {
             var response = await CheckApi(c => c.Chat.Delete("C1234567890", "1405894322.002768"),
@@ -98,6 +111,26 @@ namespace Slack.NetStandard.Tests
             Assert.True(response.OK);
             Assert.Equal("C123444",response.Channel);
             Assert.Equal("123.456",response.Timestamp);
+        }
+
+        [Fact]
+        public async Task Chat_PostScheduled()
+        {
+            var currentEpoch = Epoch.For(DateTime.Now.AddSeconds(60));
+            var response = await CheckApi(c => c.Chat.PostScheduled(new ScheduledMessageRequest
+                {
+                    Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } },
+                    PostAt = currentEpoch
+            }), "chat.scheduleMessage",
+                jobject =>
+                {
+                    Assert.NotNull(jobject.Value<JArray>("blocks"));
+                    Assert.Equal(currentEpoch, jobject.Value<long>("post_at"));
+                },
+                new ScheduledMessageResponse { OK = true, PostAt = 1562180400, ScheduledMessageId = "Q1298393284" });
+            Assert.True(response.OK);
+            Assert.Equal("Q1298393284",response.ScheduledMessageId);
+            Assert.Equal(1562180400, response.PostAt);
         }
 
         private Task<TResponse> CheckApi<TResponse>(
