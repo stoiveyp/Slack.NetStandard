@@ -76,5 +76,24 @@ namespace Slack.NetStandard.Tests
             var response = await client.Chat.DeleteScheduledMessage("C1234567890", "Q1234ABCD",true);
             Assert.True(response.OK);
         }
+
+        [Fact]
+        public async Task Chat_GetPermalink()
+        {
+            var bustersAddress = "https://ghostbusters.slack.com/archives/C1H9RESGA/p135854651500008";
+            var http = new HttpClient(new ActionHandler(async req =>
+            {
+                Assert.Equal("https://slack.com/api/chat.getPermalink", req.RequestUri.ToString());
+                Assert.Equal("application/json", req.Content.Headers.ContentType.MediaType);
+                var jobject = JObject.Parse(await req.Content.ReadAsStringAsync());
+                Assert.Equal("C1234567890", jobject.Value<string>("channel"));
+                Assert.Equal("1234567890.123456", jobject.Value<string>("message_ts"));
+            }, new GetPermalinkResponse { OK = true, Channel= "C1H9RESGA", Permalink = bustersAddress}));
+            var client = new SlackWebApiClient(http);
+            var response = await client.Chat.GetPermalink("C1234567890", "1234567890.123456");
+            Assert.True(response.OK);
+            Assert.Equal("C1H9RESGA",response.Channel);
+            Assert.Equal(bustersAddress,response.Permalink);
+        }
     }
 }

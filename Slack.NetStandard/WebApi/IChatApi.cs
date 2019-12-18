@@ -9,5 +9,7 @@ namespace Slack.NetStandard.WebApi
         Task<DeleteResponse> Delete(string channel, string timestamp, bool? asUser = null);
 
         Task<WebApiResponse> DeleteScheduledMessage(string channel, string scheduledMessageId, bool? asUser = null);
+
+        Task<GetPermalinkResponse> GetPermalink(string channel, string timestamp);
     }
 }

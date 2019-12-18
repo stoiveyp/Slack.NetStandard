@@ -45,6 +45,15 @@ namespace Slack.NetStandard.WebApi
             });
         }
 
+        public Task<GetPermalinkResponse> GetPermalink(string channel, string timestamp)
+        {
+            return MakeJsonCall<GetPermalinkRequest, GetPermalinkResponse>("chat.getPermalink", new GetPermalinkRequest
+            {
+                Channel = channel,
+                Timestamp = timestamp
+            });
+        }
+
         private async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request)
         {
             try

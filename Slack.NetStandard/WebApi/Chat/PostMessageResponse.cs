@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-using Slack.NetStandard.Messages;
-using Slack.NetStandard.Messages.Blocks;
+﻿using Newtonsoft.Json;
 
 namespace Slack.NetStandard.WebApi.Chat
 {

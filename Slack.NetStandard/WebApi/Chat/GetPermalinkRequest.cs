@@ -5,12 +5,12 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.WebApi.Chat
 {
-    public class DeleteResponse:WebApiResponse
+    class GetPermalinkRequest
     {
         [JsonProperty("channel")]
         public string Channel { get; set; }
 
-        [JsonProperty("ts")] 
+        [JsonProperty("message_ts")]
         public string Timestamp { get; set; }
     }
 }
