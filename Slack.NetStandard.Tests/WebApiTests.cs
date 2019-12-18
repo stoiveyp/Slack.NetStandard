@@ -133,6 +133,26 @@ namespace Slack.NetStandard.Tests
             Assert.Equal(1562180400, response.PostAt);
         }
 
+        [Fact]
+        public async Task Chat_UnfurlUrl()
+        {
+            var response = await CheckApi(c => c.Chat.Unfurl(new UnfurlRequest
+                {
+                Channel = "C123456",
+                Timestamp = "123.456",
+                Unfurls = new Dictionary<string,IMessageBlock[]>{{"example.com/test",new[]{new Section(new PlainText("test"))}}}
+            }),
+                "chat.unfurl",
+                jobject =>
+                {
+                    Assert.Equal("C123456", jobject.Value<string>("channel"));
+                    Assert.Equal("123.456", jobject.Value<string>("ts"));
+                    Assert.NotNull(jobject.Value<JObject>("unfurls"));
+                },
+                new WebApiResponse { OK = true });
+            Assert.True(response.OK);
+        }
+
         private Task<TResponse> CheckApi<TResponse>(
             Func<SlackWebApiClient, Task<TResponse>> requestCall,
             string url,

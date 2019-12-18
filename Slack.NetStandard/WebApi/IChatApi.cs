@@ -16,5 +16,6 @@ namespace Slack.NetStandard.WebApi
         Task<GetPermalinkResponse> GetPermalink(string channel, string timestamp);
 
         Task<MessageResponse> MeMessage(string channel, string action);
+        Task<WebApiResponse> Unfurl(UnfurlRequest request);
     }
 }

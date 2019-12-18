@@ -77,6 +77,11 @@ namespace Slack.NetStandard.WebApi
             });
         }
 
+        public Task<WebApiResponse> Unfurl(UnfurlRequest request)
+        {
+            return MakeJsonCall<UnfurlRequest, WebApiResponse>("chat.unfurl", request);
+        }
+
         private async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request)
         {
             try
