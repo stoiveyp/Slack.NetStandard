@@ -6,6 +6,8 @@ namespace Slack.NetStandard.WebApi.Chat
     {
         [EnumMember(Value="none")]
         None,
+        [EnumMember(Value="client")]
+        Client,
         [EnumMember(Value="full")]
         Full
     }

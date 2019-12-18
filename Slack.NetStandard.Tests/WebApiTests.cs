@@ -29,9 +29,9 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_PostMessage()
         {
             var response = await CheckApi(c => c.Chat.PostMessage(new PostMessageRequest
-                {
-                    Blocks = new List<IMessageBlock> {new Section {Text = new PlainText("stuff")}}
-                }), "chat.postMessage", jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); },
+            {
+                Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
+            }), "chat.postMessage", jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); },
                 Utility.ExampleFileContent<PostMessageResponse>("PostMessageResponse.json"));
             Assert.True(response.OK);
         }
@@ -40,13 +40,13 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_PostEphemeral()
         {
             var response = await CheckApi(c => c.Chat.PostEphemeral(new PostMessageRequest
-                {
-                    Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
-                }), "chat.postEphemeral",
+            {
+                Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
+            }), "chat.postEphemeral",
                 jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); },
-                new EphemeralResponse{OK=true,Timestamp = "123.456"});
+                new EphemeralResponse { OK = true, Timestamp = "123.456" });
             Assert.True(response.OK);
-            Assert.Equal("123.456",response.Timestamp);
+            Assert.Equal("123.456", response.Timestamp);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("C1234567890", jobject.Value<string>("channel"));
                     Assert.Equal("Q1234ABCD", jobject.Value<string>("scheduled_message_id"));
                     Assert.True(jobject.Value<bool>("as_user"));
-                }, new WebApiResponse {OK = true});
+                }, new WebApiResponse { OK = true });
             Assert.True(response.OK);
         }
 
@@ -107,10 +107,10 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("C123456", jobject.Value<string>("channel"));
                     Assert.Equal("wibbles", jobject.Value<string>("text"));
                 },
-                new MessageResponse {OK = true, Channel = "C123444", Timestamp = "123.456"});
+                new MessageResponse { OK = true, Channel = "C123444", Timestamp = "123.456" });
             Assert.True(response.OK);
-            Assert.Equal("C123444",response.Channel);
-            Assert.Equal("123.456",response.Timestamp);
+            Assert.Equal("C123444", response.Channel);
+            Assert.Equal("123.456", response.Timestamp);
         }
 
         [Fact]
@@ -118,9 +118,9 @@ namespace Slack.NetStandard.Tests
         {
             var currentEpoch = Epoch.For(DateTime.Now.AddSeconds(60));
             var response = await CheckApi(c => c.Chat.PostScheduled(new ScheduledMessageRequest
-                {
-                    Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } },
-                    PostAt = currentEpoch
+            {
+                Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } },
+                PostAt = currentEpoch
             }), "chat.scheduleMessage",
                 jobject =>
                 {
@@ -129,7 +129,7 @@ namespace Slack.NetStandard.Tests
                 },
                 new ScheduledMessageResponse { OK = true, PostAt = 1562180400, ScheduledMessageId = "Q1298393284" });
             Assert.True(response.OK);
-            Assert.Equal("Q1298393284",response.ScheduledMessageId);
+            Assert.Equal("Q1298393284", response.ScheduledMessageId);
             Assert.Equal(1562180400, response.PostAt);
         }
 
@@ -137,10 +137,10 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_UnfurlUrl()
         {
             var response = await CheckApi(c => c.Chat.Unfurl(new UnfurlRequest
-                {
+            {
                 Channel = "C123456",
                 Timestamp = "123.456",
-                Unfurls = new Dictionary<string,IMessageBlock[]>{{"example.com/test",new[]{new Section(new PlainText("test"))}}}
+                Unfurls = new Dictionary<string, IMessageBlock[]> { { "example.com/test", new[] { new Section(new PlainText("test")) } } }
             }),
                 "chat.unfurl",
                 jobject =>
@@ -151,6 +151,36 @@ namespace Slack.NetStandard.Tests
                 },
                 new WebApiResponse { OK = true });
             Assert.True(response.OK);
+        }
+
+        //{
+        //    "ok": true,
+        //    "channel": "C024BE91L",
+        //    "ts": "1401383885.000061",
+        //    "text": "Updated text you carefully authored"
+        //}
+        [Fact]
+        public async Task Chat_UpdateMessage()
+        {
+            var newText = "Updated text you carefully authored";
+            var response = await CheckApi(c => c.Chat.UpdateMessage(new UpdateMessageRequest
+            {
+                Channel = "C024BE91L",
+                Timestamp = "1401383885.000061",
+                Text = newText
+            }),
+                "chat.updateMessage",
+                jobject =>
+                {
+                    Assert.Equal("C024BE91L", jobject.Value<string>("channel"));
+                    Assert.Equal("1401383885.000061", jobject.Value<string>("ts"));
+                    Assert.Equal(newText, jobject.Value<string>("text"));
+                },
+                new UpdateMessageResponse { OK = true, Channel = "C024BE91L", Timestamp = "1401383885.000061", Text = newText });
+            Assert.True(response.OK);
+            Assert.Equal("C024BE91L",response.Channel);
+            Assert.Equal("1401383885.000061",response.Timestamp);
+            Assert.Equal(newText, response.Text);
         }
 
         private Task<TResponse> CheckApi<TResponse>(

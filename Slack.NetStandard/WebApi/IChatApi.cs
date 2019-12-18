@@ -17,5 +17,7 @@ namespace Slack.NetStandard.WebApi
 
         Task<MessageResponse> MeMessage(string channel, string action);
         Task<WebApiResponse> Unfurl(UnfurlRequest request);
+
+        Task<UpdateMessageResponse> UpdateMessage(UpdateMessageRequest request);
     }
 }

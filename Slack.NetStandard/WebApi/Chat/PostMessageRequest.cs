@@ -8,8 +8,8 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("channel")]
         public string Channel { get; set; }
 
-        [JsonProperty("as_user")]
-        public bool AsUser { get; set; }
+        [JsonProperty("as_user", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? AsUser { get; set; }
 
         //Attachments
 
