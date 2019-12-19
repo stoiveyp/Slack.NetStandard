@@ -29,6 +29,7 @@ namespace Slack.NetStandard.Tests
             var original = new JObject(new JProperty("type", "mrkdwn"), new JProperty("text", "testing 1.2.3"));
             var text = JsonConvert.DeserializeObject<TextObject>(original.ToString());
             var mrkdwn = Assert.IsType<MarkdownText>(text);
+            JToken.DeepEquals(JObject.FromObject(mrkdwn), original);
             Assert.Equal("testing 1.2.3", mrkdwn.Text);
         }
 
