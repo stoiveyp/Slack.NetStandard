@@ -1,6 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.ExceptionServices;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Slack.NetStandard.WebApi;
 
@@ -51,5 +55,43 @@ namespace Slack.NetStandard
         public IChatApi Chat { get; }
         public HttpClient Client { get; set; }
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
+
+        public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request)
+        {
+            try
+            {
+                var content = new StringContent(JsonConvert.SerializeObject(request));
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var message = await Client.PostAsync(url, content);
+                return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
+            }
+            catch (WebException ex)
+            {
+                var source = ExceptionDispatchInfo.Capture(ex);
+                return ProcessSlackException<TResponse>(ex, source);
+            }
+        }
+
+        private T DeserializeResponse<T>(Stream response)
+        {
+            using (var jsonReader = new JsonTextReader(new StreamReader(response)))
+            {
+                return Serializer.Deserialize<T>(jsonReader);
+            }
+        }
+
+        private T ProcessSlackException<T>(WebException webException, ExceptionDispatchInfo source)
+        {
+            try
+            {
+                return DeserializeResponse<T>(webException.Response.GetResponseStream());
+            }
+            catch
+            {
+                source.Throw();
+            }
+
+            throw new InvalidOperationException("Processing call failed");
+        }
     }
 }

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Slack.NetStandard.WebApi.Chat;
 
 namespace Slack.NetStandard.WebApi
@@ -21,12 +15,12 @@ namespace Slack.NetStandard.WebApi
 
         public Task<PostMessageResponse> PostMessage(PostMessageRequest request)
         {
-            return MakeJsonCall<PostMessageRequest, PostMessageResponse>("chat.postMessage", request);
+            return _client.MakeJsonCall<PostMessageRequest, PostMessageResponse>("chat.postMessage", request);
         }
 
         public Task<EphemeralResponse> PostEphemeral(PostMessageRequest request)
         {
-            return MakeJsonCall<PostMessageRequest, EphemeralResponse>("chat.postEphemeral", request);
+            return _client.MakeJsonCall<PostMessageRequest, EphemeralResponse>("chat.postEphemeral", request);
         }
 
         public Task<ScheduledMessageResponse> PostScheduled(ScheduledMessageRequest request)
@@ -35,12 +29,12 @@ namespace Slack.NetStandard.WebApi
             {
                 throw new InvalidOperationException($"{nameof(request.PostAt)} zero or before now");
             }
-            return MakeJsonCall<ScheduledMessageRequest, ScheduledMessageResponse>("chat.scheduleMessage", request);
+            return _client.MakeJsonCall<ScheduledMessageRequest, ScheduledMessageResponse>("chat.scheduleMessage", request);
         }
 
         public Task<MessageResponse> Delete(string channel, string timestamp, bool? asUser = null)
         {
-            return MakeJsonCall<DeleteRequest, MessageResponse>("chat.delete", new DeleteRequest
+            return _client.MakeJsonCall<DeleteRequest, MessageResponse>("chat.delete", new DeleteRequest
             {
                 Channel = channel,
                 Timestamp = timestamp,
@@ -51,7 +45,7 @@ namespace Slack.NetStandard.WebApi
         public Task<WebApiResponse> DeleteScheduledMessage(string channel, string scheduledMessageId,
             bool? asUser = null)
         {
-            return MakeJsonCall<DeleteScheduledMessageRequest, WebApiResponse>("chat.deleteScheduledMessage", new DeleteScheduledMessageRequest
+            return _client.MakeJsonCall<DeleteScheduledMessageRequest, WebApiResponse>("chat.deleteScheduledMessage", new DeleteScheduledMessageRequest
             {
                 Channel = channel,
                 ScheduledMessageId = scheduledMessageId,
@@ -61,7 +55,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<GetPermalinkResponse> GetPermalink(string channel, string timestamp)
         {
-            return MakeJsonCall<GetPermalinkRequest, GetPermalinkResponse>("chat.getPermalink", new GetPermalinkRequest
+            return _client.MakeJsonCall<GetPermalinkRequest, GetPermalinkResponse>("chat.getPermalink", new GetPermalinkRequest
             {
                 Channel = channel,
                 Timestamp = timestamp
@@ -70,7 +64,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<MessageResponse> MeMessage(string channel, string text)
         {
-            return MakeJsonCall<MeMessageRequest, MessageResponse>("chat.meMessage", new MeMessageRequest
+            return _client.MakeJsonCall<MeMessageRequest, MessageResponse>("chat.meMessage", new MeMessageRequest
             {
                 Channel = channel,
                 Text = text
@@ -79,50 +73,12 @@ namespace Slack.NetStandard.WebApi
 
         public Task<WebApiResponse> Unfurl(UnfurlRequest request)
         {
-            return MakeJsonCall<UnfurlRequest, WebApiResponse>("chat.unfurl", request);
+            return _client.MakeJsonCall<UnfurlRequest, WebApiResponse>("chat.unfurl", request);
         }
 
         public Task<UpdateMessageResponse> UpdateMessage(UpdateMessageRequest request)
         {
-            return MakeJsonCall<UpdateMessageRequest, UpdateMessageResponse>("chat.updateMessage", request);
-        }
-
-        private async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request)
-        {
-            try
-            {
-                var content = new StringContent(JsonConvert.SerializeObject(request));
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                var message = await _client.Client.PostAsync(url, content);
-                return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
-            }
-            catch (WebException ex)
-            {
-                var source = ExceptionDispatchInfo.Capture(ex);
-                return ProcessSlackException<TResponse>(ex, source);
-            }
-        }
-
-        private T DeserializeResponse<T>(Stream response)
-        {
-            using (var jsonReader = new JsonTextReader(new StreamReader(response)))
-            {
-                return _client.Serializer.Deserialize<T>(jsonReader);
-            }
-        }
-
-        private T ProcessSlackException<T>(WebException webException, ExceptionDispatchInfo source)
-        {
-            try
-            {
-                return DeserializeResponse<T>(webException.Response.GetResponseStream());
-            }
-            catch
-            {
-                source.Throw();
-            }
-
-            throw new InvalidOperationException("Processing call failed");
+            return _client.MakeJsonCall<UpdateMessageRequest, UpdateMessageResponse>("chat.updateMessage", request);
         }
     }
 }
