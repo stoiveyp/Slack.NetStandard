@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Slack.NetStandard.Messages.Elements;
@@ -8,6 +9,12 @@ namespace Slack.NetStandard.Messages.Blocks
 {
     public class Section:IMessageBlock
     {
+        public Section() { }
+
+        public Section(params TextObject[] fields)
+        {
+            Fields = fields.ToList();
+        }
         [JsonProperty("type")] public string Type => nameof(Section).ToLower();
 
         [JsonProperty("text",NullValueHandling = NullValueHandling.Ignore)]
