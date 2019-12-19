@@ -11,9 +11,12 @@ namespace Slack.NetStandard.WebApi
         public ChatApi(IWebApiClient client)
         {
             _client = client;
+            ScheduledMessages = new ScheduledMessageApi(client);
         }
 
-        public Task<PostMessageResponse> PostMessage(PostMessageRequest request)
+        public IScheduledMessageApi ScheduledMessages { get; }
+
+        public Task<PostMessageResponse> Post(PostMessageRequest request)
         {
             return _client.MakeJsonCall<PostMessageRequest, PostMessageResponse>("chat.postMessage", request);
         }
@@ -21,15 +24,6 @@ namespace Slack.NetStandard.WebApi
         public Task<EphemeralResponse> PostEphemeral(PostMessageRequest request)
         {
             return _client.MakeJsonCall<PostMessageRequest, EphemeralResponse>("chat.postEphemeral", request);
-        }
-
-        public Task<ScheduledMessageResponse> PostScheduled(ScheduledMessageRequest request)
-        {
-            if (request.PostAt == 0 || request.PostAt < Epoch.Current )
-            {
-                throw new InvalidOperationException($"{nameof(request.PostAt)} zero or before now");
-            }
-            return _client.MakeJsonCall<ScheduledMessageRequest, ScheduledMessageResponse>("chat.scheduleMessage", request);
         }
 
         public Task<MessageResponse> Delete(string channel, string timestamp, bool? asUser = null)
@@ -42,18 +36,7 @@ namespace Slack.NetStandard.WebApi
             });
         }
 
-        public Task<WebApiResponse> DeleteScheduledMessage(string channel, string scheduledMessageId,
-            bool? asUser = null)
-        {
-            return _client.MakeJsonCall<DeleteScheduledMessageRequest, WebApiResponse>("chat.deleteScheduledMessage", new DeleteScheduledMessageRequest
-            {
-                Channel = channel,
-                ScheduledMessageId = scheduledMessageId,
-                AsUser = asUser
-            });
-        }
-
-        public Task<GetPermalinkResponse> GetPermalink(string channel, string timestamp)
+        public Task<GetPermalinkResponse> Permalink(string channel, string timestamp)
         {
             return _client.MakeJsonCall<GetPermalinkRequest, GetPermalinkResponse>("chat.getPermalink", new GetPermalinkRequest
             {
@@ -76,7 +59,7 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeJsonCall<UnfurlRequest, WebApiResponse>("chat.unfurl", request);
         }
 
-        public Task<UpdateMessageResponse> UpdateMessage(UpdateMessageRequest request)
+        public Task<UpdateMessageResponse> Update(UpdateMessageRequest request)
         {
             return _client.MakeJsonCall<UpdateMessageRequest, UpdateMessageResponse>("chat.updateMessage", request);
         }

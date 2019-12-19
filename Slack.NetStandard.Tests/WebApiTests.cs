@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
+using System.Linq;
 using System.Net.Http;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Messages;
@@ -28,7 +26,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_PostMessage()
         {
-            var response = await CheckApi(c => c.Chat.PostMessage(new PostMessageRequest
+            var response = await CheckApi(c => c.Chat.Post(new PostMessageRequest
             {
                 Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
             }), "chat.postMessage", jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); },
@@ -68,7 +66,7 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_DeleteScheduledMessage()
         {
             var response = await CheckApi(
-                c => c.Chat.DeleteScheduledMessage("C1234567890", "Q1234ABCD", true),
+                c => c.Chat.ScheduledMessages.Delete("C1234567890", "Q1234ABCD", true),
                 "chat.deleteScheduledMessage",
                 jobject =>
                 {
@@ -84,7 +82,7 @@ namespace Slack.NetStandard.Tests
         {
             var bustersAddress = "https://ghostbusters.slack.com/archives/C1H9RESGA/p135854651500008";
             var response = await CheckApi(
-                c => c.Chat.GetPermalink("C1234567890", "1234567890.123456"),
+                c => c.Chat.Permalink("C1234567890", "1234567890.123456"),
                 "chat.getPermalink",
                 jobject =>
                 {
@@ -117,7 +115,7 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_PostScheduled()
         {
             var currentEpoch = Epoch.For(DateTime.Now.AddSeconds(60));
-            var response = await CheckApi(c => c.Chat.PostScheduled(new ScheduledMessageRequest
+            var response = await CheckApi(c => c.Chat.ScheduledMessages.Post(new ScheduledMessageRequest
             {
                 Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } },
                 PostAt = currentEpoch
@@ -153,17 +151,11 @@ namespace Slack.NetStandard.Tests
             Assert.True(response.OK);
         }
 
-        //{
-        //    "ok": true,
-        //    "channel": "C024BE91L",
-        //    "ts": "1401383885.000061",
-        //    "text": "Updated text you carefully authored"
-        //}
         [Fact]
         public async Task Chat_UpdateMessage()
         {
             var newText = "Updated text you carefully authored";
-            var response = await CheckApi(c => c.Chat.UpdateMessage(new UpdateMessageRequest
+            var response = await CheckApi(c => c.Chat.Update(new UpdateMessageRequest
             {
                 Channel = "C024BE91L",
                 Timestamp = "1401383885.000061",
@@ -178,9 +170,41 @@ namespace Slack.NetStandard.Tests
                 },
                 new UpdateMessageResponse { OK = true, Channel = "C024BE91L", Timestamp = "1401383885.000061", Text = newText });
             Assert.True(response.OK);
-            Assert.Equal("C024BE91L",response.Channel);
-            Assert.Equal("1401383885.000061",response.Timestamp);
+            Assert.Equal("C024BE91L", response.Channel);
+            Assert.Equal("1401383885.000061", response.Timestamp);
             Assert.Equal(newText, response.Text);
+        }
+
+        [Fact]
+        public async Task Chat_ScheduledMessageList()
+        {
+            var response = await CheckApi(c => c.Chat.ScheduledMessages.List(new ScheduledMessageListRequest
+            {
+                Channel = "C123456",
+                Latest = 123456,
+            }),
+                "chat.scheduledMessages.list",
+                jobject =>
+                {
+                    Assert.Equal(2, jobject.Children().Count());
+                    Assert.Equal("C123456", jobject.Value<string>("channel"));
+                    Assert.Equal(123456, jobject.Value<long>("latest"));
+                },
+                new ScheduledMessageListResponse
+                {
+                    OK = true,
+                    ScheduledMessages = new[] {new ScheduledMessageSummary
+                    {
+                        Channel = "ABCDEF"
+                    }},
+                    Metadata = new ResponseMetadata
+                    {
+                        NextCursor = "DFGDFG"
+                    }
+                });
+            Assert.True(response.OK);
+            Assert.Single(response.ScheduledMessages);
+            Assert.NotNull(response.Metadata.NextCursor);
         }
 
         private Task<TResponse> CheckApi<TResponse>(

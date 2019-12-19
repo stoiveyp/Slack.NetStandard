@@ -6,6 +6,11 @@ namespace Slack.NetStandard
 {
     public static class Epoch
     {
+        public static DateTime From(long timestamp)
+        {
+            return Base.AddSeconds(timestamp);
+        }
+
         public static long For(DateTime datetime)
         {
             return (long)datetime.Subtract(Base).TotalSeconds;
