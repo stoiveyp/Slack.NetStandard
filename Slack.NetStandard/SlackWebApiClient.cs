@@ -55,6 +55,7 @@ namespace Slack.NetStandard
 
             Client = client;
             Chat = new ChatApi(this);
+            Conversations = new ConversationsApi(this);
         }
 
         public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request)
