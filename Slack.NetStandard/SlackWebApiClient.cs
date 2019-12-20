@@ -12,6 +12,11 @@ namespace Slack.NetStandard
 {
     public class SlackWebApiClient:IWebApiClient
     {
+        public IConversationsApi Conversations { get; }
+        public IChatApi Chat { get; }
+        public HttpClient Client { get; set; }
+        public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
+
         public SlackWebApiClient(string token):this(SetupClient(token))
         {
             if (string.IsNullOrWhiteSpace(token))
@@ -50,11 +55,8 @@ namespace Slack.NetStandard
 
             Client = client;
             Chat = new ChatApi(this);
+            Conversations = new ConversationsApi(this);
         }
-        
-        public IChatApi Chat { get; }
-        public HttpClient Client { get; set; }
-        public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
 
         public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request)
         {
