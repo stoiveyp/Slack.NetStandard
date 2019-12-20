@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Messages;
@@ -12,7 +11,7 @@ using Xunit;
 
 namespace Slack.NetStandard.Tests
 {
-    public class WebApiTests
+    public class WebApiTests_Chat
     {
         [Fact]
         public void ClientSetup()
@@ -26,7 +25,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_PostMessage()
         {
-            var response = await CheckApi(c => c.Chat.Post(new PostMessageRequest
+            var response = await Utility.CheckApi(c => c.Chat.Post(new PostMessageRequest
             {
                 Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
             }), "chat.postMessage", jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); },
@@ -37,7 +36,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_PostEphemeral()
         {
-            var response = await CheckApi(c => c.Chat.PostEphemeral(new PostMessageRequest
+            var response = await Utility.CheckApi(c => c.Chat.PostEphemeral(new PostMessageRequest
             {
                 Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
             }), "chat.postEphemeral",
@@ -50,7 +49,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_DeleteMessage()
         {
-            var response = await CheckApi(c => c.Chat.Delete("C1234567890", "1405894322.002768"),
+            var response = await Utility.CheckApi(c => c.Chat.Delete("C1234567890", "1405894322.002768"),
                 "chat.delete",
                 jobject =>
                 {
@@ -65,7 +64,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_DeleteScheduledMessage()
         {
-            var response = await CheckApi(
+            var response = await Utility.CheckApi(
                 c => c.Chat.ScheduledMessages.Delete("C1234567890", "Q1234ABCD", true),
                 "chat.deleteScheduledMessage",
                 jobject =>
@@ -81,7 +80,7 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_GetPermalink()
         {
             var bustersAddress = "https://ghostbusters.slack.com/archives/C1H9RESGA/p135854651500008";
-            var response = await CheckApi(
+            var response = await Utility.CheckApi(
                 c => c.Chat.Permalink("C1234567890", "1234567890.123456"),
                 "chat.getPermalink",
                 jobject =>
@@ -98,7 +97,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_MeMessage()
         {
-            var response = await CheckApi(c => c.Chat.MeMessage("C123456", "wibbles"),
+            var response = await Utility.CheckApi(c => c.Chat.MeMessage("C123456", "wibbles"),
                 "chat.meMessage",
                 jobject =>
                 {
@@ -115,7 +114,7 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_PostScheduled()
         {
             var currentEpoch = Epoch.For(DateTime.Now.AddSeconds(60));
-            var response = await CheckApi(c => c.Chat.ScheduledMessages.Post(new ScheduledMessageRequest
+            var response = await Utility.CheckApi(c => c.Chat.ScheduledMessages.Post(new ScheduledMessageRequest
             {
                 Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } },
                 PostAt = currentEpoch
@@ -134,7 +133,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_UnfurlUrl()
         {
-            var response = await CheckApi(c => c.Chat.Unfurl(new UnfurlRequest
+            var response = await Utility.CheckApi(c => c.Chat.Unfurl(new UnfurlRequest
             {
                 Channel = "C123456",
                 Timestamp = "123.456",
@@ -155,7 +154,7 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_UpdateMessage()
         {
             var newText = "Updated text you carefully authored";
-            var response = await CheckApi(c => c.Chat.Update(new UpdateMessageRequest
+            var response = await Utility.CheckApi(c => c.Chat.Update(new UpdateMessageRequest
             {
                 Channel = "C024BE91L",
                 Timestamp = "1401383885.000061",
@@ -178,7 +177,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_ScheduledMessageList()
         {
-            var response = await CheckApi(c => c.Chat.ScheduledMessages.List(new ScheduledMessageListRequest
+            var response = await Utility.CheckApi(c => c.Chat.ScheduledMessages.List(new ScheduledMessageListRequest
             {
                 Channel = "C123456",
                 Latest = 123456,
@@ -205,23 +204,6 @@ namespace Slack.NetStandard.Tests
             Assert.True(response.OK);
             Assert.Single(response.ScheduledMessages);
             Assert.NotNull(response.Metadata.NextCursor);
-        }
-
-        private Task<TResponse> CheckApi<TResponse>(
-            Func<SlackWebApiClient, Task<TResponse>> requestCall,
-            string url,
-            Action<JObject> requestCheck,
-            TResponse responseToSend)
-        {
-            var http = new HttpClient(new ActionHandler(async req =>
-            {
-                Assert.Equal("https://slack.com/api/" + url, req.RequestUri.ToString());
-                Assert.Equal("application/json", req.Content.Headers.ContentType.MediaType);
-                var jobject = JObject.Parse(await req.Content.ReadAsStringAsync());
-                requestCheck(jobject);
-            }, responseToSend));
-            var client = new SlackWebApiClient(http);
-            return requestCall(client);
         }
     }
 }
