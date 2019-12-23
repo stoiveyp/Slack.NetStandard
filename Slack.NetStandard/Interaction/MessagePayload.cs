@@ -11,7 +11,5 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("container")]
         public MessageContainer Container { get; set; }
 
-        [JsonProperty("response_url",NullValueHandling = NullValueHandling.Ignore)]
-        public string ResponseUrl { get; set; }
     }
 }
