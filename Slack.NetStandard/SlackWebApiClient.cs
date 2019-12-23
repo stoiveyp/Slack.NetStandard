@@ -63,7 +63,7 @@ namespace Slack.NetStandard
             try
             {
                 var content = new StringContent(JsonConvert.SerializeObject(request));
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json"){CharSet = "utf-8"};
                 var message = await Client.PostAsync(url, content);
                 return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
             }
