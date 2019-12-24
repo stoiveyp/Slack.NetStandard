@@ -10,12 +10,34 @@ using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard
 {
-    public class SlackWebApiClient:IWebApiClient
+    public class SlackWebApiClient:IWebApiClient, ISlackApiClient
     {
         public IConversationsApi Conversations { get; }
         public IChatApi Chat { get; }
+
+        public IAdminApi Admin { get; }
+
         public HttpClient Client { get; set; }
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
+
+        internal SlackWebApiClient(Func<HttpClient> clientAccessor)
+        {
+            var client = clientAccessor();
+            if (client == null)
+            {
+                throw new ArgumentNullException(nameof(client));
+            }
+
+            if (client.BaseAddress == null)
+            {
+                client.BaseAddress = new Uri("https://slack.com/api/", UriKind.Absolute);
+            }
+
+            Client = client;
+            Chat = new ChatApi(this);
+            Conversations = new ConversationsApi(this);
+            Admin = new AdminApi(this);
+        }
 
         public SlackWebApiClient(string token):this(SetupClient(token))
         {
@@ -38,24 +60,6 @@ namespace Slack.NetStandard
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 return client;
             };
-        }
-
-        internal SlackWebApiClient(Func<HttpClient> clientAccessor)
-        {
-            var client = clientAccessor();
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
-
-            if (client.BaseAddress == null)
-            {
-                client.BaseAddress = new Uri("https://slack.com/api/", UriKind.Absolute);
-            }
-
-            Client = client;
-            Chat = new ChatApi(this);
-            Conversations = new ConversationsApi(this);
         }
 
         public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request)
