@@ -11,7 +11,7 @@ namespace Slack.NetStandard.SlashCommand
         public SlashCommandMessage(ResponseType responseType,bool replaceOriginal = false)
         {
             ResponseType = responseType;
-            ReplaceOriginal = replaceOriginal
+            ReplaceOriginal = replaceOriginal;
         }
 
         [JsonProperty("response_type"),JsonConverter(typeof(StringEnumConverter))]
