@@ -6,9 +6,9 @@ namespace Slack.NetStandard.SlashCommand
 {
     public class SlashCommandMessage:Message
     {
-        public SlashCommandMessage(bool replaceOriginal = false) :this(ResponseType.Ephemeral,replaceOriginal){ }
+        public SlashCommandMessage(bool? replaceOriginal = null) :this(ResponseType.Ephemeral,replaceOriginal){ }
 
-        public SlashCommandMessage(ResponseType responseType,bool replaceOriginal = false)
+        public SlashCommandMessage(ResponseType responseType,bool? replaceOriginal = null)
         {
             ResponseType = responseType;
             ReplaceOriginal = replaceOriginal;
