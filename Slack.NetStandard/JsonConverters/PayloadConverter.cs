@@ -21,7 +21,13 @@ namespace Slack.NetStandard.JsonConverters
             var jObject = JObject.Load(reader);
             var containerType = jObject["container"].Value<string>("type");
 
-            object target = (containerType == "message") ? (object)new MessagePayload() : new ViewPayload();
+            object target = containerType switch
+            {
+                "message" => new MessagePayload(),
+                "message_attachment" => new MessagePayload(),
+                "view" => new ViewPayload(),
+                _ => new InteractionPayload()
+            };
             
             serializer.Populate(jObject.CreateReader(), target);
             return target;
