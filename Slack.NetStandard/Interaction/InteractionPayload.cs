@@ -14,6 +14,9 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("trigger_id")]
         public string TriggerId { get; set; }
 
+        [JsonProperty("team")]
+        public PayloadTeam Team { get; set; }
+
         [JsonProperty("user")]
         public PayloadUser User { get; set; }
 

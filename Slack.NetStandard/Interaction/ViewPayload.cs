@@ -5,10 +5,10 @@ namespace Slack.NetStandard.Interaction
 {
     public class ViewPayload : InteractionPayload
     {
-        [JsonProperty("view")]
+        [JsonProperty("view", NullValueHandling = NullValueHandling.Ignore)]
         public View View { get; set; }
 
-        [JsonProperty("container")]
+        [JsonProperty("container", NullValueHandling = NullValueHandling.Ignore)]
         public ViewContainer Container { get; set; }
     }
 }

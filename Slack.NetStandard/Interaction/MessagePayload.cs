@@ -5,10 +5,10 @@ namespace Slack.NetStandard.Interaction
 {
     public class MessagePayload : InteractionPayload
     {
-        [JsonProperty("message")]
+        [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
         public ResponseMessage Message { get; set; }
 
-        [JsonProperty("container")]
+        [JsonProperty("container", NullValueHandling = NullValueHandling.Ignore)]
         public MessageContainer Container { get; set; }
 
     }
