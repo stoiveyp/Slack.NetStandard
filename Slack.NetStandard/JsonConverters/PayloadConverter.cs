@@ -19,9 +19,9 @@ namespace Slack.NetStandard.JsonConverters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             var jObject = JObject.Load(reader);
-            var isMessage = jObject.ContainsKey("message");
+            var containerType = jObject["container"].Value<string>("type");
 
-            object target = isMessage ? (object)new MessagePayload() : new ViewPayload();
+            object target = (containerType == "message") ? (object)new MessagePayload() : new ViewPayload();
             
             serializer.Populate(jObject.CreateReader(), target);
             return target;
