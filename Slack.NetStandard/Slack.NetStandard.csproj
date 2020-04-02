@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/stoiveyp/Slack.NetStandard</PackageProjectUrl>
     <RepositoryUrl>https://github.com/stoiveyp/Slack.NetStandard</RepositoryUrl>
     <PackageTags>.net, slack</PackageTags>
+    <LangVersion>8</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -11,5 +11,8 @@ namespace Slack.NetStandard.WebApi
         Task<WebApiResponse> ApproveRequest(string requestId, string teamId = null);
         Task<WebApiResponse> RestrictApp(string appId, string teamId = null);
         Task<WebApiResponse> RestrictRequest(string requestId, string teamId = null);
+
+        //Task<ListRequestResponse> ListRequests(int? limit = null, string team_id = null);
+        //Task<ListRequestResponse> ListRequests(string cursor, int? limit = null, string teamId = null);
     }
 }

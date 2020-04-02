@@ -11,5 +11,17 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("container")]
         public MessageContainer Container { get; set; }
 
+        [JsonProperty("trigger_id")]
+        public string TriggerId { get; set; }
+
+        [JsonProperty("channel")]
+        public PayloadChannel Channel { get; set; }
+
+        [JsonProperty("actions", NullValueHandling = NullValueHandling.Ignore)]
+        public PayloadAction[] Actions { get; set; }
+
+        [JsonProperty("response_url", NullValueHandling = NullValueHandling.Ignore)]
+        public string ResponseUrl { get; set; }
+
     }
 }
