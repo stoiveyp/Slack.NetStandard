@@ -17,7 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Examples\MessagePayload.json">
+    <None Update="Examples\BlockActionsPayload.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\InteractiveMessagePayload.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Examples\MessageResponse.json">

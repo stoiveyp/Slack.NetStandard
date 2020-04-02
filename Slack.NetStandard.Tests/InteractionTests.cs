@@ -15,9 +15,9 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void MessagePayload()
         {
-            var payload = Utility.ExampleFileContent<InteractionPayload>("MessagePayload.json");
-            var messagePayload = Assert.IsType<BlockActionsPayload>(payload);
-            Utility.CompareJson(messagePayload, "MessagePayload.json");
+            var payload = Utility.ExampleFileContent<InteractionPayload>("InteractiveMessagePayload.json");
+            var messagePayload = Assert.IsType<InteractiveMessagePayload>(payload);
+            Utility.CompareJson(messagePayload, "InteractiveMessagePayload.json");
         }
 
         [Fact]
@@ -26,6 +26,14 @@ namespace Slack.NetStandard.Tests
             var payload = Utility.ExampleFileContent<InteractionPayload>("ViewSubmissionPayload.json");
             var ViewPayload = Assert.IsType<ViewSubmissionPayload>(payload);
             Utility.CompareJson(ViewPayload, "ViewPayload.json");
+        }
+
+        [Fact]
+        public void BlockActionsPayload()
+        {
+            var payload = Utility.ExampleFileContent<InteractionPayload>("BlockActionsPayload.json");
+            var ViewPayload = Assert.IsType<BlockActionsPayload>(payload);
+            Utility.CompareJson(ViewPayload, "BlockActionsPayload.json");
         }
     }
 }

@@ -6,7 +6,7 @@ using Slack.NetStandard.JsonConverters;
 
 namespace Slack.NetStandard.Interaction
 {
-    [JsonConverter(typeof(PayloadConverter))]
+    [JsonConverter(typeof(InteractionPayloadConverter))]
     public class InteractionPayload
     {
         [JsonProperty("type"),JsonConverter(typeof(StringEnumConverter))]

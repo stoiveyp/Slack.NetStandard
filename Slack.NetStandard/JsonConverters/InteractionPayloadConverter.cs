@@ -10,7 +10,7 @@ using Slack.NetStandard.Interaction;
 
 namespace Slack.NetStandard.JsonConverters
 {
-    public class PayloadConverter:JsonConverter
+    public class InteractionPayloadConverter:JsonConverter
     {
         public override bool CanWrite => false;
 
@@ -32,6 +32,7 @@ namespace Slack.NetStandard.JsonConverters
             return value switch
             { 
                 InteractionType.BlockActions => new BlockActionsPayload(),
+                InteractionType.InteractiveMessage => new InteractiveMessagePayload(),
                 InteractionType.ViewClosed => new ViewClosedPayload(),
                 InteractionType.ViewSubmission => new ViewSubmissionPayload(),
                 _ => (InteractionPayload)null
