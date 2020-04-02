@@ -31,6 +31,7 @@ namespace Slack.NetStandard.JsonConverters
         {
             return value switch
             { 
+                InteractionType.BlockActions => new BlockActionsPayload(),
                 InteractionType.ViewClosed => new ViewClosedPayload(),
                 InteractionType.ViewSubmission => new ViewSubmissionPayload(),
                 _ => (InteractionPayload)null

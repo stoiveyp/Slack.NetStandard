@@ -3,7 +3,7 @@ using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard.Interaction
 {
-    public class MessagePayload : InteractionPayload
+    public class BlockActionsPayload : InteractionPayload
     {
         [JsonProperty("message")]
         public ResponseMessage Message { get; set; }

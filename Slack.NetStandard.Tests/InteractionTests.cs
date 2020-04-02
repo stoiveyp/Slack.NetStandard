@@ -16,7 +16,7 @@ namespace Slack.NetStandard.Tests
         public void MessagePayload()
         {
             var payload = Utility.ExampleFileContent<InteractionPayload>("MessagePayload.json");
-            var messagePayload = Assert.IsType<MessagePayload>(payload);
+            var messagePayload = Assert.IsType<BlockActionsPayload>(payload);
             Utility.CompareJson(messagePayload, "MessagePayload.json");
         }
 
