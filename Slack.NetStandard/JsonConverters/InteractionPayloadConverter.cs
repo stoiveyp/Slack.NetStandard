@@ -10,7 +10,36 @@ using Slack.NetStandard.Interaction;
 
 namespace Slack.NetStandard.JsonConverters
 {
-    public class InteractionPayloadConverter:JsonConverter
+    public class InteractionContainerConverter : JsonConverter<Container>
+    {
+        public override bool CanWrite => false;
+
+        public override void WriteJson(JsonWriter writer, Container value, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Container ReadJson(JsonReader reader, Type objectType, Container existingValue, bool hasExistingValue,
+            JsonSerializer serializer)
+        {
+            var jObject = JObject.Load(reader);
+            var target = GetContainerType(jObject.Value<string>("type"));
+            serializer.Populate(jObject.CreateReader(), target);
+            return target;
+        }
+
+        private Container GetContainerType(string value)
+        {
+            return value switch
+            {
+                "message" => new MessageContainer(),
+                "view" => new ViewContainer(),
+                _ => new Container()
+            };
+        }
+    }
+
+    public class InteractionPayloadConverter : JsonConverter
     {
         public override bool CanWrite => false;
 
@@ -30,9 +59,10 @@ namespace Slack.NetStandard.JsonConverters
         private InteractionPayload GetPayloadType(InteractionType value)
         {
             return value switch
-            { 
+            {
+                InteractionType.GlobalShortcut => new GlobalShortcutPayload(),
+                InteractionType.MessageAction => new MessageActionPayload(),
                 InteractionType.BlockActions => new BlockActionsPayload(),
-                InteractionType.InteractiveMessage => new InteractiveMessagePayload(),
                 InteractionType.ViewClosed => new ViewClosedPayload(),
                 InteractionType.ViewSubmission => new ViewSubmissionPayload(),
                 _ => (InteractionPayload)null

@@ -9,7 +9,7 @@ namespace Slack.NetStandard.Interaction
         [EnumMember(Value="interactive_message")]
         InteractiveMessage,
         [EnumMember(Value="shortcut")]
-        Shortcut,
+        GlobalShortcut,
         [EnumMember(Value="message_action")]
         MessageAction,
         [EnumMember(Value="view_submission")]

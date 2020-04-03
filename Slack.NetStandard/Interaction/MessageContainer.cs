@@ -2,7 +2,7 @@
 
 namespace Slack.NetStandard.Interaction
 {
-    public class MessageContainer
+    public class MessageContainer:Container
     {
         [JsonProperty("type")]
         public string Type { get; set; }
