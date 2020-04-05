@@ -8,7 +8,7 @@ namespace Slack.NetStandard.Interaction
         public string TriggerId { get; set; }
 
         [JsonProperty("channel")]
-        public PayloadChannel Channel { get; set; }
+        public SlackId Channel { get; set; }
 
         [JsonProperty("actions", NullValueHandling = NullValueHandling.Ignore)]
         public PayloadAction[] Actions { get; set; }

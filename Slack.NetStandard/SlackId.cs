@@ -1,8 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json;
 
-namespace Slack.NetStandard.Interaction
+namespace Slack.NetStandard
 {
-    public class PayloadChannel
+    public class SlackId
     {
         [JsonProperty("id")]
         public string Id { get; set; }
