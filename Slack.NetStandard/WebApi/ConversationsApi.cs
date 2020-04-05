@@ -6,7 +6,7 @@ using Slack.NetStandard.WebApi.Conversations;
 
 namespace Slack.NetStandard.WebApi
 {
-    public class ConversationsApi : IConversationsApi
+    internal class ConversationsApi : IConversationsApi
     {
         private readonly IWebApiClient _client;
         internal ConversationsApi(IWebApiClient client)

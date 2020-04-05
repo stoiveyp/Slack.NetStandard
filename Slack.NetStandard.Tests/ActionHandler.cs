@@ -36,7 +36,7 @@ namespace Slack.NetStandard.Tests
             Run = async req =>
             {
                 await run(req);
-                return new HttpResponseMessage(code) { Content = new StringContent(JObject.FromObject(response).ToString()) };
+                return new HttpResponseMessage(code) { Content = new StringContent(response is string ? response.ToString() : JObject.FromObject(response).ToString()) };
             };
         }
 

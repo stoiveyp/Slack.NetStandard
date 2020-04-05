@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Data;
+using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
 
@@ -38,5 +40,24 @@ namespace Slack.NetStandard.Interaction
 
         [JsonProperty("callback_id",NullValueHandling = NullValueHandling.Ignore)]
         public string CallbackId { get; set; }
+
+        [JsonProperty("private_metadata",NullValueHandling = NullValueHandling.Ignore)]
+        public string PrivateMetadata { get; set; }
+
+        [JsonProperty("previous_view_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string PreviousViewId { get; set; }
+
+        [JsonProperty("root_view_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string RootViewId { get; set; }
+
+        [JsonProperty("hash",NullValueHandling = NullValueHandling.Ignore)]
+        public string Hash { get; set; }
+
+        [JsonProperty("state")]
+        public ViewState State { get; set; }
+
+        [JsonExtensionData]
+        public Dictionary<string, object> OtherFields { get; set; }
+
     }
 }
