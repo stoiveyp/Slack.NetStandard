@@ -5,7 +5,7 @@ namespace Slack.NetStandard.Interaction
 {
     public class ViewSubmissionPayload : InteractionPayload
     {
-        [JsonProperty("view")]
+        [JsonProperty("view", NullValueHandling = NullValueHandling.Ignore)]
         public View View { get; set; }
     }
 }
