@@ -46,5 +46,18 @@ namespace Slack.NetStandard.Tests
             var client = new SlackWebApiClient(http);
             return requestCall(client);
         }
+
+        public static void AssertType<T>(string file)
+        {
+            var deserialised = Utility.ExampleFileContent<T>(file);
+            Assert.True(Utility.CompareJson(deserialised,file));
+        }
+
+        public static void AssertSubType<T,TResult>(string file)
+        {
+            var deserialised = Utility.ExampleFileContent<T>(file);
+            Assert.IsType<TResult>(deserialised);
+            Assert.True(Utility.CompareJson(deserialised, file));
+        }
     }
 }

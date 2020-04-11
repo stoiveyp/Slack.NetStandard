@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.4.0-pre</Version>
+    <Version>0.4.1-alpha1</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Add oauth methods</PackageReleaseNotes>
+    <PackageReleaseNotes>Initial Event Api support</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steven Pears</Authors>
     <Company />
