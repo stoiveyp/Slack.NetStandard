@@ -7,10 +7,10 @@ namespace Slack.NetStandard.Objects
 {
     public class View
     {
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string ID { get; set; }
 
-        [JsonProperty("team_id")]
+        [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamId { get; set; }
 
         [JsonProperty("type")]
