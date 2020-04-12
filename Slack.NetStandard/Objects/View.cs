@@ -52,7 +52,7 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("hash",NullValueHandling = NullValueHandling.Ignore)]
         public string Hash { get; set; }
 
-        [JsonProperty("state")]
+        [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public ViewState State { get; set; }
 
         [JsonExtensionData]
