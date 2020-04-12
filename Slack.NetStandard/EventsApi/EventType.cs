@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Slack.NetStandard.JsonConverters;
 
 namespace Slack.NetStandard.EventsApi
@@ -10,6 +11,9 @@ namespace Slack.NetStandard.EventsApi
         public string Type { get; set; }
 
         [JsonProperty("event_ts")]
-        public long Timestamp { get; set; }
+        public Timestamp Timestamp { get; set; }
+
+        [JsonExtensionData]
+        public Dictionary<string,object> OtherFields { get; set; }
     }
 }
