@@ -12,10 +12,10 @@ namespace Slack.NetStandard.EventsApi
         [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
         public string Channel { get; set; }
 
-        [JsonProperty("tab")]
+        [JsonProperty("tab", NullValueHandling = NullValueHandling.Ignore)]
         public string Tab { get; set; }
 
-        [JsonProperty("view")]
+        [JsonProperty("view", NullValueHandling = NullValueHandling.Ignore)]
         public View View { get; set; }
     }
 }

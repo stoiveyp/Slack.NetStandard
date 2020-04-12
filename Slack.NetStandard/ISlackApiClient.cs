@@ -8,5 +8,7 @@ namespace Slack.NetStandard
         IChatApi Chat { get; }
 
         IAdminApi Admin { get; }
+
+        IViewApi View { get; }
     }
 }

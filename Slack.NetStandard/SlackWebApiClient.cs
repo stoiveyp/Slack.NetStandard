@@ -17,6 +17,8 @@ namespace Slack.NetStandard
 
         public IAdminApi Admin { get; }
 
+        public IViewApi View { get; }
+
         public HttpClient Client { get; set; }
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
 
@@ -37,6 +39,7 @@ namespace Slack.NetStandard
             Chat = new ChatApi(this);
             Conversations = new ConversationsApi(this);
             Admin = new AdminApi(this);
+            View = new ViewApi(this);
         }
 
         public SlackWebApiClient(string token):this(SetupClient(token))
