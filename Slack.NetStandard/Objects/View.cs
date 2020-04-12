@@ -17,7 +17,7 @@ namespace Slack.NetStandard.Objects
         public string Type { get; set; }
 
         [JsonProperty("title",NullValueHandling = NullValueHandling.Ignore)]
-        public string Title { get; set; }
+        public PlainText Title { get; set; }
 
         [JsonProperty("close",NullValueHandling = NullValueHandling.Ignore)]
         public PlainText Close { get; set; }
