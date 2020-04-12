@@ -1,4 +1,4 @@
-﻿namespace Slack.NetStandard.Messages
+﻿namespace Slack.NetStandard
 {
     public class PlainText : TextObject
     {

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.Objects;
 using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard.Interaction

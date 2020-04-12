@@ -2,12 +2,9 @@
 
 namespace Slack.NetStandard.EventsApi
 {
-    public class EventCallback:Event
+    public class EventCallbackBase : Event
     {
         public const string EventType = "event_callback";
-
-        [JsonProperty("event",NullValueHandling = NullValueHandling.Ignore)]
-        public EventType Event { get; set; }
 
         [JsonProperty("token")]
         public string Token { get; set; }
@@ -18,7 +15,7 @@ namespace Slack.NetStandard.EventsApi
         [JsonProperty("api_app_id")]
         public string ApiAppId { get; set; }
 
-        [JsonProperty("authed_users",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("authed_users", NullValueHandling = NullValueHandling.Ignore)]
         public string[] AuthedUsers { get; set; }
 
         [JsonProperty("event_id")]
@@ -26,5 +23,17 @@ namespace Slack.NetStandard.EventsApi
 
         [JsonProperty("event_time")]
         public long EventTime { get; set; }
+    }
+
+    public class EventCallback: EventCallbackBase
+    {
+        [JsonProperty("event",NullValueHandling = NullValueHandling.Ignore)]
+        public EventType Event { get; set; }
+    }
+
+    public class EventCallback<T> : EventCallbackBase where T:EventType
+    {
+        [JsonProperty("event", NullValueHandling = NullValueHandling.Ignore)]
+        public T Event { get; set; }
     }
 }

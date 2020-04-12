@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Data;
 using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
 
-namespace Slack.NetStandard.Interaction
+namespace Slack.NetStandard.Objects
 {
     public class View
     {

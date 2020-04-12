@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Slack.NetStandard.Messages
+namespace Slack.NetStandard
 {
     public enum TextType
     {

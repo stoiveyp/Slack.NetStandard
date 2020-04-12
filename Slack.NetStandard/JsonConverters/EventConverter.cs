@@ -17,6 +17,13 @@ namespace Slack.NetStandard.JsonConverters
         public override Event ReadJson(JsonReader reader, Type objectType, Event existingValue, bool hasExistingValue,
             JsonSerializer serializer)
         {
+            if (objectType != typeof(Event))
+            {
+                var known = Activator.CreateInstance(objectType);
+                serializer.Populate(reader,known);
+                return (Event)known;
+            }
+
             var jObject = JObject.Load(reader);
 
             var target = GetEventType(jObject.Value<string>("type"));

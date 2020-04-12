@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 using Slack.NetStandard.EventsApi;
 using Xunit;
 
@@ -23,6 +24,21 @@ namespace Slack.NetStandard.Tests
             Assert.True(et.OtherFields.ContainsKey("user"));
             Assert.Equal(1234567890,et.Timestamp.EpochSeconds);
             Assert.Equal(123456, et.Timestamp.Identifier);
+        }
+
+        [Fact]
+        public void SubclassOptimized()
+        {
+            var et = Utility.ExampleFileContent<AppHomeOpened>("Events_Unknown.json");
+            Assert.IsType<AppHomeOpened>(et);
+        }
+
+        [Fact]
+        public void CheckShortcuts()
+        {
+            var test = "{\"event\":{}}";
+            var et = JsonConvert.DeserializeObject<EventCallback<AppHomeOpened>>(test);
+            Assert.IsType<EventCallback<AppHomeOpened>>(et);
         }
     }
 }
