@@ -196,14 +196,14 @@ namespace Slack.NetStandard.Tests
                     {
                         Channel = "ABCDEF"
                     }},
-                    Metadata = new ResponseMetadata
+                    ResponseMetadata = new ResponseMetadata
                     {
                         NextCursor = "DFGDFG"
                     }
                 });
             Assert.True(response.OK);
             Assert.Single(response.ScheduledMessages);
-            Assert.NotNull(response.Metadata.NextCursor);
+            Assert.NotNull(response.ResponseMetadata.NextCursor);
         }
     }
 }

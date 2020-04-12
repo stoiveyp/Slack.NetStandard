@@ -2,12 +2,9 @@
 
 namespace Slack.NetStandard.WebApi.Chat
 {
-    public class ScheduledMessageListResponse:WebApiResponse
+    public class ScheduledMessageListResponse:WebApiResponse<ResponseMetadata>
     {
         [JsonProperty("scheduled_messages")]
         public ScheduledMessageSummary[] ScheduledMessages { get; set; }
-
-        [JsonProperty("response_metadata")]
-        public ResponseMetadata Metadata { get; set; }
     }
 }
