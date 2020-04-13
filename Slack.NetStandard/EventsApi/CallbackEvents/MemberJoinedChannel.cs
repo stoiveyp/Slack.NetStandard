@@ -15,8 +15,7 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
         public string Channel { get; set; }
 
         [JsonProperty("channel_type",NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ChannelType ChannelType { get; set; }
+        public string ChannelType { get; set; }
 
         [JsonProperty("team",NullValueHandling = NullValueHandling.Ignore)]
         public string Team { get; set; }
