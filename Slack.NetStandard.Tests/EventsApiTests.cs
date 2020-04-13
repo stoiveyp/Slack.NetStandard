@@ -89,5 +89,29 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, ChannelCreated>("Events_ChannelCreated.json");
         }
+
+        [Fact]
+        public void ChannelDeleted()
+        {
+            Utility.AssertSubType<CallbackEvent, ChannelDeleted>("Events_ChannelDeleted.json");
+        }
+
+        [Fact]
+        public void ChannelHistoryChanged()
+        {
+            Utility.AssertSubType<CallbackEvent, ChannelHistoryChanged>("Events_ChannelHistoryChanged.json");
+        }
+
+        [Fact]
+        public void ChannelLeft()
+        {
+            Utility.AssertSubType<CallbackEvent, ChannelLeft>("Events_ChannelLeft.json");
+        }
+
+        [Fact]
+        public void ChannelRenamed()
+        {
+            Utility.AssertSubType<CallbackEvent, ChannelRename>("Events_ChannelRename.json");
+        }
     }
 }
