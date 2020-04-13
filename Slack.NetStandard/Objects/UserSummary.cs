@@ -2,16 +2,10 @@
 
 namespace Slack.NetStandard.Objects
 {
-    public class UserSummary
+    public class UserSummary:SlackId
     {
-        [JsonProperty("id")]
-        public string ID { get; set; }
-
         [JsonProperty("username", NullValueHandling = NullValueHandling.Ignore)]
         public string Username { get; set; }
-
-        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
-        public string Name { get; set; }
 
         [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamId { get; set; }

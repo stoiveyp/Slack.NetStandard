@@ -8,9 +8,9 @@ namespace Slack.NetStandard
     public class SlackId
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string ID { get; set; }
 
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; set; }
     }
 }

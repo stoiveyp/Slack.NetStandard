@@ -42,6 +42,8 @@ namespace Slack.NetStandard.JsonConverters
                 AppRequested.EventType => new AppRequested(),
                 AppUninstalled.EventType => new AppUninstalled(),
                 CallRejected.EventType => new CallRejected(),
+                ChannelArchive.EventType => new ChannelArchive(),
+                ChannelCreated.EventType => new ChannelCreated(),
                 _ => new CallbackEvent()
             };
         }
