@@ -77,7 +77,10 @@
     <None Update="Examples\Events_EmailDomainChanged.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Examples\Events_EmojiChanged.json">
+    <None Update="Examples\Events_EmojiChangedAdd.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\Events_EmojiChangedRemove.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Examples\Events_Unknown.json">

@@ -153,7 +153,8 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void EmojiChanged()
         {
-            Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChanged.json");
+            Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedAdd.json");
+            Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedRemove.json");
         }
     }
 }
