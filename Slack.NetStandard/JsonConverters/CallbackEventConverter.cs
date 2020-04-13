@@ -80,6 +80,13 @@ namespace Slack.NetStandard.JsonConverters
                 MemberJoinedChannel.EventType => new MemberJoinedChannel(),
                 MemberLeftChannel.EventType => new MemberLeftChannel(),
                 Message.EventType => MessageSubtype(container.Value<string>("subtype")),
+                PinAdded.EventType => new PinAdded(),
+                PinRemoved.EventType => new PinRemoved(),
+                ReactionAdded.EventType => new ReactionAdded(),
+                ReactionRemoved.EventType => new ReactionRemoved(),
+                StarAdded.EventType => new StarAdded(),
+                StarRemoved.EventType => new StarRemoved(),
+                SubteamCreated.EventType => new SubteamCreated(),
                 _ => new CallbackEvent()
             };
         }
