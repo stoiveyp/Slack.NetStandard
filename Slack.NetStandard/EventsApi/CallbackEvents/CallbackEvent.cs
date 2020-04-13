@@ -2,16 +2,16 @@
 using Newtonsoft.Json;
 using Slack.NetStandard.JsonConverters;
 
-namespace Slack.NetStandard.EventsApi
+namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
-    [JsonConverter(typeof(EventTypeConverter))]
-    public class EventType
+    [JsonConverter(typeof(CallbackEventConverter))]
+    public class CallbackEvent
     {
         [JsonProperty("type")]
         public string Type { get; set; }
 
-        [JsonProperty("event_ts")]
-        public Timestamp Timestamp { get; set; }
+        [JsonProperty("event_ts",NullValueHandling = NullValueHandling.Ignore)]
+        public Timestamp EventTimestamp { get; set; }
 
         [JsonExtensionData]
         public Dictionary<string,object> OtherFields { get; set; }

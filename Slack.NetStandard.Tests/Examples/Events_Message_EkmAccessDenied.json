@@ -1,0 +1,7 @@
+{
+  "type": "message",
+  "subtype": "ekm_access_denied",
+  "ts": "1358877455.000010",
+  "text": "Your admins have suspended everyone's access to this content.",
+  "user": "UREVOKEDU"
+}

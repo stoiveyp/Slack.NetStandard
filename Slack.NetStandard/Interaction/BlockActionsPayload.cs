@@ -13,7 +13,7 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("view", NullValueHandling = NullValueHandling.Ignore)]
         public View View { get; set; }
 
-        [JsonProperty("message")]
+        [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
         public ResponseMessage Message { get; set; }
     }
 }

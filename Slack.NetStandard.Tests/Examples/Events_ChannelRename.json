@@ -1,0 +1,8 @@
+{
+  "type": "channel_rename",
+  "channel": {
+    "id": "C02ELGNBH",
+    "name": "new_name",
+    "created": 1360782804
+  }
+}

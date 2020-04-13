@@ -1,0 +1,19 @@
+{
+  "type": "invite_requested",
+  "invite_request": {
+    "id": "12345",
+    "email": "bront@puppies.com",
+    "date_created": 123455,
+    "requester_ids": [ "U12345" ],
+    "channel_ids": [ "C12345" ],
+    "invite_type": "full_member",
+    "real_name": "Brent",
+    "date_expire": 123456,
+    "request_reason": "They're good dogs, Brant",
+    "team": {
+      "id": "T12345",
+      "name": "Puppy ratings workspace incorporated",
+      "domain": "puppiesrus"
+    }
+  }
+}

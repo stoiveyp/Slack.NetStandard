@@ -1,0 +1,7 @@
+{
+  "type": "emoji_changed",
+  "subtype": "add",
+  "name": "picard_facepalm",
+  "value": "https://my.slack.com/emoji/picard_facepalm/db8e287430eaa459.gif",
+  "event_ts": "1361482916.000004"
+}

@@ -13,13 +13,7 @@ namespace Slack.NetStandard.WebApi
         }
     }
 
-    public class WebApiResponseMessages
-    {
-        [JsonProperty("messages",NullValueHandling = NullValueHandling.Ignore)]
-        public string[] Messages { get; set; }
-    }
-
-    public class WebApiResponse<TMetadata>
+    public class WebApiResponse<TMetadata> where TMetadata: WebApiResponseMessages
     {
         [JsonProperty("ok")]
         public bool OK { get; set; }
