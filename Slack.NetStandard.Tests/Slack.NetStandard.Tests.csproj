@@ -65,6 +65,15 @@
     <None Update="Examples\Events_ChannelUnarchive.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Examples\Events_ChannelUnshared.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\Events_DndUpdated.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\Events_DndUpdatedUser.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Examples\Events_Unknown.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

@@ -50,6 +50,9 @@ namespace Slack.NetStandard.JsonConverters
                 ChannelRename.EventType => new ChannelRename(),
                 ChannelShared.EventType => new ChannelShared(),
                 ChannelUnarchive.EventType => new ChannelUnarchive(),
+                ChannelUnshared.EventType => new ChannelUnshared(),
+                DndUpdated.EventType => new DndUpdated(),
+                DndUpdatedUser.EventType => new DndUpdatedUser(),
                 _ => new CallbackEvent()
             };
         }

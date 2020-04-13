@@ -125,5 +125,23 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, ChannelUnarchive>("Events_ChannelUnarchive.json");
         }
+
+        [Fact]
+        public void ChannelUnshared()
+        {
+            Utility.AssertSubType<CallbackEvent, ChannelUnshared>("Events_ChannelUnshared.json");
+        }
+
+        [Fact]
+        public void DndUpdated()
+        {
+            Utility.AssertSubType<CallbackEvent, DndUpdated>("Events_DndUpdated.json");
+        }
+
+        [Fact]
+        public void DndUpdatedUser()
+        {
+            Utility.AssertSubType<CallbackEvent, DndUpdatedUser>("Events_DndUpdatedUser.json");
+        }
     }
 }
