@@ -37,6 +37,7 @@ namespace Slack.NetStandard.JsonConverters
             return type switch
             {
                 AppHomeOpened.EventType => new AppHomeOpened(),
+                AppMention.EventType => new AppMention(),
                 _ => new EventType()
             };
         }

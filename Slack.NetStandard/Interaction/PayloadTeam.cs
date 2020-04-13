@@ -7,7 +7,7 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("id")]
         public string Id { get; set; }
 
-        [JsonProperty("domain")]
+        [JsonProperty("domain", NullValueHandling = NullValueHandling.Ignore)]
         public string Domain { get; set; }
     }
 }

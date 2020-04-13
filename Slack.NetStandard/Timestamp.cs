@@ -15,13 +15,13 @@ namespace Slack.NetStandard
             {
                 return null;
             }
-            var pieces = value.Split(new[] { '.' }, 2).Select(long.Parse).ToArray();
-            return new Timestamp(pieces[0], pieces.Length > 1 ? (long?)pieces[1] : null);
+            var pieces = value.Split(new[] { '.' }, 2);
+            return new Timestamp(long.Parse(pieces[0]), pieces.Length > 1 ? pieces[1] : null);
         }
 
         public Timestamp() { }
 
-        public Timestamp(long epochSeconds, long? identifier = null)
+        public Timestamp(long epochSeconds, string identifier = null)
         {
             EpochSeconds = epochSeconds;
             Identifier = identifier;
@@ -29,7 +29,17 @@ namespace Slack.NetStandard
 
         public long EpochSeconds { get; set; }
 
-        public long? Identifier { get; set; }
+        public string Identifier { get; set; }
+
+        public override string ToString()
+        {
+            if (!string.IsNullOrWhiteSpace(Identifier))
+            {
+                return EpochSeconds + "." + Identifier;
+            }
+
+            return EpochSeconds.ToString();
+        }
 
         public int CompareTo(Timestamp other)
         {
@@ -37,17 +47,7 @@ namespace Slack.NetStandard
             if (ReferenceEquals(null, other)) return 1;
             var epochSecondsComparison = EpochSeconds.CompareTo(other.EpochSeconds);
             if (epochSecondsComparison != 0) return epochSecondsComparison;
-            return Nullable.Compare(Identifier, other.Identifier);
-        }
-
-        public override string ToString()
-        {
-            if (Identifier.HasValue)
-            {
-                return EpochSeconds + "." + Identifier.Value;
-            }
-
-            return EpochSeconds.ToString();
+            return string.Compare(Identifier, other.Identifier, StringComparison.Ordinal);
         }
     }
 }

@@ -15,33 +15,26 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void ViewSubmissionPayload()
         {
-            var payload = Utility.ExampleFileContent<InteractionPayload>("ViewSubmissionPayload.json");
-            var ViewPayload = Assert.IsType<ViewSubmissionPayload>(payload);
-            Utility.CompareJson(ViewPayload, "ViewPayload.json");
+            Utility.AssertSubType<InteractionPayload,ViewSubmissionPayload>("ViewSubmissionPayload.json");
         }
 
         [Fact]
         public void BlockActionsPayload()
         {
-            var payload = Utility.ExampleFileContent<InteractionPayload>("BlockActionsPayload.json");
-            var ViewPayload = Assert.IsType<BlockActionsPayload>(payload);
-            Utility.CompareJson(ViewPayload, "BlockActionsPayload.json");
+            Utility.AssertSubType<InteractionPayload, BlockActionsPayload>("BlockActionsPayload.json");
         }
 
         [Fact]
         public void GlobalShortcutPayload()
         {
-            var payload = Utility.ExampleFileContent<InteractionPayload>("GlobalShortcutPayload.json");
-            var ViewPayload = Assert.IsType<GlobalShortcutPayload>(payload);
-            Utility.CompareJson(ViewPayload, "GlobalShortcutPayload.json");
+            Utility.AssertSubType<InteractionPayload, GlobalShortcutPayload>("GlobalShortcutPayload.json");
         }
 
         [Fact]
         public void MessageActionPayload()
         {
-            var payload = Utility.ExampleFileContent<InteractionPayload>("MessageActionPayload.json");
-            var ViewPayload = Assert.IsType<MessageActionPayload>(payload);
-            Utility.CompareJson(ViewPayload, "MessageActionPayload.json");
+            var output = Utility.AssertSubType<InteractionPayload, MessageActionPayload>("MessageActionPayload.json","token");
+            Assert.Single(output.Message.OtherFields);
         }
     }
 }

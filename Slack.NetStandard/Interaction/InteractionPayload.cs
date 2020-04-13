@@ -18,7 +18,7 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("team")]
         public PayloadTeam Team { get; set; }
 
-        [JsonProperty("api_app_id")]
+        [JsonProperty("api_app_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ApiAppId { get; set; }
 
         [JsonExtensionData]

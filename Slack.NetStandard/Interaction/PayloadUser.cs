@@ -10,13 +10,13 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("id")]
         public string Id { get; set; }
 
-        [JsonProperty("username")]
+        [JsonProperty("username", NullValueHandling = NullValueHandling.Ignore)]
         public string Username { get; set; }
 
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; set; }
 
-        [JsonProperty("team_id")]
+        [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamId { get; set; }
     }
 }

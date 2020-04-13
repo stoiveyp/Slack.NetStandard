@@ -4,7 +4,7 @@ namespace Slack.NetStandard.Interaction
 {
     public abstract class ShortcutPayload:InteractionPayload
     {
-        [JsonProperty("calback_id")]
+        [JsonProperty("callback_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CallbackId { get; set; }
 
         [JsonProperty("trigger_id",NullValueHandling = NullValueHandling.Ignore)]

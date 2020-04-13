@@ -1,4 +1,6 @@
-﻿namespace Slack.NetStandard
+﻿using Newtonsoft.Json;
+
+namespace Slack.NetStandard
 {
     public class PlainText : TextObject
     {
@@ -13,6 +15,9 @@
         {
             
         }
+
+        [JsonIgnore]
+        internal bool WasConvertedFromString { get; set; }
 
         public override TextType Type => TextType.PlainText;
     }

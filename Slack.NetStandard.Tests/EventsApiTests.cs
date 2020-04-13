@@ -23,7 +23,7 @@ namespace Slack.NetStandard.Tests
             Assert.Single(et.OtherFields);
             Assert.True(et.OtherFields.ContainsKey("user"));
             Assert.Equal(1234567890,et.Timestamp.EpochSeconds);
-            Assert.Equal(123456, et.Timestamp.Identifier);
+            Assert.Equal("123456", et.Timestamp.Identifier);
         }
 
         [Fact]

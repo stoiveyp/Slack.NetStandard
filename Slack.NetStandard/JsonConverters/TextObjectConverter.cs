@@ -1,20 +1,46 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.Messages;
 
 namespace Slack.NetStandard.JsonConverters
 {
     public class TextObjectConverter : JsonConverter<TextObject>
     {
-        public override bool CanWrite => false;
-
         public override void WriteJson(JsonWriter writer, TextObject value, JsonSerializer serializer)
         {
-            throw new NotImplementedException();
+            if (value is PlainText pt && pt.WasConvertedFromString)
+            {
+                writer.WriteValue(value.Text);
+                return;
+            }
+            writer.WriteStartObject();
+            writer.WritePropertyName("type");
+            if (value.Type == TextType.PlainText)
+            {
+                writer.WriteValue("plain_text");
+            }
+            else
+            {
+                writer.WriteValue("mrkdwn");
+            }
+
+            writer.WritePropertyName("text");
+            writer.WriteValue(value.Text);
+
+            if (value.Emoji.HasValue)
+            {
+                writer.WritePropertyName("emoji");
+                writer.WriteValue(value.Emoji.Value);
+            }
+
+            if (value.Verbatim.HasValue)
+            {
+                writer.WritePropertyName("verbatim");
+                writer.WriteValue(value.Verbatim.Value);
+            }
+            
+
+            writer.WriteEndObject();
         }
 
         public override TextObject ReadJson(JsonReader reader, Type objectType, TextObject existingValue, bool hasExistingValue,
@@ -22,7 +48,7 @@ namespace Slack.NetStandard.JsonConverters
         {
             if (reader.TokenType == JsonToken.String)
             {
-                return new PlainText(reader.Value?.ToString());
+                return new PlainText(reader.Value?.ToString()){ WasConvertedFromString =true};
             }
 
             if (objectType != typeof(TextObject))
