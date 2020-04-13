@@ -156,5 +156,43 @@ namespace Slack.NetStandard.Tests
             Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedAdd.json");
             Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedRemove.json");
         }
+
+
+        [Fact]
+        public void FileChange()
+        {
+            Utility.AssertSubType<CallbackEvent, FileChange>("Events_FileChange.json");
+        }
+
+
+        [Fact]
+        public void FileCreated()
+        {
+            Utility.AssertSubType<CallbackEvent, FileCreated>("Events_FileCreated.json");
+        }
+
+        [Fact]
+        public void FileDeleted()
+        {
+            Utility.AssertSubType<CallbackEvent, FileDeleted>("Events_FileDeleted.json");
+        }
+
+        [Fact]
+        public void FilePublic()
+        {
+            Utility.AssertSubType<CallbackEvent, FilePublic>("Events_FilePublic.json");
+        }
+
+        [Fact]
+        public void FileShared()
+        {
+            Utility.AssertSubType<CallbackEvent, FileShared>("Events_FileShared.json");
+        }
+
+        [Fact]
+        public void FileUnshared()
+        {
+            Utility.AssertSubType<CallbackEvent, FileUnshared>("Events_FileUnshared.json");
+        }
     }
 }
