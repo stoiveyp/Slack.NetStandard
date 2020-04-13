@@ -2,26 +2,27 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.EventsApi;
+using Slack.NetStandard.EventsApi.CallbackEvents;
 
 namespace Slack.NetStandard.JsonConverters
 {
-    public class EventTypeConverter : JsonConverter<EventType>
+    public class CallbackEventConverter : JsonConverter<CallbackEvent>
     {
         public override bool CanWrite => false;
 
-        public override void WriteJson(JsonWriter writer, EventType value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, CallbackEvent value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
 
-        public override EventType ReadJson(JsonReader reader, Type objectType, EventType existingValue, bool hasExistingValue,
+        public override CallbackEvent ReadJson(JsonReader reader, Type objectType, CallbackEvent existingValue, bool hasExistingValue,
             JsonSerializer serializer)
         {
-            if (objectType != typeof(EventType))
+            if (objectType != typeof(CallbackEvent))
             {
                 var known = Activator.CreateInstance(objectType);
                 serializer.Populate(reader, known);
-                return known as EventType;
+                return known as CallbackEvent;
             }
             var jObject = JObject.Load(reader);
 
@@ -32,13 +33,14 @@ namespace Slack.NetStandard.JsonConverters
             return target;
         }
 
-        private EventType GetEventType(string type)
+        private CallbackEvent GetEventType(string type)
         {
             return type switch
             {
                 AppHomeOpened.EventType => new AppHomeOpened(),
                 AppMention.EventType => new AppMention(),
-                _ => new EventType()
+                AppRequested.EventType => new AppRequested(),
+                _ => new CallbackEvent()
             };
         }
     }

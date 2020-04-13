@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using Slack.NetStandard.EventsApi;
+using Slack.NetStandard.EventsApi.CallbackEvents;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -18,12 +19,12 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void UnknownEvent()
         {
-            var et = Utility.ExampleFileContent<EventType>("Events_Unknown.json");
+            var et = Utility.ExampleFileContent<CallbackEvent>("Events_Unknown.json");
             Assert.Equal("name_of_event",et.Type);
             Assert.Single(et.OtherFields);
             Assert.True(et.OtherFields.ContainsKey("user"));
-            Assert.Equal(1234567890,et.Timestamp.EpochSeconds);
-            Assert.Equal("123456", et.Timestamp.Identifier);
+            Assert.Equal(1234567890,et.EventTimestamp.EpochSeconds);
+            Assert.Equal("123456", et.EventTimestamp.Identifier);
         }
 
         [Fact]
@@ -44,13 +45,25 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void AppHomeOpened()
         {
-            Utility.AssertSubType<EventType,AppHomeOpened>("Events_AppHomeOpened.json");
+            Utility.AssertSubType<CallbackEvent,AppHomeOpened>("Events_AppHomeOpened.json");
         }
 
         [Fact]
         public void AppMention()
         {
-            Utility.AssertSubType<EventType,AppMention>("Events_AppMention.json");
+            Utility.AssertSubType<CallbackEvent,AppMention>("Events_AppMention.json");
+        }
+
+        [Fact]
+        public void AppRateLimited()
+        {
+            Utility.AssertSubType<Event,AppRateLimited>("Events_AppRateLimited.json");
+        }
+
+        [Fact]
+        public void AppRequested()
+        {
+            Utility.AssertSubType<CallbackEvent, AppRequested>("Events_AppRequested.json");
         }
     }
 }

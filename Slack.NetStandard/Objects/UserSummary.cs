@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace Slack.NetStandard.Interaction
+namespace Slack.NetStandard.Objects
 {
-    public class PayloadUser
+    public class UserSummary
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string ID { get; set; }
 
         [JsonProperty("username", NullValueHandling = NullValueHandling.Ignore)]
         public string Username { get; set; }
@@ -18,5 +15,8 @@ namespace Slack.NetStandard.Interaction
 
         [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamId { get; set; }
+
+        [JsonProperty("email",NullValueHandling = NullValueHandling.Ignore)]
+        public string Email { get; set; }
     }
 }

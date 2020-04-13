@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace Slack.NetStandard.EventsApi
+namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
-    public class AppMention:EventType
+    public class AppMention:CallbackEvent
     {
         public const string EventType = "app_mention";
 

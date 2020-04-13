@@ -39,6 +39,7 @@ namespace Slack.NetStandard.JsonConverters
             {
                 UrlVerification.EventType => new UrlVerification(),
                 EventCallback.EventType => new EventCallback(),
+                AppRateLimited.EventType => new AppRateLimited(),
                 _ => new Event()
             };
         }

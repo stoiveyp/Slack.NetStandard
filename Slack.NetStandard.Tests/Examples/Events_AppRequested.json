@@ -1,0 +1,48 @@
+{
+  "type": "app_requested",
+  "app_request": {
+    "id": "1234",
+    "app": {
+      "id": "A5678",
+      "name": "Brent's app",
+      "description": "They're good apps, Bront.",
+      "help_url": "brontsapp.com",
+      "privacy_policy_url": "brontsapp.com",
+      "app_homepage_url": "brontsapp.com",
+      "app_directory_url": "https://slack.slack.com/apps/A102ARD7Y",
+      "is_app_directory_approved": true,
+      "is_internal": false,
+      "additional_info": "none"
+    },
+    "previous_resolution": {
+      "status": "approved",
+      "scopes": [
+        {
+          "name": "app_requested",
+          "description": "allows this app to listen for app install requests",
+          "is_sensitive": false,
+          "token_type": "user"
+        }
+      ]
+    },
+    "user": {
+      "id": "U1234",
+      "name": "Bront",
+      "email": "bront@brent.com"
+    },
+    "team": {
+      "id": "T1234",
+      "name": "Brant App Team",
+      "domain": "brantappteam"
+    },
+    "scopes": [
+      {
+        "name": "app_requested",
+        "description": "allows this app to listen for app install requests",
+        "is_sensitive": false,
+        "token_type": "user"
+      }
+    ],
+    "message": "none"
+  }
+}

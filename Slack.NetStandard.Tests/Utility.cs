@@ -37,6 +37,11 @@ namespace Slack.NetStandard.Tests
 
         private static void OutputTrimEqual(JObject expectedJObject, JObject actualJObject, bool output = true)
         {
+            if(expectedJObject == null || actualJObject == null)
+            {
+                return;
+            }
+
             foreach (var prop in actualJObject.Properties().ToArray())
             {
                 if (JToken.DeepEquals(actualJObject[prop.Name], expectedJObject[prop.Name]))
@@ -48,7 +53,7 @@ namespace Slack.NetStandard.Tests
 
             foreach (var prop in actualJObject.Properties().Where(p => p.Value is JObject).Select(p => new { name = p.Name, value = p.Value as JObject }).ToArray())
             {
-                OutputTrimEqual(prop.value, expectedJObject[prop.name].Value<JObject>(), false);
+                OutputTrimEqual(prop.value, expectedJObject[prop.name]?.Value<JObject>(), false);
             }
 
             if (output)

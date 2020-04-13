@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Slack.NetStandard.Objects;
 
-namespace Slack.NetStandard.EventsApi
+namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
-    public class AppHomeOpened:EventType
+    public class AppHomeOpened:CallbackEvent
     {
         public const string EventType = "app_home_opened";
         [JsonProperty("user")]

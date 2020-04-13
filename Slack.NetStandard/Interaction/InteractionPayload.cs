@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Slack.NetStandard.JsonConverters;
+using Slack.NetStandard.Objects;
 
 namespace Slack.NetStandard.Interaction
 {
@@ -13,10 +14,10 @@ namespace Slack.NetStandard.Interaction
         public InteractionType Type { get; set; }
 
         [JsonProperty("user")]
-        public PayloadUser User { get; set; }
+        public UserSummary User { get; set; }
 
         [JsonProperty("team")]
-        public PayloadTeam Team { get; set; }
+        public TeamSummary Team { get; set; }
 
         [JsonProperty("api_app_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ApiAppId { get; set; }
