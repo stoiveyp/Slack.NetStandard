@@ -28,18 +28,18 @@ namespace Slack.NetStandard.Tests
 
             if (!result)
             {
-                OutputTrimEqual(expectedJObject, actualJObject);
-                throw new InvalidOperationException("Actual object remnants: " + actualJObject);
+                (expectedJObject,actualJObject) = OutputTrimEqual(expectedJObject, actualJObject);
+                throw new InvalidOperationException("Actual object remnants: \n" + actualJObject + "\n\nExpected object remnants:\n" + expectedJObject);
             }
 
             return result;
         }
 
-        private static void OutputTrimEqual(JObject expectedJObject, JObject actualJObject, bool output = true)
+        private static (JObject Expected,JObject Actual) OutputTrimEqual(JObject expectedJObject, JObject actualJObject, bool output = true)
         {
-            if(expectedJObject == null || actualJObject == null)
+            if (expectedJObject == null || actualJObject == null)
             {
-                return;
+                return (expectedJObject,actualJObject);
             }
 
             foreach (var prop in actualJObject.Properties().ToArray())
@@ -48,12 +48,14 @@ namespace Slack.NetStandard.Tests
                 {
                     actualJObject.Remove(prop.Name);
                     expectedJObject.Remove(prop.Name);
+                    continue;
                 }
-            }
 
-            foreach (var prop in actualJObject.Properties().Where(p => p.Value is JObject).Select(p => new { name = p.Name, value = p.Value as JObject }).ToArray())
-            {
-                OutputTrimEqual(prop.value, expectedJObject[prop.name]?.Value<JObject>(), false);
+                if (actualJObject[prop.Name] is JObject && expectedJObject[prop.Name] is JObject)
+                {
+                    (actualJObject,expectedJObject) = OutputTrimEqual(actualJObject[prop.Name] as JObject, expectedJObject[prop.Name] as JObject, false);
+                }
+
             }
 
             if (output)
@@ -61,6 +63,8 @@ namespace Slack.NetStandard.Tests
                 Console.WriteLine(expectedJObject.ToString());
                 Console.WriteLine(actualJObject.ToString());
             }
+
+            return (expectedJObject,actualJObject);
         }
 
         private static void RemoveFrom(JObject exclude, string item)
@@ -114,14 +118,14 @@ namespace Slack.NetStandard.Tests
         public static void AssertType<T>(string file)
         {
             var deserialised = Utility.ExampleFileContent<T>(file);
-            Assert.True(Utility.CompareJson(deserialised,file));
+            Assert.True(Utility.CompareJson(deserialised, file));
         }
 
-        public static TResult AssertSubType<T,TResult>(string file, params string[] exclude) where TResult:T
+        public static TResult AssertSubType<T, TResult>(string file, params string[] exclude) where TResult : T
         {
             var deserialised = Utility.ExampleFileContent<T>(file);
             Assert.IsType<TResult>(deserialised);
-            Assert.True(Utility.CompareJson(deserialised, file,exclude));
+            Assert.True(Utility.CompareJson(deserialised, file, exclude));
             return (TResult)deserialised;
         }
     }

@@ -357,5 +357,29 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, SubteamCreated>("Events_SubteamCreated.json");
         }
+        
+        [Fact]
+        public void SubteamMembersChanged()
+        {
+            Utility.AssertSubType<CallbackEvent, SubteamMembersChanged>("Events_SubteamMembersChanged.json");
+        }
+
+        [Fact]
+        public void SubteamSelfAdded()
+        {
+            Utility.AssertSubType<CallbackEvent, SubteamSelfAdded>("Events_SubteamSelfAdded.json");
+        }
+
+        [Fact]
+        public void SubteamSelfRemoved()
+        {
+            Utility.AssertSubType<CallbackEvent, SubteamSelfRemoved>("Events_SubteamSelfRemoved.json");
+        }
+
+        [Fact]
+        public void SubteamUpdated()
+        {
+            Utility.AssertSubType<CallbackEvent, SubteamUpdated>("Events_SubteamUpdated.json");
+        }
     }
 }

@@ -1,0 +1,17 @@
+{
+  "type": "subteam_members_changed",
+  "subteam_id": "S0614TZR7",
+  "team_id": "T060RNRCH",
+  "date_previous_update": 1446670362,
+  "date_update": 1492906952,
+  "added_users": [
+    "U060RNRCZ",
+    "U060ULRC0",
+    "U061309JM"
+  ],
+  "added_users_count": 3,
+  "removed_users": [
+    "U06129G2V"
+  ],
+  "removed_users_count": 1
+}

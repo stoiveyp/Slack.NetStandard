@@ -87,6 +87,10 @@ namespace Slack.NetStandard.JsonConverters
                 StarAdded.EventType => new StarAdded(),
                 StarRemoved.EventType => new StarRemoved(),
                 SubteamCreated.EventType => new SubteamCreated(),
+                SubteamMembersChanged.EventType => new SubteamMembersChanged(),
+                SubteamSelfAdded.EventType => new SubteamSelfAdded(),
+                SubteamSelfRemoved.EventType => new SubteamSelfRemoved(),
+                SubteamUpdated.EventType => new SubteamUpdated(),
                 _ => new CallbackEvent()
             };
         }
