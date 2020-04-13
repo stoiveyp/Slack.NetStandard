@@ -1,0 +1,21 @@
+{
+  "type": "link_shared",
+  "channel": "Cxxxxxx",
+  "user": "Uxxxxxxx",
+  "message_ts": "123456789.9875",
+  "thread_ts": "123456621.1855",
+  "links": [
+    {
+      "domain": "example.com",
+      "url": "https://example.com/12345"
+    },
+    {
+      "domain": "example.com",
+      "url": "https://example.com/67890"
+    },
+    {
+      "domain": "another-example.com",
+      "url": "https://yet.another-example.com/v/abcde"
+    }
+  ]
+}

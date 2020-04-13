@@ -1,0 +1,23 @@
+{
+  "text": "Is but a message within a thread",
+  "type": "message",
+  "thread_ts": "1517414896.001003",
+  "root": {
+    "type": "message",
+    "user": "U061F7AUR",
+    "text": "All that we see or seem",
+    "thread_ts": "1517414896.001003",
+    "reply_count": 1,
+    "replies": [
+      {
+        "user": "U061F7AUR",
+        "ts": "1517414906.000889"
+      }
+    ],
+    "unread_count": 1,
+    "ts": "1517414896.001003"
+  },
+  "subtype": "thread_broadcast",
+  "user": "U061F7AUR",
+  "ts": "1517414906.000889"
+}

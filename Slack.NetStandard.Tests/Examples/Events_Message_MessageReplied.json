@@ -1,0 +1,22 @@
+{
+  "type": "message",
+  "message": {
+    "type": "message",
+    "user": "U061F7TRS",
+    "text": "Was there was there was there what was there was there what was there was there there was there.",
+    "thread_ts": "1482960137.003543",
+    "reply_count": 1,
+    "replies": [
+      {
+        "user": "U061F7AUR",
+        "ts": "1483037603.017503"
+      }
+    ],
+    "ts": "1482960137.003543"
+  },
+  "subtype": "message_replied",
+  "hidden": true,
+  "channel": "C061EG9SL",
+  "event_ts": "1483037604.017506",
+  "ts": "1483037604.017506"
+}

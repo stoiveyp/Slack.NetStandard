@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using Newtonsoft.Json;
 using Slack.NetStandard.Messages.Blocks;
 
@@ -20,6 +21,15 @@ namespace Slack.NetStandard.Messages
 
         [JsonProperty("mrkdwn", NullValueHandling = NullValueHandling.Ignore)]
         public bool? UseMarkdown { get; set; }
+
+        [JsonProperty("edited", NullValueHandling = NullValueHandling.Ignore)]
+        public EditDetail Edited { get; set; }
+
+        [JsonProperty("reply_count",NullValueHandling = NullValueHandling.Ignore)]
+        public int? ReplyCount { get; set; }
+
+        [JsonProperty("replies",NullValueHandling = NullValueHandling.Ignore)]
+        public Reply[] Replies { get; set; }
 
         [JsonExtensionData]
         public Dictionary<string, object> OtherFields { get; set; }

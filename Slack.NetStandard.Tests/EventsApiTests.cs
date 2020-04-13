@@ -284,5 +284,36 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, InviteRequested>("Events_InviteRequested.json");
         }
+
+        [Fact]
+        public void LinkShared()
+        {
+            Utility.AssertSubType<CallbackEvent, LinkShared>("Events_LinkShared.json");
+        }
+
+        [Fact]
+        public void MemberJoinedChannel()
+        {
+            Utility.AssertSubType<CallbackEvent, MemberJoinedChannel>("Events_MemberJoinedChannel.json");
+        }
+
+        [Fact]
+        public void MemberLeftChannel()
+        {
+            Utility.AssertSubType<CallbackEvent, MemberLeftChannel>("Events_MemberLeftChannel.json");
+        }
+
+        [Fact]
+        public void Message()
+        {
+            Utility.AssertSubType<CallbackEvent, Message>("Events_Message.json");
+            Utility.AssertSubType<CallbackEvent, BotMessage>("Events_Message_Bot.json");
+            Utility.AssertSubType<CallbackEvent, EkmAccessDenied>("Events_Message_EkmAccessDenied.json");
+            Utility.AssertSubType<CallbackEvent, MeMessage>("Events_Message_Me.json");
+            Utility.AssertSubType<CallbackEvent, MessageChanged>("Events_Message_MessageChanged.json");
+            Utility.AssertSubType<CallbackEvent, MessageDeleted>("Events_Message_MessageDeleted.json");
+            Utility.AssertSubType<CallbackEvent, MessageReplied>("Events_Message_MessageReplied.json");
+            Utility.AssertSubType<CallbackEvent, ThreadBroadcast>("Events_Message_ThreadBroadcast.json");
+        }
     }
 }

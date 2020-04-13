@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.EventsApi;
 using Slack.NetStandard.EventsApi.CallbackEvents;
 
 namespace Slack.NetStandard.JsonConverters
@@ -18,7 +18,7 @@ namespace Slack.NetStandard.JsonConverters
         public override CallbackEvent ReadJson(JsonReader reader, Type objectType, CallbackEvent existingValue, bool hasExistingValue,
             JsonSerializer serializer)
         {
-            if (objectType != typeof(CallbackEvent))
+            if (objectType != typeof(CallbackEvent) && objectType != typeof(Message))
             {
                 var known = Activator.CreateInstance(objectType);
                 serializer.Populate(reader, known);
@@ -26,14 +26,14 @@ namespace Slack.NetStandard.JsonConverters
             }
             var jObject = JObject.Load(reader);
 
-            var target = GetEventType(jObject.Value<string>("type"));
+            var target = GetEventType(jObject.Value<string>("type"),jObject);
 
             serializer.Populate(jObject.CreateReader(), target);
 
             return target;
         }
 
-        private CallbackEvent GetEventType(string type)
+        private CallbackEvent GetEventType(string type, JObject container)
         {
             return type switch
             {
@@ -76,7 +76,26 @@ namespace Slack.NetStandard.JsonConverters
                 ImHistoryChanged.EventType => new ImHistoryChanged(),
                 ImOpen.EventType => new ImOpen(),
                 InviteRequested.EventType => new InviteRequested(),
+                LinkShared.EventType => new LinkShared(),
+                MemberJoinedChannel.EventType => new MemberJoinedChannel(),
+                MemberLeftChannel.EventType => new MemberLeftChannel(),
+                Message.EventType => MessageSubtype(container.Value<string>("subtype")),
                 _ => new CallbackEvent()
+            };
+        }
+
+        private Message MessageSubtype(string subType)
+        {
+            return subType switch
+            {
+                ThreadBroadcast.MessageSubType => new ThreadBroadcast(),
+                MessageReplied.MessageSubType => new MessageReplied(),
+                MessageDeleted.MessageSubType => new MessageDeleted(),
+                MessageChanged.MessageSubType => new MessageChanged(),
+                MeMessage.MessageSubType => new MeMessage(),
+                EkmAccessDenied.MessageSubType => new EkmAccessDenied(),
+                BotMessage.MessageSubType => new BotMessage(),
+                _ => new Message()
             };
         }
     }
