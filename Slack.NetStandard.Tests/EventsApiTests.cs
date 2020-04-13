@@ -254,5 +254,29 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, GroupUnarchive>("Events_GroupUnarchive.json");
         }
+
+        [Fact]
+        public void ImClose()
+        {
+            Utility.AssertSubType<CallbackEvent, ImClose>("Events_ImClose.json");
+        }
+
+        [Fact]
+        public void ImOpen()
+        {
+            Utility.AssertSubType<CallbackEvent, ImOpen>("Events_ImOpen.json");
+        }
+
+        [Fact]
+        public void ImCreated()
+        {
+            Utility.AssertSubType<CallbackEvent, ImCreated>("Events_ImCreated.json");
+        }
+
+        [Fact]
+        public void ImHistoryChanged()
+        {
+            Utility.AssertSubType<CallbackEvent, ImHistoryChanged>("Events_ImHistoryChanged.json");
+        }
     }
 }
