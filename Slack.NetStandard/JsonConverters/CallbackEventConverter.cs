@@ -61,6 +61,16 @@ namespace Slack.NetStandard.JsonConverters
                 FilePublic.EventType => new FilePublic(),
                 FileShared.EventType => new FileShared(),
                 FileUnshared.EventType => new FileUnshared(),
+                GridMigrationFinished.EventType => new GridMigrationFinished(),
+                GridMigrationStarted.EventType => new GridMigrationStarted(),
+                GroupArchive.EventType => new GroupArchive(),
+                GroupClose.EventType => new GroupClose(),
+                GroupDeleted.EventType => new GroupDeleted(),
+                GroupHistoryChanged.EventType => new GroupHistoryChanged(),
+                GroupLeft.EventType => new GroupLeft(),
+                GroupOpen.EventType => new GroupOpen(),
+                GroupRename.EventType => new GroupRename(),
+                GroupUnarchive.EventType => new GroupUnarchive(),
                 _ => new CallbackEvent()
             };
         }

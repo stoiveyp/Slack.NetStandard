@@ -194,5 +194,65 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, FileUnshared>("Events_FileUnshared.json");
         }
+
+        [Fact]
+        public void GridMigrationFinished()
+        {
+            Utility.AssertSubType<CallbackEvent, GridMigrationFinished>("Events_GridMigrationFinished.json");
+        }
+
+        [Fact]
+        public void GridMigrationStarted()
+        {
+            Utility.AssertSubType<CallbackEvent, GridMigrationStarted>("Events_GridMigrationStarted.json");
+        }
+
+        [Fact]
+        public void GroupArchive()
+        {
+            Utility.AssertSubType<CallbackEvent, GroupArchive>("Events_GroupArchive.json");
+        }
+
+        [Fact]
+        public void GroupClose()
+        {
+            Utility.AssertSubType<CallbackEvent, GroupClose>("Events_GroupClose.json");
+        }
+
+        [Fact]
+        public void GroupDeleted()
+        {
+            Utility.AssertSubType<CallbackEvent, GroupDeleted>("Events_GroupDeleted.json");
+        }
+
+        [Fact]
+        public void GroupHistoryChanged()
+        {
+            Utility.AssertSubType<CallbackEvent, GroupHistoryChanged>("Events_GroupHistoryChanged.json");
+        }
+
+        [Fact]
+        public void GroupLeft()
+        {
+            Utility.AssertSubType<CallbackEvent, GroupLeft>("Events_GroupLeft.json");
+        }
+
+        [Fact]
+        public void GroupOpen()
+        {
+            Utility.AssertSubType<CallbackEvent, GroupOpen>("Events_GroupOpen.json");
+        }
+
+        [Fact]
+        public void GroupRename()
+        {
+            Utility.AssertSubType<CallbackEvent, GroupRename>("Events_GroupRename.json");
+        }
+
+        [Fact]
+        public void GroupUnarchive()
+        {
+            Utility.AssertSubType<CallbackEvent, GroupUnarchive>("Events_GroupUnarchive.json");
+        }
     }
 }
