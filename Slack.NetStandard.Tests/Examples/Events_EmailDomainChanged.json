@@ -1,0 +1,5 @@
+{
+  "type": "email_domain_changed",
+  "email_domain": "example.com",
+  "event_ts": "1360782804.083113"
+}

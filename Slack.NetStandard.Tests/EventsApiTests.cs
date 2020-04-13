@@ -143,5 +143,17 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, DndUpdatedUser>("Events_DndUpdatedUser.json");
         }
+
+        [Fact]
+        public void EmailDomainChanged()
+        {
+            Utility.AssertSubType<CallbackEvent, EmailDomainChanged>("Events_EmailDomainChanged.json");
+        }
+
+        [Fact]
+        public void EmojiChanged()
+        {
+            Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChanged.json");
+        }
     }
 }
