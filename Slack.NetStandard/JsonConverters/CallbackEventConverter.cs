@@ -40,6 +40,7 @@ namespace Slack.NetStandard.JsonConverters
                 AppHomeOpened.EventType => new AppHomeOpened(),
                 AppMention.EventType => new AppMention(),
                 AppRequested.EventType => new AppRequested(),
+                AppUninstalled.EventType => new AppUninstalled(),
                 _ => new CallbackEvent()
             };
         }

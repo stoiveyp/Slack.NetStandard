@@ -65,5 +65,11 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, AppRequested>("Events_AppRequested.json");
         }
+
+        [Fact]
+        public void AppUninstalled()
+        {
+            Utility.AssertSubType<CallbackEvent, AppUninstalled>("Events_AppUninstalled.json");
+        }
     }
 }
