@@ -91,6 +91,9 @@ namespace Slack.NetStandard.JsonConverters
                 SubteamSelfAdded.EventType => new SubteamSelfAdded(),
                 SubteamSelfRemoved.EventType => new SubteamSelfRemoved(),
                 SubteamUpdated.EventType => new SubteamUpdated(),
+                TeamDomainChange.EventType => new TeamDomainChange(),
+                TeamJoin.EventType => new TeamJoin(),
+                TeamRename.EventType => new TeamRename(),
                 _ => new CallbackEvent()
             };
         }

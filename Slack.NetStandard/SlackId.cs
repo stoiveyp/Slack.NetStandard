@@ -12,5 +12,8 @@ namespace Slack.NetStandard
 
         [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; set; }
+
+        [JsonExtensionData]
+        public Dictionary<string, object> OtherFields { get; set; }
     }
 }
