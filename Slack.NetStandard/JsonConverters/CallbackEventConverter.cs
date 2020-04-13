@@ -75,6 +75,7 @@ namespace Slack.NetStandard.JsonConverters
                 ImCreated.EventType => new ImCreated(),
                 ImHistoryChanged.EventType => new ImHistoryChanged(),
                 ImOpen.EventType => new ImOpen(),
+                InviteRequested.EventType => new InviteRequested(),
                 _ => new CallbackEvent()
             };
         }

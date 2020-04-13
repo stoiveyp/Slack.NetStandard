@@ -278,5 +278,11 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, ImHistoryChanged>("Events_ImHistoryChanged.json");
         }
+
+        [Fact]
+        public void InviteRequested()
+        {
+            Utility.AssertSubType<CallbackEvent, InviteRequested>("Events_InviteRequested.json");
+        }
     }
 }
