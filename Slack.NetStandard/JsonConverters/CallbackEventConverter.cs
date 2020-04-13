@@ -94,6 +94,8 @@ namespace Slack.NetStandard.JsonConverters
                 TeamDomainChange.EventType => new TeamDomainChange(),
                 TeamJoin.EventType => new TeamJoin(),
                 TeamRename.EventType => new TeamRename(),
+                TokensRevoked.EventType => new TokensRevoked(),
+                UserChange.EventType => new UserChange(),
                 _ => new CallbackEvent()
             };
         }

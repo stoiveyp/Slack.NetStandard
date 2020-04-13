@@ -399,5 +399,17 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, TeamRename>("Events_TeamRename.json");
         }
+
+        [Fact]
+        public void TokensRevoked()
+        {
+            Utility.AssertSubType<CallbackEvent, TokensRevoked>("Events_TokensRevoked.json");
+        }
+
+        [Fact]
+        public void UserChange()
+        {
+            Utility.AssertSubType<CallbackEvent, UserChange>("Events_UserChange.json");
+        }
     }
 }

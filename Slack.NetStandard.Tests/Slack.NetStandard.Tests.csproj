@@ -212,6 +212,12 @@
     <None Update="Examples\Events_PinAdded.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Examples\Events_UserChange.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\Events_TokensRevoked.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Examples\Events_TeamRename.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
