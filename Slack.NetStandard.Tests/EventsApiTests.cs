@@ -34,11 +34,23 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
-        public void CheckShortcuts()
+        public void CheckConverterShortcuts()
         {
             var test = "{\"event\":{}}";
             var et = JsonConvert.DeserializeObject<EventCallback<AppHomeOpened>>(test);
             Assert.IsType<EventCallback<AppHomeOpened>>(et);
+        }
+
+        [Fact]
+        public void AppHomeOpened()
+        {
+            Utility.AssertSubType<EventType,AppHomeOpened>("Events_AppHomeOpened.json");
+        }
+
+        [Fact]
+        public void AppMention()
+        {
+            Utility.AssertSubType<EventType,AppMention>("Events_AppMention.json");
         }
     }
 }
