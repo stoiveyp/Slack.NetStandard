@@ -4,6 +4,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
+using Slack.NetStandard.ApiCommon;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {

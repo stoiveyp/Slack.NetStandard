@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using Slack.NetStandard.Messages;
-using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.WebApi;
-using Slack.NetStandard.WebApi.Chat;
+using Slack.NetStandard.WebApi.Admin;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -70,6 +66,26 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("DEF", jobject.Value<string>("team_id"));
                 }, WebApiResponse.Success());
             Assert.True(response.OK);
+        }
+
+        [Fact]
+        public async Task Admin_ListAppRequests()
+        {
+            var response = await Utility.CheckApi(
+                c => c.Admin.Apps.ListAppRequests(new AppRequestFilter
+                {
+                    Limit = 20
+                }),
+                "admin.apps.requests.list",
+                jobject =>
+                {
+                    Assert.Equal(1, jobject.Children().Count());
+                    Assert.Equal(20, jobject.Value<int>("limit"));
+                }, Utility.ExampleFileContent<ListAppRequestResponse>("Web_AdminAppsRequestsList.json"));
+            Assert.True(response.OK);
+            var appRequest = Assert.Single(response.AppRequests);
+            Assert.Equal("A061BL8RQ0", appRequest.App.ID);
+            Assert.Single(appRequest.Scopes);
         }
     }
 }

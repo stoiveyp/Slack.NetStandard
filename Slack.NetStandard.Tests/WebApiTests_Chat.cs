@@ -29,7 +29,7 @@ namespace Slack.NetStandard.Tests
             {
                 Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
             }), "chat.postMessage", jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); },
-                Utility.ExampleFileContent<PostMessageResponse>("PostMessageResponse.json"));
+                Utility.ExampleFileContent<PostMessageResponse>("Web_PostMessageResponse.json"));
             Assert.True(response.OK);
         }
 

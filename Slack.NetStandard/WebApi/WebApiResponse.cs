@@ -26,5 +26,8 @@ namespace Slack.NetStandard.WebApi
 
         [JsonProperty("response_metadata", NullValueHandling = NullValueHandling.Ignore)]
         public TMetadata ResponseMetadata { get; set; }
+
+        [JsonExtensionData]
+        public Dictionary<string,object> OtherFields { get; set; }
     }
 }

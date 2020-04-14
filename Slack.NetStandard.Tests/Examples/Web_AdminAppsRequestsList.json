@@ -1,0 +1,56 @@
+{
+  "ok": true,
+  "app_requests": [
+    {
+      "id": "Ar0XJGFLMLS",
+      "app": {
+        "id": "A061BL8RQ0",
+        "name": "Test App",
+        "description": "",
+        "help_url": "",
+        "privacy_policy_url": "https://testapp.com/privacy",
+        "app_homepage_url": "",
+        "app_directory_url": "https://acmecorp.slack.com/apps/A061BL8RQ0-test-app",
+        "is_app_directory_approved": true,
+        "is_internal": false,
+        "icons": {
+          "image_32": "/cdn/157658203/img/testapp/service_32.png",
+          "image_36": "/cdn/157658203/img/testapp/service_36.png",
+          "image_48": "/cdn/157658203/img/testapp/service_48.png",
+          "image_64": "/cdn/157658203/img/testapp/service_64.png",
+          "image_72": "/cdn/157658203/img/testapp/service_72.png",
+          "image_96": "/cdn/157658203/img/testapp/service_96.png",
+          "image_128": "/cdn/157258203/img/testapp/service_128.png",
+          "image_192": "/cdn/157258203/img/testapp/service_192.png",
+          "image_512": "/cdn/15758203/img/testapp/service_512.png",
+          "image_1024": "/cdn/15258203/img/testapp/service_1024.png"
+        },
+        "additional_info": ""
+      },
+      "previous_resolution": null,
+      "user": {
+        "id": "W08RA9G5HR",
+        "name": "Jane Doe",
+        "email": "janedoe@example.com"
+      },
+      "team": {
+        "id": "T0M94LNUCR",
+        "name": "Acme Corp",
+        "domain": "acmecorp"
+      },
+      "scopes": [
+        {
+          "name": "incoming-webhook",
+          "description": "Post messages to specific channels in Slack",
+          "is_sensitive": false,
+          "token_type": "user"
+        }
+      ],
+      "message": "test test again",
+      "date_created": 1578956327
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": ""
+  }
+}

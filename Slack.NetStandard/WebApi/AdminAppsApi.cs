@@ -46,5 +46,20 @@ namespace Slack.NetStandard.WebApi
                 TeamId = teamId
             });
         }
+
+        public Task<ListAppRequestResponse> ListAppRequests(AppRequestFilter filters)
+        {
+            return _client.MakeJsonCall<AppRequestFilter, ListAppRequestResponse>("admin.apps.requests.list", filters);
+        }
+
+        public Task<ListApprovedAppResponse> ListApprovedApps(AppFilter filters)
+        {
+            return _client.MakeJsonCall<AppFilter, ListApprovedAppResponse>("admin.apps.requests.list", filters);
+        }
+
+        public Task<ListRestrictedAppResponse> ListRestrictedApps(AppFilter filters)
+        {
+            return _client.MakeJsonCall<AppFilter, ListRestrictedAppResponse>("admin.apps.requests.list", filters);
+        }
     }
 }

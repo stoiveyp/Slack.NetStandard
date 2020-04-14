@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Slack.NetStandard.EventsApi.CallbackEvents
+namespace Slack.NetStandard.ApiCommon
 {
     public class Scope
     {
