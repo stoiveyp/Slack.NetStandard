@@ -87,5 +87,51 @@ namespace Slack.NetStandard.Tests
             Assert.Equal("A061BL8RQ0", appRequest.App.ID);
             Assert.Single(appRequest.Scopes);
         }
+
+        [Fact]
+        public async Task Admin_ListAppApproved()
+        {
+            var response = await Utility.CheckApi(
+                c => c.Admin.Apps.ListApprovedApps(new AppFilter
+                {
+                    Limit = 20,
+                    Enterprise = "ABCDEF"
+                }),
+                "admin.apps.approved.list",
+                jobject =>
+                {
+                    Assert.Equal(2, jobject.Children().Count());
+                    Assert.Equal(20, jobject.Value<int>("limit"));
+                    Assert.Equal("ABCDEF", jobject.Value<string>("enterprise_id"));
+                }, Utility.ExampleFileContent<ListApprovedAppResponse>("Web_AdminAppsApprovedList.json"));
+            Assert.True(response.OK);
+            var appRequest = Assert.Single(response.Apps);
+            Assert.Equal("A0W7UKG8E", appRequest.App.ID);
+            Assert.Single(appRequest.Scopes);
+            Assert.Equal("W0G82F4FD", appRequest.LastResolvedBy.ActorId);
+        }
+
+        [Fact]
+        public async Task Admin_ListAppRestricted()
+        {
+            var response = await Utility.CheckApi(
+                c => c.Admin.Apps.ListRestrictedApps(new AppFilter
+                {
+                    Limit = 20,
+                    Enterprise = "ABCDEF"
+                }),
+                "admin.apps.restricted.list",
+                jobject =>
+                {
+                    Assert.Equal(2, jobject.Children().Count());
+                    Assert.Equal(20, jobject.Value<int>("limit"));
+                    Assert.Equal("ABCDEF", jobject.Value<string>("enterprise_id"));
+                }, Utility.ExampleFileContent<ListRestrictedAppResponse>("Web_AdminAppsRestrictedList.json"));
+            Assert.True(response.OK);
+            var appRequest = Assert.Single(response.Apps);
+            Assert.Equal("A0FDLP8M2L", appRequest.App.ID);
+            Assert.Single(appRequest.Scopes);
+            Assert.Equal("W0G82LMFD",appRequest.LastResolvedBy.ActorId);
+        }
     }
 }

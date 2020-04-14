@@ -55,7 +55,7 @@ namespace Slack.NetStandard.Tests
                 {
                     Assert.Equal("C1234567890", jobject.Value<string>("channel"));
                     Assert.Equal("1405894322.002768", jobject.Value<string>("ts"));
-                }, Utility.ExampleFileContent<MessageResponse>("MessageResponse.json"));
+                }, Utility.ExampleFileContent<MessageResponse>("Web_MessageResponse.json"));
             Assert.True(response.OK);
             Assert.Equal("C024BE91L", response.Channel);
             Assert.Equal("1401383885.000061", response.Timestamp);

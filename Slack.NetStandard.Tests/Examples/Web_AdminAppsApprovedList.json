@@ -1,0 +1,48 @@
+{
+  "ok": true,
+  "approved_apps": [
+    {
+      "app": {
+        "id": "A0W7UKG8E",
+        "name": "My Test App",
+        "description": "test app",
+        "help_url": "https://www.slack.com",
+        "privacy_policy_url": "https://www.slack.com",
+        "app_homepage_url": "https://www.slack.com",
+        "app_directory_url": "https://myteam.enterprise.slack.com/apps/A0W7UKG8E-my-test-app",
+        "is_app_directory_approved": false,
+        "is_internal": false,
+        "icons": {
+          "image_32": "https://302674312496446w_2bd4ea1ad1f89a23c242_32.png",
+          "image_36": "https://302674312496446w_2bd4ea1ad1f89a23c242_36.png",
+          "image_48": "https://302674312496446w_2bd4ea1ad1f89a23c242_48.png",
+          "image_64": "https://302674312496446w_2bd4ea1ad1f89a23c242_64.png",
+          "image_72": "https://302674312496446w_2bd4ea1ad1f89a23c242_72.png",
+          "image_96": "https://302674312496446w_2bd4ea1ad1f89a23c242_96.png",
+          "image_128": "https://30267341249446w6_2bd4ea1ad1f89a23c242_128.png",
+          "image_192": "https://30267431249446w6_2bd4ea1ad1f89a23c242_192.png",
+          "image_512": "https://30267431249446w6_2bd4ea1ad1f89a23c242_512.png",
+          "image_1024": "https://3026743124446w96_2bd4ea1ad1f89a23c242_1024.png",
+          "image_original": "https://302674446w12496_2bd4ea1ad1f89a23c242_original.png"
+        },
+        "additional_info": ""
+      },
+      "scopes": [
+        {
+          "name": "bot",
+          "description": "Add the ability for people to direct message or mention @my_test_app",
+          "is_sensitive": true,
+          "token_type": "bot"
+        }
+      ],
+      "date_updated": 1574296707,
+      "last_resolved_by": {
+        "actor_id": "W0G82F4FD",
+        "actor_type": "user"
+      }
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": ""
+  }
+}

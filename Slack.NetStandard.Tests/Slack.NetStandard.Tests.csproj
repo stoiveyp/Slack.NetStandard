@@ -242,7 +242,13 @@
     <None Update="Examples\MessageActionPayload.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Examples\MessageResponse.json">
+    <None Update="Examples\Web_AdminAppsApprovedList.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\Web_AdminAppsRestrictedList.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\Web_MessageResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Examples\Web_AdminAppsRequestsList.json">
@@ -260,7 +266,7 @@
     <None Update="Examples\ViewPayload.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Examples\ViewsPublish.json">
+    <None Update="Examples\Web_ViewsPublish.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Examples\ViewSubmissionPayload.json">

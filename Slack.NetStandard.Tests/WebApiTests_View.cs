@@ -25,7 +25,7 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("ABC", jobject.Value<string>("user_id"));
                     Assert.NotNull(jobject.Value<JObject>("view"));
                     Assert.Equal("123456789", jobject.Value<string>("hash"));
-                }, Utility.ExampleFileContent<ViewResponse>("ViewsPublish.json"));
+                }, Utility.ExampleFileContent<ViewResponse>("Web_ViewsPublish.json"));
             Assert.True(response.OK);
             Assert.Equal("VMHU10V25",response.View.ID);
         }

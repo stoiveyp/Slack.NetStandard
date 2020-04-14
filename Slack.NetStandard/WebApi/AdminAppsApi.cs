@@ -54,12 +54,12 @@ namespace Slack.NetStandard.WebApi
 
         public Task<ListApprovedAppResponse> ListApprovedApps(AppFilter filters)
         {
-            return _client.MakeJsonCall<AppFilter, ListApprovedAppResponse>("admin.apps.requests.list", filters);
+            return _client.MakeJsonCall<AppFilter, ListApprovedAppResponse>("admin.apps.approved.list", filters);
         }
 
         public Task<ListRestrictedAppResponse> ListRestrictedApps(AppFilter filters)
         {
-            return _client.MakeJsonCall<AppFilter, ListRestrictedAppResponse>("admin.apps.requests.list", filters);
+            return _client.MakeJsonCall<AppFilter, ListRestrictedAppResponse>("admin.apps.restricted.list", filters);
         }
     }
 }
