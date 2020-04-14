@@ -7,5 +7,6 @@ namespace Slack.NetStandard.WebApi
     public interface IAdminApi
     {
         IAdminAppsApi Apps { get; }
+        IAdminConversationsApi Conversations { get; }
     }
 }

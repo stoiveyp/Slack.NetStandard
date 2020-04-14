@@ -8,11 +8,13 @@ namespace Slack.NetStandard.WebApi
         private readonly IWebApiClient _client;
 
         public IAdminAppsApi Apps { get; }
+        public IAdminConversationsApi Conversations { get; }
 
         internal AdminApi(IWebApiClient client)
         {
             _client = client;
             Apps = new AdminAppsApi(client);
+            Conversations = new AdminConversationsApi(client);
         }
         public Task<WebApiResponse> Archive(string channel)
         {

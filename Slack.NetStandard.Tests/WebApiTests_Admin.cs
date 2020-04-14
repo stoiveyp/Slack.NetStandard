@@ -133,5 +133,21 @@ namespace Slack.NetStandard.Tests
             Assert.Single(appRequest.Scopes);
             Assert.Equal("W0G82LMFD",appRequest.LastResolvedBy.ActorId);
         }
+
+        [Fact]
+        public async Task Admin_ConversationsSetTeams()
+        {
+            var response = await Utility.CheckApi(
+                c => c.Admin.Conversations.SetTeams(new SetTeamsRequest{
+                Channel = "ABCDEF",OrgChannel = true}),
+                "admin.conversations.setTeams",
+                jobject =>
+                {
+                    Assert.Equal(2, jobject.Children().Count());
+                    Assert.True(jobject.Value<bool>("org_channel"));
+                    Assert.Equal("ABCDEF", jobject.Value<string>("channel_id"));
+                }, WebApiResponse.Success());
+            Assert.True(response.OK);
+        }
     }
 }
