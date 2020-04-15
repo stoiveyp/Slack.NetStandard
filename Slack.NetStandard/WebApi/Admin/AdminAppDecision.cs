@@ -16,13 +16,4 @@ namespace Slack.NetStandard.WebApi.Admin
         [JsonProperty("team_id",NullValueHandling = NullValueHandling.Ignore)]
         public string TeamId { get; set; }
     }
-
-    internal class AdminInviteRequestDecision
-    {
-        [JsonProperty("invite_request_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string InviteRequestId { get; set; }
-
-        [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string TeamId { get; set; }
-    }
 }

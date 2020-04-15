@@ -14,6 +14,8 @@ namespace Slack.NetStandard.WebApi
 
         public IAdminInviteRequestsApi InviteRequests { get; }
 
+        public IAdminTeamsApi Teams { get; }
+
         internal AdminApi(IWebApiClient client)
         {
             _client = client;
@@ -21,6 +23,7 @@ namespace Slack.NetStandard.WebApi
             Conversations = new AdminConversationsApi(client);
             Emoji = new AdminEmojiApi(client);
             InviteRequests = new AdminInviteRequestsApi(client);
+            Teams = new AdminTeamsApi(client);
         }
         public Task<WebApiResponse> Archive(string channel)
         {

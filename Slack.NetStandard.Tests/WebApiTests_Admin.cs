@@ -210,5 +210,11 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("ABCDEF", j.Value<string>("cursor"));
                 });
         }
+
+        [Fact]
+        public async Task Admin_TeamsListAdmins()
+        {
+
+        }
     }
 }
