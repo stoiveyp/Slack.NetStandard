@@ -56,7 +56,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<WebApiResponse> Unfurl(UnfurlRequest request)
         {
-            return _client.MakeJsonCall<UnfurlRequest, WebApiResponse>("chat.unfurl", request);
+            return _client.MakeJsonCall("chat.unfurl", request);
         }
 
         public Task<UpdateMessageResponse> Update(UpdateMessageRequest request)

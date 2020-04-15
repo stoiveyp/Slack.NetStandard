@@ -12,7 +12,7 @@ namespace Slack.NetStandard.WebApi
         }
         public Task<WebApiResponse> SetTeams(SetTeamsRequest request)
         {
-            return _client.MakeJsonCall<SetTeamsRequest, WebApiResponse>("admin.conversations.setTeams", request);
+            return _client.MakeJsonCall("admin.conversations.setTeams", request);
         }
     }
 }

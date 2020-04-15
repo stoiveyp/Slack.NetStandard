@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Slack.NetStandard.WebApi;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -127,6 +128,24 @@ namespace Slack.NetStandard.Tests
             Assert.IsType<TResult>(deserialised);
             Assert.True(Utility.CompareJson(deserialised, file, exclude));
             return (TResult)deserialised;
+        }
+
+        public static async Task AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<JObject> requestAssertion)
+        {
+            var response = await Utility.CheckApi(func,
+                methodName,
+                requestAssertion, Utility.ExampleFileContent<TResponse>(responseFile));
+            
+            Assert.True(Utility.CompareJson(response,responseFile));
+        }
+
+        public static async Task AssertWebApi(Func<SlackWebApiClient, Task<WebApiResponse>> func, string methodName, Action<JObject> requestAssertion)
+        {
+            var response = await Utility.CheckApi(func,
+                methodName,
+                requestAssertion, WebApiResponse.Success());
+
+            Assert.True(response.OK);
         }
     }
 }

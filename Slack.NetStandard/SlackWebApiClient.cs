@@ -65,6 +65,11 @@ namespace Slack.NetStandard
             };
         }
 
+        public Task<WebApiResponse> MakeJsonCall<TRequest>(string url, TRequest request)
+        {
+            return MakeJsonCall<TRequest, WebApiResponse>(url, request);
+        }
+
         public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request)
         {
             try

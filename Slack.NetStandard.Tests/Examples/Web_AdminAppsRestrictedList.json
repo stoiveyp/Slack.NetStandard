@@ -30,7 +30,7 @@
       "scopes": [
         {
           "name": "files:write:user",
-          "description": "Upload, edit, and delete files on the user\u201fs behalf",
+          "description": "Upload, edit, and delete files on the users behalf",
           "is_sensitive": true,
           "token_type": "user"
         }
@@ -41,8 +41,5 @@
         "actor_type": "user"
       }
     }
-  ],
-  "response_metadata": {
-    "next_cursor": ""
-  }
+  ]
 }

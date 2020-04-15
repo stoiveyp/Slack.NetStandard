@@ -4,7 +4,7 @@ using Slack.NetStandard.Objects;
 
 namespace Slack.NetStandard.WebApi.Admin
 {
-    public class ListApprovedAppResponse:WebApiResponse
+    public class ListApprovedAppResponse:WebApiResponse<ResponseMetadataCursor>
     {
         [JsonProperty("approved_apps",NullValueHandling = NullValueHandling.Ignore)]
         public ResolvedApp[] Apps { get; set; }

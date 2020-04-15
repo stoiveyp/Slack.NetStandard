@@ -17,9 +17,4 @@ namespace Slack.NetStandard.WebApi
         Task<ListApprovedAppResponse> ListApprovedApps(AppFilter filters);
         Task<ListRestrictedAppResponse> ListRestrictedApps(AppFilter filters);
     }
-
-    public interface IAdminConversationsApi
-    {
-        Task<WebApiResponse> SetTeams(SetTeamsRequest request);
-    }
 }

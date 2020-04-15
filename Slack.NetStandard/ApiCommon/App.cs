@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Slack.NetStandard.ApiCommon
 {
@@ -33,5 +34,8 @@ namespace Slack.NetStandard.ApiCommon
 
         [JsonProperty("additional_info",NullValueHandling = NullValueHandling.Ignore)]
         public string AdditionalInfo { get; set; }
+
+        [JsonProperty("icons",NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string,string> Icons { get; set; }
     }
 }

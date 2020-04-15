@@ -15,7 +15,7 @@ namespace Slack.NetStandard.WebApi
         }
         public Task<WebApiResponse> Archive(string channel)
         {
-            return _client.MakeJsonCall<ChannelRequest, WebApiResponse>("conversations.archive", new ChannelRequest
+            return _client.MakeJsonCall("conversations.archive", new ChannelRequest
             {
                 Channel = channel
             });

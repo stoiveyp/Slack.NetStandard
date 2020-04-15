@@ -196,7 +196,7 @@ namespace Slack.NetStandard.Tests
                     {
                         Channel = "ABCDEF"
                     }},
-                    ResponseMetadata = new ResponseMetadata
+                    ResponseMetadata = new ResponseMetadataCursor
                     {
                         NextCursor = "DFGDFG"
                     }
