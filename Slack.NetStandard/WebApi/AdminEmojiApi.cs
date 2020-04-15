@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Admin;
 
 namespace Slack.NetStandard.WebApi
@@ -13,12 +14,20 @@ namespace Slack.NetStandard.WebApi
 
         public Task<WebApiResponse> Add(string name, string url)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.emoji.add",new Dictionary<string, string>
+            {
+                {"name", name},
+                {"url", url}
+            });
         }
 
         public Task<WebApiResponse> AddAlias(string name, string aliasFor)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.emoji.addAlias", new Dictionary<string, string>
+            {
+                {"name", name},
+                {"alias_for", aliasFor}
+            });
         }
 
         public Task<EmojiListResponse> List(string cursor = null)
@@ -33,19 +42,36 @@ namespace Slack.NetStandard.WebApi
 
         public Task<EmojiListResponse> List(string cursor, int? limit)
         {
-            return _client.MakeJsonCall<EmojiListRequest,EmojiListResponse>("admin.emoji.list",
-                new EmojiListRequest {Cursor = cursor, Limit = limit});
-            ;
+
+            var request = new Dictionary<string, string>();
+            if (!string.IsNullOrWhiteSpace(cursor))
+            {
+                request.Add("cursor", cursor);
+            }
+
+            if (limit.HasValue)
+            {
+                request.Add("limit", limit.Value.ToString());
+            }
+
+            return _client.MakeUrlEncodedCall<EmojiListResponse>("admin.emoji.list", request);
         }
 
         public Task<WebApiResponse> Remove(string name)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.emoji.remove", new Dictionary<string, string>
+            {
+                {"name", name}
+            });
         }
 
         public Task<WebApiResponse> Rename(string name, string newName)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.emoji.rename", new Dictionary<string, string>
+            {
+                {"name", name},
+                {"new_name",newName}
+            });
         }
     }
 }

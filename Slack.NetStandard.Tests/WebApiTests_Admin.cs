@@ -12,14 +12,14 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_ApproveApp()
         {
             var response = await Utility.CheckApi(
-                c => c.Admin.Apps.ApproveApp("ABC","DEF"),
+                c => c.Admin.Apps.ApproveApp("ABC", "DEF"),
                 "admin.apps.approve",
                 jobject =>
                 {
-                    Assert.Equal(2,jobject.Children().Count());
-                    Assert.Equal("ABC",jobject.Value<string>("app_id"));
+                    Assert.Equal(2, jobject.Children().Count());
+                    Assert.Equal("ABC", jobject.Value<string>("app_id"));
                     Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                },WebApiResponse.Success());
+                }, WebApiResponse.Success());
             Assert.True(response.OK);
         }
 
@@ -128,8 +128,11 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_ConversationsSetTeams()
         {
             await Utility.AssertWebApi(
-                c => c.Admin.Conversations.SetTeams(new SetTeamsRequest{
-                Channel = "ABCDEF",OrgChannel = true}),
+                c => c.Admin.Conversations.SetTeams(new SetTeamsRequest
+                {
+                    Channel = "ABCDEF",
+                    OrgChannel = true
+                }),
                 "admin.conversations.setTeams",
                 jobject =>
                 {
@@ -142,8 +145,19 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_EmojiList()
         {
-            await Utility.AssertWebApi(c => c.Admin.Emoji.List("ABCDEF"), "admin.emoji.list", "Web_AdminEmojiList.json",
-                j => Assert.Equal("ABCDEF", j.Value<string>("cursor")));
+            await Utility.AssertEncodedWebApi(c => c.Admin.Emoji.List("ABCDEF"), "admin.emoji.list", "Web_AdminEmojiList.json",
+                j => Assert.Equal("ABCDEF", j["cursor"]));
+        }
+
+        [Fact]
+        public async Task Admin_EmojiAdd()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Emoji.Add(":myemoji:", "urlGoesHere"), "admin.emoji.add",
+                j =>
+                {
+                    Assert.Equal(":myemoji:", j["name"]);
+                    Assert.Equal("urlGoesHere", j["url"]);
+                });
         }
     }
 }

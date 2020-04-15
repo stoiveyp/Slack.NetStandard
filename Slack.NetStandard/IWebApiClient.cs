@@ -1,11 +1,14 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard
 {
     internal interface IWebApiClient
     {
-        Task<WebApiResponse> MakeJsonCall<TRequest>(string url, TRequest request);
-        Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request);
+        Task<WebApiResponse> MakeJsonCall<TRequest>(string methodName, TRequest request);
+        Task<TResponse> MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request);
+        Task<WebApiResponse> MakeUrlEncodedCall(string adminEmojiRename, Dictionary<string, string> dictionary);
+        Task<T> MakeUrlEncodedCall<T>(string adminEmojiRename, Dictionary<string, string> dictionary);
     }
 }

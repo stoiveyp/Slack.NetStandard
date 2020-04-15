@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -65,18 +66,18 @@ namespace Slack.NetStandard
             };
         }
 
-        public Task<WebApiResponse> MakeJsonCall<TRequest>(string url, TRequest request)
+        public Task<WebApiResponse> MakeJsonCall<TRequest>(string methodName, TRequest request)
         {
-            return MakeJsonCall<TRequest, WebApiResponse>(url, request);
+            return MakeJsonCall<TRequest, WebApiResponse>(methodName, request);
         }
 
-        public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string url, TRequest request)
+        public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request)
         {
             try
             {
                 var content = new StringContent(JsonConvert.SerializeObject(request));
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json"){CharSet = "utf-8"};
-                var message = await Client.PostAsync(url, content);
+                var message = await Client.PostAsync(methodName, content);
                 return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
             }
             catch (WebException ex)
@@ -84,6 +85,19 @@ namespace Slack.NetStandard
                 var source = ExceptionDispatchInfo.Capture(ex);
                 return ProcessSlackException<TResponse>(ex, source);
             }
+        }
+
+        public Task<WebApiResponse> MakeUrlEncodedCall(string methodName, Dictionary<string, string> request)
+        {
+            return MakeUrlEncodedCall<WebApiResponse>(methodName, request);
+        }
+
+        public async Task<TResponse> MakeUrlEncodedCall<TResponse>(string methodName, Dictionary<string, string> request)
+        {
+            var content = new FormUrlEncodedContent(request);
+            content.Headers.ContentType.CharSet = "utf-8";
+            var message = await Client.PostAsync(methodName, content);
+            return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
         }
 
         private T DeserializeResponse<T>(Stream response)
