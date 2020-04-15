@@ -72,7 +72,7 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_ListAppRequests()
         {
             var response = await Utility.CheckApi(
-                c => c.Admin.Apps.ListAppRequests(new AppRequestFilter
+                c => c.Admin.Apps.ListAppRequests(new TeamRequestFilter
                 {
                     Limit = 20
                 }),
@@ -92,7 +92,7 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_ListAppApproved()
         {
             await Utility.AssertWebApi(
-                c => c.Admin.Apps.ListApprovedApps(new AppFilter
+                c => c.Admin.Apps.ListApprovedApps(new TeamFilter
                 {
                     Limit = 20,
                     Enterprise = "ABCDEF"
@@ -110,7 +110,7 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_ListAppRestricted()
         {
             await Utility.AssertWebApi(
-                c => c.Admin.Apps.ListRestrictedApps(new AppFilter
+                c => c.Admin.Apps.ListRestrictedApps(new TeamFilter
                 {
                     Limit = 20,
                     Enterprise = "ABCDEF"
@@ -157,6 +157,57 @@ namespace Slack.NetStandard.Tests
                 {
                     Assert.Equal(":myemoji:", j["name"]);
                     Assert.Equal("urlGoesHere", j["url"]);
+                });
+        }
+
+        [Fact]
+        public async Task Admin_InviteRequestApprove()
+        {
+            await Utility.AssertWebApi(c => c.Admin.InviteRequests.Approve("ABCDEF","DEFGHI"), "admin.inviteRequests.approve", 
+                j =>
+                {
+                    Assert.Equal("ABCDEF", j.Value<string>("invite_request_id"));
+                    Assert.Equal("DEFGHI", j.Value<string>("team_id"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_InviteRequestDeny()
+        {
+            await Utility.AssertWebApi(c => c.Admin.InviteRequests.Deny("ABCDEF", "DEFGHI"), "admin.inviteRequests.deny",
+                j =>
+                {
+                    Assert.Equal("ABCDEF", j.Value<string>("invite_request_id"));
+                    Assert.Equal("DEFGHI", j.Value<string>("team_id"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_InviteRequestList()
+        {
+            await Utility.AssertWebApi(c => c.Admin.InviteRequests.ListInviteRequests(new TeamFilter()), "admin.inviteRequests.list",
+                j =>
+                {
+                });
+        }
+
+        [Fact]
+        public async Task Admin_InviteRequestListApproved()
+        {
+            await Utility.AssertWebApi<ListApprovedInviteRequestResponse>(c => c.Admin.InviteRequests.ListApprovedInviteRequests(new TeamFilter{Cursor="ABCDEF"}), "admin.inviteRequests.approved.list",
+                j =>
+                {
+                    Assert.Equal("ABCDEF", j.Value<string>("cursor"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_InviteRequestListDenied()
+        {
+            await Utility.AssertWebApi<ListDeniedInviteRequestResponse>(c => c.Admin.InviteRequests.ListDeniedInviteRequests(new TeamFilter { Cursor = "ABCDEF" }), "admin.inviteRequests.denied.list",
+                j =>
+                {
+                    Assert.Equal("ABCDEF", j.Value<string>("cursor"));
                 });
         }
     }

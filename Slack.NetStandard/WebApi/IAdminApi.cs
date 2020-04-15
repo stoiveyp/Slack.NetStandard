@@ -9,5 +9,7 @@ namespace Slack.NetStandard.WebApi
         IAdminAppsApi Apps { get; }
         IAdminConversationsApi Conversations { get; }
         IAdminEmojiApi Emoji { get; }
+
+        IAdminInviteRequestsApi InviteRequests { get; }
     }
 }

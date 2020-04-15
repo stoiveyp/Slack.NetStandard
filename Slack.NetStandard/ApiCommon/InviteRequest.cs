@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Slack.NetStandard.Objects;
 
-namespace Slack.NetStandard.EventsApi.CallbackEvents
+namespace Slack.NetStandard.ApiCommon
 {
     public class InviteRequest
     {

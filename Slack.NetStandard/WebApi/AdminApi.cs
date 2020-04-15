@@ -12,12 +12,15 @@ namespace Slack.NetStandard.WebApi
 
         public IAdminEmojiApi Emoji { get; }
 
+        public IAdminInviteRequestsApi InviteRequests { get; }
+
         internal AdminApi(IWebApiClient client)
         {
             _client = client;
             Apps = new AdminAppsApi(client);
             Conversations = new AdminConversationsApi(client);
             Emoji = new AdminEmojiApi(client);
+            InviteRequests = new AdminInviteRequestsApi(client);
         }
         public Task<WebApiResponse> Archive(string channel)
         {

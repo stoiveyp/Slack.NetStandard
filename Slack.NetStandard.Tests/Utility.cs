@@ -151,6 +151,11 @@ namespace Slack.NetStandard.Tests
             return (TResult)deserialised;
         }
 
+        public static Task AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, Action<JObject> requestAssertion) where TResponse:new()
+        {
+            return Utility.CheckApi(func, methodName, requestAssertion, new TResponse());
+        }
+
         public static async Task AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<JObject> requestAssertion)
         {
             var response = await Utility.CheckApi(func,

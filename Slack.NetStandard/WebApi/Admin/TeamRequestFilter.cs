@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.WebApi.Admin
 {
-    public class AppRequestFilter
+    public class TeamRequestFilter
     {
         [JsonProperty("cursor",NullValueHandling = NullValueHandling.Ignore)]
         public string Cursor { get; set; }
@@ -15,11 +15,5 @@ namespace Slack.NetStandard.WebApi.Admin
 
         [JsonProperty("limit",NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; set; }
-    }
-
-    public class AppFilter : AppRequestFilter
-    {
-        [JsonProperty("enterprise_id",NullValueHandling = NullValueHandling.Ignore)]
-        public string Enterprise { get; set; }
     }
 }
