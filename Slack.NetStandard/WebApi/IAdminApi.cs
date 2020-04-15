@@ -11,5 +11,7 @@ namespace Slack.NetStandard.WebApi
         IAdminEmojiApi Emoji { get; }
 
         IAdminInviteRequestsApi InviteRequests { get; }
+
+        IAdminTeamsApi Teams { get; }
     }
 }

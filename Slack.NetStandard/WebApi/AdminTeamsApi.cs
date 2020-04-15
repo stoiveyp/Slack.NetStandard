@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Admin;
 
 namespace Slack.NetStandard.WebApi
 {
@@ -19,9 +20,38 @@ namespace Slack.NetStandard.WebApi
             throw new NotImplementedException();
         }
 
-        public Task ListAdmins()
+        public Task<ListAdminsResponse> ListAdmins(string teamId)
         {
-            throw new NotImplementedException();
+            return ListAdmins(teamId,null,null);
+        }
+
+        public Task<ListAdminsResponse> ListAdmins(string teamId, string cursor)
+        {
+            return ListAdmins(teamId, cursor, null);
+        }
+
+        public Task<ListAdminsResponse> ListAdmins(string teamId, int limit)
+        {
+            return ListAdmins(teamId, null, limit);
+        }
+
+        public Task<ListAdminsResponse> ListAdmins(string teamId, string cursor, int? limit)
+        {
+            var dict =new Dictionary<string,string>
+            {
+                {"team_id",teamId}
+            };
+            if (!string.IsNullOrWhiteSpace(cursor))
+            {
+                dict.Add("cursor",cursor);
+            }
+
+            if (limit.HasValue)
+            {
+                dict.Add("limit",limit.Value.ToString());
+            }
+
+            return _client.MakeUrlEncodedCall<ListAdminsResponse>("admin.teams.admins.list",dict);
         }
 
         public Task ListOwners()

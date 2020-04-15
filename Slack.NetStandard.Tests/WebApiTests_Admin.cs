@@ -214,7 +214,14 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_TeamsListAdmins()
         {
-
+            await Utility.AssertEncodedWebApi<ListAdminsResponse>(c => c.Admin.Teams.ListAdmins("ABCDEF", "DEFGHI", 20),
+                "admin.teams.admins.list", "Web_AdminTeamsAdminList.json",
+                nvc =>
+                {
+                    Assert.Equal("ABCDEF",nvc["team_id"]);
+                    Assert.Equal("DEFGHI",nvc["cursor"]);
+                    Assert.Equal("20",nvc["limit"]);
+                });
         }
     }
 }
