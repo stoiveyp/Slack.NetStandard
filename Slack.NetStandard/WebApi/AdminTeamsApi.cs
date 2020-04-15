@@ -59,9 +59,9 @@ namespace Slack.NetStandard.WebApi
             throw new NotImplementedException();
         }
 
-        public Task Create()
+        public Task<TeamCreateResponse> Create(TeamCreateRequest request)
         {
-            throw new NotImplementedException();
+            return _client.MakeJsonCall<TeamCreateRequest,TeamCreateResponse>("admin.teams.create", request);
         }
 
         public IAdminTeamSettingsApi Settings { get; }

@@ -223,5 +223,23 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("20",nvc["limit"]);
                 });
         }
+
+        [Fact]
+        public async Task Admin_TeamsCreateRequest()
+        {
+            await Utility.AssertWebApi<TeamCreateResponse>(c => c.Admin.Teams.Create(new TeamCreateRequest
+                {
+                    TeamDomain="test.com",
+                    TeamName = "wibble",
+                    TeamDescription = "this is the thing"
+                }),
+                "admin.teams.create", "Web_AdminTeamsCreate.json",
+                j =>
+                {
+                    Assert.Equal("test.com", j.Value<string>("team_domain"));
+                    Assert.Equal("wibble", j.Value<string>("team_name"));
+                    Assert.Equal("this is the thing", j.Value<string>("team_description"));
+                });
+        }
     }
 }
