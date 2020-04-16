@@ -5,7 +5,9 @@ namespace Slack.NetStandard.WebApi
 {
     public interface IAdminTeamsApi
     {
-        Task List();
+        Task<ListTeamsResponse> List(string cursor = null);
+        Task<ListTeamsResponse> List(int limit);
+        Task<ListTeamsResponse> List(string cursor, int? limit);
         Task<ListAdminsResponse> ListAdmins(string teamId);
         Task<ListAdminsResponse> ListAdmins(string teamId, string cursor);
         Task<ListAdminsResponse> ListAdmins(string teamId, int limit);

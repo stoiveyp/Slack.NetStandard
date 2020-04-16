@@ -15,9 +15,20 @@ namespace Slack.NetStandard.WebApi
             Settings = new AdminTeamSettingsApi(client);
         }
 
-        public Task List()
+        public Task<ListTeamsResponse> List(string cursor = null)
         {
-            throw new NotImplementedException();
+            return List(cursor, null);
+        }
+
+        public Task<ListTeamsResponse> List(int limit)
+        {
+            return List(null, limit);
+        }
+
+        public Task<ListTeamsResponse> List(string cursor, int? limit)
+        {
+            return _client.MakeJsonCall<CursorLimit, ListTeamsResponse>("admin.teams.list",
+                new CursorLimit {Cursor = cursor, Limit = limit});
         }
 
         public Task<ListAdminsResponse> ListAdmins(string teamId)

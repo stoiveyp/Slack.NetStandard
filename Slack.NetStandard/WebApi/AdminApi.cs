@@ -25,12 +25,5 @@ namespace Slack.NetStandard.WebApi
             InviteRequests = new AdminInviteRequestsApi(client);
             Teams = new AdminTeamsApi(client);
         }
-        public Task<WebApiResponse> Archive(string channel)
-        {
-            return _client.MakeJsonCall("conversations.archive", new ChannelRequest
-            {
-                Channel = channel
-            });
-        }
     }
 }

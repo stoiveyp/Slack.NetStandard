@@ -11,6 +11,8 @@ namespace Slack.NetStandard.WebApi.Admin
         [EnumMember(Value="invite_only")]
         InviteOnly,
         [EnumMember(Value="unlisted")]
-        Unlisted
+        Unlisted,
+        [EnumMember(Value="hidden")]
+        Hidden
     }
 }

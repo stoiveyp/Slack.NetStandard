@@ -241,5 +241,17 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("this is the thing", j.Value<string>("team_description"));
                 });
         }
+
+        [Fact]
+        public async Task Admin_TeamsList()
+        {
+            await Utility.AssertWebApi(c => c.Admin.Teams.List("DEFGHI", 20),
+                "admin.teams.list", "Web_AdminTeamsList.json",
+                j =>
+                {
+                    Assert.Equal("DEFGHI", j.Value<string>("cursor"));
+                    Assert.Equal(20, j.Value<int>("limit"));
+                });
+        }
     }
 }

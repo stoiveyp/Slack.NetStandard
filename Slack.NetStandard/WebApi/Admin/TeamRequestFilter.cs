@@ -5,15 +5,9 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.WebApi.Admin
 {
-    public class TeamRequestFilter
+    public class TeamRequestFilter:CursorLimit
     {
-        [JsonProperty("cursor",NullValueHandling = NullValueHandling.Ignore)]
-        public string Cursor { get; set; }
-
         [JsonProperty("team_id",NullValueHandling = NullValueHandling.Ignore)]
         public string Team { get; set; }
-
-        [JsonProperty("limit",NullValueHandling = NullValueHandling.Ignore)]
-        public int? Limit { get; set; }
     }
 }

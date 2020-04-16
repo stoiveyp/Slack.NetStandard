@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "teams": [
+    {
+      "id": "T1234",
+      "name": "My Team",
+      "discoverability": "hidden",
+      "primary_owner": {
+        "user_id": "W1234",
+        "email": "bront@slack.com"
+      }
+    }
+  ]
+}
