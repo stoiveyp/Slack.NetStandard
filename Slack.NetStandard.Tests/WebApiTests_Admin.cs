@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Admin;
 using Xunit;
@@ -327,6 +328,27 @@ namespace Slack.NetStandard.Tests
                 {
                     Assert.Equal("ABCDEF", nvc["team_id"]);
                     Assert.Equal("realName", nvc["name"]);
+                });
+        }
+
+        [Fact]
+        public async Task Admin_UsersAssign()
+        {
+            await Utility.AssertWebApi(c => c.Admin.Users.Assign(new AssignUserRequest
+                {
+                    TeamId = "ABCDEF",
+                    UserId = "DEFGHI",
+                    ChannelIds = "C123,C3456",
+                    IsRestricted = true
+            }),
+                "admin.users.assign",
+                j =>
+                {
+                    Assert.Equal(4,j.Children().Count());
+                    Assert.Equal("ABCDEF", j.Value<string>("team_id"));
+                    Assert.Equal("DEFGHI", j.Value<string>("user_id"));
+                    Assert.Equal("C123,C3456", j.Value<string>("channel_ids"));
+                    Assert.True(j.Value<bool>("is_restricted"));
                 });
         }
     }

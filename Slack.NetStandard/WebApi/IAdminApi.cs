@@ -13,5 +13,7 @@ namespace Slack.NetStandard.WebApi
         IAdminInviteRequestsApi InviteRequests { get; }
 
         IAdminTeamsApi Teams { get; }
+
+        IAdminUsersApi Users { get; }
     }
 }
