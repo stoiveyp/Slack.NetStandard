@@ -32,9 +32,14 @@ namespace Slack.NetStandard.WebApi
                 });
         }
 
-        public Task SetDescription()
+        public Task<WebApiResponse> SetDescription(string teamId, string description)
         {
-            throw new NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.teams.settings.setDescription",
+                new Dictionary<string, string>
+                {
+                    {"team_id", teamId},
+                    {"description",description }
+                });
         }
 
         public Task SetDiscoverability()

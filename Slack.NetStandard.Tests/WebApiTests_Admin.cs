@@ -281,5 +281,17 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("AB,CD,EF", nvc["channel_ids"]);
                 });
         }
+
+        [Fact]
+        public async Task Admin_TeamsSettingsSetDescription()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.Settings.SetDescription("ABCDEF", "this is the description"),
+                "admin.teams.settings.setDescription",
+                nvc =>
+                {
+                    Assert.Equal("ABCDEF", nvc["team_id"]);
+                    Assert.Equal("this is the description", nvc["description"]);
+                });
+        }
     }
 }
