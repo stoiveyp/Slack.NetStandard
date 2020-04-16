@@ -67,14 +67,24 @@ namespace Slack.NetStandard.WebApi
             return enumMemberAttribute?.Value ?? type.ToString();
         }
 
-        public Task SetIcon()
+        public Task<WebApiResponse> SetIcon(string teamId, string iconUrl)
         {
-            throw new NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.teams.settings.setIcon",
+                new Dictionary<string, string>
+                {
+                    {"team_id", teamId},
+                    {"icon_url",iconUrl}
+                });
         }
 
-        public Task SetName()
+        public Task<WebApiResponse> SetName(string teamId, string name)
         {
-            throw new NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.teams.settings.setName",
+                new Dictionary<string, string>
+                {
+                    {"team_id", teamId},
+                    {"name",name}
+                });
         }
     }
 }

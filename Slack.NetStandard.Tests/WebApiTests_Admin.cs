@@ -305,5 +305,29 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("invite_only", nvc["discoverability"]);
                 });
         }
+
+        [Fact]
+        public async Task Admin_TeamsSettingsSetIcon()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.Settings.SetIcon("ABCDEF", "realIconGoesHere"),
+                "admin.teams.settings.setIcon",
+                nvc =>
+                {
+                    Assert.Equal("ABCDEF", nvc["team_id"]);
+                    Assert.Equal("realIconGoesHere", nvc["icon_url"]);
+                });
+        }
+
+        [Fact]
+        public async Task Admin_TeamsSettingsSetName()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.Settings.SetName("ABCDEF", "realName"),
+                "admin.teams.settings.setName",
+                nvc =>
+                {
+                    Assert.Equal("ABCDEF", nvc["team_id"]);
+                    Assert.Equal("realName", nvc["name"]);
+                });
+        }
     }
 }
