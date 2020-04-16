@@ -8,7 +8,7 @@ namespace Slack.NetStandard.WebApi
         Task<TeamInfoResponse> Info(string teamId);
         Task<WebApiResponse> SetDefaultChannels(string teamId, params string[] channelIds);
         Task<WebApiResponse> SetDescription(string teamId, string description);
-        Task SetDiscoverability();
+        Task<WebApiResponse> SetDiscoverability(string teamId, TeamDiscoverability discoverability);
         Task SetIcon();
         Task SetName();
     }

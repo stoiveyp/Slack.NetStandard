@@ -293,5 +293,17 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("this is the description", nvc["description"]);
                 });
         }
+
+        [Fact]
+        public async Task Admin_TeamsSettingsSetDiscoverability()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.Settings.SetDiscoverability("ABCDEF", TeamDiscoverability.InviteOnly),
+                "admin.teams.settings.setDiscoverability",
+                nvc =>
+                {
+                    Assert.Equal("ABCDEF", nvc["team_id"]);
+                    Assert.Equal("invite_only", nvc["discoverability"]);
+                });
+        }
     }
 }
