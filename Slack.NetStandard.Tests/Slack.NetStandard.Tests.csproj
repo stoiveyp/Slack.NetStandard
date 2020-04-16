@@ -251,6 +251,9 @@
     <None Update="Examples\Web_AdminEmojiList.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Examples\Web_AdminTeamsSettingsInfo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Examples\Web_AdminTeamsOwnersList.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

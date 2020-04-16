@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Slack.NetStandard.Objects
+namespace Slack.NetStandard.ApiCommon
 {
     public class TeamSummary:SlackId
     {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Slack.NetStandard.ApiCommon;
 using Slack.NetStandard.JsonConverters;
 using Slack.NetStandard.Objects;
 

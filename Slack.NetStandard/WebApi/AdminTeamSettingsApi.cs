@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Admin;
 
 namespace Slack.NetStandard.WebApi
 {
@@ -11,9 +13,13 @@ namespace Slack.NetStandard.WebApi
             _client = client;
         }
 
-        public Task Info()
+        public Task<TeamInfoResponse> Info(string teamId)
         {
-            throw new NotImplementedException();
+            return _client.MakeUrlEncodedCall<TeamInfoResponse>("admin.teams.settings.info",
+                new Dictionary<string, string>
+                {
+                    {"team_id", teamId}
+                });
         }
 
         public Task SetDefaultChannels()

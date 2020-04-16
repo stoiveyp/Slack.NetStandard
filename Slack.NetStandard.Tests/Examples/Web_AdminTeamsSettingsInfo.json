@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "team": {
+    "id": "string",
+    "name": "string",
+    "domain": "string",
+    "email_domain": "string",
+    "icon": {
+      "guess": "at",
+      "regular": "icon",
+      "structure": "yeah,structure"
+    },
+    "enterprise_id": "string",
+    "enterprise_name": "string",
+    "default_channels": ["not","documented","well"]
+  }
+}

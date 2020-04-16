@@ -258,5 +258,16 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("20", nvc["limit"]);
                 });
         }
+
+        [Fact]
+        public async Task Admin_TeamsSettingsInfo()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.Settings.Info("ABCDEF"),
+                "admin.teams.settings.info", "Web_AdminTeamsSettingsInfo.json",
+                nvc =>
+                {
+                    Assert.Equal("ABCDEF", nvc["team_id"]);
+                });
+        }
     }
 }

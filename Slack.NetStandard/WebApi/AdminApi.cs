@@ -5,8 +5,6 @@ namespace Slack.NetStandard.WebApi
 {
     internal class AdminApi:IAdminApi
     {
-        private readonly IWebApiClient _client;
-
         public IAdminAppsApi Apps { get; }
         public IAdminConversationsApi Conversations { get; }
 
@@ -18,7 +16,6 @@ namespace Slack.NetStandard.WebApi
 
         internal AdminApi(IWebApiClient client)
         {
-            _client = client;
             Apps = new AdminAppsApi(client);
             Conversations = new AdminConversationsApi(client);
             Emoji = new AdminEmojiApi(client);

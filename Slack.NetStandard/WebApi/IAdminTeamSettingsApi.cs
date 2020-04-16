@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Admin;
 
 namespace Slack.NetStandard.WebApi
 {
     public interface IAdminTeamSettingsApi
     {
-        Task Info();
+        Task<TeamInfoResponse> Info(string teamId);
         Task SetDefaultChannels();
         Task SetDescription();
         Task SetDiscoverability();
