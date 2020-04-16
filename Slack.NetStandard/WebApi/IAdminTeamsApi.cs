@@ -13,7 +13,11 @@ namespace Slack.NetStandard.WebApi
         Task<ListAdminsResponse> ListAdmins(string teamId, int limit);
         Task<ListAdminsResponse> ListAdmins(string teamId, string cursor, int? limit);
 
-        Task ListOwners();
+        Task<ListOwnersResponse> ListOwners(string teamId);
+        Task<ListOwnersResponse> ListOwners(string teamId, string cursor);
+        Task<ListOwnersResponse> ListOwners(string teamId, int limit);
+        Task<ListOwnersResponse> ListOwners(string teamId, string cursor, int? limit);
+
         Task<TeamCreateResponse> Create(TeamCreateRequest request);
 
         IAdminTeamSettingsApi Settings { get; }

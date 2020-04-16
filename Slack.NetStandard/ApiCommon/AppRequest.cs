@@ -26,5 +26,8 @@ namespace Slack.NetStandard.ApiCommon
 
         [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
         public string Message { get; set; }
+
+        [JsonProperty("date_created",NullValueHandling = NullValueHandling.Ignore)]
+        public long? DateCreated { get; set; }
     }
 }

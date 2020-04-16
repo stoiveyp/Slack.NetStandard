@@ -65,9 +65,38 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeUrlEncodedCall<ListAdminsResponse>("admin.teams.admins.list",dict);
         }
 
-        public Task ListOwners()
+        public Task<ListOwnersResponse> ListOwners(string teamId)
         {
-            throw new NotImplementedException();
+            return ListOwners(teamId, null, null);
+        }
+
+        public Task<ListOwnersResponse> ListOwners(string teamId, string cursor)
+        {
+            return ListOwners(teamId, cursor, null);
+        }
+
+        public Task<ListOwnersResponse> ListOwners(string teamId, int limit)
+        {
+            return ListOwners(teamId, null, limit);
+        }
+
+        public Task<ListOwnersResponse> ListOwners(string teamId, string cursor, int? limit)
+        {
+            var dict = new Dictionary<string, string>
+            {
+                {"team_id",teamId}
+            };
+            if (!string.IsNullOrWhiteSpace(cursor))
+            {
+                dict.Add("cursor", cursor);
+            }
+
+            if (limit.HasValue)
+            {
+                dict.Add("limit", limit.Value.ToString());
+            }
+
+            return _client.MakeUrlEncodedCall<ListOwnersResponse>("admin.teams.owners.list", dict);
         }
 
         public Task<TeamCreateResponse> Create(TeamCreateRequest request)

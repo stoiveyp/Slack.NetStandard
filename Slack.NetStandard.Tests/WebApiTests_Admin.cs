@@ -11,7 +11,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_ApproveApp()
         {
-            var response = await Utility.CheckApi(
+            await Utility.AssertWebApi(
                 c => c.Admin.Apps.ApproveApp("ABC", "DEF"),
                 "admin.apps.approve",
                 jobject =>
@@ -19,14 +19,13 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal(2, jobject.Children().Count());
                     Assert.Equal("ABC", jobject.Value<string>("app_id"));
                     Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                }, WebApiResponse.Success());
-            Assert.True(response.OK);
+                });
         }
 
         [Fact]
         public async Task Admin_ApproveRequest()
         {
-            var response = await Utility.CheckApi(
+            await Utility.AssertWebApi(
                 c => c.Admin.Apps.ApproveRequest("ABC", "DEF"),
                 "admin.apps.approve",
                 jobject =>
@@ -34,14 +33,13 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal(2, jobject.Children().Count());
                     Assert.Equal("ABC", jobject.Value<string>("request_id"));
                     Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                }, WebApiResponse.Success());
-            Assert.True(response.OK);
+                });
         }
 
         [Fact]
         public async Task Admin_RestrictApp()
         {
-            var response = await Utility.CheckApi(
+            await Utility.AssertWebApi(
                 c => c.Admin.Apps.RestrictApp("ABC", "DEF"),
                 "admin.apps.restrict",
                 jobject =>
@@ -49,14 +47,13 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal(2, jobject.Children().Count());
                     Assert.Equal("ABC", jobject.Value<string>("app_id"));
                     Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                }, WebApiResponse.Success());
-            Assert.True(response.OK);
+                });
         }
 
         [Fact]
         public async Task Admin_RestrictRequest()
         {
-            var response = await Utility.CheckApi(
+            await Utility.AssertWebApi(
                 c => c.Admin.Apps.RestrictRequest("ABC", "DEF"),
                 "admin.apps.restrict",
                 jobject =>
@@ -64,28 +61,23 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal(2, jobject.Children().Count());
                     Assert.Equal("ABC", jobject.Value<string>("request_id"));
                     Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                }, WebApiResponse.Success());
-            Assert.True(response.OK);
+                });
         }
 
         [Fact]
         public async Task Admin_ListAppRequests()
         {
-            var response = await Utility.CheckApi(
+            await Utility.AssertWebApi(
                 c => c.Admin.Apps.ListAppRequests(new TeamRequestFilter
                 {
                     Limit = 20
                 }),
-                "admin.apps.requests.list",
+                "admin.apps.requests.list", "Web_AdminAppsRequestsList.json",
                 jobject =>
                 {
                     Assert.Single(jobject.Children());
                     Assert.Equal(20, jobject.Value<int>("limit"));
-                }, Utility.ExampleFileContent<ListAppRequestResponse>("Web_AdminAppsRequestsList.json"));
-            Assert.True(response.OK);
-            var appRequest = Assert.Single(response.AppRequests);
-            Assert.Equal("A061BL8RQ0", appRequest.App.ID);
-            Assert.Single(appRequest.Scopes);
+                });
         }
 
         [Fact]
@@ -194,7 +186,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_InviteRequestListApproved()
         {
-            await Utility.AssertWebApi<ListApprovedInviteRequestResponse>(c => c.Admin.InviteRequests.ListApprovedInviteRequests(new TeamFilter{Cursor="ABCDEF"}), "admin.inviteRequests.approved.list",
+            await Utility.AssertWebApi(c => c.Admin.InviteRequests.ListApprovedInviteRequests(new TeamFilter{Cursor="ABCDEF"}), "admin.inviteRequests.approved.list",
                 j =>
                 {
                     Assert.Equal("ABCDEF", j.Value<string>("cursor"));
@@ -204,7 +196,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_InviteRequestListDenied()
         {
-            await Utility.AssertWebApi<ListDeniedInviteRequestResponse>(c => c.Admin.InviteRequests.ListDeniedInviteRequests(new TeamFilter { Cursor = "ABCDEF" }), "admin.inviteRequests.denied.list",
+            await Utility.AssertWebApi(c => c.Admin.InviteRequests.ListDeniedInviteRequests(new TeamFilter { Cursor = "ABCDEF" }), "admin.inviteRequests.denied.list",
                 j =>
                 {
                     Assert.Equal("ABCDEF", j.Value<string>("cursor"));
@@ -214,7 +206,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_TeamsListAdmins()
         {
-            await Utility.AssertEncodedWebApi<ListAdminsResponse>(c => c.Admin.Teams.ListAdmins("ABCDEF", "DEFGHI", 20),
+            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.ListAdmins("ABCDEF", "DEFGHI", 20),
                 "admin.teams.admins.list", "Web_AdminTeamsAdminList.json",
                 nvc =>
                 {
@@ -227,7 +219,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_TeamsCreateRequest()
         {
-            await Utility.AssertWebApi<TeamCreateResponse>(c => c.Admin.Teams.Create(new TeamCreateRequest
+            await Utility.AssertWebApi(c => c.Admin.Teams.Create(new TeamCreateRequest
                 {
                     TeamDomain="test.com",
                     TeamName = "wibble",
@@ -251,6 +243,19 @@ namespace Slack.NetStandard.Tests
                 {
                     Assert.Equal("DEFGHI", j.Value<string>("cursor"));
                     Assert.Equal(20, j.Value<int>("limit"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_TeamsListOwners()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.ListOwners("ABCDEF", "DEFGHI", 20),
+                "admin.teams.owners.list", "Web_AdminTeamsOwnersList.json",
+                nvc =>
+                {
+                    Assert.Equal("ABCDEF", nvc["team_id"]);
+                    Assert.Equal("DEFGHI", nvc["cursor"]);
+                    Assert.Equal("20", nvc["limit"]);
                 });
         }
     }
