@@ -269,5 +269,17 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("ABCDEF", nvc["team_id"]);
                 });
         }
+
+        [Fact]
+        public async Task Admin_TeamsSettingsSetDefaultChannels()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.Settings.SetDefaultChannels("ABCDEF","AB","CD","EF"),
+                "admin.teams.settings.setDefaultChannels",
+                nvc =>
+                {
+                    Assert.Equal("ABCDEF", nvc["team_id"]);
+                    Assert.Equal("AB,CD,EF", nvc["channel_ids"]);
+                });
+        }
     }
 }

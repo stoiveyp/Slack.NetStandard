@@ -6,7 +6,7 @@ namespace Slack.NetStandard.WebApi
     public interface IAdminTeamSettingsApi
     {
         Task<TeamInfoResponse> Info(string teamId);
-        Task SetDefaultChannels();
+        Task<WebApiResponse> SetDefaultChannels(string teamId, params string[] channelIds);
         Task SetDescription();
         Task SetDiscoverability();
         Task SetIcon();

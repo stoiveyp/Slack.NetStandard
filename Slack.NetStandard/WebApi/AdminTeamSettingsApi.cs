@@ -22,9 +22,14 @@ namespace Slack.NetStandard.WebApi
                 });
         }
 
-        public Task SetDefaultChannels()
+        public Task<WebApiResponse> SetDefaultChannels(string teamId, params string[] defaultChannels)
         {
-            throw new NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.teams.settings.setDefaultChannels",
+                new Dictionary<string, string>
+                {
+                    {"team_id", teamId},
+                    {"channel_ids",string.Join(",",defaultChannels) }
+                });
         }
 
         public Task SetDescription()
