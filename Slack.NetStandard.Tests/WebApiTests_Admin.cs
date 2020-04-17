@@ -351,5 +351,86 @@ namespace Slack.NetStandard.Tests
                     Assert.True(j.Value<bool>("is_restricted"));
                 });
         }
+
+        [Fact]
+        public async Task Admin_UsersInvite()
+        {
+            await Utility.AssertWebApi(c => c.Admin.Users.Invite(new InviteUserRequest
+                {
+                    TeamId = "ABCDEF",
+                    Email = "test@TEst.com",
+                    ChannelIds = "C123,C3456",
+                    IsRestricted = true
+                }),
+                "admin.users.invite",
+                j =>
+                {
+                    Assert.Equal(4, j.Children().Count());
+                    Assert.Equal("ABCDEF", j.Value<string>("team_id"));
+                    Assert.Equal("test@TEst.com", j.Value<string>("email"));
+                    Assert.Equal("C123,C3456", j.Value<string>("channel_ids"));
+                    Assert.True(j.Value<bool>("is_restricted"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_UsersList()
+        {
+            await Utility.AssertWebApi(c => c.Admin.Users.List("DEFGHI", 20),
+                "admin.users.list", "Web_AdminUsersList.json",
+                j =>
+                {
+                    Assert.Equal("DEFGHI", j.Value<string>("team_id"));
+                    Assert.Equal(20, j.Value<int>("limit"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_UsersRemove()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Users.Remove("DEFGHI", "ABCDEF"),
+                "admin.users.remove",
+                nvc =>
+                {
+                    Assert.Equal("DEFGHI", nvc["team_id"]);
+                    Assert.Equal("ABCDEF", nvc["user_id"]);
+                });
+        }
+
+        [Fact]
+        public async Task Admin_UsersSetAdmin()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Users.SetAdmin("DEFGHI", "ABCDEF"),
+                "admin.users.setAdmin",
+                nvc =>
+                {
+                    Assert.Equal("DEFGHI", nvc["team_id"]);
+                    Assert.Equal("ABCDEF", nvc["user_id"]);
+                });
+        }
+
+        [Fact]
+        public async Task Admin_UsersSetOwner()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Users.SetOwner("DEFGHI", "ABCDEF"),
+                "admin.users.setOwner",
+                nvc =>
+                {
+                    Assert.Equal("DEFGHI", nvc["team_id"]);
+                    Assert.Equal("ABCDEF", nvc["user_id"]);
+                });
+        }
+
+        [Fact]
+        public async Task Admin_UsersSetRegular()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Admin.Users.SetRegular("DEFGHI", "ABCDEF"),
+                "admin.users.setRegular",
+                nvc =>
+                {
+                    Assert.Equal("DEFGHI", nvc["team_id"]);
+                    Assert.Equal("ABCDEF", nvc["user_id"]);
+                });
+        }
     }
 }

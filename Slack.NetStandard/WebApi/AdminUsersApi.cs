@@ -19,24 +19,48 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeJsonCall("admin.users.assign", request);
         }
 
-        public Task Invite()
+        public Task<WebApiResponse> Invite(InviteUserRequest request)
         {
-            throw new NotImplementedException();
+            return _client.MakeJsonCall("admin.users.invite", request);
         }
 
-        public Task List()
+        public Task<ListUsersResponse> List(string teamId)
         {
-            throw new NotImplementedException();
+            return List(teamId, null, null);
         }
 
-        public Task Remove()
+        public Task<ListUsersResponse> List(string teamId, string cursor)
         {
-            throw new NotImplementedException();
+            return List(teamId, cursor, null);
         }
 
-        public Task SetAdmin()
+        public Task<ListUsersResponse> List(string teamId, int limit)
         {
-            throw new NotImplementedException();
+            return List(teamId, null, limit);
+        }
+
+        public Task<ListUsersResponse> List(string teamId, string cursor, int? limit)
+        {
+            return _client.MakeJsonCall<CursorLimit,ListUsersResponse>("admin.users.list",
+                new TeamRequestFilter {Team = teamId, Cursor = cursor, Limit = limit});
+        }
+
+        public Task<WebApiResponse> Remove(string teamId, string userId)
+        {
+            return _client.MakeUrlEncodedCall("admin.users.remove", new Dictionary<string, string>
+            {
+                {"team_id", teamId},
+                {"user_id", userId}
+            });
+        }
+
+        public Task<WebApiResponse> SetAdmin(string teamId, string userId)
+        {
+            return _client.MakeUrlEncodedCall("admin.users.setAdmin", new Dictionary<string, string>
+            {
+                {"team_id", teamId},
+                {"user_id", userId}
+            });
         }
 
         public Task SetExpiration()
@@ -44,14 +68,22 @@ namespace Slack.NetStandard.WebApi
             throw new NotImplementedException();
         }
 
-        public Task SetOwner()
+        public Task<WebApiResponse> SetOwner(string teamId, string userId)
         {
-            throw new NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.users.setOwner", new Dictionary<string, string>
+            {
+                {"team_id", teamId},
+                {"user_id", userId}
+            });
         }
 
-        public Task SetRegular()
+        public Task<WebApiResponse> SetRegular(string teamId, string userId)
         {
-            throw new NotImplementedException();
+            return _client.MakeUrlEncodedCall("admin.users.setRegular", new Dictionary<string, string>
+            {
+                {"team_id", teamId},
+                {"user_id", userId}
+            });
         }
 
         public Task ResetSession()

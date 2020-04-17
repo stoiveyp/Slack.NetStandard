@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.WebApi.Admin
 {
-    public class ListAdminsResponse:WebApiResponse
+    public class ListAdminsResponse:WebApiResponse<ResponseMetadataCursor>
     {
         [JsonProperty("admin_ids",NullValueHandling = NullValueHandling.Ignore)]
         public string[] AdminIds { get; set; }

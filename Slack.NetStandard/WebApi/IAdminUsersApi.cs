@@ -9,13 +9,18 @@ namespace Slack.NetStandard.WebApi
     public interface IAdminUsersApi
     {
         Task<WebApiResponse> Assign(AssignUserRequest request);
-        Task Invite();
-        Task List();
-        Task Remove();
-        Task SetAdmin();
+        Task<WebApiResponse> Invite(InviteUserRequest request);
+
+        Task<ListUsersResponse> List(string teamId);
+        Task<ListUsersResponse> List(string teamId, string cursor);
+        Task<ListUsersResponse> List(string teamId, int limit);
+        Task<ListUsersResponse> List(string teamId, string cursor, int? limit);
+
+        Task<WebApiResponse> Remove(string teamId, string userId);
+        Task<WebApiResponse> SetAdmin(string teamId, string userId);
         Task SetExpiration();
-        Task SetOwner();
-        Task SetRegular();
+        Task<WebApiResponse> SetOwner(string teamId, string userId);
+        Task<WebApiResponse> SetRegular(string teamId, string userId);
 
         Task ResetSession();
     }
