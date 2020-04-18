@@ -156,7 +156,7 @@ namespace Slack.NetStandard.Tests
             return Utility.CheckApi(func, methodName, requestAssertion, new TResponse());
         }
 
-        public static async Task AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<JObject> requestAssertion)
+        public static async Task AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<JObject> requestAssertion) where TResponse: WebApiResponseBase
         {
             var response = await Utility.CheckApi(func,
                 methodName,
@@ -174,7 +174,7 @@ namespace Slack.NetStandard.Tests
             Assert.True(response.OK);
         }
 
-        public static async Task AssertEncodedWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<NameValueCollection> requestAssertion)
+        public static async Task AssertEncodedWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<NameValueCollection> requestAssertion) where TResponse : WebApiResponseBase
         {
             var response = await Utility.CheckApi(func,
                 methodName,

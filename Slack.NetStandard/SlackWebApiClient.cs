@@ -43,6 +43,11 @@ namespace Slack.NetStandard
             View = new ViewApi(this);
         }
 
+        public Task<WebApiResponse> Test(object data)
+        {
+            return ((IWebApiClient) this).MakeJsonCall("api.test", data);
+        }
+
         public SlackWebApiClient(string token):this(SetupClient(token))
         {
             if (string.IsNullOrWhiteSpace(token))

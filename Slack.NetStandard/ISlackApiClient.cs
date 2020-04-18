@@ -1,4 +1,5 @@
-﻿using Slack.NetStandard.WebApi;
+﻿using System.Threading.Tasks;
+using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard
 {
@@ -10,5 +11,7 @@ namespace Slack.NetStandard
         IAdminApi Admin { get; }
 
         IViewApi View { get; }
+
+        Task<WebApiResponse> Test(object data);
     }
 }
