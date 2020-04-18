@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.JsonConverters
 {
-    public class TimestampConverter:JsonConverter<Timestamp>
+    public class TimestampConverter : JsonConverter<Timestamp>
     {
         public override void WriteJson(JsonWriter writer, Timestamp value, JsonSerializer serializer)
         {

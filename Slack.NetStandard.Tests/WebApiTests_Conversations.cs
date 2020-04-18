@@ -12,7 +12,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Conversations_Archive()
         {
-            var response = await Utility.CheckApi(c => c.Conversations.Archive("ABCDEF"), "conversations.archive",
+            var response = await Utility.AssertWebApi(c => c.Conversations.Archive("ABCDEF"), "conversations.archive",
                 jobject =>
                 {
                     Assert.Single(jobject.Children());
@@ -24,7 +24,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Conversations_Close()
         {
-            var response = await Utility.CheckApi(c => c.Conversations.Close("ABCDEF"), "conversations.close",
+            var response = await Utility.AssertWebApi(c => c.Conversations.Close("ABCDEF"), "conversations.close",
                 jobject =>
                 {
                     Assert.Single(jobject.Children());
@@ -33,6 +33,17 @@ namespace Slack.NetStandard.Tests
             Assert.True(response.OK);
             Assert.True(response.AlreadyClosed);
             Assert.True(response.Noop);
+        }
+
+        [Fact]
+        public async Task Conversations_Create()
+        {
+            var response = await Utility.AssertWebApi(c => c.Conversations.Create("test this", true),
+                "conversations.create", "Web_ConversationsCreate.json", j =>
+                {
+                    Assert.Equal("test this", j.Value<string>("name"));
+                    Assert.True(j.Value<bool>("is_private"));
+                });
         }
     }
 }

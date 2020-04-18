@@ -28,5 +28,26 @@ namespace Slack.NetStandard.WebApi
                 Channel = channel
             });
         }
+
+        public Task<CreateConversationResponse> Create(string name, bool isPrivate = false)
+        {
+            return _client.MakeJsonCall<CreateConversationRequest, CreateConversationResponse>("conversations.create",
+                new CreateConversationRequest
+                {
+                    Name = name,
+                    IsPrivate = isPrivate
+                });
+        }
+
+        public Task<CreateConversationResponse> Create(string name, string[] userIds, bool isPrivate = false)
+        {
+            return _client.MakeJsonCall<CreateConversationRequest, CreateConversationResponse>("conversations.create",
+                new CreateConversationRequest
+                {
+                    Name = name,
+                    IsPrivate = isPrivate,
+                    UserIds = userIds
+                });
+        }
     }
 }
