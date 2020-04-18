@@ -24,6 +24,11 @@ namespace Slack.NetStandard
             return new Timestamp(long.Parse(pieces[0]), pieces.Length > 1 ? pieces[1] : null);
         }
 
+        public static implicit operator string(Timestamp value)
+        {
+            return value.ToString();
+        }
+
         public Timestamp() { }
 
         public Timestamp(long epochSeconds, string identifier = null)

@@ -45,22 +45,19 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_DeleteMessage()
         {
-            var response = await Utility.CheckApi(c => c.Chat.Delete("C1234567890", "1405894322.002768"),
-                "chat.delete",
+            await Utility.AssertWebApi(c => c.Chat.Delete("C1234567890", "1405894322.002768"),
+                "chat.delete", "Web_MessageResponse.json",
                 jobject =>
                 {
                     Assert.Equal("C1234567890", jobject.Value<string>("channel"));
                     Assert.Equal("1405894322.002768", jobject.Value<string>("ts"));
-                }, Utility.ExampleFileContent<MessageResponse>("Web_MessageResponse.json"));
-            Assert.True(response.OK);
-            Assert.Equal("C024BE91L", response.Channel);
-            Assert.Equal("1401383885.000061", response.Timestamp);
+                });
         }
 
         [Fact]
         public async Task Chat_DeleteScheduledMessage()
         {
-            var response = await Utility.CheckApi(
+            await Utility.AssertWebApi(
                 c => c.Chat.ScheduledMessages.Delete("C1234567890", "Q1234ABCD", true),
                 "chat.deleteScheduledMessage",
                 jobject =>
@@ -68,32 +65,27 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("C1234567890", jobject.Value<string>("channel"));
                     Assert.Equal("Q1234ABCD", jobject.Value<string>("scheduled_message_id"));
                     Assert.True(jobject.Value<bool>("as_user"));
-                }, new WebApiResponse { OK = true });
-            Assert.True(response.OK);
+                });
         }
 
         [Fact]
         public async Task Chat_GetPermalink()
         {
             var bustersAddress = "https://ghostbusters.slack.com/archives/C1H9RESGA/p135854651500008";
-            var response = await Utility.CheckApi(
+            var response = await Utility.AssertWebApi<GetPermalinkResponse>(
                 c => c.Chat.Permalink("C1234567890", "1234567890.123456"),
-                "chat.getPermalink",
+                "chat.getPermalink","Web_ChatGetPermalink.json",
                 jobject =>
                 {
                     Assert.Equal("C1234567890", jobject.Value<string>("channel"));
                     Assert.Equal("1234567890.123456", jobject.Value<string>("message_ts"));
-                }, new GetPermalinkResponse { OK = true, Channel = "C1H9RESGA", Permalink = bustersAddress });
-
-            Assert.True(response.OK);
-            Assert.Equal("C1H9RESGA", response.Channel);
-            Assert.Equal(bustersAddress, response.Permalink);
+                });
         }
 
         [Fact]
         public async Task Chat_MeMessage()
         {
-            var response = await Utility.CheckApi(c => c.Chat.MeMessage("C123456", "wibbles"),
+            var response = await Utility.AssertWebApi(c => c.Chat.MeMessage("C123456", "wibbles"),
                 "chat.meMessage",
                 jobject =>
                 {
@@ -110,7 +102,7 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_PostScheduled()
         {
             var currentEpoch = Epoch.For(DateTime.Now.AddSeconds(60));
-            var response = await Utility.CheckApi(c => c.Chat.ScheduledMessages.Post(new ScheduledMessageRequest
+            var response = await Utility.AssertWebApi(c => c.Chat.ScheduledMessages.Post(new ScheduledMessageRequest
             {
                 Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } },
                 PostAt = currentEpoch
@@ -129,7 +121,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_UnfurlUrl()
         {
-            var response = await Utility.CheckApi(c => c.Chat.Unfurl(new UnfurlRequest
+            var response = await Utility.AssertWebApi(c => c.Chat.Unfurl(new UnfurlRequest
             {
                 Channel = "C123456",
                 Timestamp = "123.456",

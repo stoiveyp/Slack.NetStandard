@@ -278,6 +278,9 @@
     <None Update="Examples\Web_BotInfoResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Examples\Web_ChatGetPermalink.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Examples\Web_ChatPostEphemeral.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

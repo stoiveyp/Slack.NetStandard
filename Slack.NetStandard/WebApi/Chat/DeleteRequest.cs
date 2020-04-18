@@ -11,7 +11,7 @@ namespace Slack.NetStandard.WebApi.Chat
         public string Channel { get; set; }
 
         [JsonProperty("ts")]
-        public string Timestamp { get; set; }
+        public Timestamp Timestamp { get; set; }
 
         [JsonProperty("as_user", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AsUser { get; set; }

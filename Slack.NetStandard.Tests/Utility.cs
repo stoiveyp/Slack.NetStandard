@@ -139,57 +139,61 @@ namespace Slack.NetStandard.Tests
 
         public static void AssertType<T>(string file)
         {
-            var deserialised = Utility.ExampleFileContent<T>(file);
-            Assert.True(Utility.CompareJson(deserialised, file));
+            var deserialised = ExampleFileContent<T>(file);
+            Assert.True(CompareJson(deserialised, file));
         }
 
         public static TResult AssertSubType<T, TResult>(string file, params string[] exclude) where TResult : T
         {
-            var deserialised = Utility.ExampleFileContent<T>(file);
+            var deserialised = ExampleFileContent<T>(file);
             Assert.IsType<TResult>(deserialised);
-            Assert.True(Utility.CompareJson(deserialised, file, exclude));
+            Assert.True(CompareJson(deserialised, file, exclude));
             return (TResult)deserialised;
         }
 
-        public static Task AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, Action<JObject> requestAssertion) where TResponse:new()
+        public static Task<TResponse> AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, Action<JObject> requestAssertion,TResponse responseToSend = default) where TResponse:class,new()
         {
-            return Utility.CheckApi(func, methodName, requestAssertion, new TResponse());
+            return CheckApi(func, methodName, requestAssertion,responseToSend ?? new TResponse());
         }
 
-        public static async Task AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<JObject> requestAssertion) where TResponse: WebApiResponseBase
+        public static async Task<TResponse> AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<JObject> requestAssertion) where TResponse: WebApiResponseBase
         {
-            var response = await Utility.CheckApi(func,
+            var response = await CheckApi(func,
                 methodName,
-                requestAssertion, Utility.ExampleFileContent<TResponse>(responseFile));
+                requestAssertion, ExampleFileContent<TResponse>(responseFile));
             
-            Assert.True(Utility.CompareJson(response,responseFile));
+            Assert.True(CompareJson(response,responseFile));
+            return response;
         }
 
-        public static async Task AssertWebApi(Func<SlackWebApiClient, Task<WebApiResponse>> func, string methodName, Action<JObject> requestAssertion)
+        public static async Task<WebApiResponse> AssertWebApi(Func<SlackWebApiClient, Task<WebApiResponse>> func, string methodName, Action<JObject> requestAssertion)
         {
-            var response = await Utility.CheckApi(func,
+            var response = await CheckApi(func,
                 methodName,
                 requestAssertion, WebApiResponse.Success());
 
             Assert.True(response.OK);
+            return response;
         }
 
-        public static async Task AssertEncodedWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<NameValueCollection> requestAssertion) where TResponse : WebApiResponseBase
+        public static async Task<TResponse> AssertEncodedWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<NameValueCollection> requestAssertion) where TResponse : WebApiResponseBase
         {
-            var response = await Utility.CheckApi(func,
+            var response = await CheckApi(func,
                 methodName,
-                requestAssertion, Utility.ExampleFileContent<TResponse>(responseFile));
+                requestAssertion, ExampleFileContent<TResponse>(responseFile));
 
-            Assert.True(Utility.CompareJson(response, responseFile));
+            Assert.True(CompareJson(response, responseFile));
+            return response;
         }
 
-        public static async Task AssertEncodedWebApi(Func<SlackWebApiClient, Task<WebApiResponse>> func, string methodName, Action<NameValueCollection> requestAssertion)
+        public static async Task<WebApiResponse> AssertEncodedWebApi(Func<SlackWebApiClient, Task<WebApiResponse>> func, string methodName, Action<NameValueCollection> requestAssertion)
         {
-            var response = await Utility.CheckApi(func,
+            var response = await CheckApi(func,
                 methodName,
                 requestAssertion, WebApiResponse.Success());
 
             Assert.True(response.OK);
+            return response;
         }
     }
 }

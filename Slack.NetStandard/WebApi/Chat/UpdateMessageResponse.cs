@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Slack.NetStandard.Messages;
 
 namespace Slack.NetStandard.WebApi.Chat
 {
@@ -9,5 +10,8 @@ namespace Slack.NetStandard.WebApi.Chat
     {
         [JsonProperty("text")]
         public string Text { get; set; }
+
+        [JsonProperty("message",NullValueHandling = NullValueHandling.Ignore)]
+        public Message Message { get; set; }
     }
 }

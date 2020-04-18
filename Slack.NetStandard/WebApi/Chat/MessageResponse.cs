@@ -7,10 +7,10 @@ namespace Slack.NetStandard.WebApi.Chat
 {
     public class MessageResponse:WebApiResponse
     {
-        [JsonProperty("channel")]
+        [JsonProperty("channel",NullValueHandling = NullValueHandling.Ignore)]
         public string Channel { get; set; }
 
-        [JsonProperty("ts")] 
-        public string Timestamp { get; set; }
+        [JsonProperty("ts", NullValueHandling = NullValueHandling.Ignore)]
+        public Timestamp Timestamp { get; set; }
     }
 }
