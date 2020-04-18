@@ -6,19 +6,19 @@ using Slack.NetStandard.EventsApi.CallbackEvents;
 
 namespace Slack.NetStandard.JsonConverters
 {
-    public class CallbackEventConverter : JsonConverter<CallbackEvent>
+    public class CallbackEventConverter : JsonConverter<ICallbackEvent>
     {
         public override bool CanWrite => false;
 
-        public override void WriteJson(JsonWriter writer, CallbackEvent value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, ICallbackEvent value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }
 
-        public override CallbackEvent ReadJson(JsonReader reader, Type objectType, CallbackEvent existingValue, bool hasExistingValue,
+        public override ICallbackEvent ReadJson(JsonReader reader, Type objectType, ICallbackEvent existingValue, bool hasExistingValue,
             JsonSerializer serializer)
         {
-            if (objectType != typeof(CallbackEvent) && objectType != typeof(Message))
+            if (objectType != typeof(ICallbackEvent) && objectType != typeof(CallbackEvent) && objectType != typeof(IMessageCallbackEvent))
             {
                 var known = Activator.CreateInstance(objectType);
                 serializer.Populate(reader, known);
@@ -33,7 +33,7 @@ namespace Slack.NetStandard.JsonConverters
             return target;
         }
 
-        private CallbackEvent GetEventType(string type, JObject container)
+        private ICallbackEvent GetEventType(string type, JObject container)
         {
             return type switch
             {
@@ -79,7 +79,7 @@ namespace Slack.NetStandard.JsonConverters
                 LinkShared.EventType => new LinkShared(),
                 MemberJoinedChannel.EventType => new MemberJoinedChannel(),
                 MemberLeftChannel.EventType => new MemberLeftChannel(),
-                Message.EventType => MessageSubtype(container.Value<string>("subtype")),
+                MessageCallbackEvent.EventType => MessageSubtype(container.Value<string>("subtype")),
                 PinAdded.EventType => new PinAdded(),
                 PinRemoved.EventType => new PinRemoved(),
                 ReactionAdded.EventType => new ReactionAdded(),
@@ -100,7 +100,7 @@ namespace Slack.NetStandard.JsonConverters
             };
         }
 
-        private Message MessageSubtype(string subType)
+        private IMessageCallbackEvent MessageSubtype(string subType)
         {
             return subType switch
             {
@@ -111,7 +111,7 @@ namespace Slack.NetStandard.JsonConverters
                 MeMessage.MessageSubType => new MeMessage(),
                 EkmAccessDenied.MessageSubType => new EkmAccessDenied(),
                 BotMessage.MessageSubType => new BotMessage(),
-                _ => new Message()
+                _ => (IMessageCallbackEvent)new MessageCallbackEvent()
             };
         }
     }

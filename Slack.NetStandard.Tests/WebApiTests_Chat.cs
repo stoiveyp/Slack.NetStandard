@@ -25,25 +25,21 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_PostMessage()
         {
-            var response = await Utility.CheckApi(c => c.Chat.Post(new PostMessageRequest
-            {
-                Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
-            }), "chat.postMessage", jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); },
-                Utility.ExampleFileContent<PostMessageResponse>("Web_PostMessageResponse.json"));
-            Assert.True(response.OK);
+            await Utility.AssertWebApi(c => c.Chat.Post(new PostMessageRequest
+                {
+                    Blocks = new List<IMessageBlock> {new Section {Text = new PlainText("stuff")}}
+                }), "chat.postMessage", "Web_ChatPostMessageResponse.json",
+                jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); });
         }
 
         [Fact]
         public async Task Chat_PostEphemeral()
         {
-            var response = await Utility.CheckApi(c => c.Chat.PostEphemeral(new PostMessageRequest
-            {
-                Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
-            }), "chat.postEphemeral",
-                jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); },
-                new EphemeralResponse { OK = true, Timestamp = "123.456" });
-            Assert.True(response.OK);
-            Assert.Equal("123.456", response.Timestamp);
+            await Utility.AssertWebApi(c => c.Chat.PostEphemeral(new PostEphemeralMessageRequest
+                {
+                    Blocks = new List<IMessageBlock> {new Section {Text = new PlainText("stuff")}}
+                }), "chat.postEphemeral","Web_ChatPostEphemeral.json",
+                jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); });
         }
 
         [Fact]

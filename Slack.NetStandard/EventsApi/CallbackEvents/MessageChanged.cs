@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.Messages;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
-    public class MessageChanged : Message
+    public class MessageChanged : MessageCallbackEvent
     {
         public const string MessageSubType = "message_changed";
 
         [JsonProperty("message")]
-        public Messages.Message Message { get; set; }
+        public Message Message { get; set; }
     }
 }

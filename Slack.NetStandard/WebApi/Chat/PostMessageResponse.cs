@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.EventsApi.CallbackEvents;
+using Slack.NetStandard.Messages;
 
 namespace Slack.NetStandard.WebApi.Chat
 {
@@ -8,10 +10,10 @@ namespace Slack.NetStandard.WebApi.Chat
         public string Channel { get; set; }
 
         [JsonProperty("ts")]
-        public string Timestamp { get; set; }
+        public Timestamp Timestamp { get; set; }
 
         [JsonProperty("message")]
-        public ResponseMessage Message { get; set; }
+        public Message Message { get; set; }
         
     }
 }

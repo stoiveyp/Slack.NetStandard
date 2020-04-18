@@ -6,7 +6,7 @@ namespace Slack.NetStandard.WebApi
     public interface IChatApi
     {
         Task<PostMessageResponse> Post(PostMessageRequest request);
-        Task<EphemeralResponse> PostEphemeral(PostMessageRequest request);
+        Task<EphemeralResponse> PostEphemeral(PostEphemeralMessageRequest request);
 
         IScheduledMessageApi ScheduledMessages { get; }
         Task<MessageResponse> Delete(string channel, string timestamp, bool? asUser = null);

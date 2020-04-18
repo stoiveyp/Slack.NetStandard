@@ -5,7 +5,7 @@ namespace Slack.NetStandard.WebApi
 {
     internal class AppsApi : IAppsApi
     {
-        private IWebApiClient _client;
+        private readonly IWebApiClient _client;
 
         public AppsApi(IWebApiClient client)
         {

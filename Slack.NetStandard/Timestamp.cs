@@ -49,7 +49,7 @@ namespace Slack.NetStandard
         public int CompareTo(Timestamp other)
         {
             if (ReferenceEquals(this, other)) return 0;
-            if (ReferenceEquals(null, other)) return 1;
+            if (other is null) return 1;
             var epochSecondsComparison = EpochSeconds.CompareTo(other.EpochSeconds);
             if (epochSecondsComparison != 0) return epochSecondsComparison;
             return string.Compare(Identifier, other.Identifier, StringComparison.Ordinal);

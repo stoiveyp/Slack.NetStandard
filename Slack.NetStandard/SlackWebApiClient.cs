@@ -117,10 +117,8 @@ namespace Slack.NetStandard
 
         private T DeserializeResponse<T>(Stream response)
         {
-            using (var jsonReader = new JsonTextReader(new StreamReader(response)))
-            {
-                return Serializer.Deserialize<T>(jsonReader);
-            }
+            using var jsonReader = new JsonTextReader(new StreamReader(response));
+            return Serializer.Deserialize<T>(jsonReader);
         }
 
         private T ProcessSlackException<T>(WebException webException, ExceptionDispatchInfo source)

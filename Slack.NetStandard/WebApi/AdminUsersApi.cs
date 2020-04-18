@@ -93,8 +93,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<WebApiResponse> ResetSession(string userId, SessionType type)
         {
-            var dict = new Dictionary<string,string>();
-            dict.Add("user_id",userId);
+            var dict = new Dictionary<string, string> {{"user_id", userId}};
 
             if(type == SessionType.MobileOnly)
             {

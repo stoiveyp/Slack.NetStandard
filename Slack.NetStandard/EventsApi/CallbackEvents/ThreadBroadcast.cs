@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.Messages;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
-    public class ThreadBroadcast : Message
+    public class ThreadBroadcast : MessageCallbackEvent
     {
         public const string MessageSubType = "thread_broadcast";
 
         [JsonProperty("root")]
-        public Messages.Message Message { get; set; }
+        public Message Message { get; set; }
     }
 }

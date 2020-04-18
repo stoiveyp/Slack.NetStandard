@@ -1,17 +1,40 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Slack.NetStandard.Messages;
+using Slack.NetStandard.Messages.Blocks;
 
 namespace Slack.NetStandard.WebApi.Chat
 {
-    public class PostMessageRequest : Message {
+    public class PostEphemeralMessageRequest : MessageRequestBase
+    {
+        [JsonProperty("user")]
+        public string User { get; set; }
+    }
+
+    public class PostMessageRequest : MessageRequestBase
+    {
+        [JsonProperty("mrkdwn",NullValueHandling = NullValueHandling.Ignore)]
+        public bool UseMarkdown { get; set; }
+
+        [JsonProperty("reply_broadcast", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? ReplyBroadcast { get; set; }
+
+        [JsonProperty("unfurl_links", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? UnfurlLinks { get; set; }
+
+        [JsonProperty("unfurl_media", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? UnfurlMedia { get; set; }
+    }
+
+    public abstract class MessageRequestBase {
         [JsonProperty("channel")]
         public string Channel { get; set; }
 
         [JsonProperty("as_user", NullValueHandling = NullValueHandling.Ignore)]
         public bool? AsUser { get; set; }
 
-        //Attachments
+        [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<IMessageBlock> Blocks { get; set; }
 
         [JsonProperty("icon_emoji", NullValueHandling = NullValueHandling.Ignore)]
         public string IconEmoji { get; set; }
@@ -19,21 +42,18 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("icon_url", NullValueHandling = NullValueHandling.Ignore)]
         public string IconUrl { get; set; }
 
+        [JsonProperty("text", NullValueHandling = NullValueHandling.Ignore)]
+        public string Text { get; set; }
+
         [JsonProperty("link_names",NullValueHandling = NullValueHandling.Ignore)]
         public bool? LinkNames { get; set; }
+
+        [JsonProperty("thread_ts", NullValueHandling = NullValueHandling.Ignore)]
+        public Timestamp ThreadId { get; set; }
 
         [JsonProperty("parse",NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public MessageParsing MessageParsing { get; set; }
-
-        [JsonProperty("reply_broadcast",NullValueHandling = NullValueHandling.Ignore)]
-        public bool? ReplyBroadcast { get; set; }
-
-        [JsonProperty("unfurl_links",NullValueHandling = NullValueHandling.Ignore)]
-        public bool? UnfurlLinks { get; set; }
-
-        [JsonProperty("unfurl_media", NullValueHandling = NullValueHandling.Ignore)]
-        public bool? UnfurlMedia { get; set; }
 
         [JsonProperty("username",NullValueHandling = NullValueHandling.Ignore)]
         public string Username { get; set; }

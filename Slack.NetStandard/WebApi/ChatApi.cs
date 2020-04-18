@@ -21,9 +21,9 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeJsonCall<PostMessageRequest, PostMessageResponse>("chat.postMessage", request);
         }
 
-        public Task<EphemeralResponse> PostEphemeral(PostMessageRequest request)
+        public Task<EphemeralResponse> PostEphemeral(PostEphemeralMessageRequest request)
         {
-            return _client.MakeJsonCall<PostMessageRequest, EphemeralResponse>("chat.postEphemeral", request);
+            return _client.MakeJsonCall<PostEphemeralMessageRequest, EphemeralResponse>("chat.postEphemeral", request);
         }
 
         public Task<MessageResponse> Delete(string channel, string timestamp, bool? asUser = null)
