@@ -9,6 +9,11 @@ namespace Slack.NetStandard
     [JsonConverter(typeof(TimestampConverter))]
     public class Timestamp : IComparable<Timestamp>
     {
+        public static implicit operator Timestamp(long value)
+        {
+            return new Timestamp(value);
+        }
+
         public static implicit operator Timestamp(string value)
         {
             if (string.IsNullOrWhiteSpace(value))

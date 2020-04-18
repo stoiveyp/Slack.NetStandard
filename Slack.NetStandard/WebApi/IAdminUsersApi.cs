@@ -18,10 +18,10 @@ namespace Slack.NetStandard.WebApi
 
         Task<WebApiResponse> Remove(string teamId, string userId);
         Task<WebApiResponse> SetAdmin(string teamId, string userId);
-        Task SetExpiration();
+        Task<WebApiResponse> SetExpiration(string teamId, string userId, long expirationTimestamp);
         Task<WebApiResponse> SetOwner(string teamId, string userId);
         Task<WebApiResponse> SetRegular(string teamId, string userId);
 
-        Task ResetSession();
+        Task<WebApiResponse> ResetSession(string userId, SessionType type);
     }
 }

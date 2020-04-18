@@ -6,7 +6,7 @@ using Slack.NetStandard.WebApi.Admin;
 
 namespace Slack.NetStandard.WebApi
 {
-    internal class AdminUsersApi:IAdminUsersApi
+    internal class AdminUsersApi : IAdminUsersApi
     {
         private readonly IWebApiClient _client;
         public AdminUsersApi(IWebApiClient client)
@@ -41,54 +41,72 @@ namespace Slack.NetStandard.WebApi
 
         public Task<ListUsersResponse> List(string teamId, string cursor, int? limit)
         {
-            return _client.MakeJsonCall<CursorLimit,ListUsersResponse>("admin.users.list",
-                new TeamRequestFilter {Team = teamId, Cursor = cursor, Limit = limit});
+            return _client.MakeJsonCall<CursorLimit, ListUsersResponse>("admin.users.list",
+                new TeamRequestFilter { Team = teamId, Cursor = cursor, Limit = limit });
         }
 
         public Task<WebApiResponse> Remove(string teamId, string userId)
         {
-            return _client.MakeUrlEncodedCall("admin.users.remove", new Dictionary<string, string>
+            return _client.MakeJsonCall("admin.users.remove", new TeamUserRequest
             {
-                {"team_id", teamId},
-                {"user_id", userId}
+                TeamId = teamId,
+                UserId = userId
             });
         }
 
         public Task<WebApiResponse> SetAdmin(string teamId, string userId)
         {
-            return _client.MakeUrlEncodedCall("admin.users.setAdmin", new Dictionary<string, string>
+            return _client.MakeJsonCall("admin.users.setAdmin", new TeamUserRequest
             {
-                {"team_id", teamId},
-                {"user_id", userId}
+                TeamId = teamId,
+                UserId = userId
             });
         }
 
-        public Task SetExpiration()
+        public Task<WebApiResponse> SetExpiration(string teamId, string userId, long expirationTimestamp)
         {
-            throw new NotImplementedException();
+            return _client.MakeJsonCall("admin.users.setExpiration", new SetExpirationRequest
+            {
+                TeamId = teamId,
+                UserId = userId,
+                ExpirationTimestamp = expirationTimestamp
+            });
         }
 
         public Task<WebApiResponse> SetOwner(string teamId, string userId)
         {
-            return _client.MakeUrlEncodedCall("admin.users.setOwner", new Dictionary<string, string>
+            return _client.MakeJsonCall("admin.users.setOwner", new TeamUserRequest
             {
-                {"team_id", teamId},
-                {"user_id", userId}
+                TeamId = teamId,
+                UserId = userId
             });
         }
 
         public Task<WebApiResponse> SetRegular(string teamId, string userId)
         {
-            return _client.MakeUrlEncodedCall("admin.users.setRegular", new Dictionary<string, string>
+            return _client.MakeJsonCall("admin.users.setRegular", new TeamUserRequest
             {
-                {"team_id", teamId},
-                {"user_id", userId}
+                TeamId = teamId,
+                UserId = userId
             });
         }
 
-        public Task ResetSession()
+        public Task<WebApiResponse> ResetSession(string userId, SessionType type)
         {
-            throw new NotImplementedException();
+            var dict = new Dictionary<string,string>();
+            dict.Add("user_id",userId);
+
+            if(type == SessionType.MobileOnly)
+            {
+                dict.Add("mobile_only",true.ToString().ToLower());
+            }
+
+            if (type == SessionType.WebOnly)
+            {
+                dict.Add("web_only", true.ToString().ToLower());
+            }
+
+            return _client.MakeUrlEncodedCall("admin.users.session.reset", dict);
         }
     }
 }
