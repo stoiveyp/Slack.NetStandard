@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "bot": {
+    "id": "B061F7JD2",
+    "deleted": false,
+    "name": "beforebot",
+    "updated": 1449272004,
+    "app_id": "A161CLERW",
+    "user_id": "U012ABCDEF",
+    "icons": {
+      "image_36": "https://...",
+      "image_48": "https://...",
+      "image_72": "https://..."
+    }
+  }
+}

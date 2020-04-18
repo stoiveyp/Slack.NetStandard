@@ -12,6 +12,8 @@ namespace Slack.NetStandard
 
         IViewApi View { get; }
 
+        IAppsApi Apps { get; }
+
         Task<WebApiResponse> Test(object data);
     }
 }

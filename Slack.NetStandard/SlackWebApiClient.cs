@@ -20,7 +20,14 @@ namespace Slack.NetStandard
 
         public IViewApi View { get; }
 
+        public IAppsApi Apps { get; }
+
+        public IAuthApi Auth { get; }
+
+        public IBotsApi Bots { get; }
+
         public HttpClient Client { get; set; }
+
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
 
         internal SlackWebApiClient(Func<HttpClient> clientAccessor)
@@ -41,6 +48,9 @@ namespace Slack.NetStandard
             Conversations = new ConversationsApi(this);
             Admin = new AdminApi(this);
             View = new ViewApi(this);
+            Apps = new AppsApi(this);
+            Auth = new AuthApi(this);
+            Bots = new BotsApi(this);
         }
 
         public Task<WebApiResponse> Test(object data)
@@ -76,7 +86,7 @@ namespace Slack.NetStandard
             return MakeJsonCall<TRequest, WebApiResponse>(methodName, request);
         }
 
-        public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request)
+        public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request) where TResponse:WebApiResponseBase
         {
             try
             {
@@ -97,7 +107,7 @@ namespace Slack.NetStandard
             return MakeUrlEncodedCall<WebApiResponse>(methodName, request);
         }
 
-        public async Task<TResponse> MakeUrlEncodedCall<TResponse>(string methodName, Dictionary<string, string> request)
+        public async Task<TResponse> MakeUrlEncodedCall<TResponse>(string methodName, Dictionary<string, string> request) where TResponse : WebApiResponseBase
         {
             var content = new FormUrlEncodedContent(request);
             content.Headers.ContentType.CharSet = "utf-8";

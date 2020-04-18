@@ -269,6 +269,15 @@
     <None Update="Examples\Web_AdminUsersList.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Examples\Web_AuthTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\Web_AuthRevoke.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Examples\Web_BotInfoResponse.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Examples\Web_MessageResponse.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
