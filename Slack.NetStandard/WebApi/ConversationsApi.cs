@@ -49,5 +49,11 @@ namespace Slack.NetStandard.WebApi
                     UserIds = userIds
                 });
         }
+
+        public Task<ConversationHistoryResponse> History(ConversationHistoryRequest request)
+        {
+            return _client.MakeJsonCall<ConversationHistoryRequest, ConversationHistoryResponse>(
+                "conversations.history", request);
+        }
     }
 }

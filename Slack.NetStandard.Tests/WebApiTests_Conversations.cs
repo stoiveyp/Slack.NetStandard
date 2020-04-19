@@ -45,5 +45,21 @@ namespace Slack.NetStandard.Tests
                     Assert.True(j.Value<bool>("is_private"));
                 });
         }
+
+        [Fact]
+        public async Task Conversations_History()
+        {
+            var request = new ConversationHistoryRequest
+            {
+                Channel= "C1234567890",
+                Latest = "1234567890.123456"
+            };
+            await Utility.AssertWebApi(c => c.Conversations.History(request),
+                "conversations.history", "Web_ConversationsHistory.json", j =>
+                {
+                    Assert.Equal("C1234567890", j.Value<string>("channel"));
+                    Assert.Equal("1234567890.123456",j.Value<string>("latest"));
+                });
+        }
     }
 }

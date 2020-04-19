@@ -10,5 +10,7 @@ namespace Slack.NetStandard.WebApi
 
         Task<CreateConversationResponse> Create(string name, bool isPrivate = false);
         Task<CreateConversationResponse> Create(string name, string[] userIds, bool isPrivate = false);
+
+        Task<ConversationHistoryResponse> History(ConversationHistoryRequest request);
     }
 }
