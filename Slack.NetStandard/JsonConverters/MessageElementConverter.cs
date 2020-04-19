@@ -34,11 +34,12 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Button).ToLower(), typeof(Button)},
             {nameof(Overflow).ToLower(),typeof(Overflow) },
             {nameof(DatePicker).ToLower(),typeof(DatePicker)},
-            {"static_select",typeof(StaticSelect) },
-            {"external_select",typeof(ExternalSelect) },
-            {"users_select",typeof(UsersSelect) },
-            {"conversations_select",typeof(ConversationsSelect) },
-            {"channels_select",typeof(ChannelsSelect) }
+            {StaticSelect.ElementType,typeof(StaticSelect) },
+            {ExternalSelect.ElementType,typeof(ExternalSelect) },
+            {UsersSelect.ElementType,typeof(UsersSelect) },
+            {ConversationsSelect.ElementType,typeof(ConversationsSelect) },
+            {ChannelsSelect.ElementType,typeof(ChannelsSelect) },
+            {PlainTextInput.ElementType,typeof(PlainTextInput) }
         };
 
         private IMessageElement GetComponent(string type)

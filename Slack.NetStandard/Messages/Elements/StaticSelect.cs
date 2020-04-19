@@ -6,7 +6,9 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class StaticSelect:IMessageElement
     {
-        [JsonProperty("type")] public string Type => "static_select";
+        public const string ElementType = "static_select";
+
+        [JsonProperty("type")] public string Type => ElementType;
 
         [JsonProperty("placeholder")]
         public PlainText Placeholder { get; set; }

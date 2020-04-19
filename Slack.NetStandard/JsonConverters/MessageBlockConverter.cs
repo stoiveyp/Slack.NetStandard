@@ -34,7 +34,9 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Section).ToLower(), typeof(Section)},
             {nameof(Image).ToLower(),typeof(Image) },
             {nameof(Actions).ToLower(),typeof(Actions) },
-            {nameof(Context).ToLower(),typeof(Context) }
+            {nameof(Context).ToLower(),typeof(Context) },
+            {nameof(Input).ToLower(),typeof(Input) },
+            {nameof(File).ToLower(),typeof(File) }
         };
 
         private IMessageBlock GetComponent(string type)
