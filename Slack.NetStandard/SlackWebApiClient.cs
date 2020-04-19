@@ -43,6 +43,9 @@ namespace Slack.NetStandard
         private IEmojiApi _emoji;
         public IEmojiApi Emoji => _emoji ??= new EmojiApi(this);
 
+        private IFilesApi _files;
+        public IFilesApi Files => _files ??= new FilesApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();

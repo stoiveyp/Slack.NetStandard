@@ -52,8 +52,14 @@ namespace Slack.NetStandard.Messages
         [JsonProperty("reply_count", NullValueHandling = NullValueHandling.Ignore)]
         public int? ReplyCount { get; set; }
 
-        [JsonProperty("replies", NullValueHandling = NullValueHandling.Ignore)]
-        public Reply[] Replies { get; set; }
+        [JsonProperty("reply_users",NullValueHandling = NullValueHandling.Ignore)]
+        public string[] ReplyUsers { get; set; }
+
+        [JsonProperty("reply_users_count",NullValueHandling = NullValueHandling.Ignore)]
+        public int? ReplyUsersCount { get; set; }
+
+        [JsonProperty("latest_reply",NullValueHandling = NullValueHandling.Ignore)]
+        public Timestamp LatestReply { get; set; }
 
         [JsonProperty("username", NullValueHandling = NullValueHandling.Ignore)]
         public string Username { get; set; }
