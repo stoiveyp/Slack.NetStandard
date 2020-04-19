@@ -141,6 +141,32 @@ namespace Slack.NetStandard
             return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
         }
 
+        public Task<TResponse> MakeMultiPartCall<TResponse>(string methodName, object textData, Stream stream) where TResponse : WebApiResponseBase
+        {
+            var dict = JObject.FromObject(textData).Properties().ToDictionary(j => j.Name, j =>
+            {
+                if (j.Value.Type == JTokenType.Boolean)
+                {
+                    return j.Value.ToString().ToLower();
+                }
+                return j.Value.ToString();
+            });
+            return MakeMultiPartCall<TResponse>(methodName, dict, stream);
+        }
+
+        public async Task<TResponse> MakeMultiPartCall<TResponse>(string methodName,Dictionary<string,string> textData, Stream stream) where TResponse : WebApiResponseBase
+        {
+            var content = new MultipartFormDataContent();
+            foreach(var item in textData)
+            {
+                content.Add(new StringContent(item.Value,System.Text.Encoding.UTF8),item.Key);
+            }
+
+            content.Add(new StreamContent(stream), "file");
+            var message = await Client.PostAsync(methodName, content);
+            return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
+        }
+
         private T DeserializeResponse<T>(Stream response)
         {
             using var jsonReader = new JsonTextReader(new StreamReader(response));

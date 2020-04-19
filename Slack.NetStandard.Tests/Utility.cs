@@ -151,12 +151,12 @@ namespace Slack.NetStandard.Tests
             return (TResult)deserialised;
         }
 
-        public static Task<TResponse> AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, Action<JObject> requestAssertion,TResponse responseToSend = default) where TResponse:class,new()
+        public static Task<TResponse> AssertWebApi<TResponse>(Func<ISlackApiClient, Task<TResponse>> func, string methodName, Action<JObject> requestAssertion,TResponse responseToSend = default) where TResponse:class,new()
         {
             return CheckApi(func, methodName, requestAssertion,responseToSend ?? new TResponse());
         }
 
-        public static async Task<TResponse> AssertWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<JObject> requestAssertion) where TResponse: WebApiResponseBase
+        public static async Task<TResponse> AssertWebApi<TResponse>(Func<ISlackApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<JObject> requestAssertion) where TResponse: WebApiResponseBase
         {
             var response = await CheckApi(func,
                 methodName,
@@ -166,7 +166,7 @@ namespace Slack.NetStandard.Tests
             return response;
         }
 
-        public static async Task<WebApiResponse> AssertWebApi(Func<SlackWebApiClient, Task<WebApiResponse>> func, string methodName, Action<JObject> requestAssertion)
+        public static async Task<WebApiResponse> AssertWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, Action<JObject> requestAssertion)
         {
             var response = await CheckApi(func,
                 methodName,
@@ -186,13 +186,23 @@ namespace Slack.NetStandard.Tests
             return response;
         }
 
-        public static async Task<WebApiResponse> AssertEncodedWebApi(Func<SlackWebApiClient, Task<WebApiResponse>> func, string methodName, Action<NameValueCollection> requestAssertion)
+        public static async Task<WebApiResponse> AssertEncodedWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, Action<NameValueCollection> requestAssertion)
         {
             var response = await CheckApi(func,
                 methodName,
                 requestAssertion, WebApiResponse.Success());
 
             Assert.True(response.OK);
+            return response;
+        }
+
+        public static async Task<TResponse> AssertMultiPartWebApi<TResponse>(Func<ISlackApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<NameValueCollection> requestAssertion) where TResponse : WebApiResponseBase
+        {
+            var response = await CheckApi(func,
+                methodName,
+                requestAssertion, ExampleFileContent<TResponse>(responseFile));
+
+            Assert.True(CompareJson(response, responseFile));
             return response;
         }
     }

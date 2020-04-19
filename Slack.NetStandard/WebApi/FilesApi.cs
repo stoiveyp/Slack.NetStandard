@@ -22,5 +22,30 @@ namespace Slack.NetStandard.WebApi
         {
             return _client.MakeUrlEncodedCall<FileResponse>("files.info", new Dictionary<string, string> { { "file", file } });
         }
+
+        public Task<FileListResponse> List(FileListRequest request)
+        {
+            return _client.MakeUrlEncodedCall<FileListResponse>("files.list",request);
+        }
+
+        public Task<FileResponse> RevokePublicUrl(string file)
+        {
+            return _client.MakeUrlEncodedCall<FileResponse>("files.revokePublicUrl", new Dictionary<string, string> { { "file", file } });
+        }
+
+        public Task<FileResponse> SharedPublicUrl(string file)
+        {
+            return _client.MakeUrlEncodedCall<FileResponse>("files.sharedPublicUrl", new Dictionary<string, string> { { "file", file } });
+        }
+
+        public Task<FileResponse> Upload(FileUploadRequest request)
+        {
+            if (request.File != null)
+            {
+                return _client.MakeMultiPartCall<FileResponse>("files.upload", request, request.File);
+            }
+
+            return _client.MakeUrlEncodedCall<FileResponse>("files.upload", request);
+        }
     }
 }

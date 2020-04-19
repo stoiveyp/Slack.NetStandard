@@ -14,6 +14,17 @@ namespace Slack.NetStandard
 
         IAppsApi Apps { get; }
 
+        IDndApi Dnd { get; }
+
+        IFilesApi Files { get; }
+
+        IEmojiApi Emoji { get; }
+
+        IAuthApi Auth { get; }
+
+        IBotsApi Bots { get; }
+
+        
         Task<WebApiResponse> Test(object data);
     }
 }

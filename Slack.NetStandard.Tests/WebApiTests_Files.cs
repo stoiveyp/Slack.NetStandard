@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Files;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -15,6 +16,56 @@ namespace Slack.NetStandard.Tests
         public async Task Files_Info()
         {
             await Utility.AssertEncodedWebApi(c => c.Files.Info("F1234567890"), "files.info","Web_FilesInfo.json", nvc => Assert.Equal("F1234567890", nvc["file"]));
+        }
+
+        [Fact]
+        public async Task Files_List()
+        {
+            var request = new FileListRequest
+            {
+                Cursor="BBB",
+                ShowFilesHidenByLimit = true,
+                User="W123"
+            };
+            await Utility.AssertEncodedWebApi(c => c.Files.List(request), "files.list", "Web_FilesList.json", nvc =>
+            {
+                Assert.Equal("BBB", nvc["cursor"]);
+                Assert.Equal("W123", nvc["user"]);
+                Assert.Equal("true", nvc["show_files_hidden_by_limit"]);
+
+            });
+        }
+
+        [Fact]
+        public async Task Files_RevokePublicUrl()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Files.RevokePublicUrl("F1234567890"), "files.revokePublicUrl", "Web_FilesInfo.json", nvc => Assert.Equal("F1234567890", nvc["file"]));
+        }
+
+        [Fact]
+        public async Task Files_SharedPublicUrl()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Files.SharedPublicUrl("F1234567890"), "files.sharedPublicUrl", "Web_FilesInfo.json", nvc => Assert.Equal("F1234567890", nvc["file"]));
+        }
+
+        [Fact]
+        public async Task Files_Upload()
+        {
+            var request = new FileUploadRequest
+            {
+                Channels = "C1234",
+                Title = "hello",
+                Content = "test content",
+                Filetype = "txt"
+
+            };
+            await Utility.AssertMultiPartWebApi(c => c.Files.Upload(request), "files.upload", "Web_FilesInfo.json", nvc =>
+            {
+                Assert.Equal("C1234", nvc["channels"]);
+                Assert.Equal("hello", nvc["title"]);
+                Assert.Equal("test content", nvc["content"]);
+                Assert.Equal("txt", nvc["filetype"]);
+            });
         }
     }
 }
