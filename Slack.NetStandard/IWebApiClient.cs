@@ -10,5 +10,6 @@ namespace Slack.NetStandard
         Task<TResponse> MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request) where TResponse : WebApiResponseBase;
         Task<WebApiResponse> MakeUrlEncodedCall(string methodName, Dictionary<string, string> dictionary);
         Task<T> MakeUrlEncodedCall<T>(string methodName, Dictionary<string, string> dictionary) where T:WebApiResponseBase;
+        Task<T> MakeUrlEncodedCall<T>(string methodName, object dictionary) where T : WebApiResponseBase;
     }
 }

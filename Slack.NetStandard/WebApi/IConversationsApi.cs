@@ -31,5 +31,13 @@ namespace Slack.NetStandard.WebApi
         Task<ConversationMembersResponse> Members(string channel, string cursor, int? limit);
 
         Task<ConversationOpenResponse> Open(ConversationOpenRequest request);
+
+        Task<ChannelResponse> Rename(string channel, string name);
+        Task<ConversationRepliesResponse> Replies(ConversationRepliesRequest request);
+        Task<ConversationSetPurposeResponse> SetPurpose(string channel, string purpose);
+
+        Task<ConversationSetTopicResponse> SetTopic(string channel, string topic);
+
+        Task<WebApiResponse> Unarchive(string channel);
     }
 }

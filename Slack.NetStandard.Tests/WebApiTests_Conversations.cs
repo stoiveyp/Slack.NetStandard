@@ -170,5 +170,69 @@ namespace Slack.NetStandard.Tests
                 });
         }
 
+        [Fact]
+        public async Task ConversationsRename()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Conversations.Rename("C1234567890","new name"), "conversations.rename", "Web_ConversationsInfo.json",
+                nvc =>
+                {
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                    Assert.Equal("new name", nvc["name"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsReplies()
+        {
+            var request = new ConversationRepliesRequest
+            {
+                ParentMessageTimestamp = "1234567890.123456",
+                Channel = "C1234567890",
+                Inclusive = true
+            };
+
+            await Utility.AssertEncodedWebApi(c => c.Conversations.Replies(request), "conversations.replies", "Web_ConversationsReplies.json",
+                nvc =>
+                {
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                    Assert.Equal("1234567890.123456", nvc["ts"]);
+                    Assert.Equal("true", nvc["inclusive"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsSetPurpose()
+        {
+            await Utility.AssertEncodedWebApi<ConversationSetPurposeResponse>(c => c.Conversations.SetPurpose("C1234567890","new purpose"), "conversations.setPurpose","Web_ConversationsSetPurpose.json",
+                nvc =>
+                {
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                    Assert.Equal("new purpose", nvc["purpose"]);
+                });
+        }
+
+
+        [Fact]
+        public async Task ConversationsSetTopic()
+        {
+            await Utility.AssertEncodedWebApi<ConversationSetTopicResponse>(c => c.Conversations.SetTopic("C1234567890", "new topic"), "conversations.setTopic", "Web_ConversationsSetTopic.json",
+                nvc =>
+                {
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                    Assert.Equal("new topic", nvc["topic"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsUnarchive()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Conversations.Unarchive("C1234567890"), "conversations.unarchive", 
+                nvc =>
+                {
+                    Assert.Single(nvc);
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                });
+        }
+
     }
 }

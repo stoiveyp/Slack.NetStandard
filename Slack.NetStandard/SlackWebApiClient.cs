@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard
@@ -100,6 +102,19 @@ namespace Slack.NetStandard
                 var source = ExceptionDispatchInfo.Capture(ex);
                 return ProcessSlackException<TResponse>(ex, source);
             }
+        }
+
+        public Task<TResponse> MakeUrlEncodedCall<TResponse>(string methodName, object request) where TResponse : WebApiResponseBase
+        {
+            var dict = JObject.FromObject(request).Properties().ToDictionary(j => j.Name, j =>
+            {
+                if (j.Value.Type == JTokenType.Boolean)
+                {
+                    return j.Value.ToString().ToLower();
+                }
+                return j.Value.ToString();
+            });
+            return MakeUrlEncodedCall<TResponse>(methodName, dict);
         }
 
         public Task<WebApiResponse> MakeUrlEncodedCall(string methodName, Dictionary<string, string> request)

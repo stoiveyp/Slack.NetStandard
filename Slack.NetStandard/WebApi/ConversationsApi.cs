@@ -58,10 +58,10 @@ namespace Slack.NetStandard.WebApi
 
         public Task<ChannelResponse> Info(string channel, bool? includeLocale, bool? includeNumberOfMembers)
         {
-            var dict = new Dictionary<string, string> {{"channel", channel}};
+            var dict = new Dictionary<string, string> { { "channel", channel } };
             if (includeLocale.HasValue)
             {
-                dict.Add("include_locale",includeLocale.Value.ToString().ToLower());
+                dict.Add("include_locale", includeLocale.Value.ToString().ToLower());
             }
 
             if (includeNumberOfMembers.HasValue)
@@ -120,7 +120,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<ConversationListResponse> List(ConversationListRequest request)
         {
-            return _client.MakeJsonCall<ConversationListRequest,ConversationListResponse>("conversations.list", request);
+            return _client.MakeJsonCall<ConversationListRequest, ConversationListResponse>("conversations.list", request);
         }
 
         public Task<ConversationMembersResponse> Members(string channel)
@@ -140,15 +140,15 @@ namespace Slack.NetStandard.WebApi
 
         public Task<ConversationMembersResponse> Members(string channel, string cursor, int? limit)
         {
-            var dict = new Dictionary<string, string> {{"channel", channel}};
+            var dict = new Dictionary<string, string> { { "channel", channel } };
             if (!string.IsNullOrWhiteSpace(cursor))
             {
-                dict.Add("cursor",cursor);
+                dict.Add("cursor", cursor);
             }
 
             if (limit.HasValue)
             {
-                dict.Add("limit",limit.Value.ToString());
+                dict.Add("limit", limit.Value.ToString());
             }
 
             return _client.MakeUrlEncodedCall<ConversationMembersResponse>("conversations.members", dict);
@@ -158,6 +158,59 @@ namespace Slack.NetStandard.WebApi
         {
             return _client.MakeJsonCall<ConversationOpenRequest, ConversationOpenResponse>("conversations.open",
                 request);
+        }
+
+        public Task<ChannelResponse> Rename(string channel, string name)
+        {
+            var dict = new Dictionary<string, string>
+            {
+                { "channel", channel },
+                { "name", name }
+            };
+
+            return _client.MakeUrlEncodedCall<ChannelResponse>(
+                "conversations.rename", dict);
+        }
+
+        public Task<ConversationRepliesResponse> Replies(ConversationRepliesRequest request)
+        {
+            return _client.MakeUrlEncodedCall<ConversationRepliesResponse>(
+                "conversations.replies", request);
+        }
+
+        public Task<ConversationSetPurposeResponse> SetPurpose(string channel, string purpose)
+        {
+            var dict = new Dictionary<string, string>
+            {
+                { "channel", channel },
+                { "purpose", purpose }
+            };
+
+            return _client.MakeUrlEncodedCall<ConversationSetPurposeResponse>(
+                "conversations.setPurpose", dict);
+        }
+
+        public Task<ConversationSetTopicResponse> SetTopic(string channel, string topic)
+        {
+            var dict = new Dictionary<string, string>
+            {
+                { "channel", channel },
+                { "topic", topic }
+            };
+
+            return _client.MakeUrlEncodedCall<ConversationSetTopicResponse>(
+                "conversations.setTopic", dict);
+        }
+
+        public Task<WebApiResponse> Unarchive(string channel)
+        {
+            var dict = new Dictionary<string, string>
+            {
+                { "channel", channel }
+            };
+
+            return _client.MakeUrlEncodedCall(
+                "conversations.unarchive", dict);
         }
     }
 }
