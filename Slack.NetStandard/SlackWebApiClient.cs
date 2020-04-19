@@ -141,7 +141,7 @@ namespace Slack.NetStandard
             return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
         }
 
-        public Task<TResponse> MakeMultiPartCall<TResponse>(string methodName, object textData, Stream stream) where TResponse : WebApiResponseBase
+        public Task<TResponse> MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string,Stream> streams) where TResponse : WebApiResponseBase
         {
             var dict = JObject.FromObject(textData).Properties().ToDictionary(j => j.Name, j =>
             {
@@ -151,10 +151,10 @@ namespace Slack.NetStandard
                 }
                 return j.Value.ToString();
             });
-            return MakeMultiPartCall<TResponse>(methodName, dict, stream);
+            return MakeMultiPartCall<TResponse>(methodName, dict, streams);
         }
 
-        public async Task<TResponse> MakeMultiPartCall<TResponse>(string methodName,Dictionary<string,string> textData, Stream stream) where TResponse : WebApiResponseBase
+        public async Task<TResponse> MakeMultiPartCall<TResponse>(string methodName,Dictionary<string,string> textData, Dictionary<string,Stream> streams) where TResponse : WebApiResponseBase
         {
             var content = new MultipartFormDataContent();
             foreach(var item in textData)
@@ -162,7 +162,11 @@ namespace Slack.NetStandard
                 content.Add(new StringContent(item.Value,System.Text.Encoding.UTF8),item.Key);
             }
 
-            content.Add(new StreamContent(stream), "file");
+            foreach (var item in streams)
+            {
+                content.Add(new StreamContent(item.Value), item.Key);
+            }
+
             var message = await Client.PostAsync(methodName, content);
             return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
         }

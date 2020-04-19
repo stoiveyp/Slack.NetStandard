@@ -195,15 +195,5 @@ namespace Slack.NetStandard.Tests
             Assert.True(response.OK);
             return response;
         }
-
-        public static async Task<TResponse> AssertMultiPartWebApi<TResponse>(Func<ISlackApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<NameValueCollection> requestAssertion) where TResponse : WebApiResponseBase
-        {
-            var response = await CheckApi(func,
-                methodName,
-                requestAssertion, ExampleFileContent<TResponse>(responseFile));
-
-            Assert.True(CompareJson(response, responseFile));
-            return response;
-        }
     }
 }

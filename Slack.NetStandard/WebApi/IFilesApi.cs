@@ -16,5 +16,7 @@ namespace Slack.NetStandard.WebApi
         Task<FileResponse> SharedPublicUrl(string file);
 
         Task<FileResponse> Upload(FileUploadRequest request);
+
+        IFilesRemoteApi Remote { get; }
     }
 }

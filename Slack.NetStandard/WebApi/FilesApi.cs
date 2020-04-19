@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Files;
 
@@ -11,6 +12,7 @@ namespace Slack.NetStandard.WebApi
         public FilesApi(IWebApiClient client)
         {
             _client = client;
+            Remote = new FilesRemoteApi(client);
         }
 
         public Task<WebApiResponse> Delete(string file)
@@ -42,10 +44,12 @@ namespace Slack.NetStandard.WebApi
         {
             if (request.File != null)
             {
-                return _client.MakeMultiPartCall<FileResponse>("files.upload", request, request.File);
+                return _client.MakeMultiPartCall<FileResponse>("files.upload", request, new Dictionary<string, Stream>{{"file",request.File}});
             }
 
             return _client.MakeUrlEncodedCall<FileResponse>("files.upload", request);
         }
+
+        public IFilesRemoteApi Remote { get; }
     }
 }
