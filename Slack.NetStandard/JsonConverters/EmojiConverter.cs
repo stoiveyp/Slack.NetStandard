@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Admin;
 
 namespace Slack.NetStandard.JsonConverters
 {
-    public class EmojiConverter:JsonConverter<Emoji>
+    public class EmojiConverter:JsonConverter<EmojiInformation>
     {
-        public override void WriteJson(JsonWriter writer, Emoji value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, EmojiInformation value, JsonSerializer serializer)
         {
             if(value == null)
             {
@@ -30,17 +31,17 @@ namespace Slack.NetStandard.JsonConverters
             writer.WriteNull();
         }
 
-        public override Emoji ReadJson(JsonReader reader, Type objectType, Emoji existingValue, bool hasExistingValue,
+        public override EmojiInformation ReadJson(JsonReader reader, Type objectType, EmojiInformation existingValue, bool hasExistingValue,
             JsonSerializer serializer)
         {
             if (reader.TokenType == JsonToken.String)
             {
-                return new Emoji {Value = reader.Value.ToString()};
+                return new EmojiInformation {Value = reader.Value.ToString()};
             }
 
             if (reader.TokenType == JsonToken.StartObject)
             {
-                return new Emoji{Values = serializer.Deserialize<Dictionary<string, string>>(reader)};
+                return new EmojiInformation{Values = serializer.Deserialize<Dictionary<string, string>>(reader)};
             }
 
             return null;

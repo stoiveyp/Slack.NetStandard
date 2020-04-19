@@ -2,10 +2,10 @@
 using Newtonsoft.Json;
 using Slack.NetStandard.JsonConverters;
 
-namespace Slack.NetStandard.WebApi.Admin
+namespace Slack.NetStandard.WebApi
 {
     [JsonConverter(typeof(EmojiConverter))]
-    public class Emoji
+    public class EmojiInformation
     {
         public string Value { get; set; }
         public Dictionary<string,string> Values { get; set; }

@@ -15,20 +15,33 @@ namespace Slack.NetStandard
 {
     public class SlackWebApiClient:IWebApiClient, ISlackApiClient
     {
-        public IConversationsApi Conversations { get; }
-        public IChatApi Chat { get; }
+        private IConversationsApi _conversations;
+        public IConversationsApi Conversations => _conversations ??= new ConversationsApi(this);
 
-        public IAdminApi Admin { get; }
 
-        public IViewApi View { get; }
+        private IChatApi _chat;
+        public IChatApi Chat => _chat ??= new ChatApi(this);
 
-        public IAppsApi Apps { get; }
+        private IAdminApi _admin;
+        public IAdminApi Admin => _admin ??= new AdminApi(this);
 
-        public IAuthApi Auth { get; }
+        private IViewApi _view;
+        public IViewApi View => _view ??= new ViewApi(this);
 
-        public IBotsApi Bots { get; }
+        private IAppsApi _apps;
+        public IAppsApi Apps => _apps ??= new AppsApi(this);
 
-        public IDndApi Dnd { get; }
+        private IAuthApi _auth;
+        public IAuthApi Auth => _auth ??= new AuthApi(this);
+
+        private IBotsApi _bots;
+        public IBotsApi Bots => _bots ??= new BotsApi(this);
+
+        private IDndApi _dnd;
+        public IDndApi Dnd => _dnd ??= new DndApi(this);
+
+        private IEmojiApi _emoji;
+        public IEmojiApi Emoji => _emoji ??= new EmojiApi(this);
 
         public HttpClient Client { get; set; }
 
@@ -48,14 +61,6 @@ namespace Slack.NetStandard
             }
 
             Client = client;
-            Chat = new ChatApi(this);
-            Conversations = new ConversationsApi(this);
-            Admin = new AdminApi(this);
-            View = new ViewApi(this);
-            Apps = new AppsApi(this);
-            Auth = new AuthApi(this);
-            Bots = new BotsApi(this);
-            Dnd = new DndApi(this);
         }
 
         public Task<WebApiResponse> Test(object data)

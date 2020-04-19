@@ -8,7 +8,7 @@ namespace Slack.NetStandard.WebApi.Admin
     public class EmojiListResponse:WebApiResponse
     {
         [JsonProperty("emoji",NullValueHandling = NullValueHandling.Ignore)]
-        public Dictionary<string,Emoji> Emoji { get; set; }
+        public Dictionary<string,EmojiInformation> Emoji { get; set; }
 
         [JsonProperty("cache_ts",NullValueHandling = NullValueHandling.Ignore)]
         public Timestamp CacheTimestamp { get; set; }
