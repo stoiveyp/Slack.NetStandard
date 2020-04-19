@@ -3,7 +3,7 @@ using Slack.NetStandard.Objects;
 
 namespace Slack.NetStandard.WebApi.Conversations
 {
-    public class CreateConversationResponse:WebApiResponse
+    public class ChannelResponse:WebApiResponse
     {
         [JsonProperty("channel",NullValueHandling = NullValueHandling.Ignore)]
         public Channel Channel { get; set; }

@@ -61,5 +61,16 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("1234567890.123456",j.Value<string>("latest"));
                 });
         }
+
+        [Fact]
+        public async Task Conversations_info()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Conversations.Info("C1234567890",null,true), "conversations.info",
+                "Web_ConversationsInfo.json", nvc =>
+                {
+                    Assert.Equal("C1234567890",nvc["channel"]);
+                    Assert.Equal("true",nvc["include_num_members"]);
+                });
+        }
     }
 }

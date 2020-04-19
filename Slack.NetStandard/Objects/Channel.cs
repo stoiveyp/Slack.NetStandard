@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Slack.NetStandard.Messages;
 
 namespace Slack.NetStandard.Objects
 {
@@ -59,7 +60,7 @@ namespace Slack.NetStandard.Objects
         public Timestamp LastRead { get; set; }
 
         [JsonProperty("latest",NullValueHandling = NullValueHandling.Ignore)]
-        public Timestamp Latest { get; set; }
+        public Message Latest { get; set; }
 
         [JsonProperty("unread_count",NullValueHandling = NullValueHandling.Ignore)]
         public int? UnreadCount { get; set; }
@@ -77,7 +78,18 @@ namespace Slack.NetStandard.Objects
         public string[] PreviousNames { get; set; }
 
         [JsonProperty("priority",NullValueHandling = NullValueHandling.Ignore)]
-        public int? Priority { get; set; }
+        public double? Priority { get; set; }
+
+        [JsonProperty("locale",NullValueHandling = NullValueHandling.Ignore)]
+        public string Locale { get; set; }
+
+        [JsonProperty("num_members",NullValueHandling = NullValueHandling.Ignore)]
+        public int? NumMembers { get; set; }
+
+        [JsonProperty("is_open",NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsOpen { get; set; }
+
+
 
     }
 }
