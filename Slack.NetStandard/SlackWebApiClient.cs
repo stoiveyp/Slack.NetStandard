@@ -28,6 +28,8 @@ namespace Slack.NetStandard
 
         public IBotsApi Bots { get; }
 
+        public IDndApi Dnd { get; }
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
@@ -53,6 +55,7 @@ namespace Slack.NetStandard
             Apps = new AppsApi(this);
             Auth = new AuthApi(this);
             Bots = new BotsApi(this);
+            Dnd = new DndApi(this);
         }
 
         public Task<WebApiResponse> Test(object data)

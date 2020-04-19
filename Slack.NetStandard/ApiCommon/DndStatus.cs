@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Slack.NetStandard.EventsApi.CallbackEvents
+namespace Slack.NetStandard.ApiCommon
 {
     public class DndStatus
     {
@@ -18,5 +18,8 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
 
         [JsonProperty("snooze_endtime",NullValueHandling = NullValueHandling.Ignore)]
         public long? SnoozeEndTime { get; set; }
+
+        [JsonProperty("snooze_remaining", NullValueHandling = NullValueHandling.Ignore)]
+        public long? SnoozeRemaining { get; set; }
     }
 }
