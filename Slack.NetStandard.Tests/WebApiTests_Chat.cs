@@ -71,7 +71,6 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_GetPermalink()
         {
-            var bustersAddress = "https://ghostbusters.slack.com/archives/C1H9RESGA/p135854651500008";
             var response = await Utility.AssertWebApi<GetPermalinkResponse>(
                 c => c.Chat.Permalink("C1234567890", "1234567890.123456"),
                 "chat.getPermalink","Web_ChatGetPermalink.json",

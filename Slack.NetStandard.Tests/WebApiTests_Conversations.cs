@@ -72,5 +72,103 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("true",nvc["include_num_members"]);
                 });
         }
+
+        [Fact]
+        public async Task ConversationsInfo()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Conversations.Invite("C1234567890", "W123","U456"), "conversations.invite", "Web_ConversationsInfo.json",
+                nvc =>
+                {
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                    Assert.Equal("W123,U456", nvc["users"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsJoin()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Conversations.Join("C1234567890"), "conversations.join", "Web_ConversationsInfo.json",
+                nvc =>
+                {
+                    Assert.Single(nvc);
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsKick()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Conversations.Kick("C1234567890","U123"), "conversations.kick", 
+                nvc =>
+                {
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                    Assert.Equal("U123", nvc["user"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsLeave()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Conversations.Leave("C1234567890"), "conversations.leave", 
+                nvc =>
+                {
+                    Assert.Single(nvc);
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsList()
+        {
+            var request = new ConversationListRequest
+            {
+                Cursor = "ABCDEF",
+                ExcludeArchived=true,
+                Types="private_channel",
+                Limit=10
+            };
+            await Utility.AssertWebApi(c => c.Conversations.List(request), "conversations.list",
+                "Web_ConversationsList.json",
+                j =>
+                {
+                    Assert.Equal("ABCDEF",j.Value<string>("cursor"));
+                    Assert.Equal(10,j.Value<int>("limit"));
+                    Assert.True(j.Value<bool>("exclude_archived"));
+                    Assert.Equal("private_channel",j.Value<string>("types"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsMembers()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Conversations.Members("ABCDEF","DEFGHI",20), "conversations.members",
+                "Web_ConversationsMembers.json",
+                nvc =>
+                {
+                    Assert.Equal("ABCDEF",nvc["channel"]);
+                    Assert.Equal("DEFGHI",nvc["cursor"]);
+                    Assert.Equal(20.ToString(),nvc["limit"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsOpen()
+        {
+            var request = new ConversationOpenRequest
+            {
+                Channel = "ABCDEF",
+                ReturnIm = true,
+                Users = "W123,C123"
+            };
+            await Utility.AssertWebApi(c => c.Conversations.Open(request), "conversations.open",
+                "Web_ConversationsOpen.json",
+                j =>
+                {
+                    Assert.Equal("ABCDEF", j.Value<string>("channel"));
+                    Assert.True(j.Value<bool>("return_im"));
+                    Assert.Equal("W123,C123", j.Value<string>("users"));
+                });
+        }
+
     }
 }

@@ -8,7 +8,7 @@ namespace Slack.NetStandard.WebApi
 {
     internal class ScheduledMessageApi:IScheduledMessageApi
     {
-        private IWebApiClient _client;
+        private readonly IWebApiClient _client;
 
         public ScheduledMessageApi(IWebApiClient webApiClient)
         {
