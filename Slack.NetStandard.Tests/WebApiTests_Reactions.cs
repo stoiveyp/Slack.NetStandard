@@ -19,12 +19,6 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Reactions_Get()
         {
-            await Utility.AssertEncodedWebApi(c => c.Reactions.Get("F123",true), "reactions.get","Web_ReactionsGet.json", nvc =>
-            {
-                Assert.Equal("F123", nvc["file"]);
-                Assert.Equal("true", nvc["full"]);
-            });
-
             await Utility.AssertEncodedWebApi(c => c.Reactions.Get("C123", "12345.6789",true), "reactions.get", "Web_ReactionsGet.json",nvc =>
             {
                 Assert.Equal("C123", nvc["channel"]);
@@ -36,7 +30,23 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Reactions_List()
         {
-            Assert.False(true);
+            await Utility.AssertEncodedWebApi(c => c.Reactions.List("C123", "12345", 10), "reactions.list","Web_MessageItems.json", nvc =>
+            {
+                Assert.Equal("C123", nvc["user"]);
+                Assert.Equal("12345", nvc["cursor"]);
+                Assert.Equal("10", nvc["limit"]);
+            });
+        }
+
+        [Fact]
+        public async Task Reactions_Remove()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Reactions.Remove("C123", "12345", "test"), "reactions.remove", nvc =>
+            {
+                Assert.Equal("C123", nvc["channel"]);
+                Assert.Equal("12345", nvc["timestamp"]);
+                Assert.Equal("test", nvc["name"]);
+            });
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Pins_List()
         {
-            await Utility.AssertEncodedWebApi(c => c.Pins.List("C123"), "pins.list","Web_PinsList.json", nvc =>
+            await Utility.AssertEncodedWebApi(c => c.Pins.List("C123"), "pins.list", "Web_MessageItems.json", nvc =>
             {
                 Assert.Equal("C123", nvc["channel"]);
             });
