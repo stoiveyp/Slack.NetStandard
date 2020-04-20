@@ -5,7 +5,7 @@ using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard
 {
-    internal interface IWebApiClient
+    public interface IWebApiClient
     {
         Task<WebApiResponse> MakeJsonCall<TRequest>(string methodName, TRequest request);
         Task<TResponse> MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request) where TResponse : WebApiResponseBase;

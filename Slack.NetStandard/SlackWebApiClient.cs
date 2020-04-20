@@ -55,6 +55,12 @@ namespace Slack.NetStandard
         private IReactionsApi _reactions;
         public IReactionsApi Reactions => _reactions ??= new ReactionsApi(this);
 
+        private IRemindersApi _reminders;
+        public IRemindersApi Reminders => _reminders ??= new RemindersApi(this);
+
+        private ISearchApi _search;
+        public ISearchApi Search => _search ??= new SearchApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
@@ -103,12 +109,12 @@ namespace Slack.NetStandard
             };
         }
 
-        public Task<WebApiResponse> MakeJsonCall<TRequest>(string methodName, TRequest request)
+        Task<WebApiResponse> IWebApiClient.MakeJsonCall<TRequest>(string methodName, TRequest request)
         {
-            return MakeJsonCall<TRequest, WebApiResponse>(methodName, request);
+            return ((IWebApiClient)this).MakeJsonCall<TRequest, WebApiResponse>(methodName, request);
         }
 
-        public async Task<TResponse> MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request) where TResponse:WebApiResponseBase
+        async Task<TResponse> IWebApiClient.MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request)
         {
             try
             {
@@ -124,7 +130,7 @@ namespace Slack.NetStandard
             }
         }
 
-        public Task<TResponse> MakeUrlEncodedCall<TResponse>(string methodName, object request) where TResponse : WebApiResponseBase
+        Task<TResponse> IWebApiClient.MakeUrlEncodedCall<TResponse>(string methodName, object request)
         {
             var dict = JObject.FromObject(request).Properties().ToDictionary(j => j.Name, j =>
             {
@@ -134,15 +140,15 @@ namespace Slack.NetStandard
                 }
                 return j.Value.ToString();
             });
-            return MakeUrlEncodedCall<TResponse>(methodName, dict);
+            return ((IWebApiClient)this).MakeUrlEncodedCall<TResponse>(methodName, dict);
         }
 
-        public Task<WebApiResponse> MakeUrlEncodedCall(string methodName, Dictionary<string, string> request)
+        Task<WebApiResponse> IWebApiClient.MakeUrlEncodedCall(string methodName, Dictionary<string, string> request)
         {
-            return MakeUrlEncodedCall<WebApiResponse>(methodName, request);
+            return ((IWebApiClient)this).MakeUrlEncodedCall<WebApiResponse>(methodName, request);
         }
 
-        public async Task<TResponse> MakeUrlEncodedCall<TResponse>(string methodName, Dictionary<string, string> request) where TResponse : WebApiResponseBase
+        async Task<TResponse> IWebApiClient.MakeUrlEncodedCall<TResponse>(string methodName, Dictionary<string, string> request)
         {
             var content = new FormUrlEncodedContent(request);
             content.Headers.ContentType.CharSet = "utf-8";
@@ -150,7 +156,7 @@ namespace Slack.NetStandard
             return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
         }
 
-        public Task<TResponse> MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string,Stream> streams) where TResponse : WebApiResponseBase
+        Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string,Stream> streams)
         {
             var dict = JObject.FromObject(textData).Properties().ToDictionary(j => j.Name, j =>
             {
@@ -160,10 +166,10 @@ namespace Slack.NetStandard
                 }
                 return j.Value.ToString();
             });
-            return MakeMultiPartCall<TResponse>(methodName, dict, streams);
+            return ((IWebApiClient)this).MakeMultiPartCall<TResponse>(methodName, dict, streams);
         }
 
-        public async Task<TResponse> MakeMultiPartCall<TResponse>(string methodName,Dictionary<string,string> textData, Dictionary<string,Stream> streams) where TResponse : WebApiResponseBase
+        async Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName,Dictionary<string,string> textData, Dictionary<string,Stream> streams)
         {
             var content = new MultipartFormDataContent();
             foreach(var item in textData)

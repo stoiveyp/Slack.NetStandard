@@ -56,6 +56,23 @@ namespace Slack.NetStandard.Tests
                     continue;
                 }
 
+                if (actualJObject[prop.Name] is JArray && expectedJObject[prop.Name] is JArray)
+                {
+                    var result =
+                        ((JArray) actualJObject[prop.Name]).Zip(((JArray) expectedJObject[prop.Name]),
+                            (a, e) => (a, e)).ToArray();
+                        foreach(var set in result)
+                    {
+                        if(JToken.DeepEquals(set.a, set.e))
+                        {
+                            ((JArray) actualJObject[prop.Name]).Remove(set.a);
+                            ((JArray) expectedJObject[prop.Name]).Remove(set.e);
+                            continue;
+                        }
+                        OutputTrimEqual(actualJObject[prop.Name] as JObject, expectedJObject[prop.Name] as JObject, false);
+                    }
+                }
+
                 if (actualJObject[prop.Name] is JObject && expectedJObject[prop.Name] is JObject)
                 {
                     (actualJObject,expectedJObject) = OutputTrimEqual(actualJObject[prop.Name] as JObject, expectedJObject[prop.Name] as JObject, false);

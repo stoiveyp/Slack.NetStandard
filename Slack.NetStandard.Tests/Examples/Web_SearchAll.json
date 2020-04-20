@@ -1,0 +1,522 @@
+{
+  "ok": true,
+  "query": "test",
+  "messages": {
+    "total": 15,
+    "pagination": {
+      "total_count": 15,
+      "page": 1,
+      "per_page": 20,
+      "page_count": 1,
+      "first": 1,
+      "last": 15
+    },
+    "paging": {
+      "count": 20,
+      "total": 15,
+      "page": 1,
+      "pages": 1
+    },
+    "matches": [
+      {
+        "iid": "4f0faacf-7fe4-465e-a4ed-954e92580729",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "C08HHP21F",
+          "is_channel": true,
+          "is_group": false,
+          "is_im": false,
+          "name": "general",
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false,
+          "is_private": false,
+          "is_mpim": false,
+          "pending_shared": [],
+          "is_pending_ext_shared": false
+        },
+        "type": "message",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1587403328.000200",
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "D3PS",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "testing 123"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "text": "testing 123",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/C08HHP21F\/p1587403328000200",
+        "no_reactions": true
+      },
+      {
+        "iid": "0b4fabce-8f46-4bd8-8ce4-0791a44f6f4d",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D8F7BMBEY",
+          "name": "U8ELD2D33",
+          "user": "U8ELD2D33",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1513327052.000297",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513327052000297",
+        "no_reactions": true
+      },
+      {
+        "iid": "5a04c9c1-2e3a-4bbe-ac96-153e0ec70867",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D8F7BMBEY",
+          "name": "U8ELD2D33",
+          "user": "U8ELD2D33",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1513326661.000145",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513326661000145",
+        "no_reactions": true
+      },
+      {
+        "iid": "007c51da-4dd0-4aee-b9c5-0af527dabcf5",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D8F7BMBEY",
+          "name": "U8ELD2D33",
+          "user": "U8ELD2D33",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1513327242.000165",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513327242000165",
+        "no_reactions": true
+      },
+      {
+        "iid": "0512167c-6a50-419e-badd-f15977dbbac3",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D8F7BMBEY",
+          "name": "U8ELD2D33",
+          "user": "U8ELD2D33",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1513327058.000068",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513327058000068",
+        "no_reactions": true
+      },
+      {
+        "iid": "3cdad9bd-bdd5-4cbf-b57b-b48f16315363",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D8F7BMBEY",
+          "name": "U8ELD2D33",
+          "user": "U8ELD2D33",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1513326657.000259",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513326657000259",
+        "no_reactions": true
+      },
+      {
+        "iid": "7863bd81-6d97-49bb-8227-1b4641805b21",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D8F7BMBEY",
+          "name": "U8ELD2D33",
+          "user": "U8ELD2D33",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1513326888.000106",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513326888000106",
+        "no_reactions": true
+      },
+      {
+        "iid": "33154296-16ed-4d6f-8e7e-e7ba9d7f4f0f",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D8F7BMBEY",
+          "name": "U8ELD2D33",
+          "user": "U8ELD2D33",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1513326662.000030",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513326662000030",
+        "no_reactions": true,
+        "previous": {
+          "type": "im",
+          "user": "U08HHP201",
+          "username": "stoive",
+          "ts": "1513326661.000145",
+          "text": "test",
+          "iid": "deeb54c9-ed46-472b-a44f-d2cc09782a89",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513326661000145"
+        },
+        "previous_2": {
+          "type": "im",
+          "user": "U08HHP201",
+          "username": "stoive",
+          "ts": "1513326660.000275",
+          "text": "who are you?",
+          "iid": "6fdbdc81-82e5-49e4-b7c3-fb7fd5a37460",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513326660000275"
+        }
+      },
+      {
+        "iid": "c69a37a6-0a53-4c27-9459-8e6e8c953b57",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D8F7BMBEY",
+          "name": "U8ELD2D33",
+          "user": "U8ELD2D33",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1513325869.000118",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513325869000118",
+        "no_reactions": true,
+        "previous": {
+          "type": "im",
+          "user": "U08HHP201",
+          "username": "stoive",
+          "ts": "1513325860.000345",
+          "text": "who are you?",
+          "iid": "eb015f0b-61f2-47e2-8a3f-6d36b4f48df6",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513325860000345"
+        },
+        "previous_2": {
+          "type": "im",
+          "user": "U08HHP201",
+          "username": "stoive",
+          "ts": "1513325520.000190",
+          "text": "who are you?",
+          "iid": "e8ad1ae5-4cd0-499a-b599-df65b43ea1fe",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513325520000190"
+        }
+      },
+      {
+        "iid": "8b3a88a0-6b85-47ca-943d-d4a517f6e858",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D8F7BMBEY",
+          "name": "U8ELD2D33",
+          "user": "U8ELD2D33",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1513327412.000014",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513327412000014",
+        "no_reactions": true,
+        "previous": {
+          "type": "im",
+          "user": null,
+          "username": "tech nottingham bot",
+          "ts": "1513327249.000194",
+          "text": "mission statement here",
+          "iid": "b96fe49e-8103-4930-9850-4f597e19628c",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513327249000194"
+        },
+        "previous_2": {
+          "type": "im",
+          "user": "U08HHP201",
+          "username": "stoive",
+          "ts": "1513327248.000088",
+          "text": "Who are you?",
+          "iid": "3635458c-8431-43a0-8396-59c8c48c21c1",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D8F7BMBEY\/p1513327248000088"
+        }
+      },
+      {
+        "iid": "b1b676e4-921f-44b2-a148-665f91fa008c",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D5M408WLT",
+          "name": "U5M408VNF",
+          "user": "U5M408VNF",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1496347700.150080",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D5M408WLT\/p1496347700150080",
+        "no_reactions": true,
+        "previous": {
+          "type": "im",
+          "user": null,
+          "username": "askexperian",
+          "ts": "1496327506.938882",
+          "text": "Hello\n",
+          "iid": "0141cb8b-0e91-443f-967a-608c644f75bc",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D5M408WLT\/p1496327506938882"
+        },
+        "previous_2": {
+          "type": "im",
+          "user": null,
+          "username": "askexperian",
+          "ts": "1496327505.938473",
+          "text": "Hello\n",
+          "iid": "efe98c9d-ffff-4ea5-b2f4-26a79ae6112c",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D5M408WLT\/p1496327505938473"
+        }
+      },
+      {
+        "iid": "e8744d40-63cc-4c7f-a586-c034aeccf4e0",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "D1VU9ARSS",
+          "name": "U1VU9AR54",
+          "user": "U1VU9AR54",
+          "is_channel": false,
+          "is_group": false,
+          "is_im": true,
+          "is_mpim": false,
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false
+        },
+        "type": "im",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1469796080.000011",
+        "text": "test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D1VU9ARSS\/p1469796080000011",
+        "no_reactions": true,
+        "previous": {
+          "type": "im",
+          "user": null,
+          "username": "gamebook bot",
+          "ts": "1469784978.000010",
+          "text": "Hi stoive. Sorry - but I didn't understand that command.\n",
+          "iid": "46f4db6b-d2ed-49d2-bbd0-7d255fbdb49c",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D1VU9ARSS\/p1469784978000010"
+        },
+        "previous_2": {
+          "type": "im",
+          "user": "U08HHP201",
+          "username": "stoive",
+          "ts": "1469784974.000009",
+          "text": "create",
+          "iid": "a4723b9a-8c1d-4de0-bf2d-a312a9c3ad4e",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/D1VU9ARSS\/p1469784974000009"
+        }
+      },
+      {
+        "iid": "304788a0-3e43-456c-8f24-f585da4e8569",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "C08HHP21F",
+          "is_channel": true,
+          "is_group": false,
+          "is_im": false,
+          "name": "general",
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false,
+          "is_private": false,
+          "is_mpim": false,
+          "pending_shared": [],
+          "is_pending_ext_shared": false
+        },
+        "type": "message",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1441871708.000003",
+        "text": "acro? test",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/C08HHP21F\/p1441871708000003",
+        "no_reactions": true,
+        "previous": {
+          "type": "message",
+          "user": "U08HHP201",
+          "username": "stoive",
+          "ts": "1441871553.000002",
+          "text": "acro? wibble",
+          "iid": "d16860c1-6ed5-41aa-ac29-f54288141d95",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/C08HHP21F\/p1441871553000002"
+        },
+        "previous_2": {
+          "type": "message",
+          "user": null,
+          "username": "outgoing-webhook",
+          "ts": "1441841939.000003",
+          "text": "The answer to 'ECS' is 'Often'.",
+          "iid": "ca59e6f7-8a9c-4177-9cdb-9059bb816281",
+          "permalink": "https:\/\/bbbbbb.slack.com\/archives\/C08HHP21F\/p1441841939000003"
+        }
+      },
+      {
+        "iid": "0214ab05-bf55-4c7c-82f1-b9f45aa89ca8",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "C08HHP21F",
+          "is_channel": true,
+          "is_group": false,
+          "is_im": false,
+          "name": "general",
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false,
+          "is_private": false,
+          "is_mpim": false,
+          "pending_shared": [],
+          "is_pending_ext_shared": false
+        },
+        "type": "message",
+        "user": "U08HHP201",
+        "username": "stoive",
+        "ts": "1440534001.000002",
+        "text": "This is a test message for my dojo :)",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/C08HHP21F\/p1440534001000002",
+        "no_reactions": true
+      },
+      {
+        "iid": "f1177157-5b14-4655-a310-2f59f6199863",
+        "team": "T08HHF3T9",
+        "channel": {
+          "id": "C08HHP21F",
+          "is_channel": true,
+          "is_group": false,
+          "is_im": false,
+          "name": "general",
+          "is_shared": false,
+          "is_org_shared": false,
+          "is_ext_shared": false,
+          "is_private": false,
+          "is_mpim": false,
+          "pending_shared": [],
+          "is_pending_ext_shared": false
+        },
+        "type": "message",
+        "username": "outgoing-webhook",
+        "ts": "1441871715.000004",
+        "text": "The answer to 'test' is 'Often'.",
+        "permalink": "https:\/\/bbbbbb.slack.com\/archives\/C08HHP21F\/p1441871715000004",
+        "no_reactions": true
+      }
+    ]
+  },
+  "files": {
+    "total": 0,
+    "pagination": {
+      "total_count": 0,
+      "page": 1,
+      "per_page": 20,
+      "page_count": 0,
+      "first": 1,
+      "last": 0
+    },
+    "paging": {
+      "count": 20,
+      "total": 0,
+      "page": 1,
+      "pages": 0
+    },
+    "matches": []
+  },
+  "posts": {
+    "total": 0,
+    "matches": []
+  }
+}

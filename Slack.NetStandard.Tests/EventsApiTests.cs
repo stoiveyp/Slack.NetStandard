@@ -306,14 +306,14 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void Message()
         {
-            Utility.AssertSubType<ICallbackEvent, MessageCallbackEvent>("Events_Message.json");
-            Utility.AssertSubType<ICallbackEvent, BotMessage>("Events_Message_Bot.json");
-            Utility.AssertSubType<ICallbackEvent, EkmAccessDenied>("Events_Message_EkmAccessDenied.json");
-            Utility.AssertSubType<ICallbackEvent, MeMessage>("Events_Message_Me.json");
-            Utility.AssertSubType<ICallbackEvent, MessageChanged>("Events_Message_MessageChanged.json");
-            Utility.AssertSubType<ICallbackEvent, MessageDeleted>("Events_Message_MessageDeleted.json");
-            Utility.AssertSubType<ICallbackEvent, MessageReplied>("Events_Message_MessageReplied.json");
-            Utility.AssertSubType<ICallbackEvent, ThreadBroadcast>("Events_Message_ThreadBroadcast.json");
+            Utility.AssertSubType<ICallbackEvent, MessageCallbackEvent>("Events_Message.json","channel");
+            Utility.AssertSubType<ICallbackEvent, BotMessage>("Events_Message_Bot.json", "channel");
+            Utility.AssertSubType<ICallbackEvent, EkmAccessDenied>("Events_Message_EkmAccessDenied.json", "channel");
+            Utility.AssertSubType<ICallbackEvent, MeMessage>("Events_Message_Me.json", "channel");
+            Utility.AssertSubType<ICallbackEvent, MessageChanged>("Events_Message_MessageChanged.json", "channel");
+            Utility.AssertSubType<ICallbackEvent, MessageDeleted>("Events_Message_MessageDeleted.json", "channel");
+            Utility.AssertSubType<ICallbackEvent, MessageReplied>("Events_Message_MessageReplied.json", "channel");
+            Utility.AssertSubType<ICallbackEvent, ThreadBroadcast>("Events_Message_ThreadBroadcast.json", "channel");
         }
 
         [Fact]

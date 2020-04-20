@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Slack.NetStandard.ApiCommon;
-using Slack.NetStandard.EventsApi.CallbackEvents;
-using Slack.NetStandard.JsonConverters;
 using Slack.NetStandard.Messages.Blocks;
+using Slack.NetStandard.Objects;
+using File = Slack.NetStandard.Objects.File;
 
 namespace Slack.NetStandard.Messages
 {
     public class Message
     {
         [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
-        public string Channel { get; set; }
+        public Channel Channel { get; set; }
 
         [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]
         public IList<IMessageBlock> Blocks { get; set; }
@@ -70,6 +68,9 @@ namespace Slack.NetStandard.Messages
 
         [JsonProperty("icons", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, string> Icons { get; set; }
+
+        [JsonProperty("files",NullValueHandling = NullValueHandling.Ignore)]
+        public File[] Files { get; set; }
 
         [JsonExtensionData]
         public Dictionary<string,object> OtherFields { get; set; }

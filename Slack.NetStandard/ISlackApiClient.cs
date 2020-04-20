@@ -30,6 +30,10 @@ namespace Slack.NetStandard
 
         IReactionsApi Reactions { get; }
 
+        IRemindersApi Reminders { get; }
+
+        ISearchApi Search { get; }
+
         
         Task<WebApiResponse> Test(object data);
     }
