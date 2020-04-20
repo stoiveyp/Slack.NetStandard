@@ -16,5 +16,15 @@ namespace Slack.NetStandard.WebApi
         {
             return _client.MakeUrlEncodedCall<SearchResponse>("search.all", request);
         }
+
+        public Task<SearchResponse> Files(SearchRequest request)
+        {
+            return _client.MakeUrlEncodedCall<SearchResponse>("search.files", request);
+        }
+
+        public Task<SearchResponse> Messages(SearchRequest request)
+        {
+            return _client.MakeUrlEncodedCall<SearchResponse>("search.messages", request);
+        }
     }
 }
