@@ -49,6 +49,9 @@ namespace Slack.NetStandard
         private IMigrationApi _migration;
         public IMigrationApi Migration => _migration ??= new MigrationApi(this);
 
+        private IPinsApi _pins;
+        public IPinsApi Pins => _pins ??= new PinsApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();

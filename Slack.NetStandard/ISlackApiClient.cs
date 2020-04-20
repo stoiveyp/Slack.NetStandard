@@ -26,6 +26,8 @@ namespace Slack.NetStandard
 
         IMigrationApi Migration { get; }
 
+        IPinsApi Pins { get; }
+
         
         Task<WebApiResponse> Test(object data);
     }
