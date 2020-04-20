@@ -24,6 +24,8 @@ namespace Slack.NetStandard
 
         IBotsApi Bots { get; }
 
+        IMigrationApi Migration { get; }
+
         
         Task<WebApiResponse> Test(object data);
     }

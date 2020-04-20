@@ -46,6 +46,9 @@ namespace Slack.NetStandard
         private IFilesApi _files;
         public IFilesApi Files => _files ??= new FilesApi(this);
 
+        private IMigrationApi _migration;
+        public IMigrationApi Migration => _migration ??= new MigrationApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
