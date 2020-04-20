@@ -72,6 +72,7 @@ namespace Slack.NetStandard.Tests
             });
         }
 
+
         [Fact]
         public async Task FilesRemote_Add()
         {
@@ -99,6 +100,55 @@ namespace Slack.NetStandard.Tests
 
             await Utility.AssertEncodedWebApi(c => c.Files.Remote.InfoByFileId("F1234567890"), "files.remote.info",
                 "Web_FilesInfo.json", nvc => { Assert.Equal("F1234567890", nvc["file"]); });
+        }
+
+        [Fact]
+        public async Task FilesRemote_Update()
+        {
+            var request = new UpdateFileRemoteRequest
+            {
+                ExternalId = "1234",
+                Title = "hello",
+                Filetype = "txt",
+                File = "ABCD"
+
+            };
+            await Utility.AssertEncodedWebApi(c => c.Files.Remote.Update(request), "files.remote.update",
+                "Web_FilesInfo.json", nvc =>
+                {
+                    Assert.Equal("1234", nvc["external_id"]);
+                    Assert.Equal("hello", nvc["title"]);
+                    Assert.Equal("txt", nvc["filetype"]);
+                    Assert.Equal("ABCD", nvc["file"]);
+                });
+        }
+
+        [Fact]
+        public async Task FilesRemote_Remove()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Files.Remote.RemoveExternalId("ABCD"), "files.remote.remove",
+                "Web_FilesInfo.json", nvc => { Assert.Equal("ABCD", nvc["external_id"]); });
+
+            await Utility.AssertEncodedWebApi(c => c.Files.Remote.RemoveFile("F1234567890"), "files.remote.remove",
+                "Web_FilesInfo.json", nvc => { Assert.Equal("F1234567890", nvc["file"]); });
+        }
+
+        [Fact]
+        public async Task FilesRemote_Share()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Files.Remote.ShareByExternalId("ABCD","C123","C456"), "files.remote.share",
+                "Web_FilesInfo.json", nvc =>
+                {
+                    Assert.Equal("ABCD", nvc["external_id"]);
+                    Assert.Equal("C123,C456", nvc["channels"]);
+                });
+
+            await Utility.AssertEncodedWebApi(c => c.Files.Remote.ShareByFile("F1234567890", "C123", "C456"), "files.remote.share",
+                "Web_FilesInfo.json", nvc =>
+                {
+                    Assert.Equal("F1234567890", nvc["file"]);
+                    Assert.Equal("C123,C456", nvc["channels"]);
+                });
         }
     }
 }
