@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Slack.NetStandard.ApiCommon;
 using Slack.NetStandard.EventsApi.CallbackEvents;
 using Slack.NetStandard.JsonConverters;
 using Slack.NetStandard.Messages.Blocks;

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Slack.NetStandard.Messages;
+using Slack.NetStandard.ApiCommon;
+using Slack.NetStandard.EventsApi.CallbackEvents;
 
 namespace Slack.NetStandard.Objects
 {
@@ -112,5 +111,8 @@ namespace Slack.NetStandard.Objects
 
         [JsonProperty("shares",NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string,Dictionary<string,Share[]>> Shares { get; set; }
+
+        [JsonProperty("reactions", NullValueHandling = NullValueHandling.Ignore)]
+        public Reaction[] Reactions { get; set; }
     }
 }

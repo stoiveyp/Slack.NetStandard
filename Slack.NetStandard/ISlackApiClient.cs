@@ -28,6 +28,8 @@ namespace Slack.NetStandard
 
         IPinsApi Pins { get; }
 
+        IReactionsApi Reactions { get; }
+
         
         Task<WebApiResponse> Test(object data);
     }

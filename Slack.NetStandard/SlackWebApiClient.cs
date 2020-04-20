@@ -52,6 +52,9 @@ namespace Slack.NetStandard
         private IPinsApi _pins;
         public IPinsApi Pins => _pins ??= new PinsApi(this);
 
+        private IReactionsApi _reactions;
+        public IReactionsApi Reactions => _reactions ??= new ReactionsApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
