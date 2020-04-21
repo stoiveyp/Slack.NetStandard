@@ -64,8 +64,11 @@ namespace Slack.NetStandard
         private IStarsApi _stars;
         public IStarsApi Stars => _stars ??= new StarsApi(this);
 
-        private ITeamsApi _team;
-        public ITeamsApi Team => _team ??= new TeamsApi(this);
+        private ITeamApi _team;
+        public ITeamApi Team => _team ??= new TeamApi(this);
+
+        private IUsergroupsApi _usergroups;
+        public IUsergroupsApi Usergroups => _usergroups ??= new UsergroupsApi(this);
 
         public HttpClient Client { get; set; }
 

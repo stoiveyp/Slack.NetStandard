@@ -6,7 +6,7 @@ using Slack.NetStandard.WebApi.Teams;
 
 namespace Slack.NetStandard.WebApi
 {
-    public interface ITeamsApi
+    public interface ITeamApi
     {
         Task<TeamAccessLogResponse> AccessLogs(long before);
         Task<TeamAccessLogResponse> AccessLogs(int count, int page);

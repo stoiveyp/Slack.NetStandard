@@ -4,11 +4,11 @@ using Slack.NetStandard.WebApi.Teams;
 
 namespace Slack.NetStandard.WebApi
 {
-    internal class TeamsApi : ITeamsApi
+    internal class TeamApi : ITeamApi
     {
         private readonly IWebApiClient _client;
 
-        public TeamsApi(IWebApiClient client)
+        public TeamApi(IWebApiClient client)
         {
             _client = client;
         }
