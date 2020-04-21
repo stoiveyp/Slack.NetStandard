@@ -27,10 +27,4 @@ namespace Slack.NetStandard.WebApi
 
         IUsersProfileApi Profile{ get; }
     }
-
-    public interface IUsersProfileApi
-    {
-        Task<UserProfileResponse> Get(string user = null, string includeLabels = null);
-        Task<UserProfileResponse> Set(UserProfileSetRequest request);
-    }
 }
