@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Teams;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -31,6 +32,32 @@ namespace Slack.NetStandard.Tests
             await Utility.AssertEncodedWebApi(c => c.Team.Info("T12345"), "team.info", "Web_TeamInfo.json", nvc =>
             {
                 Assert.Equal("T12345", nvc["team"]);
+            });
+        }
+
+        [Fact]
+        public async Task Team_IntegrationLogs()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Team.IntegrationLogs(new IntegrationLogRequest
+            {
+                ChangeType = "added",
+                Count=10,
+                Page=1
+            }), "team.integrationLogs", "Web_TeamIntegrationLogs.json", nvc =>
+            {
+                Assert.Equal(3,nvc.Count);
+                Assert.Equal("added", nvc["change_type"]);
+                Assert.Equal(10.ToString(), nvc["count"]);
+                Assert.Equal(1.ToString(), nvc["page"]);
+            });
+        }
+
+        [Fact]
+        public async Task Team_ProfileGet()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Team.GetProfile("all"), "team.profile.get", "Web_TeamProfileGet.json", nvc =>
+            {
+                Assert.Equal("all", nvc["visibility"]);
             });
         }
     }

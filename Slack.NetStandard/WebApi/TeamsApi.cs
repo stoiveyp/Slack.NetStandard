@@ -65,5 +65,21 @@ namespace Slack.NetStandard.WebApi
 
             return _client.MakeUrlEncodedCall<InfoResponse>("team.info", dict);
         }
+
+        public Task<TeamIntegrationLogResponse> IntegrationLogs(IntegrationLogRequest request)
+        {
+            return _client.MakeUrlEncodedCall<TeamIntegrationLogResponse>("team.integrationLogs", request);
+        }
+
+        public Task<TeamProfileResponse> GetProfile(string visibility = null)
+        {
+            var dict = new Dictionary<string,string>();
+            if (!string.IsNullOrWhiteSpace(visibility))
+            {
+                dict.Add("visibility",visibility);
+            }
+
+            return _client.MakeUrlEncodedCall<TeamProfileResponse>("team.profile.get", dict);
+        }
     }
 }

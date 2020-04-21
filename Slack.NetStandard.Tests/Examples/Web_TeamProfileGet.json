@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "profile": {
+    "fields": [
+      {
+        "id": "Xf06054AAA",
+        "ordering": 0,
+        "label": "Phone extension",
+        "hint": "Enter the extension to reach your desk",
+        "type": "text",
+        "is_hidden": 1
+      },
+      {
+        "id": "Xf06054BBB",
+        "ordering": 1,
+        "label": "Date of birth",
+        "hint": "When you were born",
+        "type": "date"
+      },
+      {
+        "id": "Xf06054CCC",
+        "ordering": 2,
+        "label": "Facebook",
+        "hint": "Enter a link to your Facebook profile",
+        "type": "link"
+      },
+      {
+        "id": "Xf06054DDD",
+        "ordering": 3,
+        "label": "House",
+        "hint": "Hogwarts, obviously",
+        "type": "options_list",
+        "possible_values": [
+          "Gryffindor",
+          "Hufflepuff",
+          "Ravenclaw",
+          "Slytherin"
+        ]
+      },
+      {
+        "id": "Xf06054EEE",
+        "ordering": 4,
+        "label": "Location",
+        "hint": "Office location (LDAP)",
+        "type": "text",
+        "options": {
+          "is_protected": 1
+        }
+      },
+      {
+        "id": "Xf06054FFF",
+        "ordering": 5,
+        "label": "Manager",
+        "hint": "The boss",
+        "type": "user"
+      }
+    ]
+  }
+}
