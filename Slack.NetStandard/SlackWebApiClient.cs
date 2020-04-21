@@ -64,6 +64,9 @@ namespace Slack.NetStandard
         private IStarsApi _stars;
         public IStarsApi Stars => _stars ??= new StarsApi(this);
 
+        private ITeamsApi _team;
+        public ITeamsApi Team => _team ??= new TeamsApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();

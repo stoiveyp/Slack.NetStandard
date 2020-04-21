@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Slack.NetStandard.WebApi.Search
+namespace Slack.NetStandard.WebApi
 {
     public class Paging
     {
