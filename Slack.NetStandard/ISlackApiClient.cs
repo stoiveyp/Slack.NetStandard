@@ -34,7 +34,9 @@ namespace Slack.NetStandard
 
         ISearchApi Search { get; }
 
-        
+        IStarsApi Stars { get; }
+            
+
         Task<WebApiResponse> Test(object data);
     }
 }

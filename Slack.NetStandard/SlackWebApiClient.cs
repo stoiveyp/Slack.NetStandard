@@ -61,6 +61,9 @@ namespace Slack.NetStandard
         private ISearchApi _search;
         public ISearchApi Search => _search ??= new SearchApi(this);
 
+        private IStarsApi _stars;
+        public IStarsApi Stars => _stars ??= new StarsApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
