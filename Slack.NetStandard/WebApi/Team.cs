@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Slack.NetStandard.WebApi.Admin
+namespace Slack.NetStandard.WebApi
 {
     public class Team:SlackId
     {

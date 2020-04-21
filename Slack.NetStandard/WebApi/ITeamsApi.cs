@@ -11,5 +11,8 @@ namespace Slack.NetStandard.WebApi
         Task<TeamAccessLogResponse> AccessLogs(long before);
         Task<TeamAccessLogResponse> AccessLogs(int count, int page);
         Task<TeamAccessLogResponse> AccessLogs(long? before, int? count, int? page);
+
+        Task<BillableInfoResponse> BillableInfo(string user = null);
+        Task<InfoResponse> Info(string team = null);
     }
 }
