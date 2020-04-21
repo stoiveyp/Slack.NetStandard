@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "items": [
+    {
+      "type": "message",
+      "channel": "C2147483705",
+      "message": { "id": "12345" }
+    },
+    {
+      "type": "file",
+      "file": { "id": "12345"  }
+    },
+    {
+      "type": "channel",
+      "channel": "C2147483705"
+    }
+
+  ],
+  "response_metadata": {
+    "next_cursor": "dGVhbTpDMUg5UkVTR0w="
+  }
+}

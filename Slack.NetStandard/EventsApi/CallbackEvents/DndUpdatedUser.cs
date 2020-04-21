@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.ApiCommon;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {

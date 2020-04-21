@@ -4,6 +4,7 @@ namespace Slack.NetStandard.Messages.Blocks
 {
     public class Image : IMessageBlock
     {
+        [JsonProperty("type")]
         public string Type => nameof(Image).ToLower();
 
         [JsonProperty("image_url")]

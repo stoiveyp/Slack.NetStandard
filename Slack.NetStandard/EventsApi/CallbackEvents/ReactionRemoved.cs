@@ -18,8 +18,5 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
 
         [JsonProperty("item", NullValueHandling = NullValueHandling.Ignore)]
         public Item Item { get; set; }
-
-        [JsonProperty("event_ts")]
-        public Timestamp EventTimestamp { get; set; }
     }
 }

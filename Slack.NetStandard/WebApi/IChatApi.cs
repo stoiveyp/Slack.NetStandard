@@ -6,10 +6,10 @@ namespace Slack.NetStandard.WebApi
     public interface IChatApi
     {
         Task<PostMessageResponse> Post(PostMessageRequest request);
-        Task<EphemeralResponse> PostEphemeral(PostMessageRequest request);
+        Task<EphemeralResponse> PostEphemeral(PostEphemeralMessageRequest request);
 
         IScheduledMessageApi ScheduledMessages { get; }
-        Task<MessageResponse> Delete(string channel, string timestamp, bool? asUser = null);
+        Task<MessageResponse> Delete(string channel, Timestamp timestamp, bool? asUser = null);
 
         Task<GetPermalinkResponse> Permalink(string channel, string timestamp);
 

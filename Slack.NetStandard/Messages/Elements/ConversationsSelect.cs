@@ -6,7 +6,8 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class ConversationsSelect:IMessageElement
     {
-        [JsonProperty("type")] public string Type => "conversations_select";
+        public const string ElementType = "conversations_select";
+        [JsonProperty("type")] public string Type => ElementType;
 
         [JsonProperty("placeholder")]
         public PlainText Placeholder { get; set; }

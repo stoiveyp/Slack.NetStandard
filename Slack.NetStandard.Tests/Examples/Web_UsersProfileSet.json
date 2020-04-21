@@ -1,0 +1,13 @@
+{
+  "profile": {
+    "first_name": "John",
+    "last_name": "Smith",
+    "email": "john@smith.com",
+    "fields": {
+      "Xf06054BBB": {
+        "value": "Barista",
+        "alt": "I make the coffee & the tea!"
+      }
+    }
+  }
+}

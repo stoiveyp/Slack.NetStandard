@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "restricted_apps": [
+    {
+      "app": {
+        "id": "A0FDLP8M2L",
+        "name": "My Test App",
+        "description": "A fun test app for Slack",
+        "help_url": "https://example.com",
+        "privacy_policy_url": "https://example.com",
+        "app_homepage_url": "https://example.com",
+        "app_directory_url": "https://myteam.enterprise.slack.com/apps/A0FDLP8M2L-my-test-app",
+        "is_app_directory_approved": true,
+        "is_internal": false,
+        "icons": {
+          "image_32": "https://143326534038rl8788_eb57dbc818daa4ba15d6_32.png",
+          "image_36": "https://143326534038rl8788_eb57dbc818daa4ba15d6_36.png",
+          "image_48": "https://143326534038rl8788_eb57dbc818daa4ba15d6_48.png",
+          "image_64": "https://143326534038rl8788_eb57dbc818daa4ba15d6_64.png",
+          "image_72": "https://143326534038rl8788_eb57dbc818daa4ba15d6_72.png",
+          "image_96": "https://143326534038rl8788_eb57dbc818daa4ba15d6_96.png",
+          "image_128": "https://4332653438rl87808_eb57dbc818daa4ba15d6_128.png",
+          "image_192": "https://4332653438rl87808_eb57dbc818daa4ba15d6_192.png",
+          "image_512": "https://4332653438rl87808_eb57dbc818daa4ba15d6_512.png",
+          "image_1024": "https://1433265338rl878408_eb57dbc818daa4ba15d6_1024.png",
+          "image_original": "https://143338rl8782653408_eb57dbc818daa4ba15d6_original.png"
+        },
+        "additional_info": ""
+      },
+      "scopes": [
+        {
+          "name": "files:write:user",
+          "description": "Upload, edit, and delete files on the users behalf",
+          "is_sensitive": true,
+          "token_type": "user"
+        }
+      ],
+      "date_updated": 1574296721,
+      "last_resolved_by": {
+        "actor_id": "W0G82LMFD",
+        "actor_type": "user"
+      }
+    }
+  ]
+}

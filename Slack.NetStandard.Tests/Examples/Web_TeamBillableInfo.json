@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "billable_info": {
+    "U0632EWRW": {
+      "billing_active": false
+    },
+    "U02UCPE1R": {
+      "billing_active": true
+    },
+    "U02UEBSD2": {
+      "billing_active": true
+    }
+  }
+}

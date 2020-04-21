@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "no_op": true,
+  "already_open": true,
+  "channel": {
+    "id": "D069C7QFK",
+    "created": 1460147748,
+    "is_im": true,
+    "is_org_shared": false,
+    "user": "U069C7QF3",
+    "unread_count": 0,
+    "unread_count_display": 0,
+    "is_open": true,
+    "priority": 0.0
+  }
+}

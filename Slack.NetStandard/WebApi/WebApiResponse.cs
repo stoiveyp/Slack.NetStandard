@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.WebApi
 {
-    public class WebApiResponse:WebApiResponse<WebApiResponseMessages>
+    public class WebApiResponse:WebApiResponse<ResponseMetadata>
     {
         public static WebApiResponse Success()
         {
@@ -13,7 +13,13 @@ namespace Slack.NetStandard.WebApi
         }
     }
 
-    public class WebApiResponse<TMetadata> where TMetadata: WebApiResponseMessages
+    public class WebApiResponse<TMetadata>: WebApiResponseBase where TMetadata: ResponseMetadata
+    {
+        [JsonProperty("response_metadata", NullValueHandling = NullValueHandling.Ignore)]
+        public TMetadata ResponseMetadata { get; set; }
+    }
+
+    public abstract class WebApiResponseBase
     {
         [JsonProperty("ok")]
         public bool OK { get; set; }
@@ -24,7 +30,7 @@ namespace Slack.NetStandard.WebApi
         [JsonProperty("warning", NullValueHandling = NullValueHandling.Ignore)]
         public string Warning { get; set; }
 
-        [JsonProperty("response_metadata", NullValueHandling = NullValueHandling.Ignore)]
-        public TMetadata ResponseMetadata { get; set; }
+        [JsonExtensionData]
+        public Dictionary<string, object> OtherFields { get; set; }
     }
 }

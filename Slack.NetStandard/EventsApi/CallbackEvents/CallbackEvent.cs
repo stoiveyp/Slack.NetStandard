@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using Slack.NetStandard.JsonConverters;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
-    [JsonConverter(typeof(CallbackEventConverter))]
-    public class CallbackEvent
+    public class CallbackEvent:ICallbackEvent
     {
         [JsonProperty("type")]
         public string Type { get; set; }

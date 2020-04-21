@@ -21,12 +21,12 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeJsonCall<PostMessageRequest, PostMessageResponse>("chat.postMessage", request);
         }
 
-        public Task<EphemeralResponse> PostEphemeral(PostMessageRequest request)
+        public Task<EphemeralResponse> PostEphemeral(PostEphemeralMessageRequest request)
         {
-            return _client.MakeJsonCall<PostMessageRequest, EphemeralResponse>("chat.postEphemeral", request);
+            return _client.MakeJsonCall<PostEphemeralMessageRequest, EphemeralResponse>("chat.postEphemeral", request);
         }
 
-        public Task<MessageResponse> Delete(string channel, string timestamp, bool? asUser = null)
+        public Task<MessageResponse> Delete(string channel, Timestamp timestamp, bool? asUser = null)
         {
             return _client.MakeJsonCall<DeleteRequest, MessageResponse>("chat.delete", new DeleteRequest
             {
@@ -56,7 +56,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<WebApiResponse> Unfurl(UnfurlRequest request)
         {
-            return _client.MakeJsonCall<UnfurlRequest, WebApiResponse>("chat.unfurl", request);
+            return _client.MakeJsonCall("chat.unfurl", request);
         }
 
         public Task<UpdateMessageResponse> Update(UpdateMessageRequest request)

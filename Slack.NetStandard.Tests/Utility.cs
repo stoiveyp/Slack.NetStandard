@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Slack.NetStandard.WebApi;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -49,6 +54,23 @@ namespace Slack.NetStandard.Tests
                     actualJObject.Remove(prop.Name);
                     expectedJObject.Remove(prop.Name);
                     continue;
+                }
+
+                if (actualJObject[prop.Name] is JArray && expectedJObject[prop.Name] is JArray)
+                {
+                    var result =
+                        ((JArray) actualJObject[prop.Name]).Zip(((JArray) expectedJObject[prop.Name]),
+                            (a, e) => (a, e)).ToArray();
+                        foreach(var set in result)
+                    {
+                        if(JToken.DeepEquals(set.a, set.e))
+                        {
+                            ((JArray) actualJObject[prop.Name]).Remove(set.a);
+                            ((JArray) expectedJObject[prop.Name]).Remove(set.e);
+                            continue;
+                        }
+                        OutputTrimEqual(actualJObject[prop.Name] as JObject, expectedJObject[prop.Name] as JObject, false);
+                    }
                 }
 
                 if (actualJObject[prop.Name] is JObject && expectedJObject[prop.Name] is JObject)
@@ -115,18 +137,80 @@ namespace Slack.NetStandard.Tests
             return requestCall(client);
         }
 
+        public static Task<TResponse> CheckApi<TResponse>(
+            Func<SlackWebApiClient, Task<TResponse>> requestCall,
+            string url,
+            Action<NameValueCollection> requestCheck,
+            TResponse responseToSend)
+        {
+            var http = new HttpClient(new ActionHandler(async req =>
+            {
+                Assert.Equal("https://slack.com/api/" + url, req.RequestUri.ToString());
+                Assert.Equal("application/x-www-form-urlencoded", req.Content.Headers.ContentType.MediaType);
+                var dict = HttpUtility.ParseQueryString(await req.Content.ReadAsStringAsync());
+                requestCheck(dict);
+            }, responseToSend));
+            var client = new SlackWebApiClient(http);
+            return requestCall(client);
+        }
+
         public static void AssertType<T>(string file)
         {
-            var deserialised = Utility.ExampleFileContent<T>(file);
-            Assert.True(Utility.CompareJson(deserialised, file));
+            var deserialised = ExampleFileContent<T>(file);
+            Assert.True(CompareJson(deserialised, file));
         }
 
         public static TResult AssertSubType<T, TResult>(string file, params string[] exclude) where TResult : T
         {
-            var deserialised = Utility.ExampleFileContent<T>(file);
+            var deserialised = ExampleFileContent<T>(file);
             Assert.IsType<TResult>(deserialised);
-            Assert.True(Utility.CompareJson(deserialised, file, exclude));
+            Assert.True(CompareJson(deserialised, file, exclude));
             return (TResult)deserialised;
+        }
+
+        public static Task<TResponse> AssertWebApi<TResponse>(Func<ISlackApiClient, Task<TResponse>> func, string methodName, Action<JObject> requestAssertion,TResponse responseToSend = default) where TResponse:class,new()
+        {
+            return CheckApi(func, methodName, requestAssertion,responseToSend ?? new TResponse());
+        }
+
+        public static async Task<TResponse> AssertWebApi<TResponse>(Func<ISlackApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<JObject> requestAssertion) where TResponse: WebApiResponseBase
+        {
+            var response = await CheckApi(func,
+                methodName,
+                requestAssertion, ExampleFileContent<TResponse>(responseFile));
+            
+            Assert.True(CompareJson(response,responseFile));
+            return response;
+        }
+
+        public static async Task<WebApiResponse> AssertWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, Action<JObject> requestAssertion)
+        {
+            var response = await CheckApi(func,
+                methodName,
+                requestAssertion, WebApiResponse.Success());
+
+            Assert.True(response.OK);
+            return response;
+        }
+
+        public static async Task<TResponse> AssertEncodedWebApi<TResponse>(Func<SlackWebApiClient, Task<TResponse>> func, string methodName, string responseFile, Action<NameValueCollection> requestAssertion) where TResponse : WebApiResponseBase
+        {
+            var response = await CheckApi(func,
+                methodName,
+                requestAssertion, ExampleFileContent<TResponse>(responseFile));
+
+            Assert.True(CompareJson(response, responseFile));
+            return response;
+        }
+
+        public static async Task<WebApiResponse> AssertEncodedWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, Action<NameValueCollection> requestAssertion)
+        {
+            var response = await CheckApi(func,
+                methodName,
+                requestAssertion, WebApiResponse.Success());
+
+            Assert.True(response.OK);
+            return response;
         }
     }
 }

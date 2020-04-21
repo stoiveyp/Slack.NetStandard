@@ -6,20 +6,25 @@ using Slack.NetStandard.Messages.Blocks;
 
 namespace Slack.NetStandard.JsonConverters
 {
-    public class MessageBlockConverter : JsonConverter
+    public class MessageBlockConverter : JsonConverter<IMessageBlock>
     {
         public override bool CanWrite => false;
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, IMessageBlock value, JsonSerializer serializer)
         {
-
+            throw new NotImplementedException();
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override IMessageBlock ReadJson(JsonReader reader, Type objectType, IMessageBlock existingValue, bool hasExistingValue,
+            JsonSerializer serializer)
         {
             var jObject = JObject.Load(reader);
             var componentType = jObject.Value<string>("type");
-            object target = GetComponent(componentType);
+            if (string.IsNullOrWhiteSpace(componentType))
+            {
+                return null;
+            }
+            var target = GetComponent(componentType);
             if (target == null)
             {
                 throw new ArgumentOutOfRangeException($"MessageBlock type {componentType} not supported");
@@ -34,19 +39,18 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Section).ToLower(), typeof(Section)},
             {nameof(Image).ToLower(),typeof(Image) },
             {nameof(Actions).ToLower(),typeof(Actions) },
-            {nameof(Context).ToLower(),typeof(Context) }
+            {nameof(Context).ToLower(),typeof(Context) },
+            {nameof(Input).ToLower(),typeof(Input) },
+            {nameof(File).ToLower(),typeof(File) },
+            {RichText.MessageBlockType,typeof(RichText) }
         };
 
         private IMessageBlock GetComponent(string type)
         {
-            return (IMessageBlock)(
+            return (IMessageBlock) (
                 IMessageBlockLookup.ContainsKey(type)
                     ? Activator.CreateInstance(IMessageBlockLookup[type])
-                    : null);
-        }
-        public override bool CanConvert(Type objectType)
-        {
-            return typeof(IMessageBlock).IsAssignableFrom(objectType);
+                    : new UnknownBlock());
         }
     }
 }

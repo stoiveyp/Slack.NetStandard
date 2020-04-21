@@ -9,6 +9,11 @@ namespace Slack.NetStandard
     [JsonConverter(typeof(TimestampConverter))]
     public class Timestamp : IComparable<Timestamp>
     {
+        public static implicit operator Timestamp(long value)
+        {
+            return new Timestamp(value);
+        }
+
         public static implicit operator Timestamp(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -17,6 +22,11 @@ namespace Slack.NetStandard
             }
             var pieces = value.Split(new[] { '.' }, 2);
             return new Timestamp(long.Parse(pieces[0]), pieces.Length > 1 ? pieces[1] : null);
+        }
+
+        public static implicit operator string(Timestamp value)
+        {
+            return value.ToString();
         }
 
         public Timestamp() { }
@@ -44,7 +54,7 @@ namespace Slack.NetStandard
         public int CompareTo(Timestamp other)
         {
             if (ReferenceEquals(this, other)) return 0;
-            if (ReferenceEquals(null, other)) return 1;
+            if (other is null) return 1;
             var epochSecondsComparison = EpochSeconds.CompareTo(other.EpochSeconds);
             if (epochSecondsComparison != 0) return epochSecondsComparison;
             return string.Compare(Identifier, other.Identifier, StringComparison.Ordinal);

@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "reminders": [
+    {
+      "id": "Rm12345678",
+      "creator": "U18888888",
+      "user": "U18888888",
+      "text": "eat a banana",
+      "recurring": false,
+      "time": 1458678068,
+      "complete_ts": 0
+    },
+    {
+      "id": "Rm23456789",
+      "creator": "U18888888",
+      "user": "U18888888",
+      "text": "drink water",
+      "recurring": true
+    }
+  ]
+}

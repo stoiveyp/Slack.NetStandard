@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.EventsApi.CallbackEvents;
+using Slack.NetStandard.Messages;
 using Slack.NetStandard.Objects;
 using Slack.NetStandard.WebApi;
 
@@ -14,6 +16,6 @@ namespace Slack.NetStandard.Interaction
         public View View { get; set; }
 
         [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
-        public ResponseMessage Message { get; set; }
+        public Message Message { get; set; }
     }
 }

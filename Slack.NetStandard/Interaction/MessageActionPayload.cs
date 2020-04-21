@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.Messages;
 using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard.Interaction
@@ -9,7 +10,7 @@ namespace Slack.NetStandard.Interaction
         public string ResponseUrl { get; set; }
 
         [JsonProperty("message")]
-        public ResponseMessage Message { get; set; }
+        public Message Message { get; set; }
 
         [JsonProperty("channel")]
         public SlackId Channel { get; set; }

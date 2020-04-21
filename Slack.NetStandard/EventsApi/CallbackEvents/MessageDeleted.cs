@@ -2,7 +2,7 @@
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
-    public class MessageDeleted : Message
+    public class MessageDeleted : MessageCallbackEvent
     {
         public const string MessageSubType = "message_deleted";
 

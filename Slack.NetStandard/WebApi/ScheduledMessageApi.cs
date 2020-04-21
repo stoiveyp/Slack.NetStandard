@@ -8,7 +8,7 @@ namespace Slack.NetStandard.WebApi
 {
     internal class ScheduledMessageApi:IScheduledMessageApi
     {
-        private IWebApiClient _client;
+        private readonly IWebApiClient _client;
 
         public ScheduledMessageApi(IWebApiClient webApiClient)
         {
@@ -27,7 +27,7 @@ namespace Slack.NetStandard.WebApi
         public Task<WebApiResponse> Delete(string channel, string scheduledMessageId,
             bool? asUser = null)
         {
-            return _client.MakeJsonCall<DeleteScheduledMessageRequest, WebApiResponse>("chat.deleteScheduledMessage", new DeleteScheduledMessageRequest
+            return _client.MakeJsonCall("chat.deleteScheduledMessage", new DeleteScheduledMessageRequest
             {
                 Channel = channel,
                 ScheduledMessageId = scheduledMessageId,
