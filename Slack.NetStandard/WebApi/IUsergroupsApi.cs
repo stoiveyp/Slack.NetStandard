@@ -14,5 +14,7 @@ namespace Slack.NetStandard.WebApi
 
         Task<UsergroupListResponse> List(bool? includeCount = null, bool? includeDisabled = null,
             bool? includeUsers = null);
+
+        IUsergroupUserApi Users { get; }
     }
 }

@@ -67,5 +67,26 @@ namespace Slack.NetStandard.Tests
                 Assert.Equal("true", nvc["include_count"]);
             });
         }
+
+        [Fact]
+        public async Task Usergroups_Users_List()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Usergroups.Users.List("S060", true), "usergroups.users.list", "Web_UsergroupUserListResponse.json", nvc =>
+            {
+                Assert.Equal("S060", nvc["usergroup"]);
+                Assert.Equal("true", nvc["include_disabled"]);
+            });
+        }
+
+        [Fact]
+        public async Task Usergroups_Users_Update()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Usergroups.Users.Update("S060",new []{"W123","U234"}, true), "usergroups.users.update", "Web_UsergroupResponse.json", nvc =>
+            {
+                Assert.Equal("S060", nvc["usergroup"]);
+                Assert.Equal("W123,U234", nvc["users"]);
+                Assert.Equal("true", nvc["include_count"]);
+            });
+        }
     }
 }
