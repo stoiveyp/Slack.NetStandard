@@ -20,5 +20,52 @@ namespace Slack.NetStandard.Tests
                 Assert.True(j.Value<bool>("include_count"));
             });
         }
+
+        [Fact]
+        public async Task Usergroups_Disable()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Usergroups.Disable("S060",true), "usergroups.disable", "Web_UsergroupResponse.json", nvc =>
+            {
+                Assert.Equal("S060", nvc["usergroup"]);
+                Assert.Equal("true",nvc["include_count"]);
+            });
+        }
+
+        [Fact]
+        public async Task Usergroups_Enable()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Usergroups.Enable("S060", true), "usergroups.enable", "Web_UsergroupResponse.json", nvc =>
+            {
+                Assert.Equal("S060", nvc["usergroup"]);
+                Assert.Equal("true", nvc["include_count"]);
+            });
+        }
+
+        [Fact]
+        public async Task Usergroups_Update()
+        {
+            await Utility.AssertWebApi(c => c.Usergroups.Update(new UsergroupUpdateRequest
+            {
+                Usergroup = "S060",
+                Name = "test group",
+                IncludeCount = true
+            }), "usergroups.update", "Web_UsergroupResponse.json", j =>
+            {
+                Assert.Equal("S060", j.Value<string>("usergroup"));
+                Assert.Equal("test group", j.Value<string>("name"));
+                Assert.True(j.Value<bool>("include_count"));
+            });
+        }
+
+        [Fact]
+        public async Task Usergroups_List()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Usergroups.List(true, true, true), "usergroups.list", "Web_UsergroupListResponse.json", nvc =>
+            {
+                Assert.Equal("true", nvc["include_users"]);
+                Assert.Equal("true", nvc["include_disabled"]);
+                Assert.Equal("true", nvc["include_count"]);
+            });
+        }
     }
 }

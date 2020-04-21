@@ -11,4 +11,10 @@ namespace Slack.NetStandard.WebApi.Usergroups
         [JsonProperty("usergroup",NullValueHandling = NullValueHandling.Ignore)]
         public Usergroup Usergroup { get; set; }
     }
+
+    public class UsergroupListResponse : WebApiResponse
+    {
+        [JsonProperty("usergroups",NullValueHandling = NullValueHandling.Ignore)]
+        public Usergroup[] Usergroups { get; set; }
+    }
 }
