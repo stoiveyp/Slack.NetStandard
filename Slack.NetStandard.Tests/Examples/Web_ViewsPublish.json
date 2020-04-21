@@ -4,8 +4,6 @@
     "id": "VMHU10V25",
     "team_id": "T8N4K1JN",
     "type": "home",
-    "close": null,
-    "submit": null,
     "blocks": [
       {
         "type": "section",
@@ -26,7 +24,6 @@
     "clear_on_close": false,
     "notify_on_close": false,
     "root_view_id": "VMHU10V25",
-    "previous_view_id": null,
     "app_id": "AA4928AQ",
     "external_id": "",
     "bot_id": "BA13894H"
