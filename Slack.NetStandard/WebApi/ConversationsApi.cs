@@ -118,9 +118,9 @@ namespace Slack.NetStandard.WebApi
                 "conversations.leave", dict);
         }
 
-        public Task<ConversationListResponse> List(ConversationListRequest request)
+        public Task<ChannelListResponse> List(ConversationListRequest request)
         {
-            return _client.MakeJsonCall<ConversationListRequest, ConversationListResponse>("conversations.list", request);
+            return _client.MakeJsonCall<ConversationListRequest, ChannelListResponse>("conversations.list", request);
         }
 
         public Task<ConversationMembersResponse> Members(string channel)

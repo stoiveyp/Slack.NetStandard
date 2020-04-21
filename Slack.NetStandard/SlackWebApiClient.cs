@@ -70,9 +70,14 @@ namespace Slack.NetStandard
         private IUsergroupsApi _usergroups;
         public IUsergroupsApi Usergroups => _usergroups ??= new UsergroupsApi(this);
 
+        private IUsersApi _users;
+        public IUsersApi Users => _users ??= new UsersApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
+
+        private readonly Dictionary<string,string> _emptynvc = new Dictionary<string, string>();
 
         internal SlackWebApiClient(Func<HttpClient> clientAccessor)
         {
@@ -159,7 +164,7 @@ namespace Slack.NetStandard
 
         async Task<TResponse> IWebApiClient.MakeUrlEncodedCall<TResponse>(string methodName, Dictionary<string, string> request)
         {
-            var content = new FormUrlEncodedContent(request);
+            var content = new FormUrlEncodedContent(request ?? _emptynvc);
             content.Headers.ContentType.CharSet = "utf-8";
             var message = await Client.PostAsync(methodName, content);
             return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());

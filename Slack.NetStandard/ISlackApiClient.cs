@@ -40,6 +40,8 @@ namespace Slack.NetStandard
 
         IUsergroupsApi Usergroups { get; }
 
+        IUsersApi Users { get; }
+
         Task<WebApiResponse> Test(object data);
     }
 }

@@ -22,7 +22,7 @@ namespace Slack.NetStandard.WebApi
 
         Task<WebApiResponse> Leave(string channel);
 
-        Task<ConversationListResponse> List(ConversationListRequest request);
+        Task<ChannelListResponse> List(ConversationListRequest request);
 
         Task<ConversationMembersResponse> Members(string channel);
         Task<ConversationMembersResponse> Members(string channel, string cursor);
