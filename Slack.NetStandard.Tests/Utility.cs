@@ -165,6 +165,7 @@ namespace Slack.NetStandard.Tests
             var deserialised = ExampleFileContent<T>(file);
             Assert.IsType<TResult>(deserialised);
             Assert.True(CompareJson(deserialised, file, exclude));
+
             return (TResult)deserialised;
         }
 

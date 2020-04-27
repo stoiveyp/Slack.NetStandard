@@ -23,6 +23,12 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("api_app_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ApiAppId { get; set; }
 
+        [JsonProperty("token",NullValueHandling = NullValueHandling.Ignore)]
+        public string Token { get; set; }
+
+        [JsonProperty("trigger_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string TriggerId { get; set; }
+
         [JsonExtensionData]
         public Dictionary<string,object> OtherFields { get; set; }
     }

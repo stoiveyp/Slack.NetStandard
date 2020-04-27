@@ -8,33 +8,31 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void ViewClosedPayload()
         {
-            var payload = Utility.ExampleFileContent<InteractionPayload>("ViewClosedPayload.json");
-            Assert.IsType<ViewClosedPayload>(payload);
+            Assert.Null(Utility.AssertSubType<InteractionPayload,ViewClosedPayload>("ViewClosedPayload.json").OtherFields);
         }
 
         [Fact]
         public void ViewSubmissionPayload()
         {
-            Utility.AssertSubType<InteractionPayload,ViewSubmissionPayload>("ViewSubmissionPayload.json");
+            Assert.Null(Utility.AssertSubType<InteractionPayload,ViewSubmissionPayload>("ViewSubmissionPayload.json").OtherFields);
         }
 
         [Fact]
         public void BlockActionsPayload()
         {
-            Utility.AssertSubType<InteractionPayload, BlockActionsPayload>("BlockActionsPayload.json");
+            Assert.Null(Utility.AssertSubType<InteractionPayload, BlockActionsPayload>("BlockActionsPayload.json").OtherFields);
         }
 
         [Fact]
         public void GlobalShortcutPayload()
         {
-            Utility.AssertSubType<InteractionPayload, GlobalShortcutPayload>("GlobalShortcutPayload.json");
+            Assert.Null(Utility.AssertSubType<InteractionPayload, GlobalShortcutPayload>("GlobalShortcutPayload.json").OtherFields);
         }
 
         [Fact]
         public void MessageActionPayload()
         {
-            var output = Utility.AssertSubType<InteractionPayload, MessageActionPayload>("MessageActionPayload.json","token");
-            Assert.Single(output.Message.OtherFields);
+            Assert.Null(Utility.AssertSubType<InteractionPayload, MessageActionPayload>("MessageActionPayload.json","token").OtherFields);
         }
     }
 }

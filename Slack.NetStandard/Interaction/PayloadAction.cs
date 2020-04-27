@@ -8,19 +8,19 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("type")]
         public string Type { get; set; }
 
-        [JsonProperty("block_id")]
+        [JsonProperty("block_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BlockId { get; set; }
 
-        [JsonProperty("action_id")]
+        [JsonProperty("action_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ActionId { get; set; }
 
         [JsonProperty("text",NullValueHandling = NullValueHandling.Ignore)]
         public TextObject Text { get; set; }
 
-        [JsonProperty("value")]
+        [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
         public string Value { get; set; }
 
-        [JsonProperty("action_ts")]
+        [JsonProperty("action_ts", NullValueHandling = NullValueHandling.Ignore)]
         public string ActionTimestamp { get; set; }
 
 
