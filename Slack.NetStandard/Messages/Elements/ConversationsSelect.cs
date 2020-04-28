@@ -20,5 +20,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("confirm",NullValueHandling = NullValueHandling.Ignore)]
         public Confirmation Confirm { get; set; }
+
+        [JsonProperty("filter", NullValueHandling = NullValueHandling.Ignore)]
+        public Filter Filter { get; set; }
     }
 }
