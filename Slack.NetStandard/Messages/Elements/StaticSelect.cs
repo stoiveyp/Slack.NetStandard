@@ -8,7 +8,7 @@ namespace Slack.NetStandard.Messages.Elements
     {
         public const string ElementType = "static_select";
 
-        [JsonProperty("type")] public virtual string Type => ElementType;
+        [JsonProperty("type")] public string Type => ElementType;
 
         [JsonProperty("placeholder")]
         public PlainText Placeholder { get; set; }
