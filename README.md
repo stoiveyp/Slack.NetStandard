@@ -1,5 +1,6 @@
 # Slack.NetStandard
-.NET Core package that helps with Slack interactions
+.NET Core NuGet package that helps with Slack interactions
+AVailable at https://www.nuget.org/packages/Slack.NetStandard
 
 ## Create OAuth URL
 
