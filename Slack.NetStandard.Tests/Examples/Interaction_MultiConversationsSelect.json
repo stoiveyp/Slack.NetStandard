@@ -1,0 +1,15 @@
+{
+  "action_id": "text1234",
+  "type": "multi_conversations_select",
+  "placeholder": {
+    "type": "plain_text",
+    "text": "Select conversations"
+  },
+  "filter": {
+    "include": [
+      "public",
+      "mpim"
+    ],
+    "exclude_bot_users": true
+  }
+}

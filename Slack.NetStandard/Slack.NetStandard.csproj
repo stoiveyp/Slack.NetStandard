@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Interaction fixes</PackageReleaseNotes>
+    <PackageReleaseNotes>Add multi select menus</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steven Pears</Authors>
     <Company />
@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/stoiveyp/Slack.NetStandard</RepositoryUrl>
     <PackageTags>.net, slack</PackageTags>
     <LangVersion>latest</LangVersion>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
