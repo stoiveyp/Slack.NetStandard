@@ -6,8 +6,5 @@ namespace Slack.NetStandard.Interaction
     {
         [JsonProperty("callback_id", NullValueHandling = NullValueHandling.Ignore)]
         public string CallbackId { get; set; }
-
-        [JsonProperty("trigger_id",NullValueHandling = NullValueHandling.Ignore)]
-        public string TriggerId { get; set; }
     }
 }
