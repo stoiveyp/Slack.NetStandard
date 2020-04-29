@@ -11,6 +11,8 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("container", NullValueHandling = NullValueHandling.Ignore)]
         public Container Container { get; set; }
 
+        [JsonProperty("response_url",NullValueHandling = NullValueHandling.Ignore)]
+        public string ResponseUrl { get; set; }
 
         [JsonProperty("view", NullValueHandling = NullValueHandling.Ignore)]
         public View View { get; set; }

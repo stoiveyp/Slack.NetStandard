@@ -78,5 +78,17 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<IMessageElement, MultiChannelsSelect>("Interaction_MultiChannelsSelect.json", "token");
         }
+
+        [Fact]
+        public void InteractionBlockActions()
+        {
+            Assert.Null(Utility.AssertSubType<InteractionPayload, BlockActionsPayload>("Interaction_BlockActions.json", "token").OtherFields);
+        }
+
+        [Fact]
+        public void InteractionBlockActionsHome()
+        {
+            Assert.Null(Utility.AssertSubType<InteractionPayload, BlockActionsPayload>("Interaction_BlockActions_Home.json", "token").OtherFields);
+        }
     }
 }
