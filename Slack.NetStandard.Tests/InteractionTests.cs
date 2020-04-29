@@ -47,6 +47,7 @@ namespace Slack.NetStandard.Tests
         public void ResponseActionUpdate()
         {
             Utility.AssertSubType<ResponseAction, ResponseActionUpdate>("Interaction_ResponseActionUpdate.json");
+        }
 
         [Fact]
         public void MultiStaticSelect()
