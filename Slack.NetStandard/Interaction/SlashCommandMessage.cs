@@ -1,8 +1,8 @@
-﻿using Slack.NetStandard.Messages;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Slack.NetStandard.Messages;
 
-namespace Slack.NetStandard.SlashCommand
+namespace Slack.NetStandard.Interaction
 {
     public class SlashCommandMessage:Message
     {

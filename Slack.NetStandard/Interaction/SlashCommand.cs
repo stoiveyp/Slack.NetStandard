@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
-namespace Slack.NetStandard.SlashCommand
+namespace Slack.NetStandard.Interaction
 {
     public class SlashCommand
     {
