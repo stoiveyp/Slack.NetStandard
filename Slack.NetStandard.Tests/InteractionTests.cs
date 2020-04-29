@@ -34,5 +34,17 @@ namespace Slack.NetStandard.Tests
         {
             Assert.Null(Utility.AssertSubType<InteractionPayload, MessageActionPayload>("MessageActionPayload.json","token").OtherFields);
         }
+
+        [Fact]
+        public void ResponseActionErrors()
+        {
+            Utility.AssertSubType<ResponseAction, ResponseActionErrors>("Interaction_ResponseActionErrors.json");
+        }
+
+        [Fact]
+        public void ResponseActionUpdate()
+        {
+            Utility.AssertSubType<ResponseAction, ResponseActionUpdate>("Interaction_ResponseActionUpdate.json");
+        }
     }
 }

@@ -1,0 +1,6 @@
+{
+  "response_action": "errors",
+  "errors": {
+    "ticket-due-date": "You may not select a due date in the past"
+  }
+}
