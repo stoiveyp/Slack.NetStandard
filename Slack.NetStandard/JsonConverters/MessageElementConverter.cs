@@ -40,7 +40,12 @@ namespace Slack.NetStandard.JsonConverters
             {ConversationsSelect.ElementType,typeof(ConversationsSelect) },
             {ChannelsSelect.ElementType,typeof(ChannelsSelect) },
             {PlainTextInput.ElementType,typeof(PlainTextInput) },
-            {RichTextSection.ElementType,typeof(RichTextSection) }
+            {RichTextSection.ElementType,typeof(RichTextSection) },
+            {MultiStaticSelect.ElementType,typeof(MultiStaticSelect) },
+            {MultiExternalSelect.ElementType,typeof(MultiExternalSelect) },
+            {MultiUsersSelect.ElementType,typeof(MultiUsersSelect) },
+            {MultiConversationsSelect.ElementType,typeof(MultiConversationsSelect) },
+            {MultiChannelsSelect.ElementType,typeof(MultiChannelsSelect) }
         };
 
         private IMessageElement GetComponent(string type)
