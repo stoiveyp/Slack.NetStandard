@@ -33,6 +33,15 @@ var verifier = new RequestVerifier(signingSecret);
 var verified = Verifier.Verify(request.Headers["X-Slack-Signature"], long.Parse(request.Headers["X-Slack-Request-Timestamp"]), request.Body);
 ```
 
+## Dealing with a slash command payload
+
+```csharp
+var command = new SlashCommand(payloadText);
+var response = new SlashCommandMessage{
+    ...
+}
+await command.Respond(response);
+```
 
 ## Parse Events API Body
 

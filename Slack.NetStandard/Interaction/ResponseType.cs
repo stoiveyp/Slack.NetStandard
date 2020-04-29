@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Slack.NetStandard.SlashCommand
+namespace Slack.NetStandard.Interaction
 {
     public enum ResponseType
     {

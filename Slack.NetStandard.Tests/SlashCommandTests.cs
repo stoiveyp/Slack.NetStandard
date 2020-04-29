@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.SlashCommand;
+using Slack.NetStandard.Interaction;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -30,7 +30,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void SlashCommandParsesCorrectly()
         {
-            var command = new SlashCommand.SlashCommand(payload + "&test=1");
+            var command = new Interaction.SlashCommand(payload + "&test=1");
             Assert.True(command.Payload.ContainsKey("test"));
             Assert.Equal("1", command.Payload["test"]);
         }
@@ -38,7 +38,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void CorrectlyWraps()
         {
-            var command = new SlashCommand.SlashCommand(payload + "&ssl_check=1");
+            var command = new Interaction.SlashCommand(payload + "&ssl_check=1");
             Assert.True(command.IsSslCheck);
             Assert.Equal("U2147483697",command.UserId);
             Assert.Equal("Steve",command.Username);
@@ -58,7 +58,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task RespondSendCorrectRequest()
         {
-            var command = new SlashCommand.SlashCommand(payload + "&test=1");
+            var command = new Interaction.SlashCommand(payload + "&test=1");
             var message = new SlashCommandMessage(ResponseType.InChannel) { Text = "It's 80 degrees right now." };
 
             var client = new HttpClient(new ActionHandler(async req =>
