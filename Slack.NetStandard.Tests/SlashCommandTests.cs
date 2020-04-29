@@ -49,7 +49,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void SlashCommandMessageRendersCorrectly()
         {
-            var message = new SlashCommandMessage(ResponseType.InChannel) {Text = "It's 80 degrees right now."};
+            var message = new InteractionMessage(ResponseType.InChannel) {Text = "It's 80 degrees right now."};
             var expected = new JObject(new JProperty("response_type", "in_channel"),
                 new JProperty("text", "It's 80 degrees right now."));
             Assert.True(JToken.DeepEquals(expected,JObject.FromObject(message)));
@@ -59,7 +59,7 @@ namespace Slack.NetStandard.Tests
         public async Task RespondSendCorrectRequest()
         {
             var command = new Interaction.SlashCommand(payload + "&test=1");
-            var message = new SlashCommandMessage(ResponseType.InChannel) { Text = "It's 80 degrees right now." };
+            var message = new InteractionMessage(ResponseType.InChannel) { Text = "It's 80 degrees right now." };
 
             var client = new HttpClient(new ActionHandler(async req =>
             {

@@ -63,11 +63,9 @@ namespace Slack.NetStandard.Interaction
 
         public string EnterpriseName => KeyOrNull("enterprise_name");
 
-        public async Task Respond(SlashCommandMessage message, HttpClient client = null)
+        public Task Respond(InteractionMessage message, HttpClient client = null)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(message),Encoding.UTF8,"application/json");
-            var currentClient = client ?? new HttpClient();
-            await currentClient.PostAsync(new Uri(ResponseUrl, UriKind.Absolute), content);
+            return message.Send(ResponseUrl, message, client);
         }
     }
 }

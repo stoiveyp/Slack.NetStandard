@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.2.1</Version>
+    <Version>1.3.0</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Improve interactive payload support</PackageReleaseNotes>
+    <PackageReleaseNotes>SlashCommandMessage is now InteractionMessage
+Add send method to InteractionMessage</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steven Pears</Authors>
     <Company />
