@@ -65,7 +65,7 @@ namespace Slack.NetStandard.Interaction
 
         public Task Respond(InteractionMessage message, HttpClient client = null)
         {
-            return message.Send(ResponseUrl, message, client);
+            return message.Send(ResponseUrl, client);
         }
     }
 }

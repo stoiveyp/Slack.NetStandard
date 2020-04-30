@@ -24,9 +24,9 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("replace_original",NullValueHandling = NullValueHandling.Ignore)]
         public bool? ReplaceOriginal { get; set; }
 
-        public Task Send(string responseUrl, InteractionMessage message, HttpClient client = null)
+        public Task Send(string responseUrl, HttpClient client = null)
         {
-            var content = new StringContent(JsonConvert.SerializeObject(message), Encoding.UTF8, "application/json");
+            var content = new StringContent(JsonConvert.SerializeObject(this), Encoding.UTF8, "application/json");
             var currentClient = client ?? new HttpClient();
             return currentClient.PostAsync(new Uri(responseUrl, UriKind.Absolute), content);
         }
