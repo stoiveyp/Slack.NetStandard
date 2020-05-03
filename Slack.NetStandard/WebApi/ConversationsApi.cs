@@ -52,7 +52,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<ConversationHistoryResponse> History(ConversationHistoryRequest request)
         {
-            return _client.MakeJsonCall<ConversationHistoryRequest, ConversationHistoryResponse>(
+            return _client.MakeUrlEncodedCall<ConversationHistoryResponse>(
                 "conversations.history", request);
         }
 

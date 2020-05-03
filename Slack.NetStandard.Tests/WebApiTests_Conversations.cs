@@ -54,11 +54,11 @@ namespace Slack.NetStandard.Tests
                 Channel= "C1234567890",
                 Latest = "1234567890.123456"
             };
-            await Utility.AssertWebApi(c => c.Conversations.History(request),
-                "conversations.history", "Web_ConversationsHistory.json", j =>
+            await Utility.AssertEncodedWebApi(c => c.Conversations.History(request),
+                "conversations.history", "Web_ConversationsHistory.json", nvc =>
                 {
-                    Assert.Equal("C1234567890", j.Value<string>("channel"));
-                    Assert.Equal("1234567890.123456",j.Value<string>("latest"));
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                    Assert.Equal("1234567890.123456", nvc["latest"]);
                 });
         }
 
