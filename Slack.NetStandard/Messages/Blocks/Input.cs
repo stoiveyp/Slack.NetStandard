@@ -9,7 +9,7 @@ namespace Slack.NetStandard.Messages.Blocks
     public class Input:IMessageBlock
     {
         [JsonProperty("type")]
-        public string Type { get; }
+        public string Type => nameof(Input).ToLower();
 
         [JsonProperty("block_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BlockId { get; set; }

@@ -5,7 +5,7 @@ namespace Slack.NetStandard.Messages.Blocks
     public class File : IMessageBlock
     {
         [JsonProperty("type")]
-        public string Type { get; }
+        public string Type => nameof(File).ToLower();
 
         [JsonProperty("block_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BlockId { get; set; }

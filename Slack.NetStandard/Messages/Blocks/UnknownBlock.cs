@@ -6,7 +6,7 @@ namespace Slack.NetStandard.Messages.Blocks
     public class UnknownBlock : IMessageBlock
     {
         [JsonProperty("type")]
-        public string Type { get; }
+        public string Type { get; set; }
 
         [JsonProperty("block_id")]
         public string BlockId { get; set; }
