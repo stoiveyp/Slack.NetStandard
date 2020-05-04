@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Slack.NetStandard.Messages;
+using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard.Interaction
 {
@@ -24,11 +25,12 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("replace_original",NullValueHandling = NullValueHandling.Ignore)]
         public bool? ReplaceOriginal { get; set; }
 
-        public Task Send(string responseUrl, HttpClient client = null)
+        public async Task<WebApiResponse> Send(string responseUrl, HttpClient client = null)
         {
             var content = new StringContent(JsonConvert.SerializeObject(this), Encoding.UTF8, "application/json");
             var currentClient = client ?? new HttpClient();
-            return currentClient.PostAsync(new Uri(responseUrl, UriKind.Absolute), content);
+            var response = await currentClient.PostAsync(new Uri(responseUrl, UriKind.Absolute), content);
+            return JsonConvert.DeserializeObject<WebApiResponse>(await response.Content.ReadAsStringAsync());
         }
     }
 }
