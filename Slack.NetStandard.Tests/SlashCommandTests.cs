@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Interaction;
+using Slack.NetStandard.WebApi;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -66,7 +67,7 @@ namespace Slack.NetStandard.Tests
                 Assert.Equal(HttpMethod.Post,req.Method);
                 Assert.Equal(command.ResponseUrl,req.RequestUri.ToString());
                 Assert.Equal(JsonConvert.SerializeObject(message),await req.Content.ReadAsStringAsync());
-            },HttpStatusCode.OK));
+            }, new WebApiResponse { OK = true }));
             
             
             await command.Respond(message, client);
