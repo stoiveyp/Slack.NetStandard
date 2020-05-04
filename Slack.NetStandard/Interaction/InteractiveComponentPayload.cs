@@ -4,9 +4,6 @@ namespace Slack.NetStandard.Interaction
 {
     public abstract class InteractiveComponentPayload : InteractionPayload
     {
-        [JsonProperty("channel")]
-        public SlackId Channel { get; set; }
-
         [JsonProperty("actions", NullValueHandling = NullValueHandling.Ignore)]
         public PayloadAction[] Actions { get; set; }
 
