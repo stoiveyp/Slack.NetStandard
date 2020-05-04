@@ -6,6 +6,6 @@ namespace Slack.NetStandard.Objects
     public class ViewState
     {
         [JsonProperty("values",NullValueHandling = NullValueHandling.Ignore)]
-        public Dictionary<string, object> Values { get; set; }
+        public Dictionary<string, Dictionary<string,ElementValue>> Values { get; set; }
     }
 }
