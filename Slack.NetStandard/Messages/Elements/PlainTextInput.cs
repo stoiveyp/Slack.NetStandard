@@ -4,7 +4,7 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class PlainTextInput : IMessageElement
     {
-        public const string ElementType = "plain_Text_input";
+        public const string ElementType = "plain_text_input";
 
         [JsonProperty("type")] public string Type => ElementType;
 
