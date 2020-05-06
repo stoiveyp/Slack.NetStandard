@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Slack.NetStandard.ApiCommon;
 using Slack.NetStandard.Messages.Blocks;
@@ -13,7 +14,7 @@ namespace Slack.NetStandard.Messages
         public Channel Channel { get; set; }
 
         [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<IMessageBlock> Blocks { get; set; }
+        public IList<IMessageBlock> Blocks { get; set; } = new List<IMessageBlock>();
 
         [JsonProperty("channel_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ChannelType { get; set; }
@@ -74,5 +75,7 @@ namespace Slack.NetStandard.Messages
 
         [JsonExtensionData]
         public Dictionary<string,object> OtherFields { get; set; }
+
+        public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
     }
 }
