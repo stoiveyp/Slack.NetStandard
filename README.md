@@ -55,6 +55,22 @@ message.Blocks.Add(new Divider());
 ...
 ```
 
+## Building a modal
+
+```csharp
+var view = new View
+{
+    Type = "modal",
+    Title = "Create New Story",
+    Close = "Cancel",
+    Submit = "Submit",
+    Blocks = new IMessageBlock[]
+    {
+       new Section{Text = new PlainText("Only title is required")}
+    }
+};
+```
+
 ## Parse Events API Body
 
 ```csharp
