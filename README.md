@@ -49,17 +49,6 @@ await command.Respond(message);
 await command.Response(responseUrl);
 ```
 
-## Building a message to send to a different interaction response url
-
-```csharp
-using Slack.NetStandard.Messages;
-using Slack.NetStandard.Messages.Blocks;
-using Slack.NetStandard.Messages.Elements;
-...
-var message = new InteractionMessage();
-
-```
-
 ## Building & sending a modal
 
 ```csharp
@@ -77,6 +66,16 @@ var view = new View
 
 var client = new SlackWebApiClient(accessToken);
 var response = await client.View.Open(triggerId,view);
+```
+
+## Sending a new message to a channel
+
+```csharp
+var request = new PostMessageRequest {Channel = "C123456"};
+request.Blocks.Add(new Section{Text = new PlainText("Hi There!")});
+
+var client = new SlackWebApiClient("token");
+await client.Chat.Post(request);
 ```
 
 ## Parse Events API Body
@@ -98,14 +97,4 @@ if (eventObject is EventCallback callback)
 
     }
 }
-```
-
-
-## Make Web API Call
-
-```csharp
-using Slack.NetStandard;
-
-var client = new SlackWebApiClient(accessToken);
-await client.Chat.Post(postMessageRequest);
 ```
