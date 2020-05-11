@@ -56,7 +56,7 @@ message.Blocks.Add(new Divider());
 message.Send(command.ResponseUrl);
 ```
 
-## Building a modal
+## Building & sending a modal
 
 ```csharp
 var view = new View
@@ -70,6 +70,9 @@ var view = new View
        new Section{Text = new PlainText("Only title is required")}
     }
 };
+
+var client = new SlackWebApiClient(accessToken);
+var response = await client.View.Open(triggerId,view);
 ```
 
 ## Parse Events API Body
