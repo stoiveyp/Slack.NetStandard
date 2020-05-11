@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Slack.NetStandard.Messages.Blocks;
@@ -13,7 +14,7 @@ namespace Slack.NetStandard.WebApi.Chat
         public bool? AsUser { get; set; }
 
         [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<IMessageBlock> Blocks { get; set; }
+        public IList<IMessageBlock> Blocks { get; set; } = new List<IMessageBlock>();
 
         [JsonProperty("icon_emoji", NullValueHandling = NullValueHandling.Ignore)]
         public string IconEmoji { get; set; }
@@ -37,6 +38,6 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("username",NullValueHandling = NullValueHandling.Ignore)]
         public string Username { get; set; }
 
-
+        public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
     }
 }
