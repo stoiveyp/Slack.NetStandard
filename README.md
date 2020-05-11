@@ -33,17 +33,23 @@ var verifier = new RequestVerifier(signingSecret);
 var verified = Verifier.Verify(request.Headers["X-Slack-Signature"], long.Parse(request.Headers["X-Slack-Request-Timestamp"]), request.Body);
 ```
 
-## Dealing with a slash command payload
+## Receive/Respond to a slash command payload
 
 ```csharp
 var command = new SlashCommand(payloadText);
-var response = new SlashCommandMessage{
-    ...
-}
-await command.Respond(response);
+
+var message = new InteractionMessage();
+message.Blocks.Add(new Section{Text = new PlainText("Only title is required")});
+message.Blocks.Add(new Divider());
+message.Send(command.ResponseUrl);
+
+await command.Respond(message);
+
+// or - if it's not from a slash command, any response url can use
+await command.Response(responseUrl);
 ```
 
-## Building a message to send to respond to a slash command
+## Building a message to send to a different interaction response url
 
 ```csharp
 using Slack.NetStandard.Messages;
@@ -51,9 +57,7 @@ using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.Messages.Elements;
 ...
 var message = new InteractionMessage();
-message.Blocks.Add(new Section{Text = new PlainText("Only title is required")});
-message.Blocks.Add(new Divider());
-message.Send(command.ResponseUrl);
+
 ```
 
 ## Building & sending a modal
