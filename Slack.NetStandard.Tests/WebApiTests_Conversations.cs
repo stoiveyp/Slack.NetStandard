@@ -123,18 +123,18 @@ namespace Slack.NetStandard.Tests
             var request = new ConversationListRequest
             {
                 Cursor = "ABCDEF",
-                ExcludeArchived=true,
-                Types="private_channel",
-                Limit=10
+                ExcludeArchived = true,
+                Types = "private_channel",
+                Limit = 10
             };
-            await Utility.AssertWebApi(c => c.Conversations.List(request), "conversations.list",
+            await Utility.AssertEncodedWebApi(c => c.Conversations.List(request), "conversations.list",
                 "Web_ConversationsList.json",
-                j =>
+                nvc =>
                 {
-                    Assert.Equal("ABCDEF",j.Value<string>("cursor"));
-                    Assert.Equal(10,j.Value<int>("limit"));
-                    Assert.True(j.Value<bool>("exclude_archived"));
-                    Assert.Equal("private_channel",j.Value<string>("types"));
+                    Assert.Equal("ABCDEF", nvc["cursor"]);
+                    Assert.Equal(10.ToString(), nvc["limit"]);
+                    Assert.Equal("true", nvc["exclude_archived"]);
+                    Assert.Equal("private_channel", nvc["types"]);
                 });
         }
 
