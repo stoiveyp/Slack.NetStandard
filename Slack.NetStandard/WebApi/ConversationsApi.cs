@@ -120,7 +120,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<ChannelListResponse> List(ConversationListRequest request)
         {
-            return _client.MakeJsonCall<ConversationListRequest, ChannelListResponse>("conversations.list", request);
+            return _client.MakeUrlEncodedCall<ChannelListResponse>("conversations.list", request);
         }
 
         public Task<ConversationMembersResponse> Members(string channel)
