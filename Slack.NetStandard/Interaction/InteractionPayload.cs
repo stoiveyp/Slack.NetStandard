@@ -20,9 +20,6 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("team")]
         public TeamSummary Team { get; set; }
 
-        [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
-        public SlackId Channel { get; set; }
-
         [JsonProperty("api_app_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ApiAppId { get; set; }
 

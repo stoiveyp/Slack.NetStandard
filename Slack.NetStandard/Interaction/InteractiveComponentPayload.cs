@@ -9,5 +9,8 @@ namespace Slack.NetStandard.Interaction
 
         [JsonProperty("response_url", NullValueHandling = NullValueHandling.Ignore)]
         public string ResponseUrl { get; set; }
+
+        [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
+        public SlackId Channel { get; set; }
     }
 }

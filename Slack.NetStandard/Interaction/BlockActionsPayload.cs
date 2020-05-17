@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Slack.NetStandard.EventsApi.CallbackEvents;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Objects;
-using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard.Interaction
 {
@@ -22,5 +20,8 @@ namespace Slack.NetStandard.Interaction
 
         [JsonProperty("actions",NullValueHandling = NullValueHandling.Ignore)]
         public PayloadAction[] Actions { get; set; }
+
+        [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
+        public SlackId Channel { get; set; }
     }
 }
