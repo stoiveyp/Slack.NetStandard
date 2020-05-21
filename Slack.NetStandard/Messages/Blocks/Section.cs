@@ -11,6 +11,16 @@ namespace Slack.NetStandard.Messages.Blocks
     {
         public Section() { }
 
+        public Section(string plainText):this(new PlainText(plainText))
+        {
+
+        }
+
+        public Section(TextObject text)
+        {
+            Text = text;
+        }
+
         public Section(params TextObject[] fields)
         {
             Fields = fields.ToList();
