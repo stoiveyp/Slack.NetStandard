@@ -1,0 +1,12 @@
+{
+  "errors": [
+    {
+      "name": "email_address",
+      "error": "Sorry, this email domain is not authorized!"
+    },
+    {
+      "name": "username",
+      "error": "Uh-oh. This username has been taken!"
+    }
+  ]
+}

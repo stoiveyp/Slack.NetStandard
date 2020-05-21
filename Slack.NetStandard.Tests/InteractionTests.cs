@@ -90,5 +90,11 @@ namespace Slack.NetStandard.Tests
         {
             Assert.Null(Utility.AssertSubType<InteractionPayload, BlockActionsPayload>("Interaction_BlockActions_Home.json", "token").OtherFields);
         }
+
+        [Fact]
+        public void InteractionErrors()
+        {
+            Utility.AssertType<InputErrors>("Interaction_InputErrors.json");
+        }
     }
 }
