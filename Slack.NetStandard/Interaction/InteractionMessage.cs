@@ -30,7 +30,25 @@ namespace Slack.NetStandard.Interaction
             var content = new StringContent(JsonConvert.SerializeObject(this), Encoding.UTF8, "application/json");
             var currentClient = client ?? new HttpClient();
             var response = await currentClient.PostAsync(new Uri(responseUrl, UriKind.Absolute), content);
-            return JsonConvert.DeserializeObject<WebApiResponse>(await response.Content.ReadAsStringAsync());
+            var rawResponse = await response.Content.ReadAsStringAsync();
+
+            if (response.Content.Headers.ContentType.MediaType != "text/html")
+            {
+                return JsonConvert.DeserializeObject<WebApiResponse>(rawResponse);
+            }
+
+            var webApiResponse = new WebApiResponse();
+            if (rawResponse == "ok")
+            {
+                webApiResponse.OK = true;
+            }
+            else
+            {
+                webApiResponse.OK = false;
+                webApiResponse.Error = rawResponse;
+            }
+
+            return webApiResponse;
         }
     }
 }
