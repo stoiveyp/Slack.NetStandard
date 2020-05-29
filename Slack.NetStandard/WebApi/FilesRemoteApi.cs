@@ -21,7 +21,7 @@ namespace Slack.NetStandard.WebApi
                 return _client.MakeUrlEncodedCall<FileResponse>("files.remote.add", request);
             }
 
-            var dict = new Dictionary<string, Stream>();
+            var dict = new Dictionary<string, MultipartFile>();
             if (request.IndexableFileContents != null)
             {
                 dict.Add("indexable_file_contents", request.IndexableFileContents);
@@ -78,7 +78,7 @@ namespace Slack.NetStandard.WebApi
                 return _client.MakeUrlEncodedCall<FileResponse>("files.remote.update", request);
             }
 
-            var dict = new Dictionary<string, Stream>();
+            var dict = new Dictionary<string, MultipartFile>();
             if (request.IndexableFileContents != null)
             {
                 dict.Add("indexable_file_contents", request.IndexableFileContents);

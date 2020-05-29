@@ -22,8 +22,8 @@ namespace Slack.NetStandard.WebApi
 
         Task<WebApiResponse> SetPresence(string presence);
 
-        Task<WebApiResponse> SetPhoto(Stream image, int? squareSize = null);
-        Task<WebApiResponse> SetPhoto(Stream image, int cropX, int cropY);
+        Task<WebApiResponse> SetPhoto(MultipartFile image, int? squareSize = null);
+        Task<WebApiResponse> SetPhoto(MultipartFile image, int cropX, int cropY);
 
         IUsersProfileApi Profile{ get; }
     }

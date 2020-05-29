@@ -44,7 +44,7 @@ namespace Slack.NetStandard.WebApi
         {
             if (request.File != null)
             {
-                return _client.MakeMultiPartCall<FileResponse>("files.upload", request, new Dictionary<string, Stream>{{"file",request.File}});
+                return _client.MakeMultiPartCall<FileResponse>("files.upload", request, new Dictionary<string, MultipartFile>{{"file",request.File}});
             }
 
             return _client.MakeUrlEncodedCall<FileResponse>("files.upload", request);

@@ -12,7 +12,7 @@ namespace Slack.NetStandard.WebApi.Files
         public string Content { get; set; }
 
         [JsonIgnore]
-        public Stream File { get; set; }
+        public MultipartFile File { get; set; }
 
         [JsonProperty("filename",NullValueHandling = NullValueHandling.Ignore)]
         public string Filename { get; set; }

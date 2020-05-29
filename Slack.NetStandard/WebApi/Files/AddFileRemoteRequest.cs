@@ -18,9 +18,9 @@ namespace Slack.NetStandard.WebApi.Files
         public string Filetype { get; set; }
 
         [JsonIgnore]
-        public Stream IndexableFileContents { get; set; }
+        public MultipartFile IndexableFileContents { get; set; }
 
         [JsonIgnore]
-        public Stream PreviewImage { get; set; }
+        public MultipartFile PreviewImage { get; set; }
     }
 }

@@ -14,9 +14,9 @@ namespace Slack.NetStandard
         Task<T> MakeUrlEncodedCall<T>(string methodName, object dictionary) where T : WebApiResponseBase;
 
         Task<TResponse> MakeMultiPartCall<TResponse>(string methodName, Dictionary<string, string> textData,
-            Dictionary<string,Stream> streams) where TResponse : WebApiResponseBase;
+            Dictionary<string,MultipartFile> streams) where TResponse : WebApiResponseBase;
 
-        Task<TResponse> MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string,Stream> streams)
+        Task<TResponse> MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string,MultipartFile> streams)
             where TResponse : WebApiResponseBase;
     }
 }

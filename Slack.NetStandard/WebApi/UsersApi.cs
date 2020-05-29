@@ -81,13 +81,13 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeUrlEncodedCall("users.setPresence", new Dictionary<string, string> { { nameof(presence), presence } });
         }
 
-        public Task<WebApiResponse> SetPhoto(Stream image, int? squareSize = null)
+        public Task<WebApiResponse> SetPhoto(MultipartFile image, int? squareSize = null)
         {
             return _client.MakeMultiPartCall<WebApiResponse>("users.setPhoto", new Dictionary<string, string>().AddIfValue("crop_w", squareSize),
-                new Dictionary<string, Stream> {{"image", image}});
+                new Dictionary<string, MultipartFile> {{"image", image}});
         }
 
-        public Task<WebApiResponse> SetPhoto(Stream image, int cropX, int cropY)
+        public Task<WebApiResponse> SetPhoto(MultipartFile image, int cropX, int cropY)
         {
             var dict = new Dictionary<string, string>
             {
@@ -96,7 +96,7 @@ namespace Slack.NetStandard.WebApi
             };
 
             return _client.MakeMultiPartCall<WebApiResponse>("users.setPhoto", dict,
-                new Dictionary<string, Stream> { { "image", image } });
+                new Dictionary<string, MultipartFile> { { "image", image } });
         }
     }
 }

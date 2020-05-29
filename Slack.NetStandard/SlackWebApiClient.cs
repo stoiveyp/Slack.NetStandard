@@ -170,7 +170,7 @@ namespace Slack.NetStandard
             return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
         }
 
-        Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string,Stream> streams)
+        Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string,MultipartFile> streams)
         {
             var dict = JObject.FromObject(textData).Properties().ToDictionary(j => j.Name, j =>
             {
@@ -183,7 +183,7 @@ namespace Slack.NetStandard
             return ((IWebApiClient)this).MakeMultiPartCall<TResponse>(methodName, dict, streams);
         }
 
-        async Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName,Dictionary<string,string> textData, Dictionary<string,Stream> streams)
+        async Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName,Dictionary<string,string> textData, Dictionary<string,MultipartFile> streams)
         {
             var content = new MultipartFormDataContent();
             foreach(var item in textData)
@@ -193,7 +193,7 @@ namespace Slack.NetStandard
 
             foreach (var item in streams)
             {
-                content.Add(new StreamContent(item.Value), item.Key);
+                content.Add(new StreamContent(item.Value.Stream), item.Key,item.Value.Filename);
             }
 
             var message = await Client.PostAsync(methodName, content);
