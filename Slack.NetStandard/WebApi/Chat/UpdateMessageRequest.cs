@@ -22,7 +22,7 @@ namespace Slack.NetStandard.WebApi.Chat
         public string Text { get; set; }
 
         [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<IMessageBlock> Blocks { get; set; }
+        public IList<IMessageBlock> Blocks { get; set; } = new List<IMessageBlock>();
 
         [JsonProperty("link_names", NullValueHandling = NullValueHandling.Ignore)]
         public bool? LinkNames { get; set; }
