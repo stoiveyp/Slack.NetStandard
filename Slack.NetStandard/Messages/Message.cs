@@ -16,6 +16,9 @@ namespace Slack.NetStandard.Messages
         [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]
         public IList<IMessageBlock> Blocks { get; set; } = new List<IMessageBlock>();
 
+        [JsonProperty("attachments", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Attachment> Attachments{ get; set; } = new List<Attachment>();
+
         [JsonProperty("channel_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ChannelType { get; set; }
 
@@ -77,5 +80,6 @@ namespace Slack.NetStandard.Messages
         public Dictionary<string,object> OtherFields { get; set; }
 
         public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
+        public bool ShouldSerializeAttachments() => Attachments?.Any() ?? false;
     }
 }
