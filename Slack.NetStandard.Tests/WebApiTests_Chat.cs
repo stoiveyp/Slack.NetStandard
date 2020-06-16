@@ -26,9 +26,9 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_PostMessage()
         {
             await Utility.AssertWebApi(c => c.Chat.Post(new PostMessageRequest
-                {
-                    Blocks = new List<IMessageBlock> {new Section {Text = new PlainText("stuff")}}
-                }), "chat.postMessage", "Web_ChatPostMessageResponse.json",
+            {
+                Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
+            }), "chat.postMessage", "Web_ChatPostMessageResponse.json",
                 jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); });
         }
 
@@ -36,9 +36,9 @@ namespace Slack.NetStandard.Tests
         public async Task Chat_PostEphemeral()
         {
             await Utility.AssertWebApi(c => c.Chat.PostEphemeral(new PostEphemeralMessageRequest
-                {
-                    Blocks = new List<IMessageBlock> {new Section {Text = new PlainText("stuff")}}
-                }), "chat.postEphemeral","Web_ChatPostEphemeral.json",
+            {
+                Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
+            }), "chat.postEphemeral", "Web_ChatPostEphemeral.json",
                 jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); });
         }
 
@@ -73,7 +73,7 @@ namespace Slack.NetStandard.Tests
         {
             var response = await Utility.AssertWebApi<GetPermalinkResponse>(
                 c => c.Chat.Permalink("C1234567890", "1234567890.123456"),
-                "chat.getPermalink","Web_ChatGetPermalink.json",
+                "chat.getPermalink", "Web_ChatGetPermalink.json",
                 jobject =>
                 {
                     Assert.Equal("C1234567890", jobject.Value<string>("channel"));
@@ -110,11 +110,7 @@ namespace Slack.NetStandard.Tests
                 {
                     Assert.NotNull(jobject.Value<JArray>("blocks"));
                     Assert.Equal(currentEpoch, jobject.Value<long>("post_at"));
-                },
-                new ScheduledMessageResponse { OK = true, PostAt = 1562180400, ScheduledMessageId = "Q1298393284" });
-            Assert.True(response.OK);
-            Assert.Equal("Q1298393284", response.ScheduledMessageId);
-            Assert.Equal(1562180400, response.PostAt);
+                });
         }
 
         [Fact]
@@ -147,7 +143,7 @@ namespace Slack.NetStandard.Tests
                 Timestamp = "1401383885.000061",
                 Text = newText
             }),
-                "chat.updateMessage",
+                "chat.update",
                 jobject =>
                 {
                     Assert.Equal("C024BE91L", jobject.Value<string>("channel"));

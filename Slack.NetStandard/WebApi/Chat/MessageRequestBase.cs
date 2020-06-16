@@ -2,6 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
 
 namespace Slack.NetStandard.WebApi.Chat
@@ -38,6 +39,10 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("username",NullValueHandling = NullValueHandling.Ignore)]
         public string Username { get; set; }
 
+        [JsonProperty("attachments", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<Attachment> Attachments { get; set; } = new List<Attachment>();
+
         public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
+        public bool ShouldSerializeAttachments() => Blocks?.Any() ?? false;
     }
 }

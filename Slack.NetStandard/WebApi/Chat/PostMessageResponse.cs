@@ -9,7 +9,7 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("channel")]
         public string Channel { get; set; }
 
-        [JsonProperty("ts")]
+        [JsonProperty("ts", NullValueHandling = NullValueHandling.Ignore)]
         public Timestamp Timestamp { get; set; }
 
         [JsonProperty("message")]
