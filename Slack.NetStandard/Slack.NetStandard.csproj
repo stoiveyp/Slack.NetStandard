@@ -5,7 +5,8 @@
     <Version>2.1.0</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Secondary attachment support</PackageReleaseNotes>
+    <PackageReleaseNotes>Secondary attachment support
+Fixes to update message (thank you @rasmuskl!)</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steven Pears</Authors>
     <Company />
