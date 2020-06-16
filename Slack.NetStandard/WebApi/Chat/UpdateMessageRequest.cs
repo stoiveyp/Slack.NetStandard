@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -30,5 +31,7 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("parse", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(StringEnumConverter))]
         public MessageParsing MessageParsing { get; set; }
+
+        public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
     }
 }
