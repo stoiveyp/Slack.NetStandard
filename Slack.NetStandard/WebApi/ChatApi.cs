@@ -61,7 +61,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<UpdateMessageResponse> Update(UpdateMessageRequest request)
         {
-            return _client.MakeJsonCall<UpdateMessageRequest, UpdateMessageResponse>("chat.updateMessage", request);
+            return _client.MakeJsonCall<UpdateMessageRequest, UpdateMessageResponse>("chat.update", request);
         }
     }
 }
