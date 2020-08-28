@@ -50,5 +50,64 @@ namespace Slack.NetStandard.Tests
             Assert.Equal("Steven",result.Label);
         }
 
+        [Fact]
+        public void Channel()
+        {
+            var result = TextParser.FindEntities("test <#C123456>").First();
+            var entity = Assert.IsType<ChannelMention>(result);
+            Assert.Equal(5, result.TextIndex);
+            Assert.Equal(10, result.TextLength);
+            Assert.Equal("C123456", entity.ChannelId);
+            Assert.Null(result.Label);
+        }
+
+        [Fact]
+        public void SpecialMention()
+        {
+            var result = TextParser.FindEntities("test <!here|reallyhere>").First();
+            var entity = Assert.IsType<SpecialMention>(result);
+            Assert.Equal(5, result.TextIndex);
+            Assert.Equal(18, result.TextLength);
+            Assert.Equal("here", entity.Mention);
+            Assert.Equal("reallyhere",entity.Label);
+        }
+
+        [Fact]
+        public void Subteam()
+        {
+            var result = TextParser.FindEntities("test <!subteam^SAZ94GDB8>").First();
+            var entity = Assert.IsType<Subteam>(result);
+            Assert.Equal(5, result.TextIndex);
+            Assert.Equal(20, result.TextLength);
+            Assert.Equal("SAZ94GDB8", entity.SubteamId);
+            Assert.Null(entity.Label);
+        }
+
+        [Fact]
+        public void Date()
+        {
+            var result = TextParser.FindEntities("<!date^1392734382^{date_short}^https://example.com/|Feb 18, 2014 PST>").First();
+            var entity = Assert.IsType<DateMention>(result);
+            Assert.Equal(0, result.TextIndex);
+            Assert.Equal(69, result.TextLength);
+            Assert.Equal(1392734382, entity.Timestamp);
+            Assert.Equal("{date_short}",entity.Token);
+            Assert.Equal("https://example.com/",entity.OptionalLink);
+            Assert.Equal("Feb 18, 2014 PST",entity.Label);
+        }
+
+        [Fact]
+        public void SmallDate()
+        {
+            var result = TextParser.FindEntities("<!date^1392734382>").First();
+            var entity = Assert.IsType<DateMention>(result);
+            Assert.Equal(0, result.TextIndex);
+            Assert.Equal(18, result.TextLength);
+            Assert.Equal(1392734382, entity.Timestamp);
+            Assert.Null(entity.Token);
+            Assert.Null(entity.OptionalLink);
+            Assert.Null(entity.Label);
+        }
+
     }
 }

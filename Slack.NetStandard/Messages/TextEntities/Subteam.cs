@@ -16,17 +16,17 @@ namespace Slack.NetStandard.Messages.TextEntities
     {
         public DateMention(string[] datePieces)
         {
-            if (datePieces.Length > 1)
+            if (datePieces.Length > 0)
             {
                 Timestamp = long.Parse(datePieces[0]);
             }
 
-            if (datePieces.Length > 2)
+            if (datePieces.Length > 1)
             {
                 Token = datePieces[1];
             }
 
-            if (datePieces.Length > 3)
+            if (datePieces.Length > 2)
             {
                 OptionalLink = datePieces[2];
             }
