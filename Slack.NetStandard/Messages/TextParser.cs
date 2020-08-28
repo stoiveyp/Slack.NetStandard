@@ -15,7 +15,7 @@ namespace Slack.NetStandard.Messages
 
         static TextParser()
         {
-            _regex = new Regex("<(?<entity>.+)>");
+            _regex = new Regex("<(?<entity>.+?)>");
         }
         public static TextEntity[] FindEntities(string text)
         {
@@ -75,10 +75,10 @@ namespace Slack.NetStandard.Messages
                     return new SpecialMention(value.Substring(1));
                 }
 
-                return new Link(value.Substring(1));
+                return new Unknown(value);
             }
 
-            return new Unknown(value);
+            return new Link(value);
         }
     }
 }

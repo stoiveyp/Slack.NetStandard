@@ -20,10 +20,10 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void Link()
         {
-            var result = TextParser.FindEntities("<!Link>").First();
+            var result = TextParser.FindEntities("<Link>").First();
             var entity = Assert.IsType<Link>(result);
             Assert.Equal(0,result.TextIndex);
-            Assert.Equal(7,result.TextLength);
+            Assert.Equal(6,result.TextLength);
             Assert.Equal("Link",entity.Url);
             Assert.Null(result.Label);
         }
@@ -107,6 +107,20 @@ namespace Slack.NetStandard.Tests
             Assert.Null(entity.Token);
             Assert.Null(entity.OptionalLink);
             Assert.Null(entity.Label);
+        }
+
+        [Fact]
+        public void MultipleEntities()
+        {
+            var result =
+                TextParser.FindEntities(
+                    "<http://example.com|example link> <http://example.com> <#C0838UC2D|general> <!here> :star-struck: :smile:");
+            Assert.Equal(4, result.Length);
+            var firstLink = Assert.IsType<Link>(result[0]);
+            var secondLink = Assert.IsType<Link>(result[1]);
+            var channel = Assert.IsType<ChannelMention>(result[2]);
+            var specialMention = Assert.IsType<SpecialMention>(result[3]);
+
         }
 
     }
