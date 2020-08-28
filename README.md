@@ -101,7 +101,7 @@ if (eventObject is EventCallback callback)
 
 ## Parse incoming text for entities (channels, users, links etc.)
 ```
-var entities = TextParser.FindEntities("<@W123456|Steven>").First();
+var entities = TextParser.FindEntities("<@W123456|Steven>");
 if(entities.First() is UserMention mention)
 {
     var userId = mention.UserId //W123456
