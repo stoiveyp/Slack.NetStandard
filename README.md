@@ -98,3 +98,13 @@ if (eventObject is EventCallback callback)
     }
 }
 ```
+
+## Parse incoming text for entities (channels, users, links etc.)
+```
+var entities = TextParser.FindEntities("<@W123456|Steven>").First();
+if(entity is UserMention mention)
+{
+    var userId = mention.UserId //W123456
+    var label = mention.Label //Steven
+}
+```
