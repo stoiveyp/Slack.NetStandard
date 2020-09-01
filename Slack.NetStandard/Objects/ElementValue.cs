@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.Messages.Elements;
 
 namespace Slack.NetStandard.Objects
 {
@@ -9,5 +10,8 @@ namespace Slack.NetStandard.Objects
 
         [JsonProperty("value",NullValueHandling = NullValueHandling.Ignore)]
         public string Value { get; set; }
+
+        [JsonProperty("selected_option",NullValueHandling = NullValueHandling.Ignore)]
+        public IOption SelectedOption { get; set; }
     }
 }
