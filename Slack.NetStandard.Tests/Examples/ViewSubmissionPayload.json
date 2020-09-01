@@ -1,166 +1,24 @@
 {
   "type": "view_submission",
   "team": {
-    "id": "T0171ZZZSH1",
-    "domain": "janZZZo"
+    "id": "TXXXXXX",
+    "domain": "coverbands"
   },
   "user": {
-    "id": "U017RACS8M6",
-    "username": "fred",
-    "name": "fred",
-    "team_id": "T0171M4PSH1"
+    "id": "UXXXXXX",
+    "name": "dreamweaver"
   },
-  "api_app_id": "A017TDZZZZZ",
-  "token": "EMiKHII0vxIeBXoZZZZZZZZ",
-  "trigger_id": "1331750393925.1239718808579.0b31535dbdfb21febc1a50d69cc2d1f3",
   "view": {
-    "id": "V019UQZZZZZ",
-    "team_id": "T0171MZZZZZ",
+    "id": "VNHU13V36",
     "type": "modal",
-    "blocks": [
-      {
-        "type": "divider",
-        "block_id": "ET4"
-      },
-      {
-        "type": "section",
-        "block_id": "mC1+",
-        "text": {
-          "type": "mrkdwn",
-          "text": "Hey+<@U017RACS8M6>,+thanks+for+thinking\nabout+who+deserves+your+help.",
-          "verbatim": false
-        }
-      },
-      {
-        "type": "divider",
-        "block_id": "EKE"
-      },
-      {
-        "type": "input",
-        "block_id": "{\"questionid\":\"6002f175-9da9-495d-bb8a-c85289a569d7\"}",
-        "label": {
-          "type": "plain_text",
-          "text": "Advocated+for+the+idea",
-          "emoji": true
-        },
-        "optional": false,
-        "element": {
-          "type": "static_select",
-          "action_id": "1ea72d25-5d37-405b-85b6-27eae722ac2c",
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Who+will+it+be?",
-            "emoji": true
-          },
-          "options": [
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "Anne+aBC",
-                "emoji": true
-              },
-              "value": "U017E89XY33"
-            },
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "No+one",
-                "emoji": true
-              },
-              "value": "!"
-            }
-          ]
-        }
-      },
-      {
-        "type": "divider",
-        "block_id": "lyE"
-      },
-      {
-        "type": "input",
-        "block_id": "{\"questionid\":\"d4e3c797-2e92-40b9-9312-4d0ef9776bdd\"}",
-        "label": {
-          "type": "plain_text",
-          "text": "Put+in+a+huge+effort",
-          "emoji": true
-        },
-        "optional": false,
-        "element": {
-          "type": "static_select",
-          "action_id": "79edaf2a-6db0-4a7c-90c1-9b431880f09b",
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Who+will+it+be?",
-            "emoji": true
-          },
-          "options": [
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "Anne+aBC",
-                "emoji": true
-              },
-              "value": "U017E89XY33"
-            },
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "No+one",
-                "emoji": true
-              },
-              "value": "!"
-            }
-          ]
-        }
-      },
-      {
-        "type": "divider",
-        "block_id": "mm6O"
-      },
-      {
-        "type": "input",
-        "block_id": "{\"questionid\":\"00506e2d-0ed5-4e73-8fc0-8f2db0a5c4f9\"}",
-        "label": {
-          "type": "plain_text",
-          "text": "Shared+knowledge",
-          "emoji": true
-        },
-        "optional": false,
-        "element": {
-          "type": "static_select",
-          "action_id": "ce2504f7-acaf-44ab-bd07-3e4b090b733b",
-          "placeholder": {
-            "type": "plain_text",
-            "text": "Who+will+it+be?",
-            "emoji": true
-          },
-          "options": [
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "Anne+aBC",
-                "emoji": true
-              },
-              "value": "U017E89XY33"
-            },
-            {
-              "text": {
-                "type": "plain_text",
-                "text": "No+one",
-                "emoji": true
-              },
-              "value": "!"
-            }
-          ]
-        }
-      },
-      {
-        "type": "divider",
-        "block_id": "lrJ0"
-      }
-    ],
-    "private_metadata": "",
-    "callback_id": "",
+    "title": "Hello world",
+    "submit": {
+      "type": "plain_text",
+      "text": "Title"
+    },
+    "blocks": [],
+    "private_metadata": "shhh-its-secret",
+    "callback_id": "modal-with-inputs",
     "state": {
       "values": {
         "question1": {
@@ -176,56 +34,14 @@
             }
           }
         },
-        "question2": {
-          "79edaf2a-6db0-4a7c-90c1-9b431880f09b": {
-            "type": "static_select",
-            "selected_option": {
-              "text": {
-                "type": "plain_text",
-                "text": "No+one",
-                "emoji": true
-              },
-              "value": "!"
-            }
-          }
-        },
-        "question3": {
-          "ce2504f7-acaf-44ab-bd07-3e4b090b733b": {
-            "type": "static_select",
-            "selected_option": {
-              "text": {
-                "type": "plain_text",
-                "text": "Anne+aBC",
-                "emoji": true
-              },
-              "value": "U017E89XY33"
-            }
+        "multi-line": {
+          "ml-value": {
+            "type": "plain_text_input",
+            "value": "This is my example inputted value"
           }
         }
       }
     },
-    "hash": "1598928680.hVtdPb8F",
-    "title": {
-      "type": "plain_text",
-      "text": "title text",
-      "emoji": true
-    },
-    "clear_on_close": false,
-    "notify_on_close": false,
-    "close": {
-      "type": "plain_text",
-      "text": "Cancel",
-      "emoji": true
-    },
-    "submit": {
-      "type": "plain_text",
-      "text": "Submit",
-      "emoji": true
-    },
-    "root_view_id": "V019UQL7AH0",
-    "app_id": "A017TDU6996",
-    "external_id": "{\"ClassName\":\"SurveyHandler\",\"MethodName\":\"Submit\",\"Timestamp\":39762777506774,\"Context\":\"{\\\"surveyid\\\":\\\"acb3f4c4-a8d0-461b-884e-873da16488f0\\\"}\"}",
-    "app_installed_team_id": "T0171M4PSH1",
-    "bot_id": "B016WSKBP0W"
+    "hash": "156663117.cd33ad1f"
   }
 }
