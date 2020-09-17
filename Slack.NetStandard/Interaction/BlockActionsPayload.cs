@@ -23,5 +23,8 @@ namespace Slack.NetStandard.Interaction
 
         [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
         public SlackId Channel { get; set; }
+
+        [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
+        public ViewState State { get; set; }
     }
 }
