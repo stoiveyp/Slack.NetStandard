@@ -411,5 +411,11 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, UserChange>("Events_UserChange.json");
         }
+
+        [Fact]
+        public void WorkflowStepExecute()
+        {
+            Utility.AssertSubType<CallbackEvent, WorkflowStepExecute>("Events_Workflow.json");
+        }
     }
 }

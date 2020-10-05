@@ -1,0 +1,39 @@
+{
+  "type": "workflow_step_edit",
+  "action_ts": "1583365953.106277",
+  "team": {
+    "id": "TXXXXXX",
+    "domain": "workspace-domain",
+    "enterprise_id": "EXXXXXX",
+    "enterprise_name": "Enterprise Grid name"
+  },
+  "user": {
+    "id": "WXXXXXX",
+    "name": "Bruce Wayne",
+    "team_id": "TXXXXXX"
+  },
+  "callback_id": "your_callback_id",
+  "trigger_id": "39718531891.19077474947.fd5f3dff6299006cbbfe124ff5902cff",
+  "workflow_step": {
+    "workflow_id": "302798802677412566",
+    "step_id": "4da7dbc9-7961-4eb9-857c-c96397e5398b",
+    "inputs": {
+      "strings": {
+        "value": [
+          ":pizza:",
+          ":hamburger:",
+          ":carrot:",
+          ":burrito:",
+          ":taco:"
+        ]
+      }
+    },
+    "outputs": [
+      {
+        "name": "random_string",
+        "type": "text",
+        "label": "Random String"
+      }
+    ]
+  }
+}
