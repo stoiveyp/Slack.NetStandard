@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Interaction;
@@ -36,6 +34,7 @@ namespace Slack.NetStandard.JsonConverters
                 InteractionType.BlockActions => new BlockActionsPayload(),
                 InteractionType.ViewClosed => new ViewClosedPayload(),
                 InteractionType.ViewSubmission => new ViewSubmissionPayload(),
+                InteractionType.WorkflowStepEdit => new WorkflowStepEditPayload(),
                 _ => (InteractionPayload)null
             };
         }

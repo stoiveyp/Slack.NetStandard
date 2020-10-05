@@ -29,6 +29,9 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("trigger_id",NullValueHandling = NullValueHandling.Ignore)]
         public string TriggerId { get; set; }
 
+        [JsonProperty("action_ts", NullValueHandling = NullValueHandling.Ignore)]
+        public Timestamp ActionTimestamp { get; set; }
+
         [JsonExtensionData]
         public Dictionary<string,object> OtherFields { get; set; }
     }

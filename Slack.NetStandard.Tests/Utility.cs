@@ -61,12 +61,12 @@ namespace Slack.NetStandard.Tests
                     var result =
                         ((JArray) actualJObject[prop.Name]).Zip(((JArray) expectedJObject[prop.Name]),
                             (a, e) => (a, e)).ToArray();
-                        foreach(var set in result)
+                        foreach(var (a, e) in result)
                     {
-                        if(JToken.DeepEquals(set.a, set.e))
+                        if(JToken.DeepEquals(a, e))
                         {
-                            ((JArray) actualJObject[prop.Name]).Remove(set.a);
-                            ((JArray) expectedJObject[prop.Name]).Remove(set.e);
+                            ((JArray) actualJObject[prop.Name]).Remove(a);
+                            ((JArray) expectedJObject[prop.Name]).Remove(e);
                             continue;
                         }
                         OutputTrimEqual(actualJObject[prop.Name] as JObject, expectedJObject[prop.Name] as JObject, false);
