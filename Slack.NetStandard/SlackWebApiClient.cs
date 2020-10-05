@@ -73,6 +73,9 @@ namespace Slack.NetStandard
         private IUsersApi _users;
         public IUsersApi Users => _users ??= new UsersApi(this);
 
+        private IWorkflowApi _workflow;
+        public IWorkflowApi Workflow => _workflow ??= new WorkflowApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
