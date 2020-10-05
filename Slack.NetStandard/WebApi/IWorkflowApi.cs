@@ -8,5 +8,6 @@ namespace Slack.NetStandard.WebApi
     public interface IWorkflowApi
     {
         Task<WebApiResponse> StepCompleted(string workflowStepExecuteId, Dictionary<string, string> outputs = null);
+        Task<WebApiResponse> StepFailed(string workflowStepExecuteId, string errorMessage);
     }
 }

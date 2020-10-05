@@ -17,5 +17,10 @@ namespace Slack.NetStandard.WebApi
         {
             return _client.MakeJsonCall("workflows.stepCompleted", new StepCompletedRequest { WorkflowStepExecuteId = workflowStepExecuteId, Outputs = outputs});
         }
+
+        public Task<WebApiResponse> StepFailed(string workflowStepExecuteId, string errorMessage)
+        {
+            return _client.MakeJsonCall("workflows.stepFailed", new StepFailedRequest { WorkflowStepExecuteId = workflowStepExecuteId, Error = new Error{Message = errorMessage}});
+        }
     }
 }
