@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Slack.NetStandard.WebApi.Workflow
@@ -11,6 +9,6 @@ namespace Slack.NetStandard.WebApi.Workflow
         public string WorkflowStepExecuteId { get; set; }
 
         [JsonProperty("outputs",NullValueHandling = NullValueHandling.Ignore)]
-        public Dictionary<string,string> Outputs { get; set; }
+        public Dictionary<string,object> Outputs { get; set; }
     }
 }

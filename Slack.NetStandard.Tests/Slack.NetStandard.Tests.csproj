@@ -443,7 +443,7 @@
     <None Update="Examples\ViewPayload.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Examples\Web_WorkflowStepCompleted.json">
+    <None Update="Examples\Web_UpdateStepRequest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Examples\Web_ViewsOpen.json">
