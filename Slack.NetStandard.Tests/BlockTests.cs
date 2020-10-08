@@ -44,5 +44,11 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<IMessageElement, StaticSelect>("Blocks_StaticSelect.json");
         }
+
+        [Fact]
+        public void Checkboxes()
+        {
+            Utility.AssertSubType<IMessageElement, Checkboxes>("Blocks_Checkboxes.json");
+        }
     }
 }
