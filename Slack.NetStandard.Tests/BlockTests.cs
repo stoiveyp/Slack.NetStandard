@@ -34,19 +34,21 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
-        public void StaticSelectGeneratesCorrectly()
+        public void RadioButtons()
         {
-            var select = Utility.ExampleFileContent<StaticSelect>("StaticSelect.json");
+            Utility.AssertSubType<IMessageElement, RadioButtons>("Blocks_RadioButtons.json");
+        }
 
-            Assert.Equal("text1234", select.ActionId);
+        [Fact]
+        public void StaticSelect()
+        {
+            Utility.AssertSubType<IMessageElement, StaticSelect>("Blocks_StaticSelect.json");
+        }
 
-            Assert.NotNull(select.Placeholder);
-            Assert.Equal("Select an item",select.Placeholder.Text);
-
-            var initial = Assert.IsType<Option>(select.InitialOption);
-            Assert.Null(select.OptionGroups);
-            Assert.NotNull(select.Options);
-            Assert.Equal(3,select.Options.Count);
+        [Fact]
+        public void Checkboxes()
+        {
+            Utility.AssertSubType<IMessageElement, Checkboxes>("Blocks_Checkboxes.json");
         }
     }
 }
