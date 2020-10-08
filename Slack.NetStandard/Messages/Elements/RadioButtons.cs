@@ -18,5 +18,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("initial_option", NullValueHandling = NullValueHandling.Ignore)]
         public IOption InitialOption { get; set; }
+
+        [JsonProperty("confirm", NullValueHandling = NullValueHandling.Ignore)]
+        public Confirmation Confirm { get; set; }
     }
 }
