@@ -29,6 +29,9 @@
     <None Update="Examples\Blocks_RadioButtons.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Examples\Blocks_Header.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Examples\Events_AppHomeOpened.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

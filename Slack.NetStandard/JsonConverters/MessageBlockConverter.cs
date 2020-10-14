@@ -42,6 +42,7 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Context).ToLower(),typeof(Context) },
             {nameof(Input).ToLower(),typeof(Input) },
             {nameof(File).ToLower(),typeof(File) },
+            {nameof(Header).ToLower(),typeof(Header) },
             {RichText.MessageBlockType,typeof(RichText) }
         };
 
