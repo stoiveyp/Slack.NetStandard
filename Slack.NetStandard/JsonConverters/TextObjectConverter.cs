@@ -15,30 +15,28 @@ namespace Slack.NetStandard.JsonConverters
             }
             writer.WriteStartObject();
             writer.WritePropertyName("type");
-            if (value.Type == TextType.PlainText)
+            if (value is PlainText plt)
             {
                 writer.WriteValue("plain_text");
+                if (plt.Emoji.HasValue)
+                {
+                    writer.WritePropertyName("emoji");
+                    writer.WriteValue(plt.Emoji.Value);
+                }
             }
             else
             {
+                var mrk = value as MarkdownText;
                 writer.WriteValue("mrkdwn");
+                if (mrk.Verbatim.HasValue)
+                {
+                    writer.WritePropertyName("verbatim");
+                    writer.WriteValue(mrk.Verbatim.Value);
+                }
             }
 
             writer.WritePropertyName("text");
             writer.WriteValue(value.Text);
-
-            if (value.Emoji.HasValue)
-            {
-                writer.WritePropertyName("emoji");
-                writer.WriteValue(value.Emoji.Value);
-            }
-
-            if (value.Verbatim.HasValue)
-            {
-                writer.WritePropertyName("verbatim");
-                writer.WriteValue(value.Verbatim.Value);
-            }
-            
 
             writer.WriteEndObject();
         }
@@ -59,7 +57,7 @@ namespace Slack.NetStandard.JsonConverters
             }
             var jObject = JObject.Load(reader);
 
-            var target = jObject.Value<string>("type") == "plain_text" ? (TextObject)new PlainText() : (TextObject)new MarkdownText();
+            var target = jObject.Value<string>("type") == "plain_text" ? new PlainText() : (TextObject)new MarkdownText();
 
             serializer.Populate(jObject.CreateReader(), target);
             return target;
