@@ -8,5 +8,10 @@
         }
 
         public string ChannelId { get; }
+
+        public static string Text(string channelId)
+        {
+            return $"<#{channelId}>";
+        }
     }
 }

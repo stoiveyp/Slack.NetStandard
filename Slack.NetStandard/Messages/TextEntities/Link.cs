@@ -11,5 +11,15 @@ namespace Slack.NetStandard.Messages.TextEntities
             Url = url;
         }
         public string Url { get; }
+
+        public static string Text(string uri, string label = null)
+        {
+            if (!string.IsNullOrWhiteSpace(label))
+            {
+                return $"<!{uri}|{label}>";
+            }
+
+            return $"<!{uri}>";
+        }
     }
 }
