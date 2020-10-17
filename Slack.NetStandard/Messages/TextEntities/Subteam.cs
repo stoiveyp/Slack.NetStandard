@@ -10,32 +10,10 @@ namespace Slack.NetStandard.Messages.TextEntities
         }
 
         public string SubteamId { get; }
-    }
 
-    public class DateMention : TextEntity
-    {
-        public DateMention(string[] datePieces)
+        public static string Text(string teamId)
         {
-            if (datePieces.Length > 0)
-            {
-                Timestamp = long.Parse(datePieces[0]);
-            }
-
-            if (datePieces.Length > 1)
-            {
-                Token = datePieces[1];
-            }
-
-            if (datePieces.Length > 2)
-            {
-                OptionalLink = datePieces[2];
-            }
+            return $"<!subteam^{teamId}>";
         }
-
-        public long Timestamp { get; }
-
-        public string Token { get; }
-
-        public string OptionalLink { get; }
     }
 }

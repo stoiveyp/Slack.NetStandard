@@ -8,5 +8,9 @@
         }
 
         public string Mention { get; }
+
+        public const string Here = "<!here>";
+        public const string Channel = "<!channel>";
+        public const string Everyone = "<!everyone>";
     }
 }

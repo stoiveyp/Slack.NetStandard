@@ -9,5 +9,10 @@ namespace Slack.NetStandard.Messages.TextEntities
             UserId = userId;
         }
         public string UserId { get; }
+
+        public static string Text(string userId)
+        {
+            return $"<@{userId}>";
+        }
     }
 }
