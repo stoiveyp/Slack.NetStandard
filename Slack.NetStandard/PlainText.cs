@@ -20,5 +20,8 @@ namespace Slack.NetStandard
         internal bool WasConvertedFromString { get; set; }
 
         public override TextType Type => TextType.PlainText;
+
+        [JsonProperty("emoji", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Emoji { get; set; }
     }
 }

@@ -20,11 +20,5 @@ namespace Slack.NetStandard
 
         [JsonProperty("text")]
         public string Text { get; set; }
-
-        [JsonProperty("emoji",NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Emoji { get; set; }
-
-        [JsonProperty("verbatim",NullValueHandling = NullValueHandling.Ignore)]
-        public bool? Verbatim { get; set; }
     }
 }
