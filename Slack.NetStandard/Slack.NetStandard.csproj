@@ -5,7 +5,8 @@
     <Version>2.6.1</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Correct text object properties</PackageReleaseNotes>
+    <PackageReleaseNotes>Move emoji to plain text objects
+Move verbatim to matrkdown text objects</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steven Pears</Authors>
     <Company />
