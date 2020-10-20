@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Apps;
 
 namespace Slack.NetStandard.WebApi
 {
@@ -19,6 +20,35 @@ namespace Slack.NetStandard.WebApi
                 {"client_id", clientId},
                 {"client_secret", clientSecret}
             });
+        }
+
+        public Task<ListAuthorizationsResponse> ListAuthorizations(string context, string cursor)
+        {
+            return ListAuthorizations(context, cursor, null);
+        }
+
+        public Task<ListAuthorizationsResponse> ListAuthorizations(string context, int limit)
+        {
+            return ListAuthorizations(context, null, limit);
+        }
+
+        public Task<ListAuthorizationsResponse> ListAuthorizations(string context, string cursor, int? limit)
+        {
+            var dict = new Dictionary<string, string>
+            {
+                {"event_context",context}
+            };
+            if (!string.IsNullOrWhiteSpace(cursor))
+            {
+                dict.Add("cursor", cursor);
+            }
+
+            if (limit.HasValue)
+            {
+                dict.Add("limit", limit.Value.ToString());
+            }
+
+            return _client.MakeUrlEncodedCall<ListAuthorizationsResponse>("apps.event.authorizations.list", dict);
         }
     }
 }

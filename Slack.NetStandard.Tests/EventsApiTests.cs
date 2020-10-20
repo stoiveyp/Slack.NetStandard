@@ -17,6 +17,12 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void EventsBasics()
+        {
+            Utility.AssertSubType<Event, EventCallback>("Events_Basics.json");
+        }
+
+        [Fact]
         public void UnknownEvent()
         {
             var et = Utility.ExampleFileContent<CallbackEvent>("Events_Unknown.json");

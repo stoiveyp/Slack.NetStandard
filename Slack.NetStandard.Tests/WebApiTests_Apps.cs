@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Apps;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -17,5 +18,18 @@ namespace Slack.NetStandard.Tests
                 Assert.Equal("secret", nvc["client_secret"]);
             });
         }
+
+        [Fact]
+        public async Task Apps_Authorizations()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Apps.ListAuthorizations("C1234", "token", 10), "apps.event.authorizations.list", "Web_AdminAppsAuthorizations.json", nvc =>
+            {
+                Assert.Equal("C1234", nvc["event_context"]);
+                Assert.Equal("token", nvc["cursor"]);
+                Assert.Equal(10.ToString(), nvc["limit"]);
+            });
+        }
+
+        //ListAuthorizationsResponse
     }
 }

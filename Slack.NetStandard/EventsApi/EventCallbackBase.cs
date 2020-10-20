@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
+using Slack.NetStandard.JsonConverters;
+using Slack.NetStandard.Objects;
 
 namespace Slack.NetStandard.EventsApi
 {
@@ -15,8 +18,16 @@ namespace Slack.NetStandard.EventsApi
         [JsonProperty("api_app_id")]
         public string ApiAppId { get; set; }
 
+        [JsonProperty("authorizations", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(AuthorizationConverter))]
+        public Authorization[] Authorizations { get; set; }
+
         [JsonProperty("authed_users", NullValueHandling = NullValueHandling.Ignore)]
+        [Obsolete("authed users will be removed in a future release. Please use a token with authorizations:read permission and the WebApi.Apps.ListAuthorizations method")]
         public string[] AuthedUsers { get; set; }
+
+        [JsonProperty("event_context")]
+        public string EventContext { get; set; }
 
         [JsonProperty("event_id")]
         public string EventId { get; set; }
