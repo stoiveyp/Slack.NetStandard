@@ -11,5 +11,8 @@ namespace Slack.NetStandard.Interaction
 
         [JsonProperty("response_url",NullValueHandling = NullValueHandling.Ignore)]
         public string ResponseUrl{ get; set; }
+
+        [JsonProperty("workflow_step",NullValueHandling = NullValueHandling.Ignore)]
+        public WorkflowStep WorkflowStep { get; set; }
     }
 }
