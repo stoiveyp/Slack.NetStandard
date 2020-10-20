@@ -10,7 +10,7 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
         public string WorkflowStepExecuteId { get; set; }
 
         [JsonProperty("inputs",NullValueHandling = NullValueHandling.Ignore)]
-        public Dictionary<string,string> Inputs { get; set; }
+        public Dictionary<string,WorkflowValue> Inputs { get; set; }
 
         [JsonProperty("outputs",NullValueHandling = NullValueHandling.Ignore)]
         public WorkflowOutput[] Outputs { get; set; }
