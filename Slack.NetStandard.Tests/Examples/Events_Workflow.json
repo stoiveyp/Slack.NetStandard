@@ -1,23 +1,26 @@
 {
   "type": "workflow_step_execute",
-  "callback_id": "open_ticket",
+  "callback_id": "approval_author",
   "workflow_step": {
-    "workflow_step_execute_id": "1036669284371.19077474947.c94bcf942e047298d21f89faf24f1326",
+    "workflow_step_execute_id": "MzI0OTA5NzMyNzg5NzYzMjQxPT0zMjQ5MTYwNTM2ODk3NzY5MTE9PTc3OGY5ZmZjLWY4MTQtNDMyZC1iOWM1LWMzY2E2NzlhMzk2Ng==",
+    "workflow_id": "324909732789763241",
+    "workflow_instance_id": "324916053689776911",
+    "step_id": "778f9ffc-f814-432d-b9c5-c3ca679a3966",
     "inputs": {
-      "title": "Requesting help with my computer",
-      "submitter": "W1234567890"
+      "requestor": {
+        "value": "U08HHP201"
+      },
+      "test": {
+        "value": "test"
+      }
     },
     "outputs": [
       {
-        "type": "text",
-        "name": "title",
-        "label": "Title of Ticket"
-      },
-      {
-        "type": "text",
-        "name": "id",
-        "label": "Ticket ID"
+        "name": "approver",
+        "type": "user",
+        "label": "Request Approver"
       }
     ]
-  }
+  },
+  "event_ts": "1603194666.907590"
 }

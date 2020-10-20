@@ -6,6 +6,15 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
     public class WorkflowStepInformation
     {
+        [JsonProperty("step_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string StepId { get; set; }
+
+        [JsonProperty("workflow_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string WorkflowId { get; set; }
+
+        [JsonProperty("workflow_instance_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string WorkflowInstanceId { get; set; }
+
         [JsonProperty("workflow_step_execute_id",NullValueHandling = NullValueHandling.Ignore)]
         public string WorkflowStepExecuteId { get; set; }
 
