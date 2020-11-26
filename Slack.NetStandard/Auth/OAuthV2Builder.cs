@@ -18,6 +18,8 @@ namespace Slack.NetStandard.Auth
             {
                 throw new ArgumentException("Client id cannot be blank", nameof(clientId));
             }
+
+            ClientId = clientId;
         }
 
         public string ClientId { get; }
