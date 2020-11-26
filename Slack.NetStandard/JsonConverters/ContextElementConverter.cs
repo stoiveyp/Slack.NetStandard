@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Messages;
@@ -33,14 +36,14 @@ namespace Slack.NetStandard.JsonConverters
 
         public static Dictionary<string, Type> IMessageElementLookup = new Dictionary<string, Type>
         {
-            {nameof(PlainText).ToLower(), typeof(PlainText)},
-            {nameof(MarkdownText).ToLower(), typeof(MarkdownText)},
-            {nameof(Image),typeof(Image) }
+            {ToEnumString(TextType.PlainText), typeof(PlainText)},
+            {ToEnumString(TextType.Markdown), typeof(MarkdownText)},
+            {nameof(Image).ToLower(),typeof(Image) }
         };
 
-        private IMessageElement GetComponent(string type)
+        private IContextElement GetComponent(string type)
         {
-            return (IMessageElement)(
+            return (IContextElement)(
                 IMessageElementLookup.ContainsKey(type)
                     ? Activator.CreateInstance(IMessageElementLookup[type])
                     : null);
@@ -48,6 +51,14 @@ namespace Slack.NetStandard.JsonConverters
         public override bool CanConvert(Type objectType)
         {
             return typeof(IContextElement).IsAssignableFrom(objectType);
+        }
+
+        private static string ToEnumString(TextType type)
+        {
+            var enumType = typeof(TextType);
+            var name = Enum.GetName(enumType, type);
+            var enumMemberAttribute = ((EnumMemberAttribute[])enumType.GetTypeInfo().GetField(name).GetCustomAttributes(typeof(EnumMemberAttribute), true)).FirstOrDefault();
+            return enumMemberAttribute?.Value ?? type.ToString();
         }
     }
 }
