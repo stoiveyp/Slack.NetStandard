@@ -41,9 +41,9 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Image).ToLower(),typeof(Image) }
         };
 
-        private IMessageElement GetComponent(string type)
+        private IContextElement GetComponent(string type)
         {
-            return (IMessageElement)(
+            return (IContextElement)(
                 IMessageElementLookup.ContainsKey(type)
                     ? Activator.CreateInstance(IMessageElementLookup[type])
                     : null);
