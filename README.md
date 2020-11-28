@@ -30,7 +30,7 @@ var token = await OAuthV2Builder.Exchange(code,clientId,clientSecret);
 using Slack.NetStandard;
 
 var verifier = new RequestVerifier(signingSecret);
-var verified = Verifier.Verify(request.Headers["X-Slack-Signature"], long.Parse(request.Headers["X-Slack-Request-Timestamp"]), request.Body);
+var verified = Verifier.Verify(request.Headers[RequestVerifier.SignatureHeaderName], long.Parse(request.Headers[RequestVerifier.TimestampHeaderName]), request.Body);
 ```
 
 ## Receive/Respond to a slash command payload

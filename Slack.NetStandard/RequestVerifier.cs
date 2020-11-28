@@ -9,6 +9,9 @@ namespace Slack.NetStandard
         private readonly string _secret;
         private readonly TimeSpan _tolerance;
 
+        public const string TimestampHeaderName = "X-Slack-Request-Timestamp";
+        public const string SignatureHeaderName = "X-Slack-Signature";
+
         public RequestVerifier(string signingSecret, TimeSpan? timestampTolerance = null)
         {
             _secret = signingSecret ?? throw new ArgumentNullException(nameof(signingSecret));
