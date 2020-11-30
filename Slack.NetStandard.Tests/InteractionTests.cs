@@ -1,5 +1,6 @@
 ﻿using Slack.NetStandard.Interaction;
 using Slack.NetStandard.Messages.Elements;
+using System.Linq;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -15,7 +16,11 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void ViewSubmissionPayload()
         {
-            Assert.Null(Utility.AssertSubType<InteractionPayload,ViewSubmissionPayload>("ViewSubmissionPayload.json").OtherFields);
+            var viewSubmissionPayload = Utility.AssertSubType<InteractionPayload, ViewSubmissionPayload>("ViewSubmissionPayload.json");
+
+            Assert.Null(viewSubmissionPayload.OtherFields);
+            Assert.All(viewSubmissionPayload.View.State.Values.SelectMany(v => v.Value.Values),
+                elementValue => Assert.Null(elementValue.OtherFields));
         }
 
         [Fact]
