@@ -39,6 +39,12 @@
             "type": "plain_text_input",
             "value": "This is my example inputted value"
           }
+        },
+        "user-select": {
+          "select-user": {
+            "type": "users_select",
+            "selected_user": "U12345678"
+          }
         }
       }
     },

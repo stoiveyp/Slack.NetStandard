@@ -15,6 +15,9 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("selected_option",NullValueHandling = NullValueHandling.Ignore)]
         public IOption SelectedOption { get; set; }
 
+        [JsonProperty("selected_user",NullValueHandling = NullValueHandling.Ignore)]
+        public string SelectedUser { get; set; }
+
         [JsonExtensionData]
         public Dictionary<string, object> OtherFields { get; set; }
     }
