@@ -26,5 +26,8 @@ namespace Slack.NetStandard.Auth
 
         [JsonProperty("authed_user",NullValueHandling = NullValueHandling.Ignore)]
         public AuthedUser AuthedUser { get; set; }
+
+        [JsonProperty("is_enterprise_install", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsEnterpriseInstall { get; set; }
     }
 }
