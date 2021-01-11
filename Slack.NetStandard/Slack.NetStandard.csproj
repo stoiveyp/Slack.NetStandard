@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.8.6</Version>
+    <Version>2.8.7</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>AccessTokenInformation now returns IsEnterpriseInstall to help support enterprise org deployment</PackageReleaseNotes>
+    <PackageReleaseNotes>Filled out ElementValue properties</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steven Pears</Authors>
     <Company />

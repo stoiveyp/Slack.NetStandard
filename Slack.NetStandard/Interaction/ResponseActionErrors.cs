@@ -13,7 +13,7 @@ namespace Slack.NetStandard.Interaction
         }
 
         [JsonProperty("errors")]
-        public Dictionary<string, string> Errors { get; set; }
+        public Dictionary<string, string> Errors { get; set; } = new ();
 
         [JsonProperty("response_action")]
         public override string Type => "errors";
