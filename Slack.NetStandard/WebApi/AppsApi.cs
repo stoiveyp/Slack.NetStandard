@@ -50,5 +50,10 @@ namespace Slack.NetStandard.WebApi
 
             return _client.MakeUrlEncodedCall<ListAuthorizationsResponse>("apps.event.authorizations.list", dict);
         }
+
+        public Task<OpenConnectionResponse> OpenConnection()
+        {
+            return _client.MakeUrlEncodedCall<OpenConnectionResponse>("apps.connections.open");
+        }
     }
 }

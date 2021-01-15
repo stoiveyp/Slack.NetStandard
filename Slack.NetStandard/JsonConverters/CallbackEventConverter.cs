@@ -33,7 +33,7 @@ namespace Slack.NetStandard.JsonConverters
             return target;
         }
 
-        private ICallbackEvent GetEventType(string type, JObject container)
+        internal static ICallbackEvent GetEventType(string type, JObject container)
         {
             return type switch
             {
@@ -101,7 +101,7 @@ namespace Slack.NetStandard.JsonConverters
             };
         }
 
-        private IMessageCallbackEvent MessageSubtype(string subType)
+        private static IMessageCallbackEvent MessageSubtype(string subType)
         {
             return subType switch
             {

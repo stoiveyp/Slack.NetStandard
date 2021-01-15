@@ -154,10 +154,11 @@ namespace Slack.NetStandard.Tests
             return requestCall(client);
         }
 
-        public static void AssertType<T>(string file)
+        public static T AssertType<T>(string file)
         {
             var deserialised = ExampleFileContent<T>(file);
             Assert.True(CompareJson(deserialised, file));
+            return deserialised;
         }
 
         public static TResult AssertSubType<T, TResult>(string file, params string[] exclude) where TResult : T

@@ -1,0 +1,25 @@
+{
+  "payload": {
+    "type": "view_submission",
+    "view": {
+      "id": "VNHU13V36",
+      "type": "modal",
+      "private_metadata": "shhh-its-secret",
+      "callback_id": "modal-with-inputs",
+      "state": {
+        "values": {
+          "multi-line": {
+            "ml-value": {
+              "type": "plain_text_input",
+              "value": "Archaic torso of Apollo"
+            }
+          }
+        }
+      },
+      "hash": "156663117.cd33ad1f"
+    }
+  },
+  "envelope_id": "156663117.cd33ad1f",
+  "type": "interactive",
+  "accepts_response_payload": true
+}

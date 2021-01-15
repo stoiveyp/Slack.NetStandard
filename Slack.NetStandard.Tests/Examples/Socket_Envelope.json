@@ -1,0 +1,21 @@
+{
+  "envelope": {
+    "payload": {
+      "token": "bHKJ2n9AW6Ju3MjciOHfbA1b",
+      "team_id": "T0SNL8S4S",
+      "team_domain": "maria",
+      "channel_id": "C15SASXJ6",
+      "channel_name": "general",
+      "user_id": "U0SNL8SV8",
+      "user_name": "rainer",
+      "command": "/randorilke",
+      "text": "",
+      "response_url": "https://rilke.slack.com/commands/T0SNL8S4S/37053613554/YMB2ZESDLNjNLqSFZ1quhNAh",
+      "trigger_id": "37053613634.26768298162.440952c06ef4de2653466a48fe495f93"
+    },
+    "envelope_id": "37053613634.26768298162.440952c06ef4de2653466a48fe495f93",
+    "type": "slash_commands",
+    "accepts_response_payload": true,
+    "test": "other" 
+  }
+}

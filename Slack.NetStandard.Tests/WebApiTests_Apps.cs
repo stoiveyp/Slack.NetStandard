@@ -30,6 +30,10 @@ namespace Slack.NetStandard.Tests
             });
         }
 
-        //ListAuthorizationsResponse
+        [Fact]
+        public async Task Apps_ConnectionOpen()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Apps.OpenConnection(), "apps.connections.open", "Web_AppsConnectionsOpen.json", _ => {});
+        }
     }
 }

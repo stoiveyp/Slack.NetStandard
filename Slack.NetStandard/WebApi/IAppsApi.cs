@@ -13,5 +13,7 @@ namespace Slack.NetStandard.WebApi
         Task<ListAuthorizationsResponse> ListAuthorizations(string context, int limit);
 
         Task<ListAuthorizationsResponse> ListAuthorizations(string context, string cursor, int? limit);
+
+        Task<OpenConnectionResponse> OpenConnection();
     }
 }

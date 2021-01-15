@@ -1,0 +1,23 @@
+{
+  "envelope_id": "156663117.cd33ad1f",
+  "payload": {
+    "response_action": "update",
+    "view": {
+      "type": "modal",
+      "callback_id": "updated-view-id",
+      "title": {
+        "type": "plain_text",
+        "text": "Updated view"
+      },
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "plain_text",
+            "text": "You must change your life."
+          }
+        }
+      ]
+    }
+  }
+}

@@ -20,12 +20,17 @@ namespace Slack.NetStandard.JsonConverters
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             var jObject = JObject.Load(reader);
-            var target = GetPayloadType(ToEnum(jObject.Value<string>("type")));
+            var target = GetPayloadType(jObject.Value<string>("type"));
             serializer.Populate(jObject.CreateReader(), target);
             return target;
         }
 
-        private InteractionPayload GetPayloadType(InteractionType value)
+        internal static InteractionPayload GetPayloadType(string value)
+        {
+            return GetPayloadType(ToEnum(value));
+        }
+
+        internal static InteractionPayload GetPayloadType(InteractionType value)
         {
             return value switch
             {
