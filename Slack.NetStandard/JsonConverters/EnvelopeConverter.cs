@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Slack.NetStandard.EventsApi;
 using Slack.NetStandard.EventsApi.CallbackEvents;
 using Slack.NetStandard.Interaction;
 using Slack.NetStandard.Socket;
@@ -49,7 +50,15 @@ namespace Slack.NetStandard.JsonConverters
                         break;
                     case "payload":
                         reader.Read();
-                        payload = JObject.Load(reader);
+                        if (envelope.Type != null && envelope.Type == "slash_commands")
+                        {
+                            envelope.Payload = new SlashCommand(serializer.Deserialize<Dictionary<string, string>>(reader));
+                        }
+                        else
+                        {
+                            payload = JObject.Load(reader);
+                        }
+
                         reader.Read();
                         break;
                     case "accepts_response_payload":
@@ -66,42 +75,38 @@ namespace Slack.NetStandard.JsonConverters
                 }
             }
 
+            if (envelope.Payload == null)
+            {
+                return PostObjectPayload(serializer, envelope, payload);
+            }
+
+            return envelope;
+        }
+
+        private Envelope PostObjectPayload(JsonSerializer serializer, Envelope envelope, JObject payload)
+        {
             if (payload == null)
             {
                 return envelope;
             }
 
-            if (envelope.Type == "slash_commands")
+            switch (envelope.Type)
             {
-                envelope.Payload =
-                    new SlashCommand(payload.Properties().ToDictionary(p => p.Name, p => p.Value.ToString()));
-                return envelope;
-            }
-
-            if (envelope.Type != "interactive")
-            {
-                envelope.Payload = payload;
-                return envelope;
-            }
-
-            var interactionType = payload.Value<string>("type");
-            var eventType = CallbackEventConverter.GetEventType(interactionType, payload);
-            if (eventType.GetType() != typeof(CallbackEvent))
-            {
-                serializer.Populate(payload.CreateReader(), eventType);
-                envelope.Payload = eventType;
-                return envelope;
-            }
-
-            var interaction = InteractionPayloadConverter.GetPayloadType(interactionType);
-            if (interaction != null)
-            {
-                serializer.Populate(payload.CreateReader(), interaction);
-                envelope.Payload = interaction;
-            }
-            else
-            {
-                envelope.Payload = payload;
+                case "slash_commands":
+                    envelope.Payload =
+                        new SlashCommand(payload.Properties().ToDictionary(p => p.Name, p => p.Value.ToString()));
+                    break;
+                case "interactive":
+                    var interaction = serializer.Deserialize<InteractionPayload>(payload.CreateReader());
+                    envelope.Payload = interaction;
+                    break;
+                case "events_api":
+                    var evt = serializer.Deserialize<ICallbackEvent>(payload.CreateReader());
+                    envelope.Payload = evt;
+                    break;
+                default:
+                    envelope.Payload = payload;
+                    break;
             }
 
             return envelope;

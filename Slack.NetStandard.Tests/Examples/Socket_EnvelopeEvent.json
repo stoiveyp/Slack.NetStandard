@@ -22,6 +22,6 @@
     }
   },
   "envelope_id": "1231232323.12321312",
-  "type": "interactive",
+  "type": "events_api",
   "accepts_response_payload": false
 }

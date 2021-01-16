@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Slack.NetStandard.EventsApi;
 using Slack.NetStandard.EventsApi.CallbackEvents;
 using Slack.NetStandard.Interaction;
 using Slack.NetStandard.Socket;
@@ -45,7 +46,7 @@ namespace Slack.NetStandard.Tests
         {
             var evt = Utility.ExampleFileContent<Envelope>("Socket_EnvelopeEvent.json");
             Assert.NotNull(evt);
-            Assert.Equal("interactive", evt.Type);
+            Assert.Equal("events_api", evt.Type);
             Assert.IsType<AppHomeOpened>(evt.Payload);
         }
 

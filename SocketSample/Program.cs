@@ -18,14 +18,13 @@ namespace SocketSample
 {
     class Program
     {
-        private static string apptoken = "";
+        private static string apptoken = "xapp-1-A01JMB95JNS-1664023245712-f2c0dd33fdb4d3faf8199c0bf3563f4768502d66f99be3df19f64a744c4480f5";
 
         static async Task Main(string[] args)
         {
             var webapi = new SlackWebApiClient(apptoken);
             var url = await webapi.Apps.OpenConnection();
             using var client = new ClientWebSocket();
-            client.Options.SetBuffer(50,50);
             var cancel = new CancellationTokenSource();
             while (Reconnect)
             {
