@@ -18,7 +18,7 @@ namespace SocketSample
 {
     class Program
     {
-        private static string apptoken = "xapp-1-A01JMB95JNS-1664023245712-f2c0dd33fdb4d3faf8199c0bf3563f4768502d66f99be3df19f64a744c4480f5";
+        private static string apptoken = "";
 
         static async Task Main(string[] args)
         {
