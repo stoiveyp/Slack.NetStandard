@@ -100,11 +100,32 @@ if (eventObject is EventCallback callback)
 ```
 
 ## Parse incoming text for entities (channels, users, links etc.)
-```
+```csharp
 var entities = TextParser.FindEntities("<@W123456|Steven>");
 if(entities.First() is UserMention mention)
 {
     var userId = mention.UserId //W123456
     var label = mention.Label //Steven
+}
+```
+
+## Socket Mode - getting to your payload
+```csharp
+if(msg.Contains("envelope_id")) //If there's no envelope ID it's a Hello or Disconnect object
+{
+   var env = JsonConvert.DeserializeObject<Envelope>(msg);
+   switch(msg.Payload) {
+     case SlashCommand command:
+       //logic here
+       break;
+     case ICallbackEvent evt: 
+       //logic here
+       break;
+     case InteractionPayload payload:
+       //logic here
+       break;
+   }
+   var ack = new Acknowledge{EnvelopeId=msg.EnvelopeId} //All messages must be acknowledged within a few seconds
+   Send(ack);
 }
 ```
