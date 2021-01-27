@@ -114,7 +114,7 @@ if(entities.First() is UserMention mention)
 if(msg.Contains("envelope_id")) //If there's no envelope ID it's a Hello or Disconnect object
 {
    var env = JsonConvert.DeserializeObject<Envelope>(msg);
-   switch(msg.Payload) {
+   switch(env.Payload) {
      case SlashCommand command:
        //logic here
        break;
@@ -125,7 +125,7 @@ if(msg.Contains("envelope_id")) //If there's no envelope ID it's a Hello or Disc
        //logic here
        break;
    }
-   var ack = new Acknowledge{EnvelopeId=msg.EnvelopeId} //All messages must be acknowledged within a few seconds
+   var ack = new Acknowledge{EnvelopeId=env.EnvelopeId} //All messages must be acknowledged within a few seconds
    Send(ack);
 }
 ```
