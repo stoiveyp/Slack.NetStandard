@@ -47,7 +47,8 @@ namespace Slack.NetStandard.Tests
             var evt = Utility.ExampleFileContent<Envelope>("Socket_EnvelopeEvent.json");
             Assert.NotNull(evt);
             Assert.Equal("events_api", evt.Type);
-            Assert.IsType<AppHomeOpened>(evt.Payload);
+            var callback = Assert.IsType<EventCallback>(evt.Payload);
+            Assert.IsType<AppHomeOpened>(callback.Event);
         }
 
         [Fact]

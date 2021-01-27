@@ -1,27 +1,32 @@
 {
+  "envelope_id": "8a037aeb-e778-480e-bf7c-412d2054651d",
   "payload": {
-    "type": "app_home_opened",
-    "user": "U061F7AUR",
-    "channel": "D0LAN2Q65",
-    "event_ts": "1515449522000016",
-    "tab": "home",
-    "view": {
-      "id": "VPASKP233",
-      "team_id": "T21312902",
-      "type": "home",
-      "private_metadata": "",
-      "callback_id": "",
-      "hash": "1231232323.12321312",
-      "clear_on_close": false,
-      "notify_on_close": false,
-      "root_view_id": "VPASKP233",
-      "app_id": "A21SDS90",
-      "external_id": "",
-      "app_installed_team_id": "T21312902",
-      "bot_id": "BSDKSAO2"
-    }
+    "token": "xxx",
+    "team_id": "xxx",
+    "api_app_id": "xxx",
+    "event": {
+      "type": "app_home_opened",
+      "user": "xxx",
+      "channel": "xxx",
+      "tab": "messages",
+      "event_ts": "1611746843.282238"
+    },
+    "type": "event_callback",
+    "event_id": "xxx",
+    "event_time": 1611746843,
+    "authorizations": [
+      {
+        "enterprise_id": null,
+        "team_id": "xxx",
+        "user_id": "xxx",
+        "is_bot": true,
+        "is_enterprise_install": false
+      }
+    ],
+    "is_ext_shared_channel": false
   },
-  "envelope_id": "1231232323.12321312",
   "type": "events_api",
-  "accepts_response_payload": false
+  "accepts_response_payload": false,
+  "retry_attempt": 0,
+  "retry_reason": ""
 }

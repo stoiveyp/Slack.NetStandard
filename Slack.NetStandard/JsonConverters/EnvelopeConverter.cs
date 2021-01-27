@@ -101,7 +101,7 @@ namespace Slack.NetStandard.JsonConverters
                     envelope.Payload = interaction;
                     break;
                 case "events_api":
-                    var evt = serializer.Deserialize<ICallbackEvent>(payload.CreateReader());
+                    var evt = serializer.Deserialize<EventCallback>(payload.CreateReader());
                     envelope.Payload = evt;
                     break;
                 default:

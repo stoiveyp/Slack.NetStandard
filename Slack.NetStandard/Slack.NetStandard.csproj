@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.9.1</Version>
+    <Version>2.9.2</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Support for Socket Mode - hello, disconnect, Envelopes and Acknowlegements</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix socket mode events (thanks @freakalis!)
+Add retry fields to Envelope</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steven Pears</Authors>
     <Company />
