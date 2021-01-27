@@ -118,7 +118,7 @@ if(msg.Contains("envelope_id")) //If there's no envelope ID it's a Hello or Disc
      case SlashCommand command:
        //logic here
        break;
-     case ICallbackEvent evt: 
+     case EventCallback evt: 
        //logic here
        break;
      case InteractionPayload payload:
