@@ -423,5 +423,29 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, WorkflowStepExecute>("Events_Workflow.json");
         }
+
+        [Fact]
+        public void WorkflowPublished()
+        {
+            Utility.AssertSubType<CallbackEvent, WorkflowPublished>("Events_WorkflowPublished.json");
+        }
+
+        [Fact]
+        public void WorkflowUnpublished()
+        {
+            Utility.AssertSubType<CallbackEvent, WorkflowUnpublished>("Events_WorkflowUnpublished.json");
+        }
+
+        [Fact]
+        public void WorkflowDeleted()
+        {
+            Utility.AssertSubType<CallbackEvent, WorkflowDeleted>("Events_WorkflowDeleted.json");
+        }
+
+        [Fact]
+        public void WorkflowStepDeleted()
+        {
+            Utility.AssertSubType<CallbackEvent, WorkflowStepDeleted>("Events_WorkflowStepDeleted.json");
+        }
     }
 }

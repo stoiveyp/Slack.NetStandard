@@ -1,0 +1,40 @@
+{
+  "type": "workflow_step_deleted",
+  "workflow_id": "338772933017143757",
+  "workflow_draft_configuration": {
+    "version_id": "338776577011617206",
+    "app_steps": [
+      {
+        "app_id": "A012VT792TC",
+        "workflow_step_id": "def5f7a2-365f-42e9-8ab8-26f9e9716696",
+        "callback_id": "take_two"
+      },
+      {
+        "app_id": "A012VT792TC",
+        "workflow_step_id": "19dab8c3-c062-43f7-a912-a69da0cf0bc0",
+        "callback_id": "take_three"
+      }
+    ]
+  },
+  "workflow_published_configuration": {
+    "version_id": "338776445998336786",
+    "app_steps": [
+      {
+        "app_id": "A012VT792TC",
+        "workflow_step_id": "def5f7a2-365f-42e9-8ab8-26f9e9716696",
+        "callback_id": "take_two"
+      },
+      {
+        "app_id": "A012VT792TC",
+        "workflow_step_id": "19dab8c3-c062-43f7-a912-a69da0cf0bc0",
+        "callback_id": "take_three"
+      },
+      {
+        "app_id": "A012VT792TC",
+        "workflow_step_id": "e9f8c121-de29-4d37-9e00-5204663a1b4d",
+        "callback_id": "take_four"
+      }
+    ]
+  },
+  "event_ts": "1611456175.413379"
+}

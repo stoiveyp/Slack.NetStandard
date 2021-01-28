@@ -1,0 +1,20 @@
+{
+  "type": "workflow_deleted",
+  "workflow_id": "338772933017143757",
+  "workflow_draft_configuration": {
+    "version_id": "338776445998336786",
+    "app_steps": [
+      {
+        "app_id": "A012VT792TC",
+        "workflow_step_id": "def5f7a2-365f-42e9-8ab8-26f9e9716696",
+        "callback_id": "take_two"
+      },
+      {
+        "app_id": "A012VT792TC",
+        "workflow_step_id": "19dab8c3-c062-43f7-a912-a69da0cf0bc0",
+        "callback_id": "take_three"
+      }
+    ]
+  },
+  "event_ts": "1611456217.716570"
+}

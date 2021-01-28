@@ -16,6 +16,8 @@ namespace Slack.NetStandard.WebApi
 
         public IAdminUsersApi Users { get; }
 
+        public IAdminAnalyticsApi Analytics { get; }
+
         internal AdminApi(IWebApiClient client)
         {
             Apps = new AdminAppsApi(client);
@@ -24,6 +26,7 @@ namespace Slack.NetStandard.WebApi
             InviteRequests = new AdminInviteRequestsApi(client);
             Teams = new AdminTeamsApi(client);
             Users = new AdminUsersApi(client);
+            Analytics = new AdminAnalyticsApi(client);
         }
     }
 }

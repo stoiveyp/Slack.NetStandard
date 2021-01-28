@@ -13,7 +13,7 @@ using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard
 {
-    public class SlackWebApiClient:IWebApiClient, ISlackApiClient
+    public class SlackWebApiClient : IWebApiClient, ISlackApiClient
     {
         private IConversationsApi _conversations;
         public IConversationsApi Conversations => _conversations ??= new ConversationsApi(this);
@@ -80,7 +80,7 @@ namespace Slack.NetStandard
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
 
-        private readonly Dictionary<string,string> _emptynvc = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> _emptynvc = new Dictionary<string, string>();
 
         internal SlackWebApiClient(Func<HttpClient> clientAccessor)
         {
@@ -100,10 +100,10 @@ namespace Slack.NetStandard
 
         public Task<WebApiResponse> Test(object data)
         {
-            return ((IWebApiClient) this).MakeJsonCall("api.test", data);
+            return ((IWebApiClient)this).MakeJsonCall("api.test", data);
         }
 
-        public SlackWebApiClient(string token):this(SetupClient(token))
+        public SlackWebApiClient(string token) : this(SetupClient(token))
         {
             if (string.IsNullOrWhiteSpace(token))
             {
@@ -111,7 +111,7 @@ namespace Slack.NetStandard
             }
         }
 
-        public SlackWebApiClient(HttpClient client):this(() => client)
+        public SlackWebApiClient(HttpClient client) : this(() => client)
         {
 
         }
@@ -136,7 +136,7 @@ namespace Slack.NetStandard
             try
             {
                 var content = new StringContent(JsonConvert.SerializeObject(request));
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json"){CharSet = "utf-8"};
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
                 var message = await Client.PostAsync(methodName, content);
                 return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
             }
@@ -160,6 +160,13 @@ namespace Slack.NetStandard
             return ((IWebApiClient)this).MakeUrlEncodedCall<TResponse>(methodName, dict);
         }
 
+        Task<HttpResponseMessage> IWebApiClient.MakeRawUrlEncodedCall(string methodName, Dictionary<string, string> request)
+        {
+            var content = new FormUrlEncodedContent(request ?? _emptynvc);
+            content.Headers.ContentType.CharSet = "utf-8";
+            return Client.PostAsync(methodName, content);
+        }
+
         Task<WebApiResponse> IWebApiClient.MakeUrlEncodedCall(string methodName, Dictionary<string, string> request)
         {
             return ((IWebApiClient)this).MakeUrlEncodedCall<WebApiResponse>(methodName, request);
@@ -173,7 +180,7 @@ namespace Slack.NetStandard
             return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
         }
 
-        Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string,MultipartFile> streams)
+        Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string, MultipartFile> streams)
         {
             var dict = JObject.FromObject(textData).Properties().ToDictionary(j => j.Name, j =>
             {
@@ -186,17 +193,17 @@ namespace Slack.NetStandard
             return ((IWebApiClient)this).MakeMultiPartCall<TResponse>(methodName, dict, streams);
         }
 
-        async Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName,Dictionary<string,string> textData, Dictionary<string,MultipartFile> streams)
+        async Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName, Dictionary<string, string> textData, Dictionary<string, MultipartFile> streams)
         {
             var content = new MultipartFormDataContent();
-            foreach(var item in textData)
+            foreach (var item in textData)
             {
-                content.Add(new StringContent(item.Value,System.Text.Encoding.UTF8),item.Key);
+                content.Add(new StringContent(item.Value, System.Text.Encoding.UTF8), item.Key);
             }
 
             foreach (var item in streams)
             {
-                content.Add(new StreamContent(item.Value.Stream), item.Key,item.Value.Filename);
+                content.Add(new StreamContent(item.Value.Stream), item.Key, item.Value.Filename);
             }
 
             var message = await Client.PostAsync(methodName, content);

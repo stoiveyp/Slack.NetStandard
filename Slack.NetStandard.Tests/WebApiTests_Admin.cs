@@ -1,4 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
@@ -9,6 +13,18 @@ namespace Slack.NetStandard.Tests
 {
     public class WebApiTests_Admin
     {
+        [Fact]
+        public async Task Admin_AnalyticsGetFile()
+        {
+            await Utility.CheckApi(
+                c => c.Admin.Analytics.GetFile("ABC", new DateTime(2020,03,01)),
+                "admin.analytics.getFile",nvc =>
+                {
+                    Assert.Equal("ABC", nvc.Get("type"));
+                    Assert.Equal("2020-03-01", nvc.Get("date"));
+                },new HttpResponseMessage(HttpStatusCode.OK));
+        }
+
         [Fact]
         public async Task Admin_ApproveApp()
         {

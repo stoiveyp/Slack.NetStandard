@@ -97,6 +97,10 @@ namespace Slack.NetStandard.JsonConverters
                 TokensRevoked.EventType => new TokensRevoked(),
                 UserChange.EventType => new UserChange(),
                 WorkflowStepExecute.EventType => new WorkflowStepExecute(),
+                WorkflowPublished.EventType => new WorkflowPublished(),
+                WorkflowUnpublished.EventType => new WorkflowUnpublished(),
+                WorkflowDeleted.EventType => new WorkflowDeleted(),
+                WorkflowStepDeleted.EventType => new WorkflowStepDeleted(),
                 _ => new CallbackEvent()
             };
         }
