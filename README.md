@@ -129,3 +129,4 @@ if(msg.Contains("envelope_id")) //If there's no envelope ID it's a Hello or Disc
    Send(ack);
 }
 ```
+You can also use [Slack.NetStandard.AsyncEnumerable](https://www.nuget.org/packages/Slack.NetStandard.AsyncEnumerable) for a helpful client that does a lot of this for you.

@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Slack.NetStandard\Slack.NetStandard.csproj" />
+    <PackageReference Include="Slack.NetStandard.AsyncEnumerable" Version="1.0.3" />
   </ItemGroup>
 
 </Project>
