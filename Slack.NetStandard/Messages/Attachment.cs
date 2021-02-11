@@ -58,7 +58,7 @@ namespace Slack.NetStandard.Messages
         public string TitleLink { get; set; }
 
         [JsonProperty("ts",NullValueHandling = NullValueHandling.Ignore)]
-        public long? Timestamp { get; set; }
+        public Timestamp Timestamp { get; set; }
 
 
 

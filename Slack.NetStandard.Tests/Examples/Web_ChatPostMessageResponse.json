@@ -37,7 +37,7 @@
         "thumb_url": "http://placekitten.com/g/200/200",
         "footer": "footer",
         "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
-        "ts": 123456789
+        "ts": "123456789"
       }
     ],
     "type": "message",
