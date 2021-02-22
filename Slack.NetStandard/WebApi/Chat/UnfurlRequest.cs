@@ -17,6 +17,9 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("unfurls")]
         public Dictionary<string,IMessageBlock[]> Unfurls { get; set; }
 
+        [JsonProperty("user_auth_blocks",NullValueHandling = NullValueHandling.Ignore)]
+        public IMessageBlock[] UserAuthBlocks { get; set; }
+
         [JsonProperty("user_auth_message",NullValueHandling = NullValueHandling.Ignore)]
         public string UserAuthMessage { get; set; }
 

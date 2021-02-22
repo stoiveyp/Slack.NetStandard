@@ -109,6 +109,12 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void ChannelIDChanged()
+        {
+            Utility.AssertSubType<CallbackEvent, ChannelIdChanged>("Events_ChannelIDChanged.json");
+        }
+
+        [Fact]
         public void ChannelLeft()
         {
             Utility.AssertSubType<CallbackEvent, ChannelLeft>("Events_ChannelLeft.json");
