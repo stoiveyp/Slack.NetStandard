@@ -138,13 +138,23 @@ namespace Slack.NetStandard
                 var content = new StringContent(JsonConvert.SerializeObject(request));
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
                 var message = await Client.PostAsync(methodName, content);
-                return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
+                return await GenerateResponseFromMessage<TResponse>(message);
             }
             catch (WebException ex)
             {
                 var source = ExceptionDispatchInfo.Capture(ex);
                 return ProcessSlackException<TResponse>(ex, source);
             }
+        }
+
+        private async Task<TResponse> GenerateResponseFromMessage<TResponse>(HttpResponseMessage message) where TResponse : WebApiResponseBase
+        {
+            var response = DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
+            if ((int)message.StatusCode == 429)
+            {
+                response.RetryAfter = message.Headers.RetryAfter.Delta;
+            }
+            return response;
         }
 
         Task<TResponse> IWebApiClient.MakeUrlEncodedCall<TResponse>(string methodName, object request)
@@ -176,8 +186,16 @@ namespace Slack.NetStandard
         {
             var content = new FormUrlEncodedContent(request ?? _emptynvc);
             content.Headers.ContentType.CharSet = "utf-8";
-            var message = await Client.PostAsync(methodName, content);
-            return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
+            try
+            {
+                var message = await Client.PostAsync(methodName, content);
+                return await GenerateResponseFromMessage<TResponse>(message);
+            }
+            catch (WebException ex)
+            {
+                var source = ExceptionDispatchInfo.Capture(ex);
+                return ProcessSlackException<TResponse>(ex, source);
+            }
         }
 
         Task<TResponse> IWebApiClient.MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string, MultipartFile> streams)
@@ -206,8 +224,16 @@ namespace Slack.NetStandard
                 content.Add(new StreamContent(item.Value.Stream), item.Key, item.Value.Filename);
             }
 
-            var message = await Client.PostAsync(methodName, content);
-            return DeserializeResponse<TResponse>(await message.Content.ReadAsStreamAsync());
+            try
+            {
+                var message = await Client.PostAsync(methodName, content);
+                return await GenerateResponseFromMessage<TResponse>(message);
+            }
+            catch (WebException ex)
+            {
+                var source = ExceptionDispatchInfo.Capture(ex);
+                return ProcessSlackException<TResponse>(ex, source);
+            }
         }
 
         private T DeserializeResponse<T>(Stream response)
@@ -216,11 +242,18 @@ namespace Slack.NetStandard
             return Serializer.Deserialize<T>(jsonReader);
         }
 
-        private T ProcessSlackException<T>(WebException webException, ExceptionDispatchInfo source)
+        private T ProcessSlackException<T>(WebException webException, ExceptionDispatchInfo source) where T : WebApiResponseBase
         {
             try
             {
-                return DeserializeResponse<T>(webException.Response.GetResponseStream());
+                var response = DeserializeResponse<T>(webException.Response.GetResponseStream());
+                if (webException.Response is HttpWebResponse webResponse)
+                {
+                    if ((int)webResponse.StatusCode == 429)
+                    {
+                        response.RetryAfter = TimeSpan.FromSeconds(double.Parse(webResponse.Headers["retry-after"]));
+                    }
+                }
             }
             catch
             {
