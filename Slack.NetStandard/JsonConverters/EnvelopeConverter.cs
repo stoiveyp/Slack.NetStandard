@@ -50,14 +50,7 @@ namespace Slack.NetStandard.JsonConverters
                         break;
                     case "payload":
                         reader.Read();
-                        if (envelope.Type != null && envelope.Type == "slash_commands")
-                        {
-                            envelope.Payload = new SlashCommand(serializer.Deserialize<Dictionary<string, string>>(reader));
-                        }
-                        else
-                        {
-                            payload = JObject.Load(reader);
-                        }
+                        payload = JObject.Load(reader);
 
                         reader.Read();
                         break;
@@ -93,8 +86,7 @@ namespace Slack.NetStandard.JsonConverters
             switch (envelope.Type)
             {
                 case "slash_commands":
-                    envelope.Payload =
-                        new SlashCommand(payload.Properties().ToDictionary(p => p.Name, p => p.Value.ToString()));
+                    envelope.Payload = serializer.Deserialize<SlashCommand>(payload.CreateReader());
                     break;
                 case "interactive":
                     var interaction = serializer.Deserialize<InteractionPayload>(payload.CreateReader());

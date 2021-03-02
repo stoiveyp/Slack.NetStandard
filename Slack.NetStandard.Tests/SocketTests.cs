@@ -30,7 +30,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void Envelope()
         {
-            var dict = Utility.ExampleFileContent<Dictionary<string, Envelope>>("Socket_Envelope.json");
+            var dict = Utility.AssertType<Dictionary<string, Envelope>>("Socket_Envelope.json");
             var kvp = Assert.Single(dict);
             Assert.Equal("envelope",kvp.Key);
             Assert.NotNull(kvp.Value);
@@ -44,7 +44,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void EnvelopeEvent()
         {
-            var evt = Utility.ExampleFileContent<Envelope>("Socket_EnvelopeEvent.json");
+            var evt = Utility.AssertType<Envelope>("Socket_EnvelopeEvent.json");
             Assert.NotNull(evt);
             Assert.Equal("events_api", evt.Type);
             var callback = Assert.IsType<EventCallback>(evt.Payload);
@@ -54,7 +54,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void EnvelopeInteraction()
         {
-            var evt = Utility.ExampleFileContent<Envelope>("Socket_EnvelopeInteraction.json");
+            var evt = Utility.AssertType<Envelope>("Socket_EnvelopeInteraction.json");
             Assert.NotNull(evt);
             Assert.Equal("interactive", evt.Type);
             Assert.IsType<ViewSubmissionPayload>(evt.Payload);

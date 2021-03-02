@@ -26,7 +26,7 @@ namespace Slack.NetStandard.EventsApi
         [Obsolete("authed users will be removed in a future release. Please use a token with authorizations:read permission and the WebApi.Apps.ListAuthorizations method")]
         public string[] AuthedUsers { get; set; }
 
-        [JsonProperty("event_context")]
+        [JsonProperty("event_context", NullValueHandling = NullValueHandling.Ignore)]
         public string EventContext { get; set; }
 
         [JsonProperty("event_id")]
@@ -34,5 +34,8 @@ namespace Slack.NetStandard.EventsApi
 
         [JsonProperty("event_time")]
         public long EventTime { get; set; }
+
+        [JsonProperty("is_ext_shared_channel", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsExtSharedChannel { get; set; }
     }
 }

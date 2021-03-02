@@ -18,5 +18,8 @@ namespace Slack.NetStandard.Objects
 
         [JsonProperty("is_bot",NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsBot { get; set; }
+
+        [JsonProperty("is_enterprise_install", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsEnterpriseInstall { get; set; }
     }
 }

@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
+using Slack.NetStandard.JsonConverters;
 
 namespace Slack.NetStandard.Interaction
 {
+    [JsonConverter(typeof(SlashCommandConverter))]
     public class SlashCommand
     {
         public const string SslCheckKey = "ssl_check";

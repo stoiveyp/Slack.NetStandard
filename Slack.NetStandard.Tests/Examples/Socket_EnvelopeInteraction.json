@@ -1,5 +1,11 @@
 {
   "payload": {
+    "user": {
+      "id": "xxx" 
+    },
+    "team": {
+      "id": "xxx" 
+    }, 
     "type": "view_submission",
     "view": {
       "id": "VNHU13V36",

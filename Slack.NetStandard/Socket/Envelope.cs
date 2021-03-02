@@ -22,7 +22,7 @@ namespace Slack.NetStandard.Socket
         public object Payload { get; set; }
 
         [JsonProperty("retry_attempt", NullValueHandling = NullValueHandling.Ignore)]
-        public int RetryAttempt { get; set; }
+        public int? RetryAttempt { get; set; }
 
         [JsonProperty("retry_reason", NullValueHandling = NullValueHandling.Ignore)]
         public string RetryReason { get; set; }

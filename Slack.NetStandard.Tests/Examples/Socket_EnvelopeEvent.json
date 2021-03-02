@@ -14,15 +14,14 @@
     "type": "event_callback",
     "event_id": "xxx",
     "event_time": 1611746843,
-    "authorizations": [
+    "authorizations": 
       {
-        "enterprise_id": null,
         "team_id": "xxx",
         "user_id": "xxx",
         "is_bot": true,
         "is_enterprise_install": false
       }
-    ],
+    ,
     "is_ext_shared_channel": false
   },
   "type": "events_api",
