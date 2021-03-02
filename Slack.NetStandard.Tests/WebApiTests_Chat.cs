@@ -71,13 +71,13 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Chat_GetPermalink()
         {
-            var response = await Utility.AssertWebApi<GetPermalinkResponse>(
+            var response = await Utility.AssertEncodedWebApi<GetPermalinkResponse>(
                 c => c.Chat.Permalink("C1234567890", "1234567890.123456"),
                 "chat.getPermalink", "Web_ChatGetPermalink.json",
-                jobject =>
+                nvc =>
                 {
-                    Assert.Equal("C1234567890", jobject.Value<string>("channel"));
-                    Assert.Equal("1234567890.123456", jobject.Value<string>("message_ts"));
+                    Assert.Equal("C1234567890", nvc["channel"]);
+                    Assert.Equal("1234567890.123456", nvc["message_ts"]);
                 });
         }
 

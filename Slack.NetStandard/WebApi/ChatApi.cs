@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Chat;
 
@@ -38,10 +39,10 @@ namespace Slack.NetStandard.WebApi
 
         public Task<GetPermalinkResponse> Permalink(string channel, string timestamp)
         {
-            return _client.MakeJsonCall<GetPermalinkRequest, GetPermalinkResponse>("chat.getPermalink", new GetPermalinkRequest
+            return _client.MakeUrlEncodedCall<GetPermalinkResponse>("chat.getPermalink", new Dictionary<string, string>
             {
-                Channel = channel,
-                Timestamp = timestamp
+                {"channel", channel},
+                {"message_ts", timestamp}
             });
         }
 
