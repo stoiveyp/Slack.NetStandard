@@ -26,5 +26,16 @@ namespace Slack.NetStandard.WebApi
 
             return _client.MakeRawUrlEncodedCall("admin.analytics.getFile", dict);
         }
+
+        public Task<HttpResponseMessage> GetFile(bool metadataOnly)
+        {
+            var dict = new Dictionary<string, string>
+            {
+                {"type", "public_channel"},
+                {"metadata_only","true" }
+            };
+
+            return _client.MakeRawUrlEncodedCall("admin.analytics.getFile", dict);
+        }
     }
 }

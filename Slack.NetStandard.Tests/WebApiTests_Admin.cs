@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Admin;
 using Xunit;
 
@@ -23,6 +20,18 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("ABC", nvc.Get("type"));
                     Assert.Equal("2020-03-01", nvc.Get("date"));
                 },new HttpResponseMessage(HttpStatusCode.OK));
+        }
+
+        [Fact]
+        public async Task Admin_AnalyticsGetFileMetadata()
+        {
+            await Utility.CheckApi(
+                c => c.Admin.Analytics.GetFile(true),
+                "admin.analytics.getFile", nvc =>
+                {
+                    Assert.Equal("public_channel", nvc.Get("type"));
+                    Assert.Equal("true", nvc.Get("metadata_only"));
+                }, new HttpResponseMessage(HttpStatusCode.OK));
         }
 
         [Fact]
