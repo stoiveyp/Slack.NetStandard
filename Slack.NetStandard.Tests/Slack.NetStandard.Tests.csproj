@@ -314,7 +314,7 @@
     <None Update="Examples\Interaction_MultiStaticSelect.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Examples\InteractiveMessagePayload.json">
+    <None Update="Examples\Socket_InteractiveMessagePayload.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Examples\MessageActionPayload.json">

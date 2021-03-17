@@ -52,6 +52,16 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void EnvelopeInteractiveMessage()
+        {
+            var evt = Utility.AssertType<Envelope>("Socket_InteractiveMessagePayload.json");
+            Assert.NotNull(evt);
+            Assert.Equal("interactive", evt.Type);
+            var payload = Assert.IsType<InteractiveMessagePayload>(evt.Payload);
+            Assert.Null(payload.OtherFields);
+        }
+
+        [Fact]
         public void EnvelopeInteraction()
         {
             var evt = Utility.AssertType<Envelope>("Socket_EnvelopeInteraction.json");

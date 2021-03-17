@@ -1,0 +1,27 @@
+{
+  "payload": {
+    "name": "bugs_list",
+    "value": "bot",
+    "callback_id": "select_remote_1234",
+    "type": "interactive_message",
+    "team": {
+      "id": "T012AB0A1",
+      "domain": "rilke"
+    },
+    "channel": {
+      "id": "C012AB3CD",
+      "name": "rainer"
+    },
+    "user": {
+      "id": "U012A1BCJ",
+      "name": "panther"
+    },
+    "action_ts": "1481670445.010908",
+    "message_ts": "1481670439.000007",
+    "attachment_id": "1",
+    "token": "verification_token_string"
+  },
+  "envelope_id": "interactive_message-T1234.000007",
+  "type": "interactive",
+  "accepts_response_payload": true
+}

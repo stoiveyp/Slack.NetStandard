@@ -35,6 +35,7 @@ namespace Slack.NetStandard.JsonConverters
             return value switch
             {
                 InteractionType.GlobalShortcut => new GlobalShortcutPayload(),
+                InteractionType.InteractiveMessage => new InteractiveMessagePayload(),
                 InteractionType.MessageAction => new MessageActionPayload(),
                 InteractionType.BlockActions => new BlockActionsPayload(),
                 InteractionType.ViewClosed => new ViewClosedPayload(),
