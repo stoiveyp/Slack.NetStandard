@@ -54,7 +54,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void LinkWithLabel()
         {
-            Assert.Equal("<!https://test|test>", Link.Text("https://test", "test"));
+            Assert.Equal("<https://test|test>", Link.Text("https://test", "test"));
         }
 
         [Fact]
