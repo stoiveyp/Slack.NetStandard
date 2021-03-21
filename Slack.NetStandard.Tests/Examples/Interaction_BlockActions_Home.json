@@ -81,15 +81,23 @@
   },
   "actions": [
     {
-      "type": "button",
-      "block_id": "7fhg",
-      "action_id": "XRX",
-      "text": {
+      "type": "static_select",
+      "action_id": "Edit_Location",
+      "block_id": "6Ot5",
+      "selected_option": {
+        "text": {
+          "type": "plain_text",
+          "text": "Room1",
+          "emoji": true
+        },
+        "value": "LOC#a5782c4ca70d48e4b06943ca8b69e363"
+      },
+      "placeholder": {
         "type": "plain_text",
-        "text": "Action A",
+        "text": "Select+Location",
         "emoji": true
       },
-      "action_ts": "1571318425.267782"
+      "action_ts": "1616349784.750070"
     }
   ]
 }

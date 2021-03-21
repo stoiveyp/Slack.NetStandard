@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.14.1</Version>
+    <Version>2.14.2</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>Add InteractiveMessagePayload for options load support
-Fix Link TextEntity output</PackageReleaseNotes>
+Add optional values to PayloadAction</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steven Pears</Authors>
     <Company />

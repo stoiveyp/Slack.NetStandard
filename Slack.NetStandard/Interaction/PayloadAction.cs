@@ -1,5 +1,6 @@
-﻿using Newtonsoft.Json;
-using Slack.NetStandard.Messages;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using Slack.NetStandard.Messages.Elements;
 
 namespace Slack.NetStandard.Interaction
 {
@@ -23,31 +24,31 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("action_ts", NullValueHandling = NullValueHandling.Ignore)]
         public string ActionTimestamp { get; set; }
 
+        [JsonProperty("selected_option", NullValueHandling = NullValueHandling.Ignore)]
+        public IOption SelectedOption { get; set; }
 
+        [JsonProperty("selected_options", NullValueHandling = NullValueHandling.Ignore)]
+        public IOption[] SelectedOptions { get; set; }
 
-        //{
-        //    "type":"button",
-        //    "block_id":"7fhg",
-        //    "action_id":"XRX",
-        //    "text":{
-        //        "type":"plain_text",
-        //        "text":"Action A",
-        //        "emoji":true
-        //    },
-        //    "action_ts":"1571318425.267782"
-        //}
+        [JsonProperty("selected_user", NullValueHandling = NullValueHandling.Ignore)]
+        public string SelectedUser { get; set; }
 
-        //{
-        //    "action_id": "WaXA",
-        //    "block_id": "=qXel",
-        //    "text": {
-        //        "type": "plain_text",
-        //        "text": "View",
-        //        "emoji": true
-        //    },
-        //    "value": "click_me_123",
-        //    "type": "button",
-        //    "action_ts": "1548426417.840180"
-        //}
-}
+        [JsonProperty("selected_users", NullValueHandling = NullValueHandling.Ignore)]
+        public string SelectedUsers { get; set; }
+
+        [JsonProperty("selected_channel", NullValueHandling = NullValueHandling.Ignore)]
+        public string SelectedChannel { get; set; }
+
+        [JsonProperty("selected_channels", NullValueHandling = NullValueHandling.Ignore)]
+        public string SelectedChannels { get; set; }
+
+        [JsonProperty("selected_conversation", NullValueHandling = NullValueHandling.Ignore)]
+        public string SelectedConversation { get; set; }
+
+        [JsonProperty("selected_conversations", NullValueHandling = NullValueHandling.Ignore)]
+        public string SelectedConversations { get; set; }
+
+        [JsonExtensionData]
+        public Dictionary<string, object> OtherFields { get; set; }
+    }
 }
