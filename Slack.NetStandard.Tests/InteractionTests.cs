@@ -24,6 +24,12 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void SuggestionPayload()
+        {
+            Assert.Null(Utility.AssertSubType<InteractionPayload, SuggestionPayload>("Interaction_BlockSuggestion.json").OtherFields);
+        }
+
+        [Fact]
         public void WorkflowStepEditPayload()
         {
             Assert.Null(Utility.AssertSubType<InteractionPayload, WorkflowStepEditPayload>("WorkflowStepEdit.json").OtherFields);

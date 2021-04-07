@@ -41,6 +41,8 @@ namespace Slack.NetStandard.JsonConverters
                 InteractionType.ViewClosed => new ViewClosedPayload(),
                 InteractionType.ViewSubmission => new ViewSubmissionPayload(),
                 InteractionType.WorkflowStepEdit => new WorkflowStepEditPayload(),
+                InteractionType.BlockSuggestion => new SuggestionPayload(),
+                InteractionType.DialogSuggestion => new SuggestionPayload(),
                 _ => (InteractionPayload)null
             };
         }

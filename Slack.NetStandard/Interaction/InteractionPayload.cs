@@ -32,6 +32,12 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("action_ts", NullValueHandling = NullValueHandling.Ignore)]
         public Timestamp ActionTimestamp { get; set; }
 
+        [JsonProperty("enterprise", NullValueHandling = NullValueHandling.Ignore)]
+        public SlackId Enterprise { get; set; }
+
+        [JsonProperty("is_enterprise_install", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsEnterpriseInstall { get; set; }
+
         [JsonExtensionData]
         public Dictionary<string,object> OtherFields { get; set; }
     }

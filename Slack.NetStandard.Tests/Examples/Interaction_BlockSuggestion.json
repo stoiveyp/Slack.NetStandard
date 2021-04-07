@@ -1,0 +1,166 @@
+{
+  "type": "block_suggestion",
+  "user": {
+    "id": "U08HHP201",
+    "username": "stoive",
+    "name": "stoive",
+    "team_id": "T08HHF3T9"
+  },
+  "container": {
+    "type": "view",
+    "view_id": "V011W1AQ7AQ"
+  },
+  "api_app_id": "A010P4LCK5Z",
+  "token": "H5RRT41giJdSX53HwoEHY4T7",
+  "action_id": "ItemLocationLookup",
+  "block_id": "24y6",
+  "value": "roo",
+  "team": {
+    "id": "T08HHF3T9",
+    "domain": "laggard"
+  },
+  "is_enterprise_install": false,
+  "view": {
+    "id": "V011W1AQ7AQ",
+    "team_id": "T08HHF3T9",
+    "type": "home",
+    "blocks": [
+      {
+        "type": "actions",
+        "block_id": "GeneralInteraction",
+        "elements": [
+          {
+            "type": "button",
+            "action_id": "Create_Adventure",
+            "text": {
+              "type": "plain_text",
+              "text": "Create+Story",
+              "emoji": true
+            }
+          }
+        ]
+      },
+      {
+        "type": "divider",
+        "block_id": "vfz"
+      },
+      {
+        "type": "header",
+        "block_id": "tl7",
+        "text": {
+          "type": "plain_text",
+          "text": "Test+1",
+          "emoji": true
+        }
+      },
+      {
+        "type": "section",
+        "block_id": "Cmav",
+        "text": {
+          "type": "plain_text",
+          "text": "Test+2",
+          "emoji": true
+        }
+      },
+      {
+        "type": "actions",
+        "block_id": "24y6",
+        "elements": [
+          {
+            "type": "button",
+            "action_id": "Game_Builder",
+            "text": {
+              "type": "plain_text",
+              "text": "Edit+Story",
+              "emoji": true
+            }
+          },
+          {
+            "type": "external_select",
+            "action_id": "ItemLocationLookup",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Enter+name+of+location+or+item",
+              "emoji": true
+            },
+            "min_query_length": 3
+          },
+          {
+            "type": "button",
+            "action_id": "Edit_Item",
+            "text": {
+              "type": "plain_text",
+              "text": "Edit+Item",
+              "emoji": true
+            },
+            "value": "STORY#USER#slack#T08HHF3T9#U08HHP201#a9de42e2a2b444c58bb8e02e12422f23"
+          },
+          {
+            "type": "button",
+            "action_id": "Remove_Item",
+            "text": {
+              "type": "plain_text",
+              "text": "Remove+Item",
+              "emoji": true
+            },
+            "style": "danger",
+            "value": "STORY#USER#slack#T08HHF3T9#U08HHP201#a9de42e2a2b444c58bb8e02e12422f23",
+            "confirm": {
+              "title": {
+                "type": "plain_text",
+                "text": "Are+you+sure?",
+                "emoji": true
+              },
+              "text": {
+                "type": "plain_text",
+                "text": "This+action+will+delete+Test+1?",
+                "emoji": true
+              },
+              "confirm": {
+                "type": "plain_text",
+                "text": "Confirm",
+                "emoji": true
+              },
+              "deny": {
+                "type": "plain_text",
+                "text": "Cancel",
+                "emoji": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "type": "divider",
+        "block_id": "iQ3"
+      },
+      {
+        "type": "section",
+        "block_id": "QIwy5",
+        "text": {
+          "type": "mrkdwn",
+          "text": "Last+Updated:+<!date^1617819290^Posted+{date_long}+{time}|Posted+Wednesday,+April+7,+2021+6:14:50+PM+UTC>",
+          "verbatim": false
+        }
+      }
+    ],
+    "private_metadata": "",
+    "callback_id": "",
+    "state": {
+      "values": {}
+    },
+    "hash": "1617819290.EQJkyfWf",
+    "title": {
+      "type": "plain_text",
+      "text": "View+Title",
+      "emoji": true
+    },
+    "clear_on_close": false,
+    "notify_on_close": false,
+    "root_view_id": "V011W1AQ7AQ",
+    "app_id": "A010P4LCK5Z",
+    "external_id": "",
+    "app_installed_team_id": "T08HHF3T9",
+    "bot_id": "B0110JV7J8G"
+  }
+}
