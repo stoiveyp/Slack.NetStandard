@@ -1,11 +1,11 @@
 {
       "type": "app_home_opened",
-      "user": "WKNNGMWSW",
-      "channel": "D01QH0817RQ",
+      "user": "xxxxxx",
+      "channel": "xxxxx",
       "tab": "home",
       "view": {
-        "id": "V01TMUN7E4U",
-        "team_id": "T02FL1Q2B",
+        "id": "xxxxx",
+        "team_id": "xxxxx",
         "type": "home",
         "blocks": [
           {
@@ -31,11 +31,11 @@
         },
         "clear_on_close": false,
         "notify_on_close": false,
-        "root_view_id": "V01TMUN7E4U",
-        "app_id": "A01L3MRH77B",
+        "root_view_id": "xxxxxx",
+        "app_id": "xxxxxx",
         "external_id": "",
-        "app_installed_team_id": "T02FL1Q2B",
-        "bot_id": "B01P0MN5JR1"
+        "app_installed_team_id": "xxxxxx",
+        "bot_id": "xxxxxxx"
       },
       "event_ts": "1617788918.579451"
     }

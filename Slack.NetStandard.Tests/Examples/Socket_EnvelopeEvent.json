@@ -1,18 +1,18 @@
 {
   "envelope_id": "1ec17213-fc47-4afd-97d5-c35305718e30",
   "payload": {
-    "token": "ND4RRwDC1JHPZSBdC8YsTB4H",
-    "team_id": "T02FL1Q2B",
-    "enterprise_id": "EJA4SJ3RA",
-    "api_app_id": "A01L3MRH77B",
+    "token": "xxxxxxx",
+    "team_id": "xxxxxxxx",
+    "enterprise_id": "abc123",
+    "api_app_id": "xxxxxxxx",
     "event": {
       "type": "app_home_opened",
       "user": "WKNNGMWSW",
       "channel": "D01QH0817RQ",
       "tab": "home",
       "view": {
-        "id": "V01TMUN7E4U",
-        "team_id": "T02FL1Q2B",
+        "id": "xxxxxxxxx",
+        "team_id": "xxxxxxx",
         "type": "home",
         "blocks": [
           {
@@ -38,26 +38,26 @@
         },
         "clear_on_close": false,
         "notify_on_close": false,
-        "root_view_id": "V01TMUN7E4U",
-        "app_id": "A01L3MRH77B",
+        "root_view_id": "xxxxxx",
+        "app_id": "xxxxxxx",
         "external_id": "",
-        "app_installed_team_id": "T02FL1Q2B",
-        "bot_id": "B01P0MN5JR1"
+        "app_installed_team_id": "xxxxxx",
+        "bot_id": "xxxxxxx"
       },
       "event_ts": "1617792734.901092"
     },
     "type": "event_callback",
     "event_id": "Ev01TEHHUCTF",
     "event_time": 1617792734,
-    "authorizations": [
+    "authorizations": 
       {
-        "enterprise_id": "EJA4SJ3RA",
-        "team_id": "T02FL1Q2B",
-        "user_id": "U01NKNAMUR5",
+        "enterprise_id": "xxxxxxx",
+        "team_id": "xxxxxxx",
+        "user_id": "xxxxxxx",
         "is_bot": true,
         "is_enterprise_install": false
       }
-    ],
+    ,
     "is_ext_shared_channel": false
   },
   "type": "events_api",
