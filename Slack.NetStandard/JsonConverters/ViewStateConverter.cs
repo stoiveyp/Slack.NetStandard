@@ -19,8 +19,7 @@ namespace Slack.NetStandard.JsonConverters
         {
             if (reader.TokenType == JsonToken.StartArray)
             {
-                reader.Read();
-                reader.Read();
+                serializer.Deserialize<List<object>>(reader);
                 return null;
             }
 
