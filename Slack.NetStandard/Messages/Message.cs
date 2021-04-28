@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Slack.NetStandard.ApiCommon;
 using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.Objects;
+using Slack.NetStandard.WebApi.Bots;
 using File = Slack.NetStandard.Objects.File;
 
 namespace Slack.NetStandard.Messages
@@ -69,6 +70,9 @@ namespace Slack.NetStandard.Messages
 
         [JsonProperty("bot_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BotId { get; set; }
+
+        [JsonProperty("bot_profile", NullValueHandling = NullValueHandling.Ignore)]
+        public BotInfo BotInfo { get; set; }
 
         [JsonProperty("icons", NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, string> Icons { get; set; }

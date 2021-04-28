@@ -19,7 +19,7 @@ namespace Slack.NetStandard.JsonConverters
         {
             var jObject = JObject.Load(reader);
 
-            var target = string.IsNullOrWhiteSpace(jObject.Value<string>("label")) ? (IOption)new Option() : new OptionGroup();
+            var target = jObject.ContainsKey("label") ? new OptionGroup() : (IOption) new Option();
 
             serializer.Populate(jObject.CreateReader(), target);
             return target;
