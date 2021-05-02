@@ -21,7 +21,7 @@ namespace Slack.NetStandard
             return Current - epoch <= duration.TotalSeconds;
         }
 
-        public static long Current => (long)DateTime.Now.Subtract(Base).TotalSeconds;
-        private static readonly DateTime Base = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        public static long Current => (long)DateTime.UtcNow.Subtract(Base).TotalSeconds;
+        private static readonly DateTime Base = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
     }
 }
