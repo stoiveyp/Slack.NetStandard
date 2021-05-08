@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Slack.NetStandard.Messages.Elements
 {
     public class DatePicker:IMessageElement
     {
+        public DatePicker(){}
+
+        public DatePicker(string actionId)
+        {
+            ActionId = actionId;
+        }
+
+        public DatePicker(string actionId, string initialDate) : this(actionId)
+        {
+            InitialDate = initialDate;
+        }
+
         [JsonProperty("type")] public string Type => nameof(DatePicker).ToLower();
 
         [JsonProperty("action_id")]

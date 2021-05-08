@@ -1,11 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
-using Slack.NetStandard.Messages.Elements;
 
 namespace Slack.NetStandard.Messages.Blocks
 {
     public class Context : IMessageBlock
     {
+        public Context(){}
+
+        public Context(params IContextElement[] elements)
+        {
+            Elements = elements.ToList();
+        }
+
         public string Type => nameof(Context).ToLower();
 
         [JsonProperty("elements", NullValueHandling = NullValueHandling.Ignore)]

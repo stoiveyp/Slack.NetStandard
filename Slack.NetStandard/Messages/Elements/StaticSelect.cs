@@ -1,11 +1,30 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Schema;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Slack.NetStandard.Messages.Elements
 {
     public class StaticSelect:IMessageElement
     {
+        public StaticSelect(){}
+
+        public StaticSelect(string actionId)
+        {
+            ActionId = actionId;
+        }
+
+        public StaticSelect(string actionId, string placeholder, params Option[] options):this(actionId)
+        {
+            Placeholder = placeholder;
+            Options = options.ToList();
+        }
+
+        public StaticSelect(string actionId, string placeholder, params OptionGroup[] optionGroups) : this(actionId)
+        {
+            Placeholder = placeholder;
+            OptionGroups = optionGroups.ToList();
+        }
+
         public const string ElementType = "static_select";
 
         [JsonProperty("type")] public string Type => ElementType;

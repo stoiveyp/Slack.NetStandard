@@ -1,13 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Slack.NetStandard.Messages.Elements;
 
 namespace Slack.NetStandard.Messages.Blocks
 {
     public class Input:IMessageBlock
     {
+        public Input(){}
+
+        public Input(PlainText label, IMessageElement element)
+        {
+            Label = label;
+            Element = element;
+        }
+
         [JsonProperty("type")]
         public string Type => nameof(Input).ToLower();
 

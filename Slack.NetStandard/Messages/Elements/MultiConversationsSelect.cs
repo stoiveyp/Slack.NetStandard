@@ -4,6 +4,14 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class MultiConversationsSelect : IMessageElement
     {
+        public MultiConversationsSelect(){}
+
+        public MultiConversationsSelect(string actionId, string placeholder)
+        {
+            ActionId = actionId;
+            Placeholder = placeholder;
+        }
+
         public const string ElementType = "multi_conversations_select";
         [JsonProperty("type")] public string Type => ElementType;
 
