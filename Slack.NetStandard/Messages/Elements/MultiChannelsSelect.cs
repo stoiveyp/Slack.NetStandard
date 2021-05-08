@@ -4,6 +4,14 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class MultiChannelsSelect : IMessageElement
     {
+        public MultiChannelsSelect(){}
+
+        public MultiChannelsSelect(string actionId, string placeholder)
+        {
+            ActionId = actionId;
+            Placeholder = placeholder;
+        }
+
         public const string ElementType = "multi_channels_select";
         [JsonProperty("type")] public string Type => ElementType;
 

@@ -25,6 +25,10 @@ Fix timezone issue with RequestVerifier (thanks @kzhen!)</PackageReleaseNotes>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <ProjectReference Include="..\Slack.NetStandard.Analyzers\Slack.NetStandard.Analyzers.csproj"
+                      PrivateAssets="all"
+                      ReferenceOutputAssembly="false"
+                      OutputItemType="Analyzer" />
   </ItemGroup>
 
 </Project>

@@ -6,6 +6,14 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class ExternalSelect:IMessageElement
     {
+        public ExternalSelect(){}
+
+        public ExternalSelect(string actionId, string placeholder)
+        {
+            ActionId = actionId;
+            Placeholder = placeholder;
+        }
+
         public const string ElementType = "external_select";
         [JsonProperty("type")] public string Type => ElementType;
 

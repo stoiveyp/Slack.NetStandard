@@ -8,6 +8,13 @@ namespace Slack.NetStandard.Messages.Blocks
 {
     public class RichText:IMessageBlock
     {
+        public RichText(){}
+
+        public RichText(params IMessageElement[] elements)
+        {
+            Elements = elements;
+        }
+
         [JsonProperty("type")] public string Type => MessageBlockType;
 
         [JsonProperty("block_id")]
