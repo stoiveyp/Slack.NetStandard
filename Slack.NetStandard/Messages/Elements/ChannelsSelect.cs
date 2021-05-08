@@ -6,6 +6,14 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class ChannelsSelect:IMessageElement
     {
+        public ChannelsSelect(){}
+
+        public ChannelsSelect(string actionId, string placeholder)
+        {
+            ActionId = actionId;
+            Placeholder = placeholder;
+        }
+
         public const string ElementType = "channels_select";
         [JsonProperty("type")] public string Type => ElementType;
 
@@ -20,5 +28,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("confirm",NullValueHandling = NullValueHandling.Ignore)]
         public Confirmation Confirm { get; set; }
+
+        [JsonProperty("response_url_enabled", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? ResponseUrlEnabled { get; set; }
     }
 }

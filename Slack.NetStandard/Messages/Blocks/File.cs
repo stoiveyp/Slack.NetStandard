@@ -4,6 +4,14 @@ namespace Slack.NetStandard.Messages.Blocks
 {
     public class File : IMessageBlock
     {
+        public File(){}
+
+        public File(string externalId)
+        {
+            ExternalId = externalId;
+            Source = "remote";
+        }
+
         [JsonProperty("type")]
         public string Type => nameof(File).ToLower();
 

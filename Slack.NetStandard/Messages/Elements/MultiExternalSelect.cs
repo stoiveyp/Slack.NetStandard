@@ -4,6 +4,14 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class MultiExternalSelect : IMessageElement
     {
+        public MultiExternalSelect(){}
+
+        public MultiExternalSelect(string actionId, string placeholder)
+        {
+            ActionId = actionId;
+            Placeholder = placeholder;
+        }
+
         public const string ElementType = "multi_external_select";
         [JsonProperty("type")] public string Type => ElementType;
 

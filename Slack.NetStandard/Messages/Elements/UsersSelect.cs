@@ -6,6 +6,14 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class UsersSelect:IMessageElement
     {
+        public UsersSelect(){}
+
+        public UsersSelect(string actionId, string placeholder)
+        {
+            ActionId = actionId;
+            Placeholder = placeholder;
+        }
+
         public const string ElementType = "users_select";
         [JsonProperty("type")] public string Type => ElementType;
 

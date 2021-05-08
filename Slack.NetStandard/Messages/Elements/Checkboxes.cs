@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Slack.NetStandard.Messages.Elements
 {
     public class Checkboxes:IMessageElement
     {
+        public Checkboxes(){}
+
+        public Checkboxes(string actionId, params Option[] options)
+        {
+            ActionId = actionId;
+            Options = options.ToList();
+        }
+
         public string Type => nameof(Checkboxes).ToLower();
 
         [JsonProperty("action_id", NullValueHandling = NullValueHandling.Ignore)]

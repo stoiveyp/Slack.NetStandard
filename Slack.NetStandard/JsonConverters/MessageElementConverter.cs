@@ -28,7 +28,7 @@ namespace Slack.NetStandard.JsonConverters
             return target;
         }
 
-        public static Dictionary<string, Type> IMessageElementLookup = new Dictionary<string, Type>
+        public static Dictionary<string, Type> IMessageElementLookup = new()
         {
             {nameof(Image).ToLower(), typeof(Image)},
             {nameof(Button).ToLower(), typeof(Button)},

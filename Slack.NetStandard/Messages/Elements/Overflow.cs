@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Slack.NetStandard.Messages.Elements
 {
     public class Overflow:IMessageElement
     {
+        public Overflow(){}
+
+        public Overflow(string actionId, params Option[] options)
+        {
+            ActionId = actionId;
+            Options = options.ToList();
+        }
+
         [JsonProperty("type")] public string Type => nameof(Overflow).ToLower();
 
         [JsonProperty("action_id")]

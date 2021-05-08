@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Slack.NetStandard.Messages.Elements
 {
     public class RadioButtons:IMessageElement
     {
+        public RadioButtons(){}
+
+        public RadioButtons(string actionId, params Option[] options)
+        {
+            ActionId = actionId;
+            Options = options.ToList();
+        }
+
         public const string ElementType = "radio_buttons";
         public string Type => ElementType;
 

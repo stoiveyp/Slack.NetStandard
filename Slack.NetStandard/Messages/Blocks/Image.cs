@@ -4,6 +4,14 @@ namespace Slack.NetStandard.Messages.Blocks
 {
     public class Image : IMessageBlock
     {
+        public Image(){}
+
+        public Image(string imageUrl, string altText)
+        {
+            ImageUrl = imageUrl;
+            AltText = altText;
+        }
+
         [JsonProperty("type")]
         public string Type => nameof(Image).ToLower();
 

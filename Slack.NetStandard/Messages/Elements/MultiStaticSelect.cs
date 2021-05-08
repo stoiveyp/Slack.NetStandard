@@ -5,6 +5,14 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class MultiStaticSelect:IMessageElement
     {
+        public MultiStaticSelect(){}
+
+        public MultiStaticSelect(string actionId, string placeholder)
+        {
+            ActionId = actionId;
+            Placeholder = placeholder;
+        }
+
         public const string ElementType = "multi_static_select";
         [JsonProperty("type")] public virtual string Type => ElementType;
 

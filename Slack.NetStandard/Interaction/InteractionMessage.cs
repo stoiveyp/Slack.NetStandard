@@ -1,16 +1,23 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Slack.NetStandard.Messages;
+using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.WebApi;
 
 namespace Slack.NetStandard.Interaction
 {
     public class InteractionMessage:Message
     {
+        public InteractionMessage(params IMessageBlock[] blocks)
+        {
+            Blocks = blocks.ToList();
+        }
+
         public InteractionMessage(bool? replaceOriginal = null) :this(ResponseType.Ephemeral,replaceOriginal){ }
 
         public InteractionMessage(ResponseType responseType,bool? replaceOriginal = null)

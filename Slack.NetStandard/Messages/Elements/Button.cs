@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -8,6 +6,14 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class Button:IMessageElement
     {
+        public Button(){}
+
+        public Button(string text, string actionId)
+        {
+            Text = text;
+            ActionId = actionId;
+        }
+
         [JsonProperty("type")]
         public string Type => nameof(Button).ToLower();
 
