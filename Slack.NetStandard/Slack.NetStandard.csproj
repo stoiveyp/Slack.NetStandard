@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.15.2</Version>
+    <Version>2.16.0</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Add SubmissionPayload for block_submission and dialog_submission types
-Fix timezone issue with RequestVerifier (thanks @kzhen!)</PackageReleaseNotes>
+    <PackageReleaseNotes>Add constructors to message blocks and elements</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Steven Pears</Authors>
     <Company />
@@ -25,10 +24,7 @@ Fix timezone issue with RequestVerifier (thanks @kzhen!)</PackageReleaseNotes>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <ProjectReference Include="..\Slack.NetStandard.Analyzers\Slack.NetStandard.Analyzers.csproj"
-                      PrivateAssets="all"
-                      ReferenceOutputAssembly="false"
-                      OutputItemType="Analyzer" />
+    <ProjectReference Include="..\Slack.NetStandard.Analyzers\Slack.NetStandard.Analyzers.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
   </ItemGroup>
 
 </Project>
