@@ -7,6 +7,13 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class TimePicker:IMessageElement
     {
+        public TimePicker(){}
+
+        public TimePicker(string actionId)
+        {
+            ActionId = actionId;
+        }
+
         public string Type => nameof(TimePicker).ToLower();
 
         [JsonProperty("placeholder")]
