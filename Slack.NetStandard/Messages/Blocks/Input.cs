@@ -30,5 +30,8 @@ namespace Slack.NetStandard.Messages.Blocks
 
         [JsonProperty("optional",NullValueHandling = NullValueHandling.Ignore)]
         public bool? Optional { get; set; }
+
+        [JsonProperty("dispatch_action",NullValueHandling = NullValueHandling.Ignore)]
+        public bool? DispatchAction { get; set; }
     }
 }
