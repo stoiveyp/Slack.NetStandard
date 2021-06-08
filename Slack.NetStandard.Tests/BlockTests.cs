@@ -54,8 +54,6 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
-        
-        [Fact]
         public void OptionExtensions()
         {
             IOption option = new Option();
