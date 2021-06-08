@@ -7,4 +7,17 @@ namespace Slack.NetStandard.Messages.Elements
     public interface IOption
     {
     }
+
+    public static class OptionExtensions
+    {
+        public static Option AsOption(this IOption option)
+        {
+            return option as Option;
+        }
+
+        public static OptionGroup AsOptionGroup(this IOption option)
+        {
+            return option as OptionGroup;
+        }
+    }
 }
