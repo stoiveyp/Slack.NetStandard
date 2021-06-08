@@ -12,6 +12,9 @@ jobs:
       - uses: actions/checkout@master
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
       - name: Build Solution
         run:  dotnet build -c Release
       - name: Test Solution
