@@ -7,7 +7,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>AsOption and AsOptionGroup added as IOption extensions</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageReadmeFile>../README.md</PackageReadmeFile>
     <Authors>Steven Pears</Authors>
     <Company />
     <PackageProjectUrl>https://github.com/stoiveyp/Slack.NetStandard</PackageProjectUrl>
