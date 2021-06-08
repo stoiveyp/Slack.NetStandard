@@ -17,10 +17,11 @@ jobs:
           include-prerelease: true
       - name: Build Solution
         run:  dotnet build -c Release
-      - name: Test Solution
+      - name: Set up 3.x
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '3.1.x'
+      - name: Test Solution
         run:  dotnet test
       - name: GH Deploy Workaround
         run: |
