@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.Messages.Elements;
 using Xunit;
@@ -55,6 +51,20 @@ namespace Slack.NetStandard.Tests
         public void Checkboxes()
         {
             Utility.AssertSubType<IMessageElement, Checkboxes>("Blocks_Checkboxes.json");
+        }
+
+        [Fact]
+        
+        [Fact]
+        public void OptionExtensions()
+        {
+            IOption option = new Option();
+            Assert.NotNull(option.AsOption());
+            Assert.Null(option.AsOptionGroup());
+
+            IOption optionGroup = new OptionGroup();
+            Assert.Null(optionGroup.AsOption());
+            Assert.NotNull(optionGroup.AsOptionGroup());
         }
     }
 }
