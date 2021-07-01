@@ -1,0 +1,7 @@
+{
+  "channel": "ABC123",
+  "emails": [ "test@test.com" ],
+  "external_limited": true,
+  "message": "Hi There",
+  "tracking_id": "123456" 
+}

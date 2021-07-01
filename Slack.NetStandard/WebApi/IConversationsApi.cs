@@ -16,6 +16,9 @@ namespace Slack.NetStandard.WebApi
         Task<ChannelResponse> Info(string channel, bool? includeLocale, bool? include_num_members);
 
         Task<ChannelResponse> Invite(string channel, params string[] users);
+
+        Task<InviteSharedResponse> InviteShared (InviteSharedRequest request);
+
         Task<ChannelResponse> Join(string channel);
 
         Task<WebApiResponse> Kick(string channel, string user);

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+﻿using System.Threading.Tasks;
 using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Conversations;
 using Xunit;
@@ -215,7 +213,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task ConversationsSetTopic()
         {
-            await Utility.AssertEncodedWebApi<ConversationSetTopicResponse>(c => c.Conversations.SetTopic("C1234567890", "new topic"), "conversations.setTopic", "Web_ConversationsSetTopic.json",
+            await Utility.AssertEncodedWebApi(c => c.Conversations.SetTopic("C1234567890", "new topic"), "conversations.setTopic", "Web_ConversationsSetTopic.json",
                 nvc =>
                 {
                     Assert.Equal("C1234567890", nvc["channel"]);
@@ -231,6 +229,23 @@ namespace Slack.NetStandard.Tests
                 {
                     Assert.Single(nvc);
                     Assert.Equal("C1234567890", nvc["channel"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsInviteShared()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.InviteShared(new InviteSharedRequest
+                {
+                Channel = "ABC123",
+                TrackingId = "123456",
+                ExternalLimited = true,
+                Message = "Hi There",
+                Emails = new []{"test@test.com"}
+                }), "conversations.inviteShared", "Web_ConversationsInviteSharedResponse.json",
+                job =>
+                {
+                    Assert.True(Utility.CompareJson(job, "Web_ConversationsInviteSharedRequest.json"));
                 });
         }
 

@@ -84,6 +84,12 @@ namespace Slack.NetStandard.WebApi
                 "conversations.invite", dict);
         }
 
+        public Task<InviteSharedResponse> InviteShared(InviteSharedRequest request)
+        {
+            return _client.MakeJsonCall<InviteSharedRequest, InviteSharedResponse>("conversations.inviteShared",
+                request);
+        }
+
         public Task<ChannelResponse> Join(string channel)
         {
             var dict = new Dictionary<string, string>
