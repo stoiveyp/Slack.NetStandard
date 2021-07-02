@@ -453,5 +453,11 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, WorkflowStepDeleted>("Events_WorkflowStepDeleted.json");
         }
+
+        [Fact]
+        public void SharedChannelInviteReceived()
+        {
+            Utility.AssertSubType<CallbackEvent, SharedChannelInviteReceived>("Events_SharedChannelInviteReceived.json");
+        }
     }
 }
