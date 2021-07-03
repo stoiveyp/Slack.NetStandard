@@ -318,5 +318,30 @@ namespace Slack.NetStandard.Tests
                 });
         }
 
+        [Fact]
+        public async Task ConversationsListInvites()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.ListConnectInvites("ABC123", 13), "conversations.listConnectInvites", "Web_ConversationsListConnectInvites.json",
+                job =>
+                {
+                    Assert.Equal(2, job.Count);
+                    Assert.Equal("ABC123", job.Value<string>("cursor_id"));
+                    Assert.Equal(13, job.Value<int>("count"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsListInviteTeams()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.ListConnectInvitesForTeam("T1234","ABC123", 13), "conversations.listConnectInvites", "Web_ConversationsListConnectInvites.json",
+                job =>
+                {
+                    Assert.Equal(3, job.Count);
+                    Assert.Equal("T1234", job.Value<string>("team_id"));
+                    Assert.Equal("ABC123", job.Value<string>("cursor_id"));
+                    Assert.Equal(13, job.Value<int>("count"));
+                });
+        }
+
     }
 }

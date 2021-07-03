@@ -1,0 +1,213 @@
+{
+  "ok": true,
+  "invites": [
+    {
+      "direction": "outgoing",
+      "status": "sent",
+      "date_last_updated": 1622591318,
+      "invite_type": "channel",
+      "invite": {
+        "id": "I0139HVDSDQ",
+        "date_created": 1622591287,
+        "date_invalid": 1623800887,
+        "inviting_team": {
+          "id": "E0ANZNL03",
+          "name": "oonamole",
+          "icon": {
+            
+          },
+          "is_verified": false,
+          "domain": "oonamole",
+          "date_created": 1559335482
+        },
+        "inviting_user": {
+          "id": "W0ANZNNAX",
+          "team_id": "E0ANZNL03",
+          "name": "ben_boss",
+          "updated": 1616521338,
+          "profile": {
+            "real_name": "Puppy InCharge",
+            "display_name": "puppy_incharge",
+            "real_name_normalized": "Puppy InCharge",
+            "display_name_normalized": "puppy_incharge",
+            "team": "E0ANZNL03",
+            "avatar_hash": "g767309df8c3",
+            "email": "puppyincharge@slack.com",
+            "image_24": "...",
+            "image_32": "...",
+            "image_48": "...",
+            "image_72": "...",
+            "image_192": "...",
+            "image_512": "..."
+          }
+        },
+        "link": "..."
+      },
+      "channel": {
+        "id": "C013AGH1GBD",
+        "is_private": false,
+        "is_im": false,
+        "name": "pb-shared-7"
+      },
+      "acceptances": [
+        {
+          "approval_status": "pending_approval",
+          "date_accepted": 1622591318,
+          "date_invalid": 1623800918,
+          "date_last_updated": 1622591318,
+          "accepting_team": {
+            "id": "T0PP93X0Q",
+            "name": "Doughboy",
+            "icon": {
+              
+            },
+            "is_verified": false,
+            "domain": "doughboy",
+            "date_created": 1521573656
+          },
+          "accepting_user": {
+            "id": "U0PP93X1N",
+            "team_id": "T0PP93X0Q",
+            "name": "bredman",
+            "updated": 1619479454,
+            "profile": {
+              "real_name": "Brent Doodle",
+              "display_name": "Brent Doodle",
+              "real_name_normalized": "Brent",
+              "display_name_normalized": "Brent Doodle",
+              "team": "T0PP93X0Q",
+              "avatar_hash": "ge2de9bb3fde",
+              "email": "bdoodle@slack.com",
+              "image_24": "...",
+              "image_32": "...",
+              "image_48": "...",
+              "image_72": "...",
+              "image_192": "...",
+              "image_512": "..."
+            }
+          },
+          "reviews": [
+            {
+              "type": "approval",
+              "date_review": 1622591318,
+              "reviewing_team": {
+                "id": "T0PP93X0Q",
+                "name": "Doughboy",
+                "icon": {
+                  
+                },
+                "is_verified": false,
+                "domain": "doughboy",
+                "date_created": 1521573656
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "direction": "incoming",
+      "status": "sent",
+      "date_last_updated": 1622591697,
+      "invite_type": "channel",
+      "invite": {
+        "id": "I0139HWQ134",
+        "date_created": 1622591671,
+        "date_invalid": 1623801271,
+        "inviting_team": {
+          "id": "T0PP93X0Q",
+          "name": "Doughboy",
+          "icon": {
+            
+          },
+          "is_verified": false,
+          "domain": "doughboy",
+          "date_created": 1521573656
+        },
+        "inviting_user": {
+          "id": "U0PP93X1N",
+          "team_id": "T0PP93X0Q",
+          "name": "bredman",
+          "updated": 1619479454,
+          "profile": {
+            "real_name": "Pet Dog",
+            "display_name": "Pet Dog",
+            "real_name_normalized": "Pet Dog",
+            "display_name_normalized": "Pet Dog",
+            "team": "T0PP93X0Q",
+            "avatar_hash": "ge2de9bb3fde",
+            "email": "bront@slack.com",
+            "image_24": "...",
+            "image_32": "...",
+            "image_48": "...",
+            "image_72": "...",
+            "image_192": "...",
+            "image_512": "..."
+          }
+        },
+        "link": "..."
+      },
+      "channel": {
+        "id": "C013AGJCG9H",
+        "is_private": false,
+        "is_im": false,
+        "name": "shared-channel-72"
+      },
+      "acceptances": [
+        {
+          "approval_status": "pending_approval",
+          "date_accepted": 1622591697,
+          "date_invalid": 1623801297,
+          "date_last_updated": 1622591697,
+          "accepting_team": {
+            "id": "E0ANZNL03",
+            "name": "oonamole",
+            "icon": {
+              
+            },
+            "is_verified": false,
+            "domain": "oonamole",
+            "date_created": 1559335482
+          },
+          "accepting_user": {
+            "id": "W0ANZNNAX",
+            "team_id": "E0ANZNL03",
+            "name": "ben_boss",
+            "updated": 1616521338,
+            "profile": {
+              "real_name": "Brent Puppies",
+              "display_name": "Bront",
+              "real_name_normalized": "Brent Puppies",
+              "display_name_normalized": "brent_puppies",
+              "team": "E0ANZNL03",
+              "avatar_hash": "g767309df8c3",
+              "email": "brent@slack.com",
+              "image_24": "...",
+              "image_32": "...",
+              "image_48": "...",
+              "image_72": "...",
+              "image_192": "...",
+              "image_512": "..."
+            }
+          },
+          "reviews": [
+            {
+              "type": "approval",
+              "date_review": 1622591697,
+              "reviewing_team": {
+                "id": "E0ANZNL03",
+                "name": "oonamole",
+                "icon": {
+                  
+                },
+                "is_verified": false,
+                "domain": "oonamole",
+                "date_created": 1559335482
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
