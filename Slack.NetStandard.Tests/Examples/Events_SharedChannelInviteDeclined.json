@@ -1,0 +1,44 @@
+{
+  "type": "shared_channel_invite_received",
+  "invite": {
+    "id": "I01354X80CA",
+    "date_created": 1616677941,
+    "date_invalid": 1617887541,
+    "inviting_team": {
+      "id": "T07NYFKQ8",
+      "name": "Corgis",
+      "icon": {  },
+      "is_verified": false,
+      "domain": "corgis"
+    },
+    "inviting_user": {
+      "id": "U07NPHX4H",
+      "name": "demmer",
+      "updated": 1613491924,
+      "profile": {
+        "real_name": "Corgis Rus",
+        "display_name": "Corgis Rus",
+        "team": "T12345",
+        "email": "corgisrus@slack-corp.com"
+      }
+    },
+    "recipient_email": "golden@doodle.com",
+    "message": "Puppy Connect",
+    "recipient_user_id": "W0PF29AMP"
+  },
+  "channel": {
+    "id": "C01363JUC1H",
+    "is_private": false,
+    "is_im": false,
+    "name": "test-slack-connect"
+  },
+  "event_ts": "1616677941.000100",
+  "app_id": "A2134",
+  "team_id": "T1234",
+  "authorizations": {
+    "is_enterprise_install": false,
+    "is_bot": true,
+    "user_id": "U1234",
+    "team_id": "T1234"
+  }
+}

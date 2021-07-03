@@ -17,6 +17,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Examples\Events_SharedChannelInviteApproved.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Examples\Events_SharedChannelInviteDeclined.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Examples\Events_SharedChannelInviteAccepted.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Examples\Events_SharedChannelInviteReceived.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

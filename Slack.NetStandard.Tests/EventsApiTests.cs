@@ -459,5 +459,23 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, SharedChannelInviteReceived>("Events_SharedChannelInviteReceived.json");
         }
+
+        [Fact]
+        public void SharedChannelInviteAccepted()
+        {
+            Utility.AssertSubType<CallbackEvent, SharedChannelInviteAccepted>("Events_SharedChannelInviteAccepted.json");
+        }
+
+        [Fact]
+        public void SharedChannelInviteApproved()
+        {
+            Utility.AssertSubType<CallbackEvent, SharedChannelInviteApproved>("Events_SharedChannelInviteApproved.json");
+        }
+
+        [Fact]
+        public void SharedChannelInviteDeclined()
+        {
+            Utility.AssertSubType<CallbackEvent, SharedChannelInviteDeclined>("Events_SharedChannelInviteDeclined.json");
+        }
     }
 }
