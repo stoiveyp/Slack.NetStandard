@@ -32,6 +32,9 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("recipient_user_id", NullValueHandling = NullValueHandling.Ignore)]
         public string RecipientUserId { get; set; }
 
+        [JsonProperty("acceptances",NullValueHandling = NullValueHandling.Ignore)]
+        public Acceptance[] Acceptances { get; set; }
+
         [JsonExtensionData]
         public Dictionary<string, object> OtherFields { get; set; }
     }

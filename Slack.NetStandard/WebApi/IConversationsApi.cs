@@ -43,5 +43,14 @@ namespace Slack.NetStandard.WebApi
 
         Task<InviteSharedResponse> InviteShared(InviteSharedRequest request);
         Task<AcceptSharedInviteResponse> AcceptSharedInvite(AcceptSharedInviteRequest request);
+        Task<WebApiResponse> ApproveSharedInvite(string inviteId, string teamId);
+        Task<WebApiResponse> DeclineSharedInvite(string inviteId, string teamId);
+        Task<WebApiResponse> DisconnectShared(string channelId, params string[] leavingTeamIds);
+
+        Task<ListConnectInviteResponse> ListConnectInvites(int count);
+        Task<ListConnectInviteResponse> ListConnectInvites(string cursorId = null, int? count = null);
+
+        Task<ListConnectInviteResponse> ListConnectInvitesForTeam(string teamId, int count);
+        Task<ListConnectInviteResponse> ListConnectInvitesForTeam(string teamId, string cursorId = null, int? count = null);
     }
 }

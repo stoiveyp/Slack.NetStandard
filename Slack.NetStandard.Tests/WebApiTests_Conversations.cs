@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Conversations;
 using Xunit;
@@ -264,6 +265,56 @@ namespace Slack.NetStandard.Tests
                 job =>
                 {
                     Assert.True(Utility.CompareJson(job, "Web_ConversationsAcceptSharedInviteRequest.json"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsApproveSharedInvite()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.ApproveSharedInvite("I123","T123"), "conversations.approveSharedInvite",
+                job =>
+                {
+                    Assert.Equal(2,job.Count);
+                    Assert.Equal("I123",job.Value<string>("invite_id"));
+                    Assert.Equal("T123",job.Value<string>("target_team"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsDeclineSharedInvite()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.DeclineSharedInvite("I123", "T123"), "conversations.declineSharedInvite",
+                job =>
+                {
+                    Assert.Equal(2, job.Count);
+                    Assert.Equal("I123", job.Value<string>("invite_id"));
+                    Assert.Equal("T123", job.Value<string>("target_team"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsDisconnectSharedNoTeams()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.DisconnectShared("C123"), "conversations.disconnectShared",
+                job =>
+                {
+                    Assert.Single(job);
+                    Assert.Equal("C123", job.Value<string>("channel_id"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsDisconnectSharedWithTeams()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.DisconnectShared("C123","T123","T234"), "conversations.disconnectShared",
+                job =>
+                {
+                    Assert.Equal(2,job.Count);
+                    Assert.Equal("C123", job.Value<string>("channel_id"));
+                    var jarray = job.Value<JArray>("leaving_team_ids");
+                    Assert.Equal(2,jarray.Count);
+                    Assert.Equal("T123", jarray[0]);
+                    Assert.Equal("T234", jarray[1]);
                 });
         }
 
