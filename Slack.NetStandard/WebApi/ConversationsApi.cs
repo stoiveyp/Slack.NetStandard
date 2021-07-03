@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Conversations;
 
@@ -82,12 +80,6 @@ namespace Slack.NetStandard.WebApi
 
             return _client.MakeUrlEncodedCall<ChannelResponse>(
                 "conversations.invite", dict);
-        }
-
-        public Task<InviteSharedResponse> InviteShared(InviteSharedRequest request)
-        {
-            return _client.MakeJsonCall<InviteSharedRequest, InviteSharedResponse>("conversations.inviteShared",
-                request);
         }
 
         public Task<ChannelResponse> Join(string channel)
@@ -217,6 +209,19 @@ namespace Slack.NetStandard.WebApi
 
             return _client.MakeUrlEncodedCall(
                 "conversations.unarchive", dict);
+        }
+
+        public Task<InviteSharedResponse> InviteShared(InviteSharedRequest request)
+        {
+            return _client.MakeJsonCall<InviteSharedRequest, InviteSharedResponse>("conversations.inviteShared",
+                request);
+        }
+
+
+        public Task<AcceptSharedInviteResponse> AcceptSharedInvite(AcceptSharedInviteRequest request)
+        {
+            return _client.MakeJsonCall<AcceptSharedInviteRequest, AcceptSharedInviteResponse>("conversations.acceptSharedInvite",
+                request);
         }
     }
 }

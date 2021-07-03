@@ -249,5 +249,23 @@ namespace Slack.NetStandard.Tests
                 });
         }
 
+        [Fact]
+        public async Task ConversationsAcceptSharedInvite()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.AcceptSharedInvite(new AcceptSharedInviteRequest
+                {
+                    ChannelName = "puppies-r-us",
+                    ChannelId = "ABC213",
+                    InviteId = "I01354X80CA",
+                    IsPrivate = true,
+                    TeamId = "T1234",
+                    FreeTrialAccepted = true
+            }), "conversations.acceptSharedInvite", "Web_ConversationsAcceptSharedInviteResponse.json",
+                job =>
+                {
+                    Assert.True(Utility.CompareJson(job, "Web_ConversationsAcceptSharedInviteRequest.json"));
+                });
+        }
+
     }
 }

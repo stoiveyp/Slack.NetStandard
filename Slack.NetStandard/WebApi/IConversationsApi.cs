@@ -17,8 +17,6 @@ namespace Slack.NetStandard.WebApi
 
         Task<ChannelResponse> Invite(string channel, params string[] users);
 
-        Task<InviteSharedResponse> InviteShared (InviteSharedRequest request);
-
         Task<ChannelResponse> Join(string channel);
 
         Task<WebApiResponse> Kick(string channel, string user);
@@ -42,5 +40,8 @@ namespace Slack.NetStandard.WebApi
         Task<ConversationSetTopicResponse> SetTopic(string channel, string topic);
 
         Task<WebApiResponse> Unarchive(string channel);
+
+        Task<InviteSharedResponse> InviteShared(InviteSharedRequest request);
+        Task<AcceptSharedInviteResponse> AcceptSharedInvite(AcceptSharedInviteRequest request);
     }
 }
