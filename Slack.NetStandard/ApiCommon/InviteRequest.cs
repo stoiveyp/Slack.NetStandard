@@ -12,7 +12,7 @@ namespace Slack.NetStandard.ApiCommon
         public string Email { get; set; }
 
         [JsonProperty("date_created",NullValueHandling = NullValueHandling.Ignore)]
-        public long DateCreated { get; set; }
+        public long? DateCreated { get; set; }
 
         [JsonProperty("requester_ids",NullValueHandling = NullValueHandling.Ignore)]
         public string[] RequesterIds { get; set; }

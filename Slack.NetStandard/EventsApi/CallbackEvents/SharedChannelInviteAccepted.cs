@@ -8,15 +8,14 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
     {
         public const string EventType = "shared_channel_invite_accepted";
 
-        [JsonProperty("app_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string AppId { get; set; }
+        [JsonProperty("approval_required",NullValueHandling = NullValueHandling.Ignore)]
+        public bool? ApprovalRequired { get; set; }
 
-        [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string TeamId { get; set; }
+        [JsonProperty("teams_in_channel",NullValueHandling = NullValueHandling.Ignore)]
+        public Team[] TeamsInChannel { get; set; }
 
-        [JsonProperty("authorizations", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(AuthorizationConverter))]
-        public Authorization[] Authorizations { get; set; }
+        [JsonProperty("accepting_user",NullValueHandling = NullValueHandling.Ignore)]
+        public User AcceptingUser { get; set; }
 
         [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
         public Channel Channel { get; set; }

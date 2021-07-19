@@ -24,5 +24,8 @@ namespace Slack.NetStandard.Objects
 
         [JsonProperty("default_channels", NullValueHandling = NullValueHandling.Ignore)]
         public string[] DefaultChannels { get; set; }
+
+        [JsonProperty("date_created", NullValueHandling = NullValueHandling.Ignore)]
+        public long? DateCreated { get; set; }
     }
 }

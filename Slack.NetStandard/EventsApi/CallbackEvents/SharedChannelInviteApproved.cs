@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Slack.NetStandard.JsonConverters;
 using Slack.NetStandard.Objects;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
@@ -8,15 +7,14 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
     {
         public const string EventType = "shared_channel_invite_approved";
 
-        [JsonProperty("app_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string AppId { get; set; }
+        [JsonProperty("approving_user", NullValueHandling = NullValueHandling.Ignore)]
+        public User ApprovingUser { get; set; }
 
-        [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
-        public string TeamId { get; set; }
+        [JsonProperty("teams_in_channel", NullValueHandling = NullValueHandling.Ignore)]
+        public Team[] TeamsInChannel { get; set; }
 
-        [JsonProperty("authorizations", NullValueHandling = NullValueHandling.Ignore)]
-        [JsonConverter(typeof(AuthorizationConverter))]
-        public Authorization[] Authorizations { get; set; }
+        [JsonProperty("approving_team_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string ApprovingTeamId { get; set; }
 
         [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
         public Channel Channel { get; set; }

@@ -1,44 +1,102 @@
 {
-  "type": "shared_channel_invite_received",
+  "type": "shared_channel_invite_declined",
   "invite": {
-    "id": "I01354X80CA",
-    "date_created": 1616677941,
-    "date_invalid": 1617887541,
+    "id": "REDACTED-BY-ME",
+    "date_created": 1626718670,
+    "date_invalid": 1627928270,
     "inviting_team": {
-      "id": "T07NYFKQ8",
-      "name": "Corgis",
-      "icon": {  },
+      "id": "REDACTED-BY-ME",
+      "name": "REDACTED-BY-ME",
+      "icon": {
+        "image_102": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_102.png",
+        "image_132": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_132.png",
+        "image_230": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_230.png",
+        "image_34": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_34.png",
+        "image_44": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_44.png",
+        "image_68": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_68.png",
+        "image_88": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_88.png",
+        "image_original": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_original.png"
+      },
       "is_verified": false,
-      "domain": "corgis"
+      "domain": "REDACTED-BY-ME",
+      "date_created": 1521644963
     },
     "inviting_user": {
-      "id": "U07NPHX4H",
-      "name": "demmer",
-      "updated": 1613491924,
+      "id": "REDACTED-BY-ME",
+      "team_id": "REDACTED-BY-ME",
+      "name": "REDACTED-BY-ME",
+      "updated": 1622588356,
       "profile": {
-        "real_name": "Corgis Rus",
-        "display_name": "Corgis Rus",
-        "team": "T12345",
-        "email": "corgisrus@slack-corp.com"
+        "real_name": "Colm Doyle",
+        "display_name": "colmdoyle",
+        "real_name_normalized": "Colm Doyle",
+        "display_name_normalized": "colmdoyle",
+        "team": "REDACTED-BY-ME",
+        "avatar_hash": "28e4bc399c9a",
+        "email": "REDACTED-BY-ME",
+        "image_24": "https://avatars.slack-edge.com/2019-09-24/771293549024_28e4bc399c9a68f9a21c_24.png",
+        "image_32": "https://avatars.slack-edge.com/2019-09-24/771293549024_28e4bc399c9a68f9a21c_32.png",
+        "image_48": "https://avatars.slack-edge.com/2019-09-24/771293549024_28e4bc399c9a68f9a21c_48.png",
+        "image_72": "https://avatars.slack-edge.com/2019-09-24/771293549024_28e4bc399c9a68f9a21c_72.png",
+        "image_192": "https://avatars.slack-edge.com/2019-09-24/771293549024_28e4bc399c9a68f9a21c_192.png",
+        "image_512": "https://avatars.slack-edge.com/2019-09-24/771293549024_28e4bc399c9a68f9a21c_512.png",
+        "image_1024": "https://avatars.slack-edge.com/2019-09-24/771293549024_28e4bc399c9a68f9a21c_1024.png",
+        "image_original": "https://avatars.slack-edge.com/2019-09-24/771293549024_28e4bc399c9a68f9a21c_original.png",
+        "is_custom_image": true
       }
     },
-    "recipient_email": "golden@doodle.com",
-    "message": "Puppy Connect",
-    "recipient_user_id": "W0PF29AMP"
+    "recipient_email": "REDACTED-BY-ME",
+    "recipient_user_id": "REDACTED-BY-ME"
   },
   "channel": {
-    "id": "C01363JUC1H",
-    "is_private": false,
+    "id": "REDACTED-BY-ME",
     "is_im": false,
-    "name": "test-slack-connect"
+    "is_private": false,
+    "name": "shared-channel-testing"
   },
-  "event_ts": "1616677941.000100",
-  "app_id": "A2134",
-  "team_id": "T1234",
-  "authorizations": {
-    "is_enterprise_install": false,
-    "is_bot": true,
-    "user_id": "U1234",
-    "team_id": "T1234"
-  }
+  "declining_team_id": "REDACTED-BY-ME",
+  "teams_in_channel": [
+    {
+      "id": "REDACTED-BY-ME",
+      "name": "REDACTED-BY-ME",
+      "icon": {
+        "image_102": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_102.png",
+        "image_132": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_132.png",
+        "image_230": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_230.png",
+        "image_34": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_34.png",
+        "image_44": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_44.png",
+        "image_68": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_68.png",
+        "image_88": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_88.png",
+        "image_original": "https://avatars.slack-edge.com/2019-02-11/546966542737_cd277e253ba62d40b65a_original.png"
+      },
+      "is_verified": false,
+      "domain": "REDACTED-BY-ME",
+      "date_created": 1521644963
+    }
+  ],
+  "declining_user": {
+    "id": "REDACTED-BY-ME",
+    "team_id": "REDACTED-BY-ME",
+    "name": "other-corp",
+    "updated": 1604087769,
+    "profile": {
+      "real_name": "Colm",
+      "display_name": "",
+      "real_name_normalized": "Colm",
+      "display_name_normalized": "",
+      "team": "REDACTED-BY-ME",
+      "avatar_hash": "94a3b2a99e31",
+      "email": "REDACTED-BY-ME",
+      "image_24": "https://avatars.slack-edge.com/2020-01-27/926497206310_94a3b2a99e31303ffaf5_24.jpg",
+      "image_32": "https://avatars.slack-edge.com/2020-01-27/926497206310_94a3b2a99e31303ffaf5_32.jpg",
+      "image_48": "https://avatars.slack-edge.com/2020-01-27/926497206310_94a3b2a99e31303ffaf5_48.jpg",
+      "image_72": "https://avatars.slack-edge.com/2020-01-27/926497206310_94a3b2a99e31303ffaf5_72.jpg",
+      "image_192": "https://avatars.slack-edge.com/2020-01-27/926497206310_94a3b2a99e31303ffaf5_192.jpg",
+      "image_512": "https://avatars.slack-edge.com/2020-01-27/926497206310_94a3b2a99e31303ffaf5_512.jpg",
+      "image_1024": "https://avatars.slack-edge.com/2020-01-27/926497206310_94a3b2a99e31303ffaf5_1024.jpg",
+      "image_original": "https://avatars.slack-edge.com/2020-01-27/926497206310_94a3b2a99e31303ffaf5_original.jpg",
+      "is_custom_image": true
+    }
+  },
+  "event_ts": "1626718769.000000"
 }
