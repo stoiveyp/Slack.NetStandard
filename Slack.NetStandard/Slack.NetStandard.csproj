@@ -6,6 +6,7 @@
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>Add Shared Channel APIs (thank you for your help @colmdoyle)
+Refresh Token support in Access Token Information
 Breaking change - moved Team into objects namespace</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
