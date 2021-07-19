@@ -5,7 +5,7 @@
     <Version>3.0.0</Version>
     <Description>.NET Core package that helps with Slack interactions</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Add Shared Channel APIs
+    <PackageReleaseNotes>Add Shared Channel APIs (thank you for your help @colmdoyle)
 Breaking change - moved Team into objects namespace</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
