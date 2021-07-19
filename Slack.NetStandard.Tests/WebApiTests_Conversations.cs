@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Conversations;
@@ -215,7 +214,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task ConversationsSetTopic()
         {
-            await Utility.AssertEncodedWebApi<ConversationSetTopicResponse>(c => c.Conversations.SetTopic("C1234567890", "new topic"), "conversations.setTopic", "Web_ConversationsSetTopic.json",
+            await Utility.AssertEncodedWebApi(c => c.Conversations.SetTopic("C1234567890", "new topic"), "conversations.setTopic", "Web_ConversationsSetTopic.json",
                 nvc =>
                 {
                     Assert.Equal("C1234567890", nvc["channel"]);
@@ -231,6 +230,116 @@ namespace Slack.NetStandard.Tests
                 {
                     Assert.Single(nvc);
                     Assert.Equal("C1234567890", nvc["channel"]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsInviteShared()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.InviteShared(new InviteSharedRequest
+                {
+                Channel = "ABC123",
+                TrackingId = "123456",
+                ExternalLimited = true,
+                Message = "Hi There",
+                Emails = new []{"test@test.com"}
+                }), "conversations.inviteShared", "Web_ConversationsInviteSharedResponse.json",
+                job =>
+                {
+                    Assert.True(Utility.CompareJson(job, "Web_ConversationsInviteSharedRequest.json"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsAcceptSharedInvite()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.AcceptSharedInvite(new AcceptSharedInviteRequest
+                {
+                    ChannelName = "puppies-r-us",
+                    ChannelId = "ABC213",
+                    InviteId = "I01354X80CA",
+                    IsPrivate = true,
+                    TeamId = "T1234",
+                    FreeTrialAccepted = true
+            }), "conversations.acceptSharedInvite", "Web_ConversationsAcceptSharedInviteResponse.json",
+                job =>
+                {
+                    Assert.True(Utility.CompareJson(job, "Web_ConversationsAcceptSharedInviteRequest.json"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsApproveSharedInvite()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.ApproveSharedInvite("I123","T123"), "conversations.approveSharedInvite",
+                job =>
+                {
+                    Assert.Equal(2,job.Count);
+                    Assert.Equal("I123",job.Value<string>("invite_id"));
+                    Assert.Equal("T123",job.Value<string>("target_team"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsDeclineSharedInvite()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.DeclineSharedInvite("I123", "T123"), "conversations.declineSharedInvite",
+                job =>
+                {
+                    Assert.Equal(2, job.Count);
+                    Assert.Equal("I123", job.Value<string>("invite_id"));
+                    Assert.Equal("T123", job.Value<string>("target_team"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsDisconnectSharedNoTeams()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.DisconnectShared("C123"), "conversations.disconnectShared",
+                job =>
+                {
+                    Assert.Single(job);
+                    Assert.Equal("C123", job.Value<string>("channel_id"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsDisconnectSharedWithTeams()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.DisconnectShared("C123","T123","T234"), "conversations.disconnectShared",
+                job =>
+                {
+                    Assert.Equal(2,job.Count);
+                    Assert.Equal("C123", job.Value<string>("channel_id"));
+                    var jarray = job.Value<JArray>("leaving_team_ids");
+                    Assert.Equal(2,jarray.Count);
+                    Assert.Equal("T123", jarray[0]);
+                    Assert.Equal("T234", jarray[1]);
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsListInvites()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.ListConnectInvites("ABC123", 13), "conversations.listConnectInvites", "Web_ConversationsListConnectInvites.json",
+                job =>
+                {
+                    Assert.Equal(2, job.Count);
+                    Assert.Equal("ABC123", job.Value<string>("cursor_id"));
+                    Assert.Equal(13, job.Value<int>("count"));
+                });
+        }
+
+        [Fact]
+        public async Task ConversationsListInviteTeams()
+        {
+            await Utility.AssertWebApi(c => c.Conversations.ListConnectInvitesForTeam("T1234","ABC123", 13), "conversations.listConnectInvites", "Web_ConversationsListConnectInvites.json",
+                job =>
+                {
+                    Assert.Equal(3, job.Count);
+                    Assert.Equal("T1234", job.Value<string>("team_id"));
+                    Assert.Equal("ABC123", job.Value<string>("cursor_id"));
+                    Assert.Equal(13, job.Value<int>("count"));
                 });
         }
 

@@ -102,6 +102,10 @@ namespace Slack.NetStandard.JsonConverters
                 WorkflowUnpublished.EventType => new WorkflowUnpublished(),
                 WorkflowDeleted.EventType => new WorkflowDeleted(),
                 WorkflowStepDeleted.EventType => new WorkflowStepDeleted(),
+                SharedChannelInviteReceived.EventType => new SharedChannelInviteReceived(),
+                SharedChannelInviteAccepted.EventType => new SharedChannelInviteAccepted(),
+                SharedChannelInviteApproved.EventType => new SharedChannelInviteApproved(),
+                SharedChannelInviteDeclined.EventType => new SharedChannelInviteDeclined(),
                 _ => new CallbackEvent()
             };
         }
