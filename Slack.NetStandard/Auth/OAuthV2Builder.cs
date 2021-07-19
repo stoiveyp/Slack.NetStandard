@@ -79,10 +79,39 @@ namespace Slack.NetStandard.Auth
             return Exchange(new HttpClient(), code, clientId, clientSecret, redirectUri);
         }
 
+        public static Task<AccessTokenInformation> ExchangeRefreshToken(HttpClient client, string refreshToken, string clientId, string clientSecret,
+            string redirectUri = null)
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{HttpUtility.UrlEncode(clientId)}:{HttpUtility.UrlEncode(clientSecret)}")));
+            return ExchangeRefreshToken(client, refreshToken, redirectUri);
+        }
+
+        public static async Task<AccessTokenInformation> ExchangeRefreshToken(HttpClient client, string refreshToken,
+            string redirectUri = null)
+        {
+            var dict = new Dictionary<string, string>
+            {
+                {"grant_Type", "refresh_token"},
+                {"refresh_token", refreshToken}
+            };
+            if (!string.IsNullOrWhiteSpace(redirectUri))
+            {
+                dict.Add("redirect_uri", redirectUri);
+            }
+
+            var response = await client.PostAsync("https://slack.com/api/oauth.v2.access", new FormUrlEncodedContent(dict)).ConfigureAwait(false);
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<AccessTokenInformation>(await response.Content.ReadAsStringAsync().ConfigureAwait(false));
+            }
+
+            return null;
+        }
+
         public static Task<AccessTokenInformation> Exchange(HttpClient client, string code, string clientId, string clientSecret,
             string redirectUri = null)
         {
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",Convert.ToBase64String(Encoding.UTF8.GetBytes($"{HttpUtility.UrlEncode(clientId)}:{HttpUtility.UrlEncode(clientSecret)}")));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.UTF8.GetBytes($"{HttpUtility.UrlEncode(clientId)}:{HttpUtility.UrlEncode(clientSecret)}")));
             return Exchange(client, code, redirectUri);
         }
 
@@ -92,9 +121,9 @@ namespace Slack.NetStandard.Auth
             {
                 {"code", code}
             };
-            if(!string.IsNullOrWhiteSpace(redirectUri))
+            if (!string.IsNullOrWhiteSpace(redirectUri))
             {
-                dict.Add("redirect_uri",redirectUri);
+                dict.Add("redirect_uri", redirectUri);
             }
 
             var response = await client.PostAsync("https://slack.com/api/oauth.v2.access", new FormUrlEncodedContent(dict)).ConfigureAwait(false);
