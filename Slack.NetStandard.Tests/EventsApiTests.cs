@@ -300,7 +300,8 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void LinkShared()
         {
-            Utility.AssertSubType<CallbackEvent, LinkShared>("Events_LinkShared.json");
+            var ls = Utility.AssertSubType<CallbackEvent, LinkShared>("Events_LinkShared.json");
+            Assert.Null(ls.OtherFields);
         }
 
         [Fact]
