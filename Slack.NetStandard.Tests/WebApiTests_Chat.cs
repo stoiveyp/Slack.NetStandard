@@ -39,7 +39,10 @@ namespace Slack.NetStandard.Tests
             {
                 Blocks = new List<IMessageBlock> { new Section { Text = new PlainText("stuff") } }
             }), "chat.postEphemeral", "Web_ChatPostEphemeral.json",
-                jobject => { Assert.NotNull(jobject.Value<JArray>("blocks")); });
+                jobject =>
+                {
+                    Assert.NotNull(jobject.Value<JArray>("blocks"));
+                });
         }
 
         [Fact]

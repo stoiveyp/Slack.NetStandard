@@ -21,7 +21,13 @@ namespace Slack.NetStandard
                 return null;
             }
             var pieces = value.Split(new[] { '.' }, 2);
-            return new Timestamp(long.Parse(pieces[0]), pieces.Length > 1 ? pieces[1] : null);
+
+            if (!long.TryParse(pieces[0], out var epochSeconds))
+            {
+                return new Timestamp(value, epochSeconds);
+            }
+
+            return new Timestamp(value, epochSeconds, pieces.Length > 1 ? pieces[1] : null);
         }
 
         public static implicit operator string(Timestamp value)
@@ -37,12 +43,24 @@ namespace Slack.NetStandard
             Identifier = identifier;
         }
 
+        public Timestamp(string raw, long epochSeconds, string identifier = null) : this(epochSeconds, identifier)
+        {
+            RawValue = raw;
+        }
+
         public long EpochSeconds { get; set; }
 
         public string Identifier { get; set; }
 
+        public string RawValue { get; set; }
+
         public override string ToString()
         {
+            if (!string.IsNullOrWhiteSpace(RawValue))
+            {
+                return RawValue;
+            }
+
             if (!string.IsNullOrWhiteSpace(Identifier))
             {
                 return EpochSeconds + "." + Identifier;
@@ -54,10 +72,12 @@ namespace Slack.NetStandard
         public int CompareTo(Timestamp other)
         {
             if (ReferenceEquals(this, other)) return 0;
-            if (other is null) return 1;
+            if (ReferenceEquals(null, other)) return 1;
             var epochSecondsComparison = EpochSeconds.CompareTo(other.EpochSeconds);
             if (epochSecondsComparison != 0) return epochSecondsComparison;
-            return string.Compare(Identifier, other.Identifier, StringComparison.Ordinal);
+            var identifierComparison = string.Compare(Identifier, other.Identifier, StringComparison.Ordinal);
+            if (identifierComparison != 0) return identifierComparison;
+            return string.Compare(RawValue, other.RawValue, StringComparison.Ordinal);
         }
     }
 }
