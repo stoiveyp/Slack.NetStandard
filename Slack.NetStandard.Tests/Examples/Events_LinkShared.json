@@ -1,9 +1,11 @@
 {
   "type": "link_shared",
-  "channel": "Cxxxxxx",
+  "channel": "COMPOSER",
+  "is_bot_user_member": true,
   "user": "Uxxxxxxx",
   "message_ts": "123456789.9875",
-  "thread_ts": "123456621.1855",
+  "unfurl_id": "Uxxxxxxx-909b5454-75f8-4ac4-b325-1b40e230bbd8-gryl3kb80b3wm49ihzoo35fyqoq08n2y",
+  "source": "composer",
   "links": [
     {
       "domain": "example.com",
