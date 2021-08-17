@@ -2,12 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.0</Version>
+    <Version>3.1.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Add Shared Channel APIs (thank you for your help @colmdoyle)
-Refresh Token support in Access Token Information
-Breaking change - moved Team into objects namespace</PackageReleaseNotes>
+    <PackageReleaseNotes>Added source and new timestamp support to link_shared event</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Steven Pears</Authors>
