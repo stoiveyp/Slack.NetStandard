@@ -35,6 +35,7 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Overflow).ToLower(),typeof(Overflow) },
             {nameof(DatePicker).ToLower(),typeof(DatePicker)},
             {nameof(Checkboxes).ToLower(), typeof(Checkboxes)},
+            {nameof(TimePicker).ToLower(), typeof(TimePicker) },
             {RadioButtons.ElementType, typeof(RadioButtons)},
             {StaticSelect.ElementType,typeof(StaticSelect) },
             {ExternalSelect.ElementType,typeof(ExternalSelect) },

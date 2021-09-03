@@ -54,6 +54,12 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void Timepicker()
+        {
+            Utility.AssertSubType<IMessageElement, TimePicker>("Blocks_Timepicker.json");
+        }
+
+        [Fact]
         public void OptionExtensions()
         {
             IOption option = new Option();
