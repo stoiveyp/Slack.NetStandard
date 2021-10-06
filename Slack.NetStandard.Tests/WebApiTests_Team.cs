@@ -64,10 +64,11 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Team_BillingInfo()
         {
-            await Utility.AssertEncodedWebApi(c => c.Team.Billing.Info(), "team.billing.info", "Web_TeamBillingInfo.json", nvc =>
+            var response = await Utility.AssertEncodedWebApi(c => c.Team.Billing.Info(), "team.billing.info", "Web_TeamBillingInfo.json", nvc =>
             {
                 
             });
+            Assert.Null(response.OtherFields);
         }
     }
 }
