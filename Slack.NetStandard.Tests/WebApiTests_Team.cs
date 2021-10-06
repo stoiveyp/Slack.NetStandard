@@ -60,5 +60,14 @@ namespace Slack.NetStandard.Tests
                 Assert.Equal("all", nvc["visibility"]);
             });
         }
+
+        [Fact]
+        public async Task Team_BillingInfo()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Team.Billing.Info(), "team.billing.info", "Web_TeamBillingInfo.json", nvc =>
+            {
+                
+            });
+        }
     }
 }

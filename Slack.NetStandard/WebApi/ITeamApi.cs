@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Teams;
 
 namespace Slack.NetStandard.WebApi
@@ -17,5 +14,7 @@ namespace Slack.NetStandard.WebApi
         Task<TeamIntegrationLogResponse> IntegrationLogs(IntegrationLogRequest request);
 
         Task<TeamProfileResponse> GetProfile(string visibility);
+
+        ITeamBillingApi Billing { get; }
     }
 }
