@@ -11,6 +11,7 @@ namespace Slack.NetStandard.WebApi
         public TeamApi(IWebApiClient client)
         {
             _client = client;
+            Billing = new TeamBillingApi(client);
         }
 
        public Task<TeamAccessLogResponse> AccessLogs(long before)
@@ -81,5 +82,7 @@ namespace Slack.NetStandard.WebApi
 
             return _client.MakeUrlEncodedCall<TeamProfileResponse>("team.profile.get", dict);
         }
+
+        public ITeamBillingApi Billing { get; }
     }
 }
