@@ -11,7 +11,10 @@ namespace Slack.NetStandard.WebApi
         public AppsApi(IWebApiClient client)
         {
             _client = client;
+            Manifest = new AppsManifestApi(client);
         }
+
+        public IAppsManifestApi Manifest { get; }
 
         public Task<WebApiResponse> Uninstall(string clientId, string clientSecret)
         {

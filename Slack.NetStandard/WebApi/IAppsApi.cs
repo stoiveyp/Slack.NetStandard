@@ -7,6 +7,8 @@ namespace Slack.NetStandard.WebApi
 {
     public interface IAppsApi
     {
+        IAppsManifestApi Manifest { get; }
+
         Task<WebApiResponse> Uninstall(string clientId, string clientSecret);
         Task<ListAuthorizationsResponse> ListAuthorizations(string context, string cursor);
 
