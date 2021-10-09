@@ -2,7 +2,7 @@ name: Build and Test
 on:
   push:
     branches:
-    - master
+    - main
 jobs:
   runner:
     if: github.event_name == 'push' && contains(toJson(github.event.commits), '***NO_CI***') == false && contains(toJson(github.event.commits), '[ci skip]') == false && contains(toJson(github.event.commits), '[skip ci]') == false
