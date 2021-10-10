@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Apps;
 using Slack.NetStandard.WebApi.Apps.Manifest;
 

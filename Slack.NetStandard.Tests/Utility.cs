@@ -182,6 +182,7 @@ namespace Slack.NetStandard.Tests
                 requestAssertion, ExampleFileContent<TResponse>(responseFile));
             
             Assert.True(CompareJson(response,responseFile));
+            Assert.Null(response.OtherFields);
             return response;
         }
 

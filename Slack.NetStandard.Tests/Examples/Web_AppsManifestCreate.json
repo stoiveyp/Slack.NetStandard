@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "app_id": "A012ABCD0A0",
+  "credentials": {
+    "client_id": "...",
+    "client_secret": "...",
+    "verification_token": "...",
+    "signing_secret": "..."
+  },
+  "oauth_authorize_url": "https://slack.com/oauth/v2/authorize?client_id=...&scope=commands,workflow.steps:execute"
+}
