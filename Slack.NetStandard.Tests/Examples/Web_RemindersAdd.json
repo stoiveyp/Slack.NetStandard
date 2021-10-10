@@ -1,27 +1,12 @@
 {
-  "file": {
-    "channels": [
-      "C2U7V2YA2"
-    ],
-    "comments_count": 1,
-    "created": 1507850315,
-    "groups": [],
-    "id": "F7H0D7ZA4",
-    "ims": [],
-    "name": "computer.gif",
-    "reactions": [
-      {
-        "count": 1,
-        "name": "stuck_out_tongue_winking_eye",
-        "users": [
-          "U2U85N1RV"
-        ]
-      }
-    ],
-    "timestamp": 1507850315,
-    "title": "computer.gif",
-    "user": "U2U85N1RV"
-  },
   "ok": true,
-  "type": "file"
+  "reminder": {
+    "id": "Rm12345678",
+    "creator": "U18888888",
+    "user": "U18888888",
+    "text": "eat a banana",
+    "recurring": false,
+    "time": 1602288000,
+    "complete_ts": 0
+  }
 }
