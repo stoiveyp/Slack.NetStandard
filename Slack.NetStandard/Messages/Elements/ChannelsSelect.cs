@@ -31,5 +31,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("response_url_enabled", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ResponseUrlEnabled { get; set; }
+
+        [JsonProperty("focus_on_load", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? FocusOnLoad { get; set; }
     }
 }
