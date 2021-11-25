@@ -1,6 +1,7 @@
 {
   "type": "checkboxes",
   "action_id": "this_is_an_action_id",
+  "focus_on_load":  true,
   "initial_options": [
     {
       "value": "A1",

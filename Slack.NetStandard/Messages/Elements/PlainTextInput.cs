@@ -37,5 +37,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("max_length",NullValueHandling = NullValueHandling.Ignore)]
         public int? MaxLength { get; set; }
+
+        [JsonProperty("focus_on_load", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? FocusOnLoad { get; set; }
     }
 }
