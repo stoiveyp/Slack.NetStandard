@@ -28,5 +28,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("confirm",NullValueHandling = NullValueHandling.Ignore)]
         public Confirmation Confirm { get; set; }
+
+        [JsonProperty("focus_on_load", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? FocusOnLoad { get; set; }
     }
 }

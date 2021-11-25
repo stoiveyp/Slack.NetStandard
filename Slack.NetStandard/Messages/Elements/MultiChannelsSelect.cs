@@ -29,5 +29,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("max_selected_items", NullValueHandling = NullValueHandling.Ignore)]
         public int? MaxSelectedItems { get; set; }
+
+        [JsonProperty("focus_on_load", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? FocusOnLoad { get; set; }
     }
 }

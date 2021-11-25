@@ -36,5 +36,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("initial_options", NullValueHandling = NullValueHandling.Ignore)]
         public IList<IOption> InitialOption { get; set; }
+
+        [JsonProperty("focus_on_load", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? FocusOnLoad { get; set; }
     }
 }
