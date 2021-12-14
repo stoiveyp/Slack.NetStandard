@@ -70,5 +70,25 @@ namespace Slack.NetStandard.Tests
             Assert.Null(optionGroup.AsOption());
             Assert.NotNull(optionGroup.AsOptionGroup());
         }
+
+        [Fact]
+        public void PlainTextInputElementSupportsDispatchConfig()
+        {
+            var expected = new JObject(
+                new JProperty("type", "plain_text_input"),
+                new JProperty("dispatch_action_config", new JObject(
+                    new JProperty("trigger_actions_on", new JArray("on_enter_pressed"))
+                    )
+                )
+			);
+            var actual = new PlainTextInput() {
+                DispatchActionConfig = new DispatchActionConfig(new ActionTrigger[] { ActionTrigger.OnEnterPressed })
+            };
+
+            Assert.True(JToken.DeepEquals(JObject.FromObject(actual), expected));
+
+            var result = JsonConvert.DeserializeObject<PlainTextInput>(expected.ToString());
+            Assert.Equal(ActionTrigger.OnEnterPressed, result.DispatchActionConfig.TriggerActionsOn[0]);
+        }
     }
 }

@@ -5,6 +5,8 @@ namespace Slack.NetStandard.Messages.Elements
 {
     public class DispatchActionConfig
     {
+        public DispatchActionConfig(){}
+
         public DispatchActionConfig(ActionTrigger[] triggers)
         {
             TriggerActionsOn = triggers;
