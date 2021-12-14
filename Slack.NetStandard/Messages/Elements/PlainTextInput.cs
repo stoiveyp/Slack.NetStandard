@@ -40,5 +40,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("focus_on_load", NullValueHandling = NullValueHandling.Ignore)]
         public bool? FocusOnLoad { get; set; }
+
+        [JsonProperty("dispatch_action_config", NullValueHandling = NullValueHandling.Ignore)]
+        public DispatchActionConfig DispatchActionConfig { get; set; }
     }
 }
