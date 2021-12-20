@@ -57,6 +57,24 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void CheckReplaceMessage()
+        {
+            var message = new InteractionMessage(ResponseType.InChannel) { Text = "It's 80 degrees right now.", ReplaceOriginal = true };
+            var expected = new JObject(new JProperty("response_type", "in_channel"),
+                new JProperty("text", "It's 80 degrees right now."), new JProperty("replace_original", true));
+            Assert.True(JToken.DeepEquals(expected, JObject.FromObject(message)));
+        }
+
+        [Fact]
+        public void CheckDeleteMessage()
+        {
+            var message = new InteractionMessage(ResponseType.InChannel) { Text = "It's 80 degrees right now.", DeleteOriginal = true };
+            var expected = new JObject(new JProperty("response_type", "in_channel"),
+                new JProperty("text", "It's 80 degrees right now."), new JProperty("delete_original", true));
+            Assert.True(JToken.DeepEquals(expected, JObject.FromObject(message)));
+        }
+
+        [Fact]
         public async Task RespondSendCorrectRequest()
         {
             var command = new Interaction.SlashCommand(payload + "&test=1");
