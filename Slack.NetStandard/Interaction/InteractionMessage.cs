@@ -31,6 +31,9 @@ namespace Slack.NetStandard.Interaction
 
         [JsonProperty("replace_original",NullValueHandling = NullValueHandling.Ignore)]
         public bool? ReplaceOriginal { get; set; }
+        
+        [JsonProperty("delete_original",NullValueHandling = NullValueHandling.Ignore)]
+        public bool? DeleteOriginal { get; set; }
 
         public async Task<WebApiResponse> Send(string responseUrl, HttpClient client = null)
         {
