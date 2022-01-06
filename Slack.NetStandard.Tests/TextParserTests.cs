@@ -58,7 +58,28 @@ namespace Slack.NetStandard.Tests
             Assert.Equal(5, result.TextIndex);
             Assert.Equal(10, result.TextLength);
             Assert.Equal("C123456", entity.ChannelId);
-            Assert.Null(result.Label);
+        }
+
+        [Fact]
+        public void ChannelWithLabel()
+        {
+            var result = TextParser.FindEntities("test <#C123456|general>").First();
+            var entity = Assert.IsType<ChannelMention>(result);
+            Assert.Equal(5, result.TextIndex);
+            Assert.Equal(18, result.TextLength);
+            Assert.Equal("C123456", entity.ChannelId);
+            Assert.Equal("general", entity.Label);
+        }
+
+        [Fact]
+        public void PrivateChannel()
+        {
+            var result = TextParser.FindEntities("test <#C123456|>").First();
+            var entity = Assert.IsType<ChannelMention>(result);
+            Assert.Equal(5, result.TextIndex);
+            Assert.Equal(11, result.TextLength);
+            Assert.Equal("C123456", entity.ChannelId);
+            Assert.Equal(0, entity.Label.Length);
         }
 
         [Fact]
@@ -116,11 +137,10 @@ namespace Slack.NetStandard.Tests
                 TextParser.FindEntities(
                     "<http://example.com|example link> <http://example.com> <#C0838UC2D|general> <!here> :star-struck: :smile:");
             Assert.Equal(4, result.Length);
-            var firstLink = Assert.IsType<Link>(result[0]);
-            var secondLink = Assert.IsType<Link>(result[1]);
-            var channel = Assert.IsType<ChannelMention>(result[2]);
-            var specialMention = Assert.IsType<SpecialMention>(result[3]);
-
+            Assert.IsType<Link>(result[0]);
+            Assert.IsType<Link>(result[1]);
+            Assert.IsType<ChannelMention>(result[2]);
+            Assert.IsType<SpecialMention>(result[3]);
         }
 
     }
