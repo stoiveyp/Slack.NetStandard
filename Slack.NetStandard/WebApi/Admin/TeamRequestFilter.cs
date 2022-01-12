@@ -9,5 +9,8 @@ namespace Slack.NetStandard.WebApi.Admin
     {
         [JsonProperty("team_id",NullValueHandling = NullValueHandling.Ignore)]
         public string Team { get; set; }
+
+        [JsonProperty("enterprise_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string Enterprise { get; set; }
     }
 }

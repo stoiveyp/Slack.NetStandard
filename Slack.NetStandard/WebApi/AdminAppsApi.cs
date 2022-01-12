@@ -11,39 +11,53 @@ namespace Slack.NetStandard.WebApi
             _client = client;
         }
 
-        public Task<WebApiResponse> ApproveApp(string appId, string teamId = null)
+        public Task<WebApiResponse> ApproveApp(string appId, string teamId = null, string enterpriseId = null)
         {
             return _client.MakeJsonCall("admin.apps.approve", new AdminAppDecision
             {
                 AppId = appId,
-                TeamId = teamId
+                TeamId = teamId,
+                EnterpriseId = enterpriseId
             });
         }
 
-        public Task<WebApiResponse> ApproveRequest(string requestId, string teamId = null)
+        public Task<WebApiResponse> ApproveRequest(string requestId, string teamId = null, string enterpriseId = null)
         {
             return _client.MakeJsonCall("admin.apps.approve", new AdminAppDecision
             {
                 RequestId = requestId,
-                TeamId = teamId
+                TeamId = teamId,
+                EnterpriseId = enterpriseId
             });
         }
 
-        public Task<WebApiResponse> RestrictApp(string appId, string teamId = null)
+        public Task<WebApiResponse> RestrictApp(string appId, string teamId = null, string enterpriseId = null)
         {
             return _client.MakeJsonCall("admin.apps.restrict", new AdminAppDecision
             {
                 AppId = appId,
-                TeamId = teamId
+                TeamId = teamId,
+                EnterpriseId = enterpriseId
             });
         }
 
-        public Task<WebApiResponse> RestrictRequest(string requestId, string teamId = null)
+        public Task<WebApiResponse> RestrictRequest(string requestId, string teamId = null, string enterpriseId = null)
         {
             return _client.MakeJsonCall("admin.apps.restrict", new AdminAppDecision
             {
                 RequestId = requestId,
-                TeamId = teamId
+                TeamId = teamId,
+                EnterpriseId = enterpriseId
+            });
+        }
+
+        public Task<WebApiResponse> CancelRequest(string requestId, string teamId = null, string enterpriseId = null)
+        {
+            return _client.MakeJsonCall("admin.apps.requests.cancel", new AdminAppDecision
+            {
+                RequestId = requestId,
+                TeamId = teamId,
+                EnterpriseId = enterpriseId
             });
         }
 

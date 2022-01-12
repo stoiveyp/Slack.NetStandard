@@ -107,6 +107,20 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public async Task Admin_AppsCancel()
+        {
+            await Utility.AssertWebApi(
+                c => c.Admin.Apps.CancelRequest("ABC123","T12345","E12345"),
+                "admin.apps.requests.cancel",
+                jobject =>
+                {
+                    Assert.Equal("ABC123", jobject.Value<string>("request_id"));
+                    Assert.Equal("E12345", jobject.Value<string>("enterprise_id"));
+                    Assert.Equal("T12345", jobject.Value<string>("team_id"));
+                });
+        }
+
+        [Fact]
         public async Task Admin_ListAppApproved()
         {
             await Utility.AssertWebApi(
