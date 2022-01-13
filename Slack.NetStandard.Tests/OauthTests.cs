@@ -20,6 +20,8 @@ namespace Slack.NetStandard.Tests
             Assert.NotNull(ati.AuthedUser);
             Assert.Equal("commands,incoming-webhook", ati.Scope);
             Assert.Equal("chat:write", ati.AuthedUser.Scope);
+            Assert.Equal(43200, ati.ExpiresIn);
+            Assert.Equal(43200, ati.AuthedUser.ExpiresIn);
         }
 
         [Fact]
