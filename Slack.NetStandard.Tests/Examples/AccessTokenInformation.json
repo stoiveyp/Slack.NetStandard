@@ -5,6 +5,7 @@
   "scope": "commands,incoming-webhook",
   "bot_user_id": "U0KRQLJ9H",
   "app_id": "A0KRD7HC3",
+  "expires_in": 43200,
   "team": {
     "name": "Slack Softball Team",
     "id": "T9TK3CUKW"
@@ -17,6 +18,7 @@
     "id": "U1234",
     "scope": "chat:write",
     "access_token": "xoxp-1234",
+    "expires_in": 43200,
     "token_type": "user"
   }
 }

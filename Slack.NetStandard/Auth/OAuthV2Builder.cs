@@ -91,7 +91,7 @@ namespace Slack.NetStandard.Auth
         {
             var dict = new Dictionary<string, string>
             {
-                {"grant_Type", "refresh_token"},
+                {"grant_type", "refresh_token"},
                 {"refresh_token", refreshToken}
             };
             if (!string.IsNullOrWhiteSpace(redirectUri))

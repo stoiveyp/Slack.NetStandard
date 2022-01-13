@@ -16,7 +16,7 @@ namespace Slack.NetStandard.Auth
         [JsonProperty("id",NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; set; }
 
-        [JsonProperty("expiresIn", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("expires_in", NullValueHandling = NullValueHandling.Ignore)]
         public long? ExpiresIn { get; set; }
 
         [JsonProperty("refresh_token", NullValueHandling = NullValueHandling.Ignore)]
