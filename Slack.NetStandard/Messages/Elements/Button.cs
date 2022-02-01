@@ -35,5 +35,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("confirm",NullValueHandling = NullValueHandling.Ignore)]
         public Confirmation Confirm { get; set; }
+
+        [JsonProperty("accessibility_label", NullValueHandling = NullValueHandling.Ignore)]
+        public string AccessibilityLabel { get; set; }
     }
 }

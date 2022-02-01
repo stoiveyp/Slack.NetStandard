@@ -35,5 +35,17 @@ namespace Slack.NetStandard.Tests
             },Utility.ExampleFileContent("AccessTokenInformation.json")));
             var ati = await OAuthV2Builder.Exchange(client,"code", "Aladdin", "OpenSesame");
         }
+
+        [Fact]
+        public async Task ExchangeRefreshToken()
+        {
+            var client = new HttpClient(new ActionHandler(async req =>
+            {
+                Assert.Equal("Basic", req.Headers.Authorization.Scheme);
+                Assert.Equal("QWxhZGRpbjpPcGVuU2VzYW1l", req.Headers.Authorization.Parameter);
+                Assert.Equal("grant_type=refresh_token&refresh_token=reftoken", await req.Content.ReadAsStringAsync());
+            }, Utility.ExampleFileContent("AccessTokenInformation.json")));
+            var ati = await OAuthV2Builder.ExchangeRefreshToken(client, "reftoken", "Aladdin", "OpenSesame");
+        }
     }
 }
