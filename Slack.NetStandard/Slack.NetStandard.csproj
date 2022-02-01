@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.7.1</Version>
+    <Version>3.8.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Fixes for OAuth ExpiresIn property and OAuthV2Builder.ExchangeRefreshToken method (thank you @fvilches17!)</PackageReleaseNotes>
+    <PackageReleaseNotes>Add button support for accessibility label</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Steven Pears</Authors>
