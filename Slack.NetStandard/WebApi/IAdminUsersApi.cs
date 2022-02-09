@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Admin;
 
@@ -23,5 +21,6 @@ namespace Slack.NetStandard.WebApi
         Task<WebApiResponse> SetRegular(string teamId, string userId);
 
         Task<WebApiResponse> ResetSession(string userId, SessionType type);
+        Task<WebApiResponse> UnsupportedVersions(DateTime? endOfSupport = null, DateTime? sessionStart = null);
     }
 }

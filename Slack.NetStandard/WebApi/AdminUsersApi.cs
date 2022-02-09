@@ -107,5 +107,22 @@ namespace Slack.NetStandard.WebApi
 
             return _client.MakeUrlEncodedCall("admin.users.session.reset", dict);
         }
+
+        public Task<WebApiResponse> UnsupportedVersions(DateTime? endOfSupport = null, DateTime? sessionStart = null)
+        {
+            var dict = new Dictionary<string, string> ();
+
+            if (endOfSupport.HasValue)
+            {
+                dict.Add("date_end_of_support", Epoch.For(endOfSupport.Value).ToString());
+            }
+
+            if (sessionStart.HasValue)
+            {
+                dict.Add("date_sessions_started", Epoch.For(sessionStart.Value).ToString());
+            }
+
+            return _client.MakeUrlEncodedCall("admin.users.unsupportedVersions.export", dict);
+        }
     }
 }
