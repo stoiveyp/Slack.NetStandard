@@ -496,5 +496,20 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("true",nvc["web_only"]);
                 });
         }
+
+        [Fact]
+        public async Task Admin_UsersUnsupportedVersionsExport()
+        {
+            var supportDate = DateTime.UtcNow.AddMonths(-1);
+            var sessionDate = DateTime.UtcNow.AddDays(-1);
+
+            await Utility.AssertEncodedWebApi(c => c.Admin.Users.UnsupportedVersions(supportDate,sessionDate),
+                "admin.users.unsupportedVersions.export",
+                nvc =>
+                {
+                    Assert.Equal(Epoch.For(supportDate).ToString(), nvc["date_end_of_support"]);
+                    Assert.Equal(Epoch.For(sessionDate).ToString(), nvc["date_sessions_started"]);
+                });
+        }
     }
 }
