@@ -43,6 +43,6 @@ namespace Slack.NetStandard.WebApi.Chat
         public IList<Attachment> Attachments { get; set; } = new List<Attachment>();
 
         public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
-        public bool ShouldSerializeAttachments() => Blocks?.Any() ?? false;
+        public bool ShouldSerializeAttachments() => Attachments?.Any() ?? false;
     }
 }
