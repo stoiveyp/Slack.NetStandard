@@ -76,6 +76,9 @@ namespace Slack.NetStandard
         private IWorkflowApi _workflow;
         public IWorkflowApi Workflow => _workflow ??= new WorkflowApi(this);
 
+        private IBookmarksApi _bookmarks;
+        public IBookmarksApi Bookmarks => _bookmarks ??= new BookmarksApi(this);
+
         public HttpClient Client { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();

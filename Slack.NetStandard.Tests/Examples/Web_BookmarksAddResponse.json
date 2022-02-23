@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "bookmark": {
+    "id": "Bk033XFJ9BTJ",
+    "channel_id": "C1RQ000",
+    "title": "bookmark-1",
+    "link": "https://google.com",
+    "emoji": ":clap:",
+    "icon_url": "https://www.google.com/favicon.ico",
+    "type": "link",
+    "date_created": 1644956055,
+    "date_updated": 0,
+    "rank": "g",
+    "last_updated_by_user_id": "U0334B6G6G5",
+    "last_updated_by_team_id": "T018DF03GHY",
+  }
+}
