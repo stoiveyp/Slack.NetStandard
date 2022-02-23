@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "bookmarks": [
+    {
+      "id": "Bk033ZSD3XRC",
+      "channel_id": "C01QC33UAKB",
+      "title": "Source Link and .NET libraries",
+      "link": "https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/sourcelink",
+      "icon_url": "https://docs.microsoft.com/favicon.ico",
+      "type": "link",
+      "date_created": 1645556199,
+      "date_updated": 0,
+      "rank": "U",
+      "last_updated_by_user_id": "U08HHP201",
+      "last_updated_by_team_id": "T08HHF3T9"
+    }
+  ]
+}
