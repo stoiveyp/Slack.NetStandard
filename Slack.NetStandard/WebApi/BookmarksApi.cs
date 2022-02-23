@@ -31,4 +31,13 @@ internal class BookmarksApi : IBookmarksApi
     {
         return _client.MakeJsonCall<UpdateBookmarkRequest, BookmarkResponse>("bookmarks.edit", request);
     }
+
+    public Task<BookmarkListResponse> List(string channelId)
+    {
+        return _client.MakeUrlEncodedCall<BookmarkListResponse>("bookmarks.list",
+            new Dictionary<string, string>
+            {
+                {"channel_id",channelId }
+            });
+    }
 }

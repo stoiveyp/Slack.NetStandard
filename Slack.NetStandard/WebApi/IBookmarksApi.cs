@@ -8,4 +8,5 @@ public interface IBookmarksApi
     Task<BookmarkResponse> Add(AddBookmarkRequest request);
     Task<WebApiResponse> Remove(string bookmarkId, string channelId);
     Task<BookmarkResponse> Edit(UpdateBookmarkRequest request);
+    Task<BookmarkListResponse> List(string channelId);
 }

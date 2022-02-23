@@ -43,5 +43,19 @@ namespace Slack.NetStandard.Tests
 
             Assert.Null(response.OtherFields);
         }
+
+        [Fact]
+        public async Task Bookmarks_List()
+        {
+            var response = await Utility.AssertEncodedWebApi(c => c.Bookmarks.List("C123456789"), "bookmarks.list", "Web_BookmarksListResponse.json", nvc =>
+            {
+                Assert.Single(nvc);
+                Assert.Equal("C123456789", nvc["channel_id"]);
+            });
+
+            var bookmark = Assert.Single(response.Bookmarks);
+            Assert.Equal("Bk033ZSD3XRC", bookmark.ID);
+            Assert.Equal("https://docs.microsoft.com/en-us/dotnet/standard/library-guidance/sourcelink", bookmark.Link);
+        }
     }
 }
