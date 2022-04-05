@@ -27,11 +27,26 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public async Task Team_InfoEmpty()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Team.Info(), "team.info", "Web_TeamInfo.json", Assert.Empty);
+        }
+
+        [Fact]
         public async Task Team_Info()
         {
             await Utility.AssertEncodedWebApi(c => c.Team.Info("T12345"), "team.info", "Web_TeamInfo.json", nvc =>
             {
                 Assert.Equal("T12345", nvc["team"]);
+            });
+        }
+
+        [Fact]
+        public async Task Team_InfoDomain()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Team.Info(null,"T12345"), "team.info", "Web_TeamInfo.json", nvc =>
+            {
+                Assert.Equal("T12345", nvc["domain"]);
             });
         }
 
