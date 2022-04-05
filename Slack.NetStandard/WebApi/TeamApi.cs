@@ -56,12 +56,15 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeUrlEncodedCall<BillableInfoResponse>("team.billableInfo", dict);
         }
 
-        public Task<InfoResponse> Info(string team = null)
+        public Task<InfoResponse> Info(string team = null, string domain = null)
         {
             var dict = new Dictionary<string, string>();
             if (!string.IsNullOrWhiteSpace(team))
             {
                 dict.Add(nameof(team), team);
+            }else if (!string.IsNullOrWhiteSpace(domain))
+            {
+                dict.Add(nameof(domain), domain);
             }
 
             return _client.MakeUrlEncodedCall<InfoResponse>("team.info", dict);

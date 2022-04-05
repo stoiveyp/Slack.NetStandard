@@ -10,7 +10,7 @@ namespace Slack.NetStandard.WebApi
         Task<TeamAccessLogResponse> AccessLogs(long? before, int? count, int? page);
 
         Task<BillableInfoResponse> BillableInfo(string user = null);
-        Task<InfoResponse> Info(string team = null);
+        Task<InfoResponse> Info(string team = null, string domain = null);
         Task<TeamIntegrationLogResponse> IntegrationLogs(IntegrationLogRequest request);
 
         Task<TeamProfileResponse> GetProfile(string visibility);
