@@ -80,6 +80,9 @@ namespace Slack.NetStandard.Messages
         [JsonProperty("files",NullValueHandling = NullValueHandling.Ignore)]
         public File[] Files { get; set; }
 
+        [JsonProperty("metadata",NullValueHandling = NullValueHandling.Ignore)]
+        public MessageMetadata Metadata { get; set; }
+
         [JsonExtensionData]
         public Dictionary<string,object> OtherFields { get; set; }
 
