@@ -11,6 +11,9 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
         [JsonProperty("event_ts",NullValueHandling = NullValueHandling.Ignore)]
         public Timestamp EventTimestamp { get; set; }
 
+        [JsonProperty("cache_ts", NullValueHandling = NullValueHandling.Ignore)]
+        public Timestamp CacheTimestamp { get; set; }
+
         [JsonExtensionData]
         public Dictionary<string,object> OtherFields { get; set; }
     }

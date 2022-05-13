@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.EventsApi.CallbackEvents;
@@ -109,6 +108,9 @@ namespace Slack.NetStandard.JsonConverters
                 MessageMetadataPosted.EventType => new MessageMetadataPosted(),
                 MessageMetadataUpdated.EventType => new MessageMetadataPosted(),
                 MessageMetadataDeleted.EventType => new MessageMetadataPosted(),
+                UserHuddleChanged.EventType => new UserHuddleChanged(),
+                UserStatusChanged.EventType => new UserStatusChanged(),
+                UserProfileChanged.EventType => new UserProfileChanged(),
                 _ => new CallbackEvent()
             };
         }

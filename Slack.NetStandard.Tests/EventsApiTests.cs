@@ -482,5 +482,32 @@ namespace Slack.NetStandard.Tests
             var result = Utility.AssertSubType<CallbackEvent, SharedChannelInviteDeclined>("Events_SharedChannelInviteDeclined.json");
             Assert.Null(result.OtherFields);
         }
+
+        [Fact]
+        public void UserHuddleChanged()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, UserHuddleChanged>("Events_UserHuddleChanged.json");
+            Assert.Null(result.OtherFields);
+            Assert.Null(result.User.OtherFields);
+            Assert.Null(result.User.Profile.OtherFields);
+        }
+
+        [Fact]
+        public void UserStatusChanged()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, UserStatusChanged>("Events_UserStatusChanged.json");
+            Assert.Null(result.OtherFields);
+            Assert.Null(result.User.OtherFields);
+            Assert.Null(result.User.Profile.OtherFields);
+        }
+
+        [Fact]
+        public void UserProfileChanged()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, UserProfileChanged>("Events_UserProfileChanged.json");
+            Assert.Null(result.OtherFields);
+            Assert.Null(result.User.OtherFields);
+            Assert.Null(result.User.Profile.OtherFields);
+        }
     }
 }

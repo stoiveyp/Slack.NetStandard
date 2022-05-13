@@ -27,6 +27,9 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("display_name_normalized",NullValueHandling = NullValueHandling.Ignore)]
         public string DisplayNameNormalized { get; set; }
 
+        [JsonProperty("status_text_canonical",NullValueHandling = NullValueHandling.Ignore)]
+        public string StatusTextCanonical { get; set; }
+
         [JsonProperty("status_text",NullValueHandling = NullValueHandling.Ignore)]
         public string StatusText { get; set; }
 
@@ -68,7 +71,6 @@ namespace Slack.NetStandard.Objects
 
         [JsonProperty("image_512", NullValueHandling = NullValueHandling.Ignore)]
         public string Image512 { get; set; }
-
 
         [JsonProperty("team",NullValueHandling = NullValueHandling.Ignore)]
         public string Team { get; set; }
