@@ -43,6 +43,9 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("is_restricted",NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsRestricted { get; set; }
 
+        [JsonProperty("is_ultra_restricted", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsUltraRestricted { get; set; }
+
         [JsonProperty("is_bot",NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsBot { get; set; }
 
@@ -57,6 +60,9 @@ namespace Slack.NetStandard.Objects
 
         [JsonProperty("is_invited_user",NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsInvitedUser { get; set; }
+
+        [JsonProperty("is_email_confirmed", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsEmailConfirmed { get; set; }
 
         [JsonProperty("has_2fa",NullValueHandling = NullValueHandling.Ignore)]
         public bool? Has2FA { get; set; }

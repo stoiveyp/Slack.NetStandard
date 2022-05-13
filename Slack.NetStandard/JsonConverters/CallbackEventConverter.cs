@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.EventsApi.CallbackEvents;
@@ -106,6 +105,9 @@ namespace Slack.NetStandard.JsonConverters
                 SharedChannelInviteAccepted.EventType => new SharedChannelInviteAccepted(),
                 SharedChannelInviteApproved.EventType => new SharedChannelInviteApproved(),
                 SharedChannelInviteDeclined.EventType => new SharedChannelInviteDeclined(),
+                UserHuddleChanged.EventType => new UserHuddleChanged(),
+                UserStatusChanged.EventType => new UserStatusChanged(),
+                UserProfileChanged.EventType => new UserProfileChanged(),
                 _ => new CallbackEvent()
             };
         }
