@@ -14,5 +14,8 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("url",NullValueHandling = NullValueHandling.Ignore)]
         public string Url { get; set; }
+
+        [JsonProperty("description",NullValueHandling = NullValueHandling.Ignore)]
+        public PlainText Description { get; set; }
     }
 }
