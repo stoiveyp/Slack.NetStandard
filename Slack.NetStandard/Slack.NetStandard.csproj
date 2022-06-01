@@ -8,6 +8,7 @@
     <PackageReleaseNotes>
 		chat.unfurl request object updated to match API
 		ElementValue properties updated/fixed
+        Changed internal use of HttpClient to be less resource intensive
 		(thanks for these @zzullick)</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>

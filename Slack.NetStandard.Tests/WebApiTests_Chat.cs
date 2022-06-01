@@ -18,8 +18,8 @@ namespace Slack.NetStandard.Tests
         {
             var client = new SlackWebApiClient("token");
             Assert.Equal("https://slack.com/api/", client.Client.BaseAddress.ToString());
-            Assert.Equal("token", client.Client.DefaultRequestHeaders.Authorization.Parameter);
-            Assert.Equal("Bearer", client.Client.DefaultRequestHeaders.Authorization.Scheme);
+            Assert.Equal(client.Client, SlackWebApiClient.DefaultClient);
+            Assert.Equal("token", client.Token);
         }
 
         [Fact]
