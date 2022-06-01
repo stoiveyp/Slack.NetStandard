@@ -123,7 +123,7 @@ namespace Slack.NetStandard.Tests
             {
                 Channel = "C123456",
                 Timestamp = "123.456",
-                Unfurls = new Dictionary<string, IMessageBlock[]> { { "example.com/test", new[] { new Section(new PlainText("test")) } } }
+                Unfurls = new Dictionary<string, Attachment> { { "example.com/test", new Attachment{Blocks = new List<IMessageBlock> { new Section(new PlainText("test")) } }} }
             }),
                 "chat.unfurl",
                 jobject =>
