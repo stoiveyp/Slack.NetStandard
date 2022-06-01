@@ -2,11 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.12.01</Version>
+    <Version>3.13.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Support for user_huddle_changed, user_status_changed and user_profile_changed events
-    Added Description property to Option</PackageReleaseNotes>
+    <PackageReleaseNotes>
+		chat.unfurl request object updated to match API
+		ElementValue properties updated/fixed
+		(thanks for these @zzullick)</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Steven Pears</Authors>
