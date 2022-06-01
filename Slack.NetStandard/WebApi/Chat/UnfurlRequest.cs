@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
 
 namespace Slack.NetStandard.WebApi.Chat
@@ -15,7 +16,7 @@ namespace Slack.NetStandard.WebApi.Chat
         public string Timestamp { get; set; }
 
         [JsonProperty("unfurls")]
-        public Dictionary<string,IMessageBlock[]> Unfurls { get; set; }
+        public Dictionary<string,Attachment> Unfurls { get; set; }
 
         [JsonProperty("user_auth_blocks",NullValueHandling = NullValueHandling.Ignore)]
         public IMessageBlock[] UserAuthBlocks { get; set; }

@@ -12,6 +12,12 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
         public string Value { get; set; }
 
+        [JsonProperty("selected_date",NullValueHandling = NullValueHandling.Ignore)]
+        public string SelectedDate { get; set; }
+
+        [JsonProperty("selected_time",NullValueHandling = NullValueHandling.Ignore)]
+        public string SelectedTime { get; set; }
+
         [JsonProperty("selected_option", NullValueHandling = NullValueHandling.Ignore)]
         public IOption SelectedOption { get; set; }
 
@@ -22,19 +28,19 @@ namespace Slack.NetStandard.Objects
         public string SelectedUser { get; set; }
 
         [JsonProperty("selected_users", NullValueHandling = NullValueHandling.Ignore)]
-        public string SelectedUsers { get; set; }
+        public string[] SelectedUsers { get; set; }
 
         [JsonProperty("selected_channel", NullValueHandling = NullValueHandling.Ignore)]
         public string SelectedChannel { get; set; }
 
         [JsonProperty("selected_channels", NullValueHandling = NullValueHandling.Ignore)]
-        public string SelectedChannels { get; set; }
+        public string[] SelectedChannels { get; set; }
 
         [JsonProperty("selected_conversation", NullValueHandling = NullValueHandling.Ignore)]
         public string SelectedConversation { get; set; }
 
         [JsonProperty("selected_conversations", NullValueHandling = NullValueHandling.Ignore)]
-        public string SelectedConversations { get; set; }
+        public string[] SelectedConversations { get; set; }
 
         [JsonExtensionData]
         public Dictionary<string, object> OtherFields { get; set; }
