@@ -18,8 +18,8 @@ namespace Slack.NetStandard.Tests
         {
             var client = new SlackWebApiClient("token");
             Assert.Equal("https://slack.com/api/", client.Client.BaseAddress.ToString());
-            Assert.Equal("token", client.Client.DefaultRequestHeaders.Authorization.Parameter);
-            Assert.Equal("Bearer", client.Client.DefaultRequestHeaders.Authorization.Scheme);
+            Assert.Equal(client.Client, SlackWebApiClient.DefaultClient);
+            Assert.Equal("token", client.Token);
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace Slack.NetStandard.Tests
             {
                 Channel = "C123456",
                 Timestamp = "123.456",
-                Unfurls = new Dictionary<string, IMessageBlock[]> { { "example.com/test", new[] { new Section(new PlainText("test")) } } }
+                Unfurls = new Dictionary<string, Attachment> { { "example.com/test", new Attachment{Blocks = new List<IMessageBlock> { new Section(new PlainText("test")) } }} }
             }),
                 "chat.unfurl",
                 jobject =>

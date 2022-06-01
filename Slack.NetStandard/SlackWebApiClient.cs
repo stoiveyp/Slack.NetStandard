@@ -79,54 +79,37 @@ namespace Slack.NetStandard
         private IBookmarksApi _bookmarks;
         public IBookmarksApi Bookmarks => _bookmarks ??= new BookmarksApi(this);
 
+        public static HttpClient DefaultClient { get; } = new ();
         public HttpClient Client { get; set; }
+        public string Token { get; set; }
 
         public JsonSerializer Serializer { get; set; } = JsonSerializer.CreateDefault();
 
-        private readonly Dictionary<string, string> _emptynvc = new Dictionary<string, string>();
-
-        internal SlackWebApiClient(Func<HttpClient> clientAccessor)
-        {
-            var client = clientAccessor();
-            if (client == null)
-            {
-                throw new ArgumentNullException(nameof(client));
-            }
-
-            if (client.BaseAddress == null)
-            {
-                client.BaseAddress = new Uri("https://slack.com/api/", UriKind.Absolute);
-            }
-
-            Client = client;
-        }
+        private readonly Dictionary<string, string> _emptynvc = new();
 
         public Task<WebApiResponse> Test(object data)
         {
             return ((IWebApiClient)this).MakeJsonCall("api.test", data);
         }
 
-        public SlackWebApiClient(string token) : this(SetupClient(token))
+        public SlackWebApiClient(string token) : this(null,token)
         {
-            if (string.IsNullOrWhiteSpace(token))
+
+        }
+
+        public SlackWebApiClient(HttpClient client) : this(client,null)
+        {
+
+        }
+
+        public SlackWebApiClient(HttpClient client, string token = null)
+        {
+            Token = token;
+            Client = client ?? DefaultClient;
+            if (Client.BaseAddress == null)
             {
-                throw new ArgumentNullException(nameof(token));
+                Client.BaseAddress = new Uri("https://slack.com/api/", UriKind.Absolute);
             }
-        }
-
-        public SlackWebApiClient(HttpClient client) : this(() => client)
-        {
-
-        }
-
-        static Func<HttpClient> SetupClient(string token)
-        {
-            return () =>
-            {
-                var client = new HttpClient();
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                return client;
-            };
         }
 
         Task<WebApiResponse> IWebApiClient.MakeJsonCall<TRequest>(string methodName, TRequest request)
@@ -140,8 +123,12 @@ namespace Slack.NetStandard
             {
                 var content = new StringContent(JsonConvert.SerializeObject(request));
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
-                var message = await Client.PostAsync(methodName, content);
-                return await GenerateResponseFromMessage<TResponse>(message);
+
+                var message = new HttpRequestMessage(HttpMethod.Post, methodName) { Content = content };
+                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+
+                var response = await Client.SendAsync(message);
+                return await GenerateResponseFromMessage<TResponse>(response);
             }
             catch (WebException ex)
             {
@@ -177,7 +164,11 @@ namespace Slack.NetStandard
         {
             var content = new FormUrlEncodedContent(request ?? _emptynvc);
             content.Headers.ContentType.CharSet = "utf-8";
-            return Client.PostAsync(methodName, content);
+
+            var message = new HttpRequestMessage(HttpMethod.Post, methodName) { Content = content };
+            message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+
+            return Client.SendAsync(message);
         }
 
         Task<WebApiResponse> IWebApiClient.MakeUrlEncodedCall(string methodName, Dictionary<string, string> request)
@@ -191,8 +182,10 @@ namespace Slack.NetStandard
             content.Headers.ContentType.CharSet = "utf-8";
             try
             {
-                var message = await Client.PostAsync(methodName, content);
-                return await GenerateResponseFromMessage<TResponse>(message);
+                var message = new HttpRequestMessage(HttpMethod.Post, methodName) { Content = content };
+                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+                var response = await Client.SendAsync(message);
+                return await GenerateResponseFromMessage<TResponse>(response);
             }
             catch (WebException ex)
             {
@@ -229,8 +222,10 @@ namespace Slack.NetStandard
 
             try
             {
-                var message = await Client.PostAsync(methodName, content);
-                return await GenerateResponseFromMessage<TResponse>(message);
+                var message = new HttpRequestMessage(HttpMethod.Post, methodName) { Content = content };
+                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+                var response = await Client.SendAsync(message);
+                return await GenerateResponseFromMessage<TResponse>(response);
             }
             catch (WebException ex)
             {

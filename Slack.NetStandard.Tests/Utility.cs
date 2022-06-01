@@ -126,14 +126,17 @@ namespace Slack.NetStandard.Tests
             Action<JObject> requestCheck,
             TResponse responseToSend)
         {
+            var guid = Guid.NewGuid().ToString("N");
             var http = new HttpClient(new ActionHandler(async req =>
             {
+                Assert.Equal("Bearer", req.Headers.Authorization.Scheme);
+                Assert.Equal(guid, req.Headers.Authorization.Parameter);
                 Assert.Equal("https://slack.com/api/" + url, req.RequestUri.ToString());
                 Assert.Equal("application/json", req.Content.Headers.ContentType.MediaType);
                 var jobject = JObject.Parse(await req.Content.ReadAsStringAsync());
                 requestCheck(jobject);
             }, responseToSend));
-            var client = new SlackWebApiClient(http);
+            var client = new SlackWebApiClient(http,guid);
             return requestCall(client);
         }
 

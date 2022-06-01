@@ -38,7 +38,7 @@ namespace Slack.NetStandard.Interaction
         public async Task<WebApiResponse> Send(string responseUrl, HttpClient client = null)
         {
             var content = new StringContent(JsonConvert.SerializeObject(this), Encoding.UTF8, "application/json");
-            var currentClient = client ?? new HttpClient();
+            var currentClient = client ?? SlackWebApiClient.DefaultClient;
             var response = await currentClient.PostAsync(new Uri(responseUrl, UriKind.Absolute), content);
             var rawResponse = await response.Content.ReadAsStringAsync();
 
