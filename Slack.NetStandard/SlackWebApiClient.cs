@@ -79,6 +79,7 @@ namespace Slack.NetStandard
         private IBookmarksApi _bookmarks;
         public IBookmarksApi Bookmarks => _bookmarks ??= new BookmarksApi(this);
 
+        public static Uri ApiBaseAddress { get; } = new ("https://slack.com/api/", UriKind.Absolute);
         public static HttpClient DefaultClient { get; } = new ();
         public HttpClient Client { get; set; }
         public string Token { get; set; }
@@ -106,11 +107,10 @@ namespace Slack.NetStandard
         {
             Token = token;
             Client = client ?? DefaultClient;
-            if (Client.BaseAddress == null)
-            {
-                Client.BaseAddress = new Uri("https://slack.com/api/", UriKind.Absolute);
-            }
         }
+
+        private static Uri MethodUrl(string methodName) => new (ApiBaseAddress, methodName);
+
 
         Task<WebApiResponse> IWebApiClient.MakeJsonCall<TRequest>(string methodName, TRequest request)
         {
@@ -124,7 +124,7 @@ namespace Slack.NetStandard
                 var content = new StringContent(JsonConvert.SerializeObject(request));
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
 
-                var message = new HttpRequestMessage(HttpMethod.Post, methodName) { Content = content };
+                var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
 
                 var response = await Client.SendAsync(message);
@@ -165,7 +165,7 @@ namespace Slack.NetStandard
             var content = new FormUrlEncodedContent(request ?? _emptynvc);
             content.Headers.ContentType.CharSet = "utf-8";
 
-            var message = new HttpRequestMessage(HttpMethod.Post, methodName) { Content = content };
+            var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
             message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
 
             return Client.SendAsync(message);
@@ -182,7 +182,7 @@ namespace Slack.NetStandard
             content.Headers.ContentType.CharSet = "utf-8";
             try
             {
-                var message = new HttpRequestMessage(HttpMethod.Post, methodName) { Content = content };
+                var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
                 var response = await Client.SendAsync(message);
                 return await GenerateResponseFromMessage<TResponse>(response);
@@ -222,7 +222,7 @@ namespace Slack.NetStandard
 
             try
             {
-                var message = new HttpRequestMessage(HttpMethod.Post, methodName) { Content = content };
+                var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
                 message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
                 var response = await Client.SendAsync(message);
                 return await GenerateResponseFromMessage<TResponse>(response);
