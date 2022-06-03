@@ -143,6 +143,7 @@ namespace Slack.NetStandard.Tests
             {
                 Channel = "C024BE91L",
                 Timestamp = "1401383885.000061",
+                FileIds = new[] { "F013GKY52QK", "F013GL22D0T" },
                 Text = newText
             }),
                 "chat.update",
@@ -151,6 +152,7 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("C024BE91L", jobject.Value<string>("channel"));
                     Assert.Equal("1401383885.000061", jobject.Value<string>("ts"));
                     Assert.Equal(newText, jobject.Value<string>("text"));
+                    Assert.Equal(2, ((JArray)jobject["file_ids"]).Count());
                 },
                 new UpdateMessageResponse { OK = true, Channel = "C024BE91L", Timestamp = "1401383885.000061", Text = newText });
             Assert.True(response.OK);
