@@ -18,5 +18,8 @@ namespace Slack.NetStandard.WebApi.Auth
 
         [JsonProperty("user_id",NullValueHandling = NullValueHandling.Ignore)]
         public string UserId { get; set; }
+
+        [JsonProperty("bot_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string BotId { get; set; }
     }
 }

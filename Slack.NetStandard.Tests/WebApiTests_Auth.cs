@@ -17,7 +17,8 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Auth_Test()
         {
-            await Utility.AssertEncodedWebApi(c => c.Auth.Test(), "auth.test", "Web_AuthTest.json", Assert.Empty);
+            var response = await Utility.AssertEncodedWebApi(c => c.Auth.Test(), "auth.test", "Web_AuthTest.json", Assert.Empty);
+            Assert.Null(response.OtherFields);
         }
     }
 }
