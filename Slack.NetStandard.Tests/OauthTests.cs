@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Slack.NetStandard.Auth;
@@ -11,6 +12,32 @@ namespace Slack.NetStandard.Tests
 {
     public class OauthTests
     {
+        [Fact]
+        public async Task ClientAuthCheck()
+        {
+            var client = new HttpClient(new ActionHandler(async req =>
+            {
+                Assert.Equal("Bearer", req.Headers.Authorization.Scheme);
+                Assert.Equal("wibble", req.Headers.Authorization.Parameter);
+            }));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "wibble");
+            var slackClient = new SlackWebApiClient(client);
+            var response = await slackClient.Auth.Test();
+        }
+
+        [Fact]
+        public async Task ClientTokenCheck()
+        {
+            var client = new HttpClient(new ActionHandler(async req =>
+            {
+                Assert.Equal("Bearer", req.Headers.Authorization.Scheme);
+                Assert.Equal("test", req.Headers.Authorization.Parameter);
+            }));
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "wibble");
+            var slackClient = new SlackWebApiClient(client, "test");
+            var response = await slackClient.Auth.Test();
+        }
+
         [Fact]
         public void AccessTokenInformation()
         {
