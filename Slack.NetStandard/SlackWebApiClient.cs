@@ -125,8 +125,8 @@ namespace Slack.NetStandard
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
 
                 var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
-                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
-
+                HandleAuth(message);
+                
                 var response = await Client.SendAsync(message);
                 return await GenerateResponseFromMessage<TResponse>(response);
             }
@@ -134,6 +134,14 @@ namespace Slack.NetStandard
             {
                 var source = ExceptionDispatchInfo.Capture(ex);
                 return ProcessSlackException<TResponse>(ex, source);
+            }
+        }
+
+        private void HandleAuth(HttpRequestMessage message)
+        {
+            if (!string.IsNullOrWhiteSpace(Token))
+            {
+                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
             }
         }
 
@@ -166,7 +174,7 @@ namespace Slack.NetStandard
             content.Headers.ContentType.CharSet = "utf-8";
 
             var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
-            message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+            HandleAuth(message);
 
             return Client.SendAsync(message);
         }
@@ -183,7 +191,7 @@ namespace Slack.NetStandard
             try
             {
                 var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
-                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+                HandleAuth(message);
                 var response = await Client.SendAsync(message);
                 return await GenerateResponseFromMessage<TResponse>(response);
             }
@@ -223,7 +231,7 @@ namespace Slack.NetStandard
             try
             {
                 var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
-                message.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+                HandleAuth(message);
                 var response = await Client.SendAsync(message);
                 return await GenerateResponseFromMessage<TResponse>(response);
             }
