@@ -44,7 +44,7 @@ namespace Slack.NetStandard.Analyzers
 
             var methods = node.ContainingType.GetMembers().OfType<IMethodSymbol>().FirstOrDefault(ims => ims.Name == "ShouldSerialize" + node.Name);
 
-            if (methods != null)
+            if (methods == null)
             {
                 var noShouldSerializeMethod = Diagnostic.Create(ShouldSerializeRule, node.Locations[0], node.Name);
                 symbolAnalysis.ReportDiagnostic(noShouldSerializeMethod);
