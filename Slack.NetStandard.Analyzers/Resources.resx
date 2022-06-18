@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BlockTypeDescription" xml:space="preserve">
-    <value>All block types should have at least one empty and one helper constructors</value>
+    <value>All block types should have at least one empty and one helper constructors.</value>
   </data>
   <data name="BlockTypeMessageFormat" xml:space="preserve">
     <value>Block type '{0}' is missing either an empty or helper constructor</value>
@@ -127,12 +127,30 @@
     <value>Block type does not adhere to constructor rules</value>
   </data>
   <data name="ElementTypeDescription" xml:space="preserve">
-    <value>All element types should have at least one empty and one helper constructors</value>
+    <value>All element types should have at least one empty and one helper constructors.</value>
   </data>
   <data name="ElementTypeMessageFormat" xml:space="preserve">
     <value>Element type '{0}' is missing either an empty or helper constructor</value>
   </data>
   <data name="ElementTypeTitle" xml:space="preserve">
     <value>Element type does not adhere to constructor rules</value>
+  </data>
+  <data name="ListNewDescription" xml:space="preserve">
+    <value>All list properties must be newed in the property and have a ShouldSerialize method in case they're empty.</value>
+  </data>
+  <data name="ListNewMessageFormat" xml:space="preserve">
+    <value>List Property '{0}' is not initialized</value>
+  </data>
+  <data name="ListNewTitle" xml:space="preserve">
+    <value>List property missing initializer</value>
+  </data>
+  <data name="ListShouldSerializeDescription" xml:space="preserve">
+    <value>List properties should have a ShouldSerialize method in case they're empty.</value>
+  </data>
+  <data name="ListShouldSerializeMessageFormat" xml:space="preserve">
+    <value>List Property '{0}' does not have a corresponding ShouldSerialize{0} method</value>
+  </data>
+  <data name="ListShouldSerializeTitle" xml:space="preserve">
+    <value>List Property missing serialization method</value>
   </data>
 </root>
