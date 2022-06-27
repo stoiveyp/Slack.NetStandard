@@ -31,13 +31,13 @@ namespace Slack.NetStandard.Analyzers
                 return;
             }
 
-            if (node.ContainingType.Name.Contains("Response") || node.ContainingNamespace.Name.Contains("Slack.NetStandard.EventsApi"))
+            if (node.ContainingType.Name.Contains("Response") || HasEventsNamespace(node))
             {
                 return;
             }
 
             var attributes = node.GetAttributes();
-            if (attributes.Any(ad => ad.AttributeClass.Name == "JsonPropertyAttribute"))
+            if (attributes.Any(ad => ad.AttributeClass?.Name == "AcceptedArrayAttribute"))
             {
                 //Only care about lists involved in serialization
                 return;
@@ -45,6 +45,21 @@ namespace Slack.NetStandard.Analyzers
 
             var notNewedList = Diagnostic.Create(ValidArrayRule, node.Locations[0], node.Name);
             symbolAnalysis.ReportDiagnostic(notNewedList);
+        }
+
+        private bool HasEventsNamespace(IPropertySymbol node)
+        {
+            var ns = node.ContainingNamespace;
+            while (ns != null)
+            {
+                if (ns.Name.Contains("EventsApi"))
+                {
+                    return true;
+                }
+                ns = ns.ContainingNamespace;
+            }
+
+            return false;
         }
 
         private static readonly LocalizableString ValidArrayTitle = new LocalizableResourceString(nameof(Resources.ValidArrayTitle), Resources.ResourceManager, typeof(Resources));

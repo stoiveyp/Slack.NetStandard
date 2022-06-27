@@ -8,3 +8,4 @@ Rule ID | Category | Severity | Notes
 SlackNetStandardMessageConstructorAnalyzer | CodingStandard | Warning | MessageConstructors
 SlackNetStandardNewList | CodingStandard | Warning | ListUsageChecks
 SlackNetStandardShouldSerialize | CodingStandard | Warning | ListUsageChecks
+SlackNetStandardValidArray | CodingStandard | Warning | ValidArrayUseAnalyzer
