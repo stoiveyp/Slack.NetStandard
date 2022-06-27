@@ -138,6 +138,9 @@
   <data name="ListNewDescription" xml:space="preserve">
     <value>All list properties must be newed in the property and have a ShouldSerialize method in case they're empty.</value>
   </data>
+  <data name="ListNewFixTitle" xml:space="preserve">
+    <value>Initialize List</value>
+  </data>
   <data name="ListNewMessageFormat" xml:space="preserve">
     <value>List Property '{0}' is not initialized</value>
   </data>
@@ -147,10 +150,22 @@
   <data name="ListShouldSerializeDescription" xml:space="preserve">
     <value>List properties should have a ShouldSerialize method in case they're empty.</value>
   </data>
+  <data name="ListShouldSerializeFixTitle" xml:space="preserve">
+    <value>Add ShouldSerialize Method</value>
+  </data>
   <data name="ListShouldSerializeMessageFormat" xml:space="preserve">
     <value>List Property '{0}' does not have a corresponding ShouldSerialize{0} method</value>
   </data>
   <data name="ListShouldSerializeTitle" xml:space="preserve">
     <value>List Property missing serialization method</value>
+  </data>
+  <data name="ValidArrayDescription" xml:space="preserve">
+    <value>Arrays should only be used in Event API classes, responses or excluded via the AllowedArray attribute.</value>
+  </data>
+  <data name="ValidArrayMessageFormat" xml:space="preserve">
+    <value>Array property {0} is invalid</value>
+  </data>
+  <data name="ValidArrayTitle" xml:space="preserve">
+    <value>Array type is not valid in this class</value>
   </data>
 </root>

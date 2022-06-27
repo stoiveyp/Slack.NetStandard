@@ -10,7 +10,8 @@ namespace Slack.NetStandard.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class ListUsageChecks : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "SlackNetStandardListUsageAnalyzer";
+        public const string NewListDiagnosticId = "SlackNetStandardNewList";
+        public const string ShouldSerializeDiagnosticId = "SlackNetStandardShouldSerialize";
 
         public static void CheckProperty(SymbolAnalysisContext symbolAnalysis)
         {
@@ -63,8 +64,8 @@ namespace Slack.NetStandard.Analyzers
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(NewedListRule, ShouldSerializeRule);
 
-        private static readonly DiagnosticDescriptor NewedListRule = new DiagnosticDescriptor(DiagnosticId, ListNewTitle, ListNewMessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: ListNewDescription);
-        private static readonly DiagnosticDescriptor ShouldSerializeRule = new DiagnosticDescriptor(DiagnosticId, ListShouldSerializeTitle, ListShouldSerializeMessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: ListShouldSerializeDescription);
+        private static readonly DiagnosticDescriptor NewedListRule = new DiagnosticDescriptor(NewListDiagnosticId, ListNewTitle, ListNewMessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: ListNewDescription);
+        private static readonly DiagnosticDescriptor ShouldSerializeRule = new DiagnosticDescriptor(ShouldSerializeDiagnosticId, ListShouldSerializeTitle, ListShouldSerializeMessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: ListShouldSerializeDescription);
 
         public override void Initialize(AnalysisContext context)
         {

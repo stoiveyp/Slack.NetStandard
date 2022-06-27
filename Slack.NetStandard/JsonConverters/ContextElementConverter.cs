@@ -34,7 +34,7 @@ namespace Slack.NetStandard.JsonConverters
             return target;
         }
 
-        public static Dictionary<string, Type> IMessageElementLookup = new Dictionary<string, Type>
+        public static Dictionary<string, Type> IMessageElementLookup = new()
         {
             {ToEnumString(TextType.PlainText), typeof(PlainText)},
             {ToEnumString(TextType.Markdown), typeof(MarkdownText)},

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Slack.NetStandard.Messages.Elements
 {
@@ -29,15 +30,19 @@ namespace Slack.NetStandard.Messages.Elements
         public string ActionId { get; set; }
 
         [JsonProperty("options", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<Option> Options { get; set; }
+        public IList<Option> Options { get; set; } = new List<Option>();
 
         [JsonProperty("option_groups", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<OptionGroup> OptionGroups { get; set; }
+        public IList<OptionGroup> OptionGroups { get; set; } = new List<OptionGroup>();
 
         [JsonProperty("initial_options", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<IOption> InitialOption { get; set; }
+        public IList<IOption> InitialOption { get; set; } = new List<IOption>();
 
         [JsonProperty("focus_on_load", NullValueHandling = NullValueHandling.Ignore)]
         public bool? FocusOnLoad { get; set; }
+
+        public bool ShouldSerializeOptions() => Options.Any();
+        public bool ShouldSerializeInitialOption() => InitialOption.Any();
+        public bool ShouldSerializeOptionGroups() => OptionGroups.Any();
     }
 }

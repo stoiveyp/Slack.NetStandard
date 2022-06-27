@@ -124,6 +124,15 @@ namespace Slack.NetStandard.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initialize List.
+        /// </summary>
+        internal static string ListNewFixTitle {
+            get {
+                return ResourceManager.GetString("ListNewFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List Property &apos;{0}&apos; is not initialized.
         /// </summary>
         internal static string ListNewMessageFormat {
@@ -151,6 +160,15 @@ namespace Slack.NetStandard.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add ShouldSerialize Method.
+        /// </summary>
+        internal static string ListShouldSerializeFixTitle {
+            get {
+                return ResourceManager.GetString("ListShouldSerializeFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List Property &apos;{0}&apos; does not have a corresponding ShouldSerialize{0} method.
         /// </summary>
         internal static string ListShouldSerializeMessageFormat {
@@ -165,6 +183,33 @@ namespace Slack.NetStandard.Analyzers {
         internal static string ListShouldSerializeTitle {
             get {
                 return ResourceManager.GetString("ListShouldSerializeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arrays should only be used in Event API classes, responses or excluded via the AllowedArray attribute..
+        /// </summary>
+        internal static string ValidArrayDescription {
+            get {
+                return ResourceManager.GetString("ValidArrayDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Array property {0} is invalid.
+        /// </summary>
+        internal static string ValidArrayMessageFormat {
+            get {
+                return ResourceManager.GetString("ValidArrayMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Array type is not valid in this class.
+        /// </summary>
+        internal static string ValidArrayTitle {
+            get {
+                return ResourceManager.GetString("ValidArrayTitle", resourceCulture);
             }
         }
     }
