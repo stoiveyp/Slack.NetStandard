@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Slack.NetStandard.Objects
 {
@@ -31,7 +32,9 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("inputs",NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string, WorkflowInput> Inputs { get; set; }
 
-        [JsonProperty("outputs",NullValueHandling = NullValueHandling.Ignore)]
-        public WorkflowOutput[] Outputs { get; set; }
+        [JsonProperty("outputs", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<WorkflowOutput> Outputs { get; set; } = new List<WorkflowOutput>();
+
+        public bool ShouldSerializeOutputs() => Outputs?.Any() ?? false;
     }
 }

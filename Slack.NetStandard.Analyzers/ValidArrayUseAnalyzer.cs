@@ -36,16 +36,17 @@ namespace Slack.NetStandard.Analyzers
                 return;
             }
 
-            var attributes = node.GetAttributes();
-            if (attributes.Any(ad => ad.AttributeClass?.Name == "AcceptedArrayAttribute"))
+            if (IsAcceptedArray(node.GetAttributes()) || IsAcceptedArray(node.ContainingType.GetAttributes()))
             {
-                //Only care about lists involved in serialization
                 return;
             }
 
             var notNewedList = Diagnostic.Create(ValidArrayRule, node.Locations[0], node.Name);
             symbolAnalysis.ReportDiagnostic(notNewedList);
         }
+
+        private bool IsAcceptedArray(ImmutableArray<AttributeData> attributes) =>
+            attributes.Any(ad => ad.AttributeClass?.Name == "AcceptedArrayAttribute");
 
         private bool HasEventsNamespace(IPropertySymbol node)
         {

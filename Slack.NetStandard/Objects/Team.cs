@@ -22,7 +22,7 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("enterprise_name", NullValueHandling = NullValueHandling.Ignore)]
         public string EnterpriseName { get; set; }
 
-        [JsonProperty("default_channels", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("default_channels", NullValueHandling = NullValueHandling.Ignore),AcceptedArray]
         public string[] DefaultChannels { get; set; }
 
         [JsonProperty("date_created", NullValueHandling = NullValueHandling.Ignore)]

@@ -115,6 +115,15 @@ namespace Slack.NetStandard.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Convert to list.
+        /// </summary>
+        internal static string InvalidArrayFixTitle {
+            get {
+                return ResourceManager.GetString("InvalidArrayFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All list properties must be newed in the property and have a ShouldSerialize method in case they&apos;re empty..
         /// </summary>
         internal static string ListNewDescription {

@@ -4,7 +4,7 @@ namespace Slack.NetStandard.WebApi.Search
 {
     public class PagedData<T>
     {
-        [JsonProperty("matches",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("matches",NullValueHandling = NullValueHandling.Ignore), AcceptedArray]
         public T[] Matches { get; set; }
 
         [JsonProperty("paging",NullValueHandling = NullValueHandling.Ignore)]

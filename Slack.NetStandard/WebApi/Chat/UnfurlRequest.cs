@@ -4,6 +4,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
+using System.Linq;
 
 namespace Slack.NetStandard.WebApi.Chat
 {
@@ -18,8 +19,8 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("unfurls")]
         public Dictionary<string,Attachment> Unfurls { get; set; }
 
-        [JsonProperty("user_auth_blocks",NullValueHandling = NullValueHandling.Ignore)]
-        public IMessageBlock[] UserAuthBlocks { get; set; }
+        [JsonProperty("user_auth_blocks", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<IMessageBlock> UserAuthBlocks { get; set; } = new List<IMessageBlock>();
 
         [JsonProperty("user_auth_message",NullValueHandling = NullValueHandling.Ignore)]
         public string UserAuthMessage { get; set; }
@@ -29,5 +30,7 @@ namespace Slack.NetStandard.WebApi.Chat
 
         [JsonProperty("user_auth_url",NullValueHandling = NullValueHandling.Ignore)]
         public string UserAuthUrl { get; set; }
+
+        public bool ShouldSerializeUserAuthBlocks() => UserAuthBlocks?.Any() ?? false;
     }
 }

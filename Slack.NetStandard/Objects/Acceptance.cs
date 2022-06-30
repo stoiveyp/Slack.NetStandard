@@ -23,7 +23,7 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("accepting_user",NullValueHandling = NullValueHandling.Ignore)]
         public User AcceptingUser { get; set; }
 
-        [JsonProperty("reviews",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reviews",NullValueHandling = NullValueHandling.Ignore),AcceptedArray]
         public Review[] Reviews { get; set; }
 
         [JsonExtensionData]

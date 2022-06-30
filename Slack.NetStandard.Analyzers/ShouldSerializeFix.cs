@@ -41,15 +41,17 @@ namespace Slack.NetStandard.Analyzers
 
         private async Task<Document> AddShouldSerialize(Document doc, PropertyDeclarationSyntax property, ClassDeclarationSyntax classType, CancellationToken cancellationToken)
         {
-            var arrowExpression = SyntaxFactory.ArrowExpressionClause(
-                SyntaxFactory.InvocationExpression(
-                SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+            var anyCheck = SyntaxFactory.ConditionalAccessExpression(
                     SyntaxFactory.IdentifierName(property.Identifier.Text),
-                    SyntaxFactory.IdentifierName("Any"))));
+                    SyntaxFactory.InvocationExpression(SyntaxFactory.MemberBindingExpression(SyntaxFactory.IdentifierName("Any")))
+                    );
+
+            var nullCoalesce = SyntaxFactory.BinaryExpression(SyntaxKind.CoalesceExpression,
+                anyCheck, SyntaxFactory.LiteralExpression(SyntaxKind.FalseLiteralExpression));
 
             var newMethod = SyntaxFactory.MethodDeclaration(
                     SyntaxFactory.ParseTypeName("bool"), $"ShouldSerialize{property.Identifier.Text}")
-                .WithExpressionBody(arrowExpression)
+                .WithExpressionBody(SyntaxFactory.ArrowExpressionClause(nullCoalesce))
                 .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword));
 

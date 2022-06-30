@@ -37,7 +37,7 @@ namespace Slack.NetStandard.ApiCommon
         [JsonProperty("team",NullValueHandling = NullValueHandling.Ignore)]
         public TeamSummary Team { get; set; }
 
-        public bool ShouldSerializeRequesterIds() => RequesterIds.Any();
-        public bool ShouldSerializeChannelIds() => ChannelIds.Any();
+        public bool ShouldSerializeRequesterIds() => RequesterIds?.Any() ?? false;
+        public bool ShouldSerializeChannelIds() => ChannelIds?.Any() ?? false;
     }
 }

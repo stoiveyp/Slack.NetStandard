@@ -8,7 +8,7 @@ namespace Slack.NetStandard.WebApi.Admin
         [JsonProperty("app")]
         public App App { get; set; }
 
-        [JsonProperty("scopes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("scopes", NullValueHandling = NullValueHandling.Ignore), AcceptedArray]
         public Scope[] Scopes { get; set; }
 
         [JsonProperty("date_updated", NullValueHandling = NullValueHandling.Ignore)]

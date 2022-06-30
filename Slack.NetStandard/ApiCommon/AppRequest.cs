@@ -21,7 +21,7 @@ namespace Slack.NetStandard.ApiCommon
         [JsonProperty("team", NullValueHandling = NullValueHandling.Ignore)]
         public TeamSummary Team { get; set; }
 
-        [JsonProperty("scopes", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("scopes", NullValueHandling = NullValueHandling.Ignore),AcceptedArray]
         public Scope[] Scopes { get; set; }
 
         [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]

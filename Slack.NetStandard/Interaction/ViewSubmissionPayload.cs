@@ -9,7 +9,7 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("view", NullValueHandling = NullValueHandling.Ignore)]
         public View View { get; set; }
 
-        [JsonProperty("response_urls",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("response_urls",NullValueHandling = NullValueHandling.Ignore), AcceptedArray]
         public string[] ResponseUrls{ get; set; }
 
         [JsonProperty("workflow_step",NullValueHandling = NullValueHandling.Ignore)]

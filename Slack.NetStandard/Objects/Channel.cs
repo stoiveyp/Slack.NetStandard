@@ -55,7 +55,7 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("is_org_shared", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsOrgShared { get; set; }
 
-        [JsonProperty("pending_shared", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("pending_shared", NullValueHandling = NullValueHandling.Ignore), AcceptedArray]
         public string[] PendingShared { get; set; }
 
         [JsonProperty("is_pending_ext_shared", NullValueHandling = NullValueHandling.Ignore)]
@@ -88,7 +88,7 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("purpose", NullValueHandling = NullValueHandling.Ignore)]
         public ChannelValue Purpose { get; set; }
 
-        [JsonProperty("previous_names", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("previous_names", NullValueHandling = NullValueHandling.Ignore), AcceptedArray]
         public string[] PreviousNames { get; set; }
 
         [JsonProperty("priority", NullValueHandling = NullValueHandling.Ignore)]

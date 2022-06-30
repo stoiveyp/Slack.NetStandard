@@ -168,4 +168,7 @@
   <data name="ValidArrayTitle" xml:space="preserve">
     <value>Array type is not valid in this class</value>
   </data>
+  <data name="InvalidArrayFixTitle" xml:space="preserve">
+    <value>Convert to list</value>
+  </data>
 </root>

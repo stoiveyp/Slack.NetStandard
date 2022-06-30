@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Slack.NetStandard
 {
-    [AttributeUsage(AttributeTargets.Property)]
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
     public class AcceptedArrayAttribute:Attribute
     {
     }

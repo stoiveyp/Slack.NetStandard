@@ -4,7 +4,7 @@ namespace Slack.NetStandard.Objects
 {
     public class Share
     {
-        [JsonProperty("reply_users",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reply_users",NullValueHandling = NullValueHandling.Ignore),AcceptedArray]
         public string[] ReplyUsers { get; set; }
 
         [JsonProperty("reply_count",NullValueHandling = NullValueHandling.Ignore)]
