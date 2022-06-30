@@ -41,14 +41,14 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Files_RevokePublicUrl()
         {
-            await Utility.AssertEncodedWebApi(c => c.Files.RevokePublicUrl("F1234567890"), "files.revokePublicUrl",
+            await Utility.AssertEncodedWebApi(c => c.Files.RevokePublicUrl("F1234567890"), "files.revokePublicURL",
                 "Web_FilesInfo.json", nvc => Assert.Equal("F1234567890", nvc["file"]));
         }
 
         [Fact]
         public async Task Files_SharedPublicUrl()
         {
-            await Utility.AssertEncodedWebApi(c => c.Files.SharedPublicUrl("F1234567890"), "files.sharedPublicUrl",
+            await Utility.AssertEncodedWebApi(c => c.Files.SharedPublicUrl("F1234567890"), "files.sharedPublicURL",
                 "Web_FilesInfo.json", nvc => Assert.Equal("F1234567890", nvc["file"]));
         }
 

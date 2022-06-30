@@ -32,12 +32,12 @@ namespace Slack.NetStandard.WebApi
 
         public Task<FileResponse> RevokePublicUrl(string file)
         {
-            return _client.MakeUrlEncodedCall<FileResponse>("files.revokePublicUrl", new Dictionary<string, string> { { "file", file } });
+            return _client.MakeUrlEncodedCall<FileResponse>("files.revokePublicURL", new Dictionary<string, string> { { "file", file } });
         }
 
         public Task<FileResponse> SharedPublicUrl(string file)
         {
-            return _client.MakeUrlEncodedCall<FileResponse>("files.sharedPublicUrl", new Dictionary<string, string> { { "file", file } });
+            return _client.MakeUrlEncodedCall<FileResponse>("files.sharedPublicURL", new Dictionary<string, string> { { "file", file } });
         }
 
         public Task<FileResponse> Upload(FileUploadRequest request)
