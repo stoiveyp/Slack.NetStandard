@@ -18,7 +18,7 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
         public Message Message { get; set; }
 
-        [JsonProperty("actions",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("actions",NullValueHandling = NullValueHandling.Ignore), AcceptedArray]
         public PayloadAction[] Actions { get; set; }
 
         [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]

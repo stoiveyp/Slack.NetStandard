@@ -19,7 +19,7 @@ namespace Slack.NetStandard.Analyzers {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,7 +61,7 @@ namespace Slack.NetStandard.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All block types should have at least one empty and one helper constructors.
+        ///   Looks up a localized string similar to All block types should have at least one empty and one helper constructors..
         /// </summary>
         internal static string BlockTypeDescription {
             get {
@@ -88,7 +88,7 @@ namespace Slack.NetStandard.Analyzers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All element types should have at least one empty and one helper constructors.
+        ///   Looks up a localized string similar to All element types should have at least one empty and one helper constructors..
         /// </summary>
         internal static string ElementTypeDescription {
             get {
@@ -111,6 +111,114 @@ namespace Slack.NetStandard.Analyzers {
         internal static string ElementTypeTitle {
             get {
                 return ResourceManager.GetString("ElementTypeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Convert to list.
+        /// </summary>
+        internal static string InvalidArrayFixTitle {
+            get {
+                return ResourceManager.GetString("InvalidArrayFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All list properties must be newed in the property and have a ShouldSerialize method in case they&apos;re empty..
+        /// </summary>
+        internal static string ListNewDescription {
+            get {
+                return ResourceManager.GetString("ListNewDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initialize List.
+        /// </summary>
+        internal static string ListNewFixTitle {
+            get {
+                return ResourceManager.GetString("ListNewFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List Property &apos;{0}&apos; is not initialized.
+        /// </summary>
+        internal static string ListNewMessageFormat {
+            get {
+                return ResourceManager.GetString("ListNewMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List property missing initializer.
+        /// </summary>
+        internal static string ListNewTitle {
+            get {
+                return ResourceManager.GetString("ListNewTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List properties should have a ShouldSerialize method in case they&apos;re empty..
+        /// </summary>
+        internal static string ListShouldSerializeDescription {
+            get {
+                return ResourceManager.GetString("ListShouldSerializeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add ShouldSerialize Method.
+        /// </summary>
+        internal static string ListShouldSerializeFixTitle {
+            get {
+                return ResourceManager.GetString("ListShouldSerializeFixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List Property &apos;{0}&apos; does not have a corresponding ShouldSerialize{0} method.
+        /// </summary>
+        internal static string ListShouldSerializeMessageFormat {
+            get {
+                return ResourceManager.GetString("ListShouldSerializeMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List Property missing serialization method.
+        /// </summary>
+        internal static string ListShouldSerializeTitle {
+            get {
+                return ResourceManager.GetString("ListShouldSerializeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Arrays should only be used in Event API classes, responses or excluded via the AllowedArray attribute..
+        /// </summary>
+        internal static string ValidArrayDescription {
+            get {
+                return ResourceManager.GetString("ValidArrayDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Array property {0} is invalid.
+        /// </summary>
+        internal static string ValidArrayMessageFormat {
+            get {
+                return ResourceManager.GetString("ValidArrayMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Array type is not valid in this class.
+        /// </summary>
+        internal static string ValidArrayTitle {
+            get {
+                return ResourceManager.GetString("ValidArrayTitle", resourceCulture);
             }
         }
     }

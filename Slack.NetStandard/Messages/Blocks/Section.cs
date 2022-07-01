@@ -32,9 +32,11 @@ namespace Slack.NetStandard.Messages.Blocks
         public string BlockId { get; set; }
 
         [JsonProperty("fields",NullValueHandling = NullValueHandling.Ignore)]
-        public IList<TextObject> Fields { get; set; }
+        public IList<TextObject> Fields { get; set; } = new List<TextObject>();
 
         [JsonProperty("accessory",NullValueHandling = NullValueHandling.Ignore)]
         public IMessageElement Accessory { get; set; }
+
+        public bool ShouldSerializeFields() => Fields.Any();
     }
 }

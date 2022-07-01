@@ -10,7 +10,7 @@ namespace Slack.NetStandard.ApiCommon
         [JsonProperty("count")]
         public int Count { get; set; }
 
-        [JsonProperty("users")]
+        [JsonProperty("users"), AcceptedArray]
         public string[] Users { get; set; }
     }
 }

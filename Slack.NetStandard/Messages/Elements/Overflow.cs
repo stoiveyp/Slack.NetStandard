@@ -20,9 +20,11 @@ namespace Slack.NetStandard.Messages.Elements
         public string ActionId { get; set; }
 
         [JsonProperty("options")]
-        public IList<Option> Options { get; set; }
+        public IList<Option> Options { get; set; } = new List<Option>();
 
         [JsonProperty("confirm", NullValueHandling = NullValueHandling.Ignore)]
         public Confirmation Confirm { get; set; }
+
+        public bool ShouldSerializeOptions() => Options.Any();
     }
 }

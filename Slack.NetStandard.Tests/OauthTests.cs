@@ -15,7 +15,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task ClientAuthCheck()
         {
-            var client = new HttpClient(new ActionHandler(async req =>
+            var client = new HttpClient(new ActionHandler(req =>
             {
                 Assert.Equal("Bearer", req.Headers.Authorization.Scheme);
                 Assert.Equal("wibble", req.Headers.Authorization.Parameter);
@@ -28,7 +28,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task ClientTokenCheck()
         {
-            var client = new HttpClient(new ActionHandler(async req =>
+            var client = new HttpClient(new ActionHandler(req =>
             {
                 Assert.Equal("Bearer", req.Headers.Authorization.Scheme);
                 Assert.Equal("test", req.Headers.Authorization.Parameter);

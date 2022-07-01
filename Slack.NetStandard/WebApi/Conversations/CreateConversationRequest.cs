@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace Slack.NetStandard.WebApi.Conversations
 {
@@ -10,7 +12,9 @@ namespace Slack.NetStandard.WebApi.Conversations
         [JsonProperty("is_private",NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsPrivate { get; set; }
 
-        [JsonProperty("user_ids",NullValueHandling = NullValueHandling.Ignore)]
-        public string[] UserIds { get; set; }
+        [JsonProperty("user_ids", NullValueHandling = NullValueHandling.Ignore)]
+        public IList<string> UserIds { get; set; } = new List<string>();
+
+        public bool ShouldSerializeUserIds() => UserIds?.Any() ?? false;
     }
 }

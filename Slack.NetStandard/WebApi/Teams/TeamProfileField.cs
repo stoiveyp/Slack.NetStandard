@@ -20,7 +20,7 @@ namespace Slack.NetStandard.WebApi.Teams
         [JsonProperty("type",NullValueHandling = NullValueHandling.Ignore)]
         public string Type { get; set; }
 
-        [JsonProperty("possible_values",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("possible_values",NullValueHandling = NullValueHandling.Ignore),AcceptedArray]
         public string[] PossibleValues { get; set; }
 
         [JsonProperty("options",NullValueHandling = NullValueHandling.Ignore)]

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
@@ -32,8 +33,8 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("submit", NullValueHandling = NullValueHandling.Ignore)]
         public PlainText Submit { get; set; }
 
-        [JsonProperty("blocks",NullValueHandling = NullValueHandling.Ignore)]
-        public IMessageBlock[] Blocks { get; set; }
+        [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]
+        public List<IMessageBlock> Blocks { get; set; } = new();
 
         [JsonProperty("clear_on_close",NullValueHandling = NullValueHandling.Ignore)]
         public bool? ClearOnClose { get; set; }
@@ -65,5 +66,6 @@ namespace Slack.NetStandard.Objects
         [JsonExtensionData]
         public Dictionary<string, object> OtherFields { get; set; }
 
+        public bool ShouldSerializeBlocks() => Blocks.Any();
     }
 }

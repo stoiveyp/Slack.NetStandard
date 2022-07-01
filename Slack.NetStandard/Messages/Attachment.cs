@@ -10,7 +10,7 @@ namespace Slack.NetStandard.Messages
     public class Attachment
     {
         [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]
-        public List<IMessageBlock> Blocks { get; set; } = new List<IMessageBlock>();
+        public List<IMessageBlock> Blocks { get; set; } = new ();
 
         [JsonProperty("color",NullValueHandling = NullValueHandling.Ignore)]
         public string Color { get; set; }
@@ -40,7 +40,7 @@ namespace Slack.NetStandard.Messages
         public string ImageUrl { get; set; }
 
         [JsonProperty("mrkdwn_in",NullValueHandling = NullValueHandling.Ignore)]
-        public List<string> MarkdownIn { get; set; } = new List<string>();
+        public List<string> MarkdownIn { get; set; } = new ();
 
         [JsonProperty("pretext",NullValueHandling = NullValueHandling.Ignore)]
         public string Pretext { get; set; }

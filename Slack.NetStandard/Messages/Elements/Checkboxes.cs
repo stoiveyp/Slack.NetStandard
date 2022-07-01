@@ -21,10 +21,10 @@ namespace Slack.NetStandard.Messages.Elements
         public string ActionId { get; set; }
 
         [JsonProperty("options", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<Option> Options { get; set; }
+        public IList<Option> Options { get; set; } = new List<Option>();
 
         [JsonProperty("initial_options", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<IOption> InitialOptions { get; set; }
+        public IList<IOption> InitialOptions { get; set; } = new List<IOption>();
 
         [JsonProperty("confirm", NullValueHandling = NullValueHandling.Ignore)]
         public Confirmation Confirm { get; set; }
@@ -32,5 +32,7 @@ namespace Slack.NetStandard.Messages.Elements
         [JsonProperty("focus_on_load", NullValueHandling = NullValueHandling.Ignore)]
         public bool? FocusOnLoad { get; set; }
 
+        public bool ShouldSerializeOptions() => Options.Any();
+        public bool ShouldSerializeInitialOptions() => InitialOptions.Any();
     }
 }

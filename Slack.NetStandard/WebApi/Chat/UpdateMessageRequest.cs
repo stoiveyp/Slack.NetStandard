@@ -28,7 +28,7 @@ namespace Slack.NetStandard.WebApi.Chat
         public bool? LinkNames { get; set; }
 
         [JsonProperty("file_ids", NullValueHandling = NullValueHandling.Ignore)]
-        public string[] FileIds { get; set; }
+        public IList<string> FileIds { get; set; } = new List<string>();
 
         [JsonProperty("attachments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Attachment> Attachments { get; set; } = new List<Attachment>();
@@ -39,5 +39,6 @@ namespace Slack.NetStandard.WebApi.Chat
 
         public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
         public bool ShouldSerializeAttachments() => Attachments?.Any() ?? false;
+        public bool ShouldSerializeFileIds() => FileIds?.Any() ?? false;
     }
 }

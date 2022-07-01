@@ -16,7 +16,6 @@
       "type": "plain_text",
       "text": "Title"
     },
-    "blocks": [],
     "private_metadata": "shhh-its-secret",
     "callback_id": "modal-with-inputs",
     "state": {

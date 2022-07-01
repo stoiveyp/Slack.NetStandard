@@ -7,7 +7,7 @@ namespace Slack.NetStandard.WebApi.Admin
         [JsonProperty("name",NullValueHandling = NullValueHandling.Ignore)]
         public string Name { get; set; }
 
-        [JsonProperty("emoji_names", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("emoji_names", NullValueHandling = NullValueHandling.Ignore),AcceptedArray]
         public string[] EmojiNames { get; set; }
     }
 }
