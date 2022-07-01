@@ -112,7 +112,7 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("shares",NullValueHandling = NullValueHandling.Ignore)]
         public Dictionary<string,Dictionary<string,Share[]>> Shares { get; set; }
 
-        [JsonProperty("reactions", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("reactions", NullValueHandling = NullValueHandling.Ignore),AcceptedArray]
         public Reaction[] Reactions { get; set; }
     }
 }

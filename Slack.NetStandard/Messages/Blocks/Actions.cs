@@ -20,6 +20,8 @@ namespace Slack.NetStandard.Messages.Blocks
         public string BlockId { get; set; }
 
         [JsonProperty("elements",NullValueHandling = NullValueHandling.Ignore)]
-        public IList<IMessageElement> Elements { get; set; }
+        public IList<IMessageElement> Elements { get; set; } = new List<IMessageElement>();
+
+        public bool ShouldSerializeElements() => Elements.Any();
     }
 }

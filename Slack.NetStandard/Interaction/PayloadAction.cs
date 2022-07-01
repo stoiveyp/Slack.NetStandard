@@ -27,7 +27,7 @@ namespace Slack.NetStandard.Interaction
         [JsonProperty("selected_option", NullValueHandling = NullValueHandling.Ignore)]
         public IOption SelectedOption { get; set; }
 
-        [JsonProperty("selected_options", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("selected_options", NullValueHandling = NullValueHandling.Ignore),AcceptedArray]
         public IOption[] SelectedOptions { get; set; }
 
         [JsonProperty("selected_user", NullValueHandling = NullValueHandling.Ignore)]

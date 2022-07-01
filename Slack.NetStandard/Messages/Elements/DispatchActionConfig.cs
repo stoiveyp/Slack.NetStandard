@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace Slack.NetStandard.Messages.Elements
@@ -7,12 +9,15 @@ namespace Slack.NetStandard.Messages.Elements
     {
         public DispatchActionConfig(){}
 
-        public DispatchActionConfig(ActionTrigger[] triggers)
+        public DispatchActionConfig(IEnumerable<ActionTrigger> triggers)
         {
-            TriggerActionsOn = triggers;
+            TriggerActionsOn = triggers.ToList();
         }
 
-        [JsonProperty("trigger_actions_on", NullValueHandling = NullValueHandling.Ignore, ItemConverterType = typeof(StringEnumConverter))]
-        public ActionTrigger[] TriggerActionsOn { get; set; }
+        [JsonProperty("trigger_actions_on", NullValueHandling = NullValueHandling.Ignore,
+            ItemConverterType = typeof(StringEnumConverter))]
+        public IList<ActionTrigger> TriggerActionsOn { get; set; } = new List<ActionTrigger>();
+
+        public bool ShouldSerializeTriggerActionsOn() => TriggerActionsOn.Any();
     }
 }

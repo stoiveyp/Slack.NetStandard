@@ -4,6 +4,7 @@ using Slack.NetStandard.Messages.Elements;
 
 namespace Slack.NetStandard.Objects
 {
+    [AcceptedArray]
     public class ElementValue
     {
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]

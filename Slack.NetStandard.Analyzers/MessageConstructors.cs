@@ -12,9 +12,9 @@ using System.Threading;
 namespace Slack.NetStandard.Analyzers
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class SlackNetStandardAnalyzersAnalyzer : DiagnosticAnalyzer
+    public class MessageConstructors : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "SlackNetStandardAnalyzers";
+        public const string DiagnosticId = "SlackNetStandardMessageConstructorAnalyzer";
 
         // You can change these strings in the Resources.resx file. If you do not want your analyzer to be localize-able, you can use regular strings for Title and MessageFormat.
         // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Localizing%20Analyzers.md for more on localization
@@ -26,12 +26,12 @@ namespace Slack.NetStandard.Analyzers
         private static readonly LocalizableString ElementTypeMessageFormat = new LocalizableResourceString(nameof(Resources.ElementTypeMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString ElementTypeDescription = new LocalizableResourceString(nameof(Resources.ElementTypeDescription), Resources.ResourceManager, typeof(Resources));
 
-        private const string Category = "Naming";
+        private const string Category = "CodingStandard";
 
         private static readonly DiagnosticDescriptor BlockRule = new DiagnosticDescriptor(DiagnosticId, BlockTypeTitle, BlockTypeMessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: BlockTypeDescription);
         private static readonly DiagnosticDescriptor ElementRule = new DiagnosticDescriptor(DiagnosticId, ElementTypeTitle, ElementTypeMessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: ElementTypeDescription);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(BlockRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(BlockRule, ElementRule);
 
         public override void Initialize(AnalysisContext context)
         {

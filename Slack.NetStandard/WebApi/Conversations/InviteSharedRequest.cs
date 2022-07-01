@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace Slack.NetStandard.WebApi.Conversations
 {
@@ -8,10 +10,10 @@ namespace Slack.NetStandard.WebApi.Conversations
         public string Channel { get; set; }
 
         [JsonProperty("user_ids", NullValueHandling = NullValueHandling.Ignore)]
-        public string[] UserIds { get; set; }
+        public IList<string> UserIds { get; set; } = new List<string>();
 
         [JsonProperty("emails", NullValueHandling = NullValueHandling.Ignore)]
-        public string[] Emails { get; set; }
+        public IList<string> Emails { get; set; } = new List<string>();
 
         [JsonProperty("external_limited", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ExternalLimited { get; set; }
@@ -21,5 +23,8 @@ namespace Slack.NetStandard.WebApi.Conversations
 
         [JsonProperty("tracking_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TrackingId { get; set; }
+
+        public bool ShouldSerializeUserIds() => UserIds?.Any() ?? false;
+        public bool ShouldSerializeEmails() => Emails?.Any() ?? false;
     }
 }

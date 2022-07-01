@@ -46,7 +46,7 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("prefs",NullValueHandling = NullValueHandling.Ignore)]
         public UsergroupPreferences Prefs { get; set; }
 
-        [JsonProperty("users",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("users",NullValueHandling = NullValueHandling.Ignore),AcceptedArray]
         public string[] Users { get; set; }
 
         [JsonProperty("user_count",NullValueHandling = NullValueHandling.Ignore)]

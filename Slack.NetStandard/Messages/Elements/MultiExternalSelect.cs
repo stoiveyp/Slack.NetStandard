@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace Slack.NetStandard.Messages.Elements
 {
@@ -22,7 +24,7 @@ namespace Slack.NetStandard.Messages.Elements
         public string ActionId { get; set; }
 
         [JsonProperty("initial_options", NullValueHandling = NullValueHandling.Ignore)]
-        public IOption[] InitialOptions { get; set; }
+        public IList<IOption> InitialOptions { get; set; } = new List<IOption>();
 
         [JsonProperty("min_query_length", NullValueHandling = NullValueHandling.Ignore)]
         public int? MinimumQueryLength { get; set; }
@@ -36,5 +38,6 @@ namespace Slack.NetStandard.Messages.Elements
         [JsonProperty("focus_on_load", NullValueHandling = NullValueHandling.Ignore)]
         public bool? FocusOnLoad { get; set; }
 
+        public bool ShouldSerializeInitialOptions() => InitialOptions?.Any() ?? false;
     }
 }

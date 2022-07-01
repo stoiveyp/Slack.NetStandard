@@ -58,7 +58,7 @@ var view = new View
     Title = "Create New Story",
     Close = "Cancel",
     Submit = "Submit",
-    Blocks = new IMessageBlock[]
+    Blocks = new List<IMessageBlock>
     {
        new Section{Text = new PlainText("Only title is required")}
     }

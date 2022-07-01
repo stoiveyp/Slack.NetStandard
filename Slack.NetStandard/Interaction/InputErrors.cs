@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.Interaction
 {
-    public class InputErrors
-    {
-        [JsonProperty("errors")]
-        public ErrorInformation[] Errors { get; set; }
-    }
+    //public class InputErrors
+    //{
+    //    [JsonProperty("errors")]
+    //    public ErrorInformation[] Errors { get; set; }
+    //}
 }
