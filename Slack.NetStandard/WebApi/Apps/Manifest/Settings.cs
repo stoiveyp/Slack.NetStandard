@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Slack.NetStandard.WebApi.Apps.Manifest;
 
 public class Settings
 {
     [JsonProperty("allowed_ip_address_ranges", NullValueHandling = NullValueHandling.Ignore)]
-    public string[] AllowedIpAddressRanges { get; set; }
+    public IList<string> AllowedIpAddressRanges { get; set; } = new List<string>();
 
     [JsonProperty("event_subscriptions",NullValueHandling = NullValueHandling.Ignore)]
     public EventSubscriptions EventSubscriptions { get; set; }
@@ -22,4 +23,6 @@ public class Settings
 
     [JsonExtensionData]
     public Dictionary<string,object> OtherFields { get; set; }
+
+    public bool ShouldSerializeAllowedIpAddressRanges() => AllowedIpAddressRanges?.Any() ?? false;
 }
