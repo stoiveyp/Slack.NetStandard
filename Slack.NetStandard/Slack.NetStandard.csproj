@@ -6,7 +6,7 @@
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-	    Fix bug where Authorization not being set correctly
+	    Fix files.sharedPublicURL and files.revokePublicURL (thanks @mapitman!)
 		Support for Manifest APIs and Message Metadata
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
