@@ -575,6 +575,9 @@
 		<None Update="Examples\ViewSubmissionPayload.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Update="Examples\Blocks_Video.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

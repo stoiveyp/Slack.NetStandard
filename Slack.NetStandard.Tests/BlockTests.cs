@@ -60,6 +60,12 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void Video()
+        {
+            Utility.AssertSubType<IMessageBlock, Video>("Blocks_Video.json");
+        }
+
+        [Fact]
         public void OptionExtensions()
         {
             IOption option = new Option();
