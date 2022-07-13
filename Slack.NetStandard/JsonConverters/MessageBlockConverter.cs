@@ -43,7 +43,8 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Input).ToLower(),typeof(Input) },
             {nameof(File).ToLower(),typeof(File) },
             {nameof(Header).ToLower(),typeof(Header) },
-            {RichText.MessageBlockType,typeof(RichText) }
+            {RichText.MessageBlockType,typeof(RichText) },
+            {nameof(Video).ToLower(), typeof(Video) }
         };
 
         private IMessageBlock GetComponent(string type)
