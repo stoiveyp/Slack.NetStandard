@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>5.0.0</Version>
+    <Version>5.1.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Add video block support</PackageReleaseNotes>
+    <PackageReleaseNotes>re-add block_id to IMessageBlock (thanks to Slack @garvankeeley for the assist). This makes this version functionally equivalent to 4.0.0</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Steven Pears</Authors>
     <Company />
     <PackageProjectUrl>https://github.com/stoiveyp/Slack.NetStandard</PackageProjectUrl>
