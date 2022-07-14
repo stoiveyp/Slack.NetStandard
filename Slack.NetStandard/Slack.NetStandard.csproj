@@ -6,7 +6,7 @@
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-        e-add block_id to IMessageBlock (thanks to Slack @garvankeeley for the assist). This makes this version functionally equivalent to 4.1.0-beta1
+        e-add block_id to IMessageBlock (thanks to Slack @garvankeeley for the assist).
 		Support for Manifest APIs and Message Metadata
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
