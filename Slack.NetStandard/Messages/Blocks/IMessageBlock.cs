@@ -8,5 +8,8 @@ namespace Slack.NetStandard.Messages.Blocks
     {
         [JsonProperty("type")]
         string Type { get; }
+
+        [JsonProperty("block_id", NullValueHandling = NullValueHandling.Ignore)]
+        string BlockId { get; set; }
     }
 }

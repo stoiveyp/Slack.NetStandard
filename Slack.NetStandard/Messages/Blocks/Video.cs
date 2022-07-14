@@ -45,6 +45,9 @@ namespace Slack.NetStandard.Messages.Blocks
 
         [JsonProperty("video_url", NullValueHandling = NullValueHandling.Ignore)]
         public string VideoUrl { get; set; }
+
+        [JsonProperty("block_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string BlockId { get; set; }
     }
 }
 
