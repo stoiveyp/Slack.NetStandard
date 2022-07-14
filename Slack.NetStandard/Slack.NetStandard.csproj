@@ -5,7 +5,7 @@
     <Version>5.1.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>re-add block_id to IMessageBlock (thanks to Slack @garvankeeley for the assist). This makes this version functionally equivalent to 4.0.0</PackageReleaseNotes>
+    <PackageReleaseNotes>re-add block_id to IMessageBlock (thanks to Slack @garvankeeley for the assist)</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Steven Pears</Authors>
