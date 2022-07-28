@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>5.1.1</Version>
+    <Version>5.1.2</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>re-add block_id to IMessageBlock (thanks to Slack @garvankeeley for the assist)</PackageReleaseNotes>
+    <PackageReleaseNotes>correct PayloadAction property types</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Steven Pears</Authors>
