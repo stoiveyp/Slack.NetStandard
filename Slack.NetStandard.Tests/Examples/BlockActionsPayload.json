@@ -103,6 +103,7 @@
         "text": "Action A",
         "emoji": true
       },
+      "selected_users": ["U1234","U2345"], 
       "action_ts": "1571318425.267782"
     }
   ]
