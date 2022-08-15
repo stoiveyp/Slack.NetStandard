@@ -509,5 +509,26 @@ namespace Slack.NetStandard.Tests
             Assert.Null(result.User.OtherFields);
             Assert.Null(result.User.Profile.OtherFields);
         }
+
+        [Fact]
+        public void MessageMetadataPosted()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, MessageMetadataPosted>("Events_MessageMetadataPosted.json");
+            Assert.Null(result.OtherFields);
+        }
+
+        [Fact]
+        public void MessageMetadataDeleted()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, MessageMetadataDeleted>("Events_MessageMetadataDeleted.json");
+            Assert.Null(result.OtherFields);
+        }
+
+        [Fact]
+        public void MessageMetadataUpdated()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, MessageMetadataUpdated>("Events_MessageMetadataUpdated.json");
+            Assert.Null(result.OtherFields);
+        }
     }
 }
