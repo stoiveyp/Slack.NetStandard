@@ -187,7 +187,6 @@ namespace Slack.NetStandard
         async Task<TResponse> IWebApiClient.MakeUrlEncodedCall<TResponse>(string methodName, Dictionary<string, string> request)
         {
             var content = new FormUrlEncodedContent(request ?? _emptynvc);
-            content.Headers.ContentType.CharSet = "utf-8";
             try
             {
                 var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
