@@ -5,7 +5,7 @@
     <Version>5.2.0-beta4</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageReleaseNotes>Correct PayloadAction property types
+    <PackageReleaseNotes>removed superflous_charset warning on some Web API methods
 		Support for Manifest APIs and Message Metadata
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
