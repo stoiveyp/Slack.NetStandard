@@ -7,6 +7,18 @@ public class Email : IMessageElement
     public static string ElementType = "email_text_input";
     public string Type => ElementType;
 
+    public Email(){}
+
+    public Email(string actionId)
+    {
+        ActionId = actionId;
+    }
+
+    public Email(string actionId, string initialValue) : this(actionId)
+    {
+        InitialValue = initialValue;
+    }
+
     [JsonProperty("action_id",NullValueHandling = NullValueHandling.Ignore)]
     public string ActionId { get; set; }
 

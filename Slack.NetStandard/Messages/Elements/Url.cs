@@ -7,6 +7,18 @@ public class Url : IMessageElement
     public static string ElementType = "url_text_input";
     public string Type => ElementType;
 
+    public Url() { }
+
+    public Url(string actionId)
+    {
+        ActionId = actionId;
+    }
+
+    public Url(string actionId, string initialValue) : this(actionId)
+    {
+        InitialValue = initialValue;
+    }
+
     [JsonProperty("action_id",NullValueHandling = NullValueHandling.Ignore)]
     public string ActionId { get; set; }
 

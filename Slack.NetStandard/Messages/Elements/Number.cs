@@ -10,6 +10,18 @@ namespace Slack.NetStandard.Messages.Elements
         public static string ElementType = "number_input";
         public string Type => ElementType;
 
+        public Number() { }
+
+        public Number(string actionId)
+        {
+            ActionId = actionId;
+        }
+
+        public Number(string actionId, string initialValue) : this(actionId)
+        {
+            InitialValue = initialValue;
+        }
+
         [JsonProperty("is_decimal_allowed")]
         public bool IsDecimalAllowed { get; set; }
 
