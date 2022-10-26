@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.Messages.Elements;
+using System;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -63,6 +64,30 @@ namespace Slack.NetStandard.Tests
         public void Video()
         {
             Utility.AssertSubType<IMessageBlock, Video>("Blocks_Video.json");
+        }
+
+        [Fact]
+        public void Url()
+        {
+            Utility.AssertSubType<IMessageElement, Url>("Blocks_Url.json");
+        }
+
+        [Fact]
+        public void Email()
+        {
+            Utility.AssertSubType<IMessageElement, Email>("Blocks_Email.json");
+        }
+
+        [Fact]
+        public void Number()
+        {
+            Utility.AssertSubType<IMessageElement, Number>("Blocks_Number.json");
+        }
+
+        [Fact]
+        public void DateTimePicker()
+        {
+            Utility.AssertSubType<IMessageElement, DateTimePicker>("Blocks_DateTimePicker.json");
         }
 
         [Fact]

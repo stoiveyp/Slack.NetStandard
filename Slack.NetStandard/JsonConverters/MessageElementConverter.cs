@@ -51,7 +51,11 @@ namespace Slack.NetStandard.JsonConverters
             {MultiExternalSelect.ElementType,typeof(MultiExternalSelect) },
             {MultiUsersSelect.ElementType,typeof(MultiUsersSelect) },
             {MultiConversationsSelect.ElementType,typeof(MultiConversationsSelect) },
-            {MultiChannelsSelect.ElementType,typeof(MultiChannelsSelect) }
+            {MultiChannelsSelect.ElementType,typeof(MultiChannelsSelect) },
+            {Url.ElementType,typeof(Url) },
+            {Email.ElementType,typeof(Email) },
+            {DateTimePicker.ElementType,typeof(DateTimePicker) },
+            {Number.ElementType, typeof(Number)}
         };
 
         private IMessageElement GetComponent(string type)
