@@ -7,6 +7,18 @@ public class DateTimePicker : IMessageElement
     public static string ElementType = "datetimepicker";
     public string Type => ElementType;
 
+    public DateTimePicker() { }
+
+    public DateTimePicker(string actionId)
+    {
+        ActionId = actionId;
+    }
+
+    public DateTimePicker(string actionId, long initialDateTime) : this(actionId)
+    {
+        InitialDateTime = initialDateTime;
+    }
+
     [JsonProperty("action_id")]
     public string ActionId { get; set; }
 
