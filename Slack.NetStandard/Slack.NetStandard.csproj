@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>5.3.0-beta2</Version>
+    <Version>5.3.0-beta3</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>New input elements url, email, number and datetimepicker
