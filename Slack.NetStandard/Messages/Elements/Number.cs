@@ -17,8 +17,19 @@ namespace Slack.NetStandard.Messages.Elements
             ActionId = actionId;
         }
 
+        public Number(string actionId, bool isDecimalAllowed) : this(actionId)
+        {
+            IsDecimalAllowed = isDecimalAllowed;
+        }
+
         public Number(string actionId, string initialValue) : this(actionId)
         {
+            InitialValue = initialValue;
+        }
+
+        public Number(string actionId, bool isDecimalAllowed, string initialValue) : this(actionId)
+        {
+            IsDecimalAllowed = isDecimalAllowed;
             InitialValue = initialValue;
         }
 
