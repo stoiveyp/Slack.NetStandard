@@ -24,20 +24,10 @@ namespace Slack.NetStandard.JsonConverters
                 return known as CallbackEvent;
             }
             var jObject = JObject.Load(reader);
-            var jObjectType = jObject.Value<string>("type");
 
-            var target = GetEventType(jObjectType, jObject);
+            var target = GetEventType(jObject.Value<string>("type"),jObject);
+
             serializer.Populate(jObject.CreateReader(), target);
-
-            if(target is CallbackEventWithItem eventWithItem)
-            {
-                var jObjectItemSubtype = jObject.SelectToken("item");
-                var itemSubType = jObjectItemSubtype.Value<string>("type");
-                var itemTarget = GetItemSubtype(itemSubType);
-
-                serializer.Populate(jObjectItemSubtype.CreateReader(), itemTarget);
-                eventWithItem.Item = itemTarget;
-            }
 
             return target;
         }
@@ -89,7 +79,7 @@ namespace Slack.NetStandard.JsonConverters
                 LinkShared.EventType => new LinkShared(),
                 MemberJoinedChannel.EventType => new MemberJoinedChannel(),
                 MemberLeftChannel.EventType => new MemberLeftChannel(),
-                MessageCallbackEvent.EventType => GetMessageSubtype(container.Value<string>("subtype")),
+                MessageCallbackEvent.EventType => MessageSubtype(container.Value<string>("subtype")),
                 PinAdded.EventType => new PinAdded(),
                 PinRemoved.EventType => new PinRemoved(),
                 ReactionAdded.EventType => new ReactionAdded(),
@@ -122,7 +112,7 @@ namespace Slack.NetStandard.JsonConverters
             };
         }
 
-        private static IMessageCallbackEvent GetMessageSubtype(string subType)
+        private static IMessageCallbackEvent MessageSubtype(string subType)
         {
             return subType switch
             {
@@ -134,15 +124,6 @@ namespace Slack.NetStandard.JsonConverters
                 EkmAccessDenied.MessageSubType => new EkmAccessDenied(),
                 BotMessage.MessageSubType => new BotMessage(),
                 _ => (IMessageCallbackEvent)new MessageCallbackEvent()
-            };
-        }
-
-        private static Item GetItemSubtype(string itemSubType)
-        {
-            return itemSubType switch
-            {
-                MessageItem.ItemSubType => new MessageItem(),
-                _ => new Item()
             };
         }
     }
