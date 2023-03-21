@@ -21,7 +21,7 @@ namespace Slack.NetStandard.WebApi
             };
             if (date.HasValue)
             {
-                dict.Add("date", date.Value.ToString("yyyy-MM-dd"));
+                dict.Add("date", date.Value.ToUniversalTime().ToString("yyyy-MM-dd"));
             }
 
             return _client.MakeRawUrlEncodedCall("admin.analytics.getFile", dict);
