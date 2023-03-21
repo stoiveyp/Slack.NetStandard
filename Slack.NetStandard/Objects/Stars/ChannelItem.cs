@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Slack.NetStandard.WebApi.Stars
+namespace Slack.NetStandard.Objects.Stars
 {
     public class ChannelItem : StarredItem
     {
@@ -8,5 +8,8 @@ namespace Slack.NetStandard.WebApi.Stars
 
         [JsonProperty("channel",NullValueHandling = NullValueHandling.Ignore)]
         public string Channel { get; set; }
+
+        [JsonProperty("date_create", NullValueHandling = NullValueHandling.Ignore)]
+        public long DateCreated { get; set; }
     }
 }

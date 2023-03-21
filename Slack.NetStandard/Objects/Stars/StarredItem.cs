@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using Slack.NetStandard.JsonConverters;
 
-namespace Slack.NetStandard.WebApi.Stars
+namespace Slack.NetStandard.Objects.Stars
 {
     [JsonConverter(typeof(StarredItemConverter))]
     public class StarredItem
