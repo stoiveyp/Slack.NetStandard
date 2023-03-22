@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.WebApi.Stars;
+using Slack.NetStandard.Objects.Stars;
+using System;
 
 namespace Slack.NetStandard.JsonConverters
 {

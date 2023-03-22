@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
-using Slack.NetStandard.Objects;
 
-namespace Slack.NetStandard.WebApi.Stars
+namespace Slack.NetStandard.Objects.Stars
 {
     public class FileItem : StarredItem
     {
