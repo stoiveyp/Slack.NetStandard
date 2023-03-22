@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
-using Slack.NetStandard.Objects;
+﻿using Newtonsoft.Json;
+using Slack.NetStandard.Objects.Reactions;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
@@ -20,6 +17,6 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
         public string ItemUser { get; set; }
 
         [JsonProperty("item",NullValueHandling = NullValueHandling.Ignore)]
-        public Item Item { get; set; }
+        public ReactionItem Item { get; set; }
     }
 }

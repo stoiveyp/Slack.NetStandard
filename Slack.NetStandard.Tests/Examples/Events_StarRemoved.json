@@ -1,8 +1,19 @@
 {
-  "type": "star_removed",
-  "user": "U024BE7LH",
+  "event_ts": "1679211395.000200",
   "item": {
-    
+    "channel": "C2147483705",
+    "date_create": 1679211291,
+    "message": {
+      "client_msg_id": "61c6ba01-6aff-411c-afd3-560f3b97772e",
+      "permalink": "https://slack.com/archives/x/y",
+      "team": "T060RNRCH",
+      "text": "Hello world",
+      "ts": "1679129233.449579",
+      "type": "message",
+      "user": "U03Q3JCJWVA"
+    },
+    "type": "message"
   },
-  "event_ts": "1360782804.083113"
+  "type": "star_removed",
+  "user": "U060RNRCZ"
 }

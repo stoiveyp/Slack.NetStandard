@@ -39,22 +39,22 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeUrlEncodedCall<ReactionGetResponse>("reactions.get", dict);
         }
 
-        public Task<MessageItemsResponse> List(string user)
+        public Task<ReactionListResponse> List(string user)
         {
             return List(user, null, null);
         }
 
-        public Task<MessageItemsResponse> List(string user, string cursor)
+        public Task<ReactionListResponse> List(string user, string cursor)
         {
             return List(user, cursor, null);
         }
 
-        public Task<MessageItemsResponse> List(string user, int limit)
+        public Task<ReactionListResponse> List(string user, int limit)
         {
             return List(user, null, limit);
         }
 
-        public Task<MessageItemsResponse> List(string user, string cursor, int? limit)
+        public Task<ReactionListResponse> List(string user, string cursor, int? limit)
         {
             var dict = new Dictionary<string, string>
             {
@@ -71,7 +71,7 @@ namespace Slack.NetStandard.WebApi
                 dict.Add(nameof(limit), limit.ToString());
             }
 
-            return _client.MakeUrlEncodedCall<MessageItemsResponse>("reactions.list", dict);
+            return _client.MakeUrlEncodedCall<ReactionListResponse>("reactions.list", dict);
         }
 
         public Task<WebApiResponse> Remove(string channel, Timestamp timestamp, string name)

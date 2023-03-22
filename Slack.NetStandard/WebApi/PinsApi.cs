@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Pins;
 
 namespace Slack.NetStandard.WebApi
 {
     internal class PinsApi : IPinsApi
     {
-        private IWebApiClient _client;
+        private readonly IWebApiClient _client;
 
         public PinsApi(IWebApiClient client)
         {
@@ -30,9 +31,9 @@ namespace Slack.NetStandard.WebApi
             });
         }
 
-        public Task<MessageItemsResponse> List(string channel)
+        public Task<PinnedListResponse> List(string channel)
         {
-            return _client.MakeUrlEncodedCall<MessageItemsResponse>("pins.list", new Dictionary<string, string>
+            return _client.MakeUrlEncodedCall<PinnedListResponse>("pins.list", new Dictionary<string, string>
             {
                 {"channel", channel}
             });

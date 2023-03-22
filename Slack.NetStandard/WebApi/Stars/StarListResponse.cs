@@ -1,6 +1,5 @@
-﻿using System;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Slack.NetStandard.Objects.Stars;
 
 namespace Slack.NetStandard.WebApi.Stars
 {

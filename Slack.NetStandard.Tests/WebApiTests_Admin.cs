@@ -14,7 +14,7 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_AnalyticsGetFile()
         {
             await Utility.CheckApi(
-                c => c.Admin.Analytics.GetFile("ABC", new DateTime(2020,03,01)),
+                c => c.Admin.Analytics.GetFile("ABC", new DateTime(2020,03,01,0,0,0, DateTimeKind.Utc)),
                 "admin.analytics.getFile",nvc =>
                 {
                     Assert.Equal("ABC", nvc.Get("type"));

@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Slack.NetStandard.Objects.Pins;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -28,10 +30,12 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Pins_List()
         {
-            await Utility.AssertEncodedWebApi(c => c.Pins.List("C123"), "pins.list", "Web_MessageItems.json", nvc =>
+            var response = await Utility.AssertEncodedWebApi(c => c.Pins.List("C123"), "pins.list", "Web_MessageItems.json", nvc =>
             {
                 Assert.Equal("C123", nvc["channel"]);
             });
+
+            Assert.IsType<PinnedMessageItem>(response.Items.First());
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.WebApi.Stars;
+using Slack.NetStandard.Objects.Stars;
+using System;
 
 namespace Slack.NetStandard.JsonConverters
 {
@@ -38,9 +36,9 @@ namespace Slack.NetStandard.JsonConverters
         {
             return value switch
             {
-                MessageItem.ItemType => new MessageItem(),
-                FileItem.ItemType => new FileItem(),
-                ChannelItem.ItemType => new ChannelItem(),
+                ItemTypes.Message => new StarredMessageItem(),
+                ItemTypes.File => new StarredFileItem(),
+                ItemTypes.Channel => new StarredChannelItem(),
                 _ => new StarredItem()
             };
         }

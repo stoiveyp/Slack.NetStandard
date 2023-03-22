@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Slack.NetStandard.Objects;
+using Slack.NetStandard.Objects.Stars;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
@@ -11,6 +12,6 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
         public string User { get; set; }
 
         [JsonProperty("item", NullValueHandling = NullValueHandling.Ignore)]
-        public Item Item { get; set; }
+        public StarredItem Item { get; set; }
     }
 }
