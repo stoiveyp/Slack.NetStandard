@@ -36,8 +36,8 @@ namespace Slack.NetStandard.JsonConverters
         {
             return value switch
             {
-                ItemTypes.Message => new MessageReactionItem(),
-                ItemTypes.File => new FileReactionItem(),
+                ItemTypes.Message => new ReactionMessageItem(),
+                ItemTypes.File => new ReactionFileItem(),
                 _ => new ReactionItem()
             };
         }

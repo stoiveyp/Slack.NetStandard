@@ -3,10 +3,8 @@ using Slack.NetStandard.Messages;
 
 namespace Slack.NetStandard.Objects.Stars
 {
-    public class MessageItem : StarredItem
+    public class StarredMessageItem : StarredItem
     {
-        public const string ItemType = "message";
-
         [JsonProperty("channel",NullValueHandling = NullValueHandling.Ignore)]
         public string Channel { get; set; }
 

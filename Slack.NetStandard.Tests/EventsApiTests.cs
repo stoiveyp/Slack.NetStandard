@@ -335,28 +335,28 @@ namespace Slack.NetStandard.Tests
         public void PinAdded()
         {
             var response = Utility.AssertSubType<CallbackEvent, PinAdded>("Events_PinAdded.json");
-            Assert.IsType<MessagePinnedItem>(response.Item);
+            Assert.IsType<PinnedMessageItem>(response.Item);
         }
 
         [Fact]
         public void PinRemoved()
         {
             var response = Utility.AssertSubType<CallbackEvent, PinRemoved>("Events_PinRemoved.json");
-            Assert.IsType<MessagePinnedItem>(response.Item);
+            Assert.IsType<PinnedMessageItem>(response.Item);
         }
 
         [Fact]
         public void ReactionAdded()
         {
             var response = Utility.AssertSubType<CallbackEvent, ReactionAdded>("Events_ReactionAdded.json");
-            Assert.IsType<MessageReactionItem>(response.Item);
+            Assert.IsType<ReactionMessageItem>(response.Item);
         }
 
         [Fact]
         public void ReactionRemoved()
         {
             var response = Utility.AssertSubType<CallbackEvent, ReactionRemoved>("Events_ReactionRemoved.json");
-            Assert.IsType<MessageReactionItem>(response.Item);
+            Assert.IsType<ReactionMessageItem>(response.Item);
         }
 
         [Fact]

@@ -2,7 +2,7 @@
 
 namespace Slack.NetStandard.Objects.Reactions;
 
-public class FileReactionItem : ReactionItem
+public class ReactionFileItem : ReactionItem
 {
     [JsonProperty("file", NullValueHandling = NullValueHandling.Ignore)]
     public File File { get; set; }

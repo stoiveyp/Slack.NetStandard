@@ -3,7 +3,7 @@ using Slack.NetStandard.Messages;
 
 namespace Slack.NetStandard.Objects.Reactions;
 
-public class MessageReactionItem : ReactionItem
+public class ReactionMessageItem : ReactionItem
 {
     [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
     public Message Message { get; set; }

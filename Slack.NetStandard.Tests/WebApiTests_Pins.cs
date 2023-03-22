@@ -35,7 +35,7 @@ namespace Slack.NetStandard.Tests
                 Assert.Equal("C123", nvc["channel"]);
             });
 
-            Assert.IsType<MessagePinnedItem>(response.Items.First());
+            Assert.IsType<PinnedMessageItem>(response.Items.First());
         }
     }
 }

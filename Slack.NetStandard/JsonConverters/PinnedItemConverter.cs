@@ -36,8 +36,8 @@ namespace Slack.NetStandard.JsonConverters
         {
             return value switch
             {
-                ItemTypes.Message => new MessagePinnedItem(),
-                ItemTypes.File => new FilePinnedItem(),
+                ItemTypes.Message => new PinnedMessageItem(),
+                ItemTypes.File => new PinnedFileItem(),
                 _ => new PinnedItem()
             };
         }
