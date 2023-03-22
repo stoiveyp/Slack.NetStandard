@@ -4,6 +4,8 @@ using System.Text;
 using Newtonsoft.Json;
 using Slack.NetStandard.EventsApi;
 using Slack.NetStandard.EventsApi.CallbackEvents;
+using Slack.NetStandard.Objects.Pins;
+using Slack.NetStandard.Objects.Reactions;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -332,25 +334,29 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void PinAdded()
         {
-            Utility.AssertSubType<CallbackEvent, PinAdded>("Events_PinAdded.json");
+            var response = Utility.AssertSubType<CallbackEvent, PinAdded>("Events_PinAdded.json");
+            Assert.IsType<MessagePinnedItem>(response.Item);
         }
 
         [Fact]
         public void PinRemoved()
         {
-            Utility.AssertSubType<CallbackEvent, PinRemoved>("Events_PinRemoved.json");
+            var response = Utility.AssertSubType<CallbackEvent, PinRemoved>("Events_PinRemoved.json");
+            Assert.IsType<MessagePinnedItem>(response.Item);
         }
 
         [Fact]
         public void ReactionAdded()
         {
-            Utility.AssertSubType<CallbackEvent, ReactionAdded>("Events_ReactionAdded.json");
+            var response = Utility.AssertSubType<CallbackEvent, ReactionAdded>("Events_ReactionAdded.json");
+            Assert.IsType<MessageReactionItem>(response.Item);
         }
 
         [Fact]
         public void ReactionRemoved()
         {
-            Utility.AssertSubType<CallbackEvent, ReactionRemoved>("Events_ReactionRemoved.json");
+            var response = Utility.AssertSubType<CallbackEvent, ReactionRemoved>("Events_ReactionRemoved.json");
+            Assert.IsType<MessageReactionItem>(response.Item);
         }
 
         [Fact]

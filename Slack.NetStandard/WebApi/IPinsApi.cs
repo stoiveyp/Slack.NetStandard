@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Pins;
 
 namespace Slack.NetStandard.WebApi
 {
@@ -7,6 +8,6 @@ namespace Slack.NetStandard.WebApi
         Task<WebApiResponse> Add(string channel, Timestamp timestamp);
         Task<WebApiResponse> Remove(string channel, Timestamp timestamp);
 
-        Task<MessageItemsResponse> List(string channel);
+        Task<PinnedListResponse> List(string channel);
     }
 }
