@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Slack.NetStandard.Objects;
+using Slack.NetStandard.Objects.Pins;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
@@ -14,7 +14,7 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
         public string Channel { get; set; }
 
         [JsonProperty("item", NullValueHandling = NullValueHandling.Ignore)]
-        public Item Item { get; set; }
+        public PinnedItem Item { get; set; }
 
         [JsonProperty("has_pins",NullValueHandling = NullValueHandling.Ignore)]
         public bool? HasPins { get; set; }
