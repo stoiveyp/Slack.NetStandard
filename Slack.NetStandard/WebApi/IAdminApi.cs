@@ -17,5 +17,6 @@ namespace Slack.NetStandard.WebApi
         IAdminUsersApi Users { get; }
 
         IAdminAnalyticsApi Analytics { get; }
+        IAdminAuditAnomalyApi AuditAnomaly { get; }
     }
 }

@@ -61,6 +61,26 @@ namespace Slack.NetStandard.WebApi
             });
         }
 
+        public Task<WebApiResponse> ClearResolution(string appId, string teamId = null, string enterpriseId = null)
+        {
+            return _client.MakeJsonCall("admin.apps.clearResolution", new AdminAppDecision
+            {
+                AppId = appId,
+                TeamId = teamId,
+                EnterpriseId = enterpriseId
+            });
+        }
+
+        public Task<WebApiResponse> UninstallApp(string appId, string teamId = null, string enterpriseId = null)
+        {
+            return _client.MakeJsonCall("admin.apps.uninstall", new AdminAppDecision
+            {
+                AppId = appId,
+                TeamId = teamId,
+                EnterpriseId = enterpriseId
+            });
+        }
+
         public Task<ListAppRequestResponse> ListAppRequests(TeamRequestFilter filters)
         {
             return _client.MakeJsonCall<TeamRequestFilter, ListAppRequestResponse>("admin.apps.requests.list", filters);

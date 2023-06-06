@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Admin;
 using Xunit;
+using JArray = Newtonsoft.Json.Linq.JArray;
 
 namespace Slack.NetStandard.Tests
 {
@@ -63,6 +65,56 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public async Task Admin_ClearResolution()
+        {
+            await Utility.AssertWebApi(
+                c => c.Admin.Apps.ClearResolution("ABC", "DEF", "ZYX"),
+                "admin.apps.clearResolution",
+                jobject =>
+                {
+                    Assert.Equal(3, jobject.Children().Count());
+                    Assert.Equal("ABC", jobject.Value<string>("app_id"));
+                    Assert.Equal("DEF", jobject.Value<string>("team_id"));
+                    Assert.Equal("ZYX", jobject.Value<string>("enterprise_id"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_AnomalyGetItem()
+        {
+            var response = await Utility.AssertEncodedWebApi(
+                c => c.Admin.AuditAnomaly.Allow.GetItem(),
+                "admin.audit.anomaly.allow.getItem", "Web_AdminAuditAnomalyGetItem.json", nvc => {});
+
+            Assert.Equal("8.8.8.8/24", response.TrustedCidr[0]);
+            Assert.Equal("8.8.4.4/22", response.TrustedCidr[1]);
+            Assert.Equal(12345, response.TrustedAsn[0]);
+            Assert.Equal(12344, response.TrustedAsn[1]);
+        }
+
+        [Fact]
+        public async Task Admin_AnomalyUpdateItem()
+        {
+            await Utility.AssertWebApi(
+                c => c.Admin.AuditAnomaly.Allow.UpdateItem(new AllowListRequest
+                {
+                    TrustedAsn = new(){12345,12344},
+                    TrustedCidr = new(){"8.8.8.8/24","8.8.4.4/22"}
+                }),
+                "admin.audit.anomaly.allow.updateItem",
+                jobject =>
+                {
+                    Assert.Equal(2, jobject.Children().Count());
+                    var trustedAsn = ((JArray)jobject["trusted_asns"]).ToObject<List<int>>();
+                    Assert.Equal(12345, trustedAsn[0]);
+                    Assert.Equal(12344, trustedAsn[1]);
+                    var trustedCidr = ((JArray)jobject["trusted_cidr"]).ToObject<List<string>>();
+                    Assert.Equal("8.8.8.8/24", trustedCidr[0]);
+                    Assert.Equal("8.8.4.4/22", trustedCidr[1]);
+                });
+        }
+
+        [Fact]
         public async Task Admin_RestrictApp()
         {
             await Utility.AssertWebApi(
@@ -82,6 +134,20 @@ namespace Slack.NetStandard.Tests
             await Utility.AssertWebApi(
                 c => c.Admin.Apps.RestrictRequest("ABC", "DEF"),
                 "admin.apps.restrict",
+                jobject =>
+                {
+                    Assert.Equal(2, jobject.Children().Count());
+                    Assert.Equal("ABC", jobject.Value<string>("request_id"));
+                    Assert.Equal("DEF", jobject.Value<string>("team_id"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_Uninstall()
+        {
+            await Utility.AssertWebApi(
+                c => c.Admin.Apps.UninstallApp("ABC", "DEF"),
+                "admin.apps.uninstall",
                 jobject =>
                 {
                     Assert.Equal(2, jobject.Children().Count());
