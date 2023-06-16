@@ -16,12 +16,12 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_AnalyticsGetFile()
         {
             await Utility.CheckApi(
-                c => c.Admin.Analytics.GetFile("ABC", new DateTime(2020,03,01,0,0,0, DateTimeKind.Utc)),
-                "admin.analytics.getFile",nvc =>
+                c => c.Admin.Analytics.GetFile("ABC", new DateTime(2020, 03, 01, 0, 0, 0, DateTimeKind.Utc)),
+                "admin.analytics.getFile", nvc =>
                 {
                     Assert.Equal("ABC", nvc.Get("type"));
                     Assert.Equal("2020-03-01", nvc.Get("date"));
-                },new HttpResponseMessage(HttpStatusCode.OK));
+                }, new HttpResponseMessage(HttpStatusCode.OK));
         }
 
         [Fact]
@@ -84,7 +84,7 @@ namespace Slack.NetStandard.Tests
         {
             var response = await Utility.AssertEncodedWebApi(
                 c => c.Admin.AuditAnomaly.Allow.GetItem(),
-                "admin.audit.anomaly.allow.getItem", "Web_AdminAuditAnomalyGetItem.json", nvc => {});
+                "admin.audit.anomaly.allow.getItem", "Web_AdminAuditAnomalyGetItem.json", nvc => { });
 
             Assert.Equal("8.8.8.8/24", response.TrustedCidr[0]);
             Assert.Equal("8.8.4.4/22", response.TrustedCidr[1]);
@@ -98,8 +98,8 @@ namespace Slack.NetStandard.Tests
             await Utility.AssertWebApi(
                 c => c.Admin.AuditAnomaly.Allow.UpdateItem(new AllowListRequest
                 {
-                    TrustedAsn = new(){12345,12344},
-                    TrustedCidr = new(){"8.8.8.8/24","8.8.4.4/22"}
+                    TrustedAsn = new() { 12345, 12344 },
+                    TrustedCidr = new() { "8.8.8.8/24", "8.8.4.4/22" }
                 }),
                 "admin.audit.anomaly.allow.updateItem",
                 jobject =>
@@ -111,6 +111,69 @@ namespace Slack.NetStandard.Tests
                     var trustedCidr = ((JArray)jobject["trusted_cidr"]).ToObject<List<string>>();
                     Assert.Equal("8.8.8.8/24", trustedCidr[0]);
                     Assert.Equal("8.8.4.4/22", trustedCidr[1]);
+                });
+        }
+
+        [Fact]
+        public async Task Admin_AuthPolicyGetEntities()
+        {
+            var response = await Utility.AssertWebApi(
+                c => c.Admin.AuthPolicy.GetEntities(new GetEntitiesRequest
+                {
+                    EntityType = EntityType.User,
+                    PolicyName = "email_password",
+                    Cursor = "xxx",
+                    Limit = 5
+                }),
+                "admin.auth.policy.getEntities",
+                "Web_AdminAuthPolicyGetEntities.json",
+                jobject =>
+                {
+                    Assert.Equal("USER", jobject.Value<string>("entity_type"));
+                    Assert.Equal("email_password", jobject.Value<string>("policy_name"));
+                    Assert.Equal("xxx", jobject.Value<string>("cursor"));
+                    Assert.Equal(5, jobject.Value<int>("limit"));
+                });
+
+            Assert.True(response.OK);
+            Assert.Equal(1, response.EntityTotalCount);
+            var entity = Assert.Single(response.Entities);
+            Assert.Equal(EntityType.User, entity.EntityType);
+            Assert.Equal("U1234", entity.EntityId);
+            Assert.Equal(1620836993, entity.DateAdded);
+        }
+
+        [Fact]
+        public async Task Admin_AuthPolicyAssignEntities()
+        {
+            await Utility.AssertWebApi(
+                c => c.Admin.AuthPolicy.AssignEntities("email_password",
+                    new List<string> { "U12345" }, EntityType.User),
+                "admin.auth.policy.assignEntities",
+                jobject =>
+                {
+                    var entities = ((JArray)jobject["entity_ids"]).ToObject<List<string>>();
+                    var entityId = Assert.Single(entities);
+                    Assert.Equal("U12345", entityId);
+                    Assert.Equal("USER", jobject.Value<string>("entity_type"));
+                    Assert.Equal("email_password", jobject.Value<string>("policy_name"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_AuthPolicyRemoveEntities()
+        {
+            await Utility.AssertWebApi(
+                c => c.Admin.AuthPolicy.RemoveEntities("email_password",
+                    new List<string> { "U12345" }, EntityType.User),
+                "admin.auth.policy.removeEntities",
+                jobject =>
+                {
+                    var entities = ((JArray)jobject["entity_ids"]).ToObject<List<string>>();
+                    var entityId = Assert.Single(entities);
+                    Assert.Equal("U12345", entityId);
+                    Assert.Equal("USER", jobject.Value<string>("entity_type"));
+                    Assert.Equal("email_password", jobject.Value<string>("policy_name"));
                 });
         }
 
@@ -146,13 +209,13 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_Uninstall()
         {
             await Utility.AssertWebApi(
-                c => c.Admin.Apps.UninstallApp("ABC", "DEF"),
+                c => c.Admin.Apps.UninstallApp("ABC", new List<string> { "DEF" }),
                 "admin.apps.uninstall",
                 jobject =>
                 {
                     Assert.Equal(2, jobject.Children().Count());
-                    Assert.Equal("ABC", jobject.Value<string>("request_id"));
-                    Assert.Equal("DEF", jobject.Value<string>("team_id"));
+                    Assert.Equal("ABC", jobject.Value<string>("app_id"));
+                    Assert.Equal("DEF", Assert.Single(jobject.Value<JArray>("team_ids").Values<string>()));
                 });
         }
 
@@ -176,7 +239,7 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_AppsCancel()
         {
             await Utility.AssertWebApi(
-                c => c.Admin.Apps.CancelRequest("ABC123","T12345","E12345"),
+                c => c.Admin.Apps.CancelRequest("ABC123", "T12345", "E12345"),
                 "admin.apps.requests.cancel",
                 jobject =>
                 {
@@ -261,7 +324,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_InviteRequestApprove()
         {
-            await Utility.AssertWebApi(c => c.Admin.InviteRequests.Approve("ABCDEF","DEFGHI"), "admin.inviteRequests.approve", 
+            await Utility.AssertWebApi(c => c.Admin.InviteRequests.Approve("ABCDEF", "DEFGHI"), "admin.inviteRequests.approve",
                 j =>
                 {
                     Assert.Equal("ABCDEF", j.Value<string>("invite_request_id"));
@@ -292,7 +355,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_InviteRequestListApproved()
         {
-            await Utility.AssertWebApi(c => c.Admin.InviteRequests.ListApprovedInviteRequests(new TeamFilter{Cursor="ABCDEF"}), "admin.inviteRequests.approved.list",
+            await Utility.AssertWebApi(c => c.Admin.InviteRequests.ListApprovedInviteRequests(new TeamFilter { Cursor = "ABCDEF" }), "admin.inviteRequests.approved.list",
                 j =>
                 {
                     Assert.Equal("ABCDEF", j.Value<string>("cursor"));
@@ -316,9 +379,9 @@ namespace Slack.NetStandard.Tests
                 "admin.teams.admins.list", "Web_AdminTeamsAdminList.json",
                 nvc =>
                 {
-                    Assert.Equal("ABCDEF",nvc["team_id"]);
-                    Assert.Equal("DEFGHI",nvc["cursor"]);
-                    Assert.Equal("20",nvc["limit"]);
+                    Assert.Equal("ABCDEF", nvc["team_id"]);
+                    Assert.Equal("DEFGHI", nvc["cursor"]);
+                    Assert.Equal("20", nvc["limit"]);
                 });
         }
 
@@ -326,11 +389,11 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_TeamsCreateRequest()
         {
             await Utility.AssertWebApi(c => c.Admin.Teams.Create(new TeamCreateRequest
-                {
-                    TeamDomain="test.com",
-                    TeamName = "wibble",
-                    TeamDescription = "this is the thing"
-                }),
+            {
+                TeamDomain = "test.com",
+                TeamName = "wibble",
+                TeamDescription = "this is the thing"
+            }),
                 "admin.teams.create", "Web_AdminTeamsCreate.json",
                 j =>
                 {
@@ -379,7 +442,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_TeamsSettingsSetDefaultChannels()
         {
-            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.Settings.SetDefaultChannels("ABCDEF","AB","CD","EF"),
+            await Utility.AssertEncodedWebApi(c => c.Admin.Teams.Settings.SetDefaultChannels("ABCDEF", "AB", "CD", "EF"),
                 "admin.teams.settings.setDefaultChannels",
                 nvc =>
                 {
@@ -440,16 +503,16 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_UsersAssign()
         {
             await Utility.AssertWebApi(c => c.Admin.Users.Assign(new AssignUserRequest
-                {
-                    TeamId = "ABCDEF",
-                    UserId = "DEFGHI",
-                    ChannelIds = "C123,C3456",
-                    IsRestricted = true
+            {
+                TeamId = "ABCDEF",
+                UserId = "DEFGHI",
+                ChannelIds = "C123,C3456",
+                IsRestricted = true
             }),
                 "admin.users.assign",
                 j =>
                 {
-                    Assert.Equal(4,j.Children().Count());
+                    Assert.Equal(4, j.Children().Count());
                     Assert.Equal("ABCDEF", j.Value<string>("team_id"));
                     Assert.Equal("DEFGHI", j.Value<string>("user_id"));
                     Assert.Equal("C123,C3456", j.Value<string>("channel_ids"));
@@ -461,12 +524,12 @@ namespace Slack.NetStandard.Tests
         public async Task Admin_UsersInvite()
         {
             await Utility.AssertWebApi(c => c.Admin.Users.Invite(new InviteUserRequest
-                {
-                    TeamId = "ABCDEF",
-                    Email = "test@TEst.com",
-                    ChannelIds = "C123,C3456",
-                    IsRestricted = true
-                }),
+            {
+                TeamId = "ABCDEF",
+                Email = "test@TEst.com",
+                ChannelIds = "C123,C3456",
+                IsRestricted = true
+            }),
                 "admin.users.invite",
                 j =>
                 {
@@ -541,7 +604,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_UsersSetExpiration()
         {
-            await Utility.AssertWebApi(c => c.Admin.Users.SetExpiration("DEFGHI", "ABCDEF",123456),
+            await Utility.AssertWebApi(c => c.Admin.Users.SetExpiration("DEFGHI", "ABCDEF", 123456),
                 "admin.users.setExpiration",
                 j =>
                 {
@@ -554,12 +617,12 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_UsersSessionReset()
         {
-            await Utility.AssertEncodedWebApi(c => c.Admin.Users.ResetSession("ABCDEF",SessionType.WebOnly),
+            await Utility.AssertEncodedWebApi(c => c.Admin.Users.ResetSession("ABCDEF", SessionType.WebOnly),
                 "admin.users.session.reset",
                 nvc =>
                 {
-                    Assert.Equal("ABCDEF",nvc["user_id"]);
-                    Assert.Equal("true",nvc["web_only"]);
+                    Assert.Equal("ABCDEF", nvc["user_id"]);
+                    Assert.Equal("true", nvc["web_only"]);
                 });
         }
 
@@ -569,7 +632,7 @@ namespace Slack.NetStandard.Tests
             var supportDate = DateTime.UtcNow.AddMonths(-1);
             var sessionDate = DateTime.UtcNow.AddDays(-1);
 
-            await Utility.AssertEncodedWebApi(c => c.Admin.Users.UnsupportedVersions(supportDate,sessionDate),
+            await Utility.AssertEncodedWebApi(c => c.Admin.Users.UnsupportedVersions(supportDate, sessionDate),
                 "admin.users.unsupportedVersions.export",
                 nvc =>
                 {

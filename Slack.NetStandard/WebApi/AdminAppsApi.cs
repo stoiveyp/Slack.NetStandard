@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Admin;
 
 namespace Slack.NetStandard.WebApi
@@ -71,12 +72,12 @@ namespace Slack.NetStandard.WebApi
             });
         }
 
-        public Task<WebApiResponse> UninstallApp(string appId, string teamId = null, string enterpriseId = null)
+        public Task<WebApiResponse> UninstallApp(string appId, List<string> teamIds = null, string enterpriseId = null)
         {
-            return _client.MakeJsonCall("admin.apps.uninstall", new AdminAppDecision
+            return _client.MakeJsonCall("admin.apps.uninstall", new AdminUninstallRequest
             {
                 AppId = appId,
-                TeamId = teamId,
+                TeamIds = teamIds,
                 EnterpriseId = enterpriseId
             });
         }
