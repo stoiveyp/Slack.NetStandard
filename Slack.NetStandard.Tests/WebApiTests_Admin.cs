@@ -181,7 +181,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_BarriersCreate()
         {
-            await Utility.AssertWebApi(
+            var response = await Utility.AssertWebApi(
                 c => c.Admin.Barriers.Create(new CreateBarrierRequest
                 {
                     BarrieredFromUserGroupIds = new List<string>{ "S03TNHGAUGZ" },
@@ -189,6 +189,7 @@ namespace Slack.NetStandard.Tests
                     RestrictedSubjects = Barrier.AllThreeRestrictedSubjects()
                 }),
                 "admin.barriers.create",
+                "Web_AdminBarrierCreateResponse.json",
                 jobject =>
                 {
                     var subjects = ((JArray)jobject["restricted_subjects"]).ToObject<List<string>>();
@@ -199,6 +200,62 @@ namespace Slack.NetStandard.Tests
 
                     var barriered = ((JArray)jobject["barriered_from_usergroup_ids"]).ToObject<List<string>>();
                     Assert.Equal("S03TNHGAUGZ", barriered.First());
+                });
+            Assert.True(Utility.CompareJson(response, "Web_AdminBarrierCreateResponse.json"));
+        }
+
+        [Fact]
+        public async Task Admin_BarriersUpdate()
+        {
+            var response = await Utility.AssertWebApi(
+                c => c.Admin.Barriers.Update(new UpdateBarrierRequest
+                {
+                    BarrierId = "xxx",
+                    BarrieredFromUserGroupIds = new List<string> { "S03TNHGAUGZ" },
+                    PrimaryUserGroupId = "S03TZK4A9H6",
+                    RestrictedSubjects = Barrier.AllThreeRestrictedSubjects()
+                }),
+                "admin.barriers.update",
+                "Web_AdminBarrierCreateResponse.json",
+                jobject =>
+                {
+                    var subjects = ((JArray)jobject["restricted_subjects"]).ToObject<List<string>>();
+                    Assert.Equal("im", subjects[0]);
+                    Assert.Equal("mpim", subjects[1]);
+                    Assert.Equal("call", subjects[2]);
+                    Assert.Equal("S03TZK4A9H6", jobject.Value<string>("primary_usergroup_id"));
+                    Assert.Equal("xxx", jobject.Value<string>("barrier_id"));
+
+                    var barriered = ((JArray)jobject["barriered_from_usergroup_ids"]).ToObject<List<string>>();
+                    Assert.Equal("S03TNHGAUGZ", barriered.First());
+                });
+            Assert.True(Utility.CompareJson(response, "Web_AdminBarrierCreateResponse.json"));
+        }
+
+        [Fact]
+        public async Task Admin_BarriersList()
+        {
+            var response = await Utility.AssertEncodedWebApi(
+                c => c.Admin.Barriers.List("ABC",5),
+                "admin.barriers.list",
+                "Web_AdminBarrierListResponse.json",
+                nvc =>
+                {
+                    Assert.Equal("ABC", nvc["cursor"]);
+                    Assert.Equal(5.ToString(), nvc["limit"]);
+                });
+            Assert.True(Utility.CompareJson(response, "Web_AdminBarrierListResponse.json"));
+        }
+
+        [Fact]
+        public async Task Admin_BarriersDelete()
+        {
+            await Utility.AssertEncodedWebApi(
+                c => c.Admin.Barriers.Delete("xxx"),
+                "admin.barriers.delete",
+                nvc =>
+                {
+                    Assert.Equal("xxx",nvc["barrier_id"]);
                 });
         }
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Slack.NetStandard.WebApi;
+namespace Slack.NetStandard.WebApi.Admin;
 
 public class CreateBarrierRequest
 {
