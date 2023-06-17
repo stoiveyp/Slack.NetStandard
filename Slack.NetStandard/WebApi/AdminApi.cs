@@ -23,6 +23,8 @@ namespace Slack.NetStandard.WebApi
 
         public IAdminAuthPolicyApi AuthPolicy { get; }
 
+        public IAdminBarriersApi Barriers { get; }
+
         internal AdminApi(IWebApiClient client)
         {
             Apps = new AdminAppsApi(client);
@@ -34,6 +36,7 @@ namespace Slack.NetStandard.WebApi
             Analytics = new AdminAnalyticsApi(client);
             AuditAnomaly = new AdminAuditAnomalyApi(client);
             AuthPolicy = new AdminAuthPolicyApi(client);
+            Barriers = new AdminBarriersApi(client);
         }
     }
 }

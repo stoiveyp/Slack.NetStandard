@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Admin;
 using Xunit;
 using JArray = Newtonsoft.Json.Linq.JArray;
@@ -174,6 +175,30 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("U12345", entityId);
                     Assert.Equal("USER", jobject.Value<string>("entity_type"));
                     Assert.Equal("email_password", jobject.Value<string>("policy_name"));
+                });
+        }
+
+        [Fact]
+        public async Task Admin_BarriersCreate()
+        {
+            await Utility.AssertWebApi(
+                c => c.Admin.Barriers.Create(new CreateBarrierRequest
+                {
+                    BarrieredFromUserGroupIds = new List<string>{ "S03TNHGAUGZ" },
+                    PrimaryUserGroupId = "S03TZK4A9H6",
+                    RestrictedSubjects = Barrier.AllThreeRestrictedSubjects()
+                }),
+                "admin.barriers.create",
+                jobject =>
+                {
+                    var subjects = ((JArray)jobject["restricted_subjects"]).ToObject<List<string>>();
+                    Assert.Equal("im", subjects[0]);
+                    Assert.Equal("mpim", subjects[1]);
+                    Assert.Equal("call", subjects[2]);
+                    Assert.Equal("S03TZK4A9H6", jobject.Value<string>("primary_usergroup_id"));
+
+                    var barriered = ((JArray)jobject["barriered_from_usergroup_ids"]).ToObject<List<string>>();
+                    Assert.Equal("S03TNHGAUGZ", barriered.First());
                 });
         }
 
