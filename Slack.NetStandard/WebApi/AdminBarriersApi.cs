@@ -35,10 +35,6 @@ internal class AdminBarriersApi:IAdminBarriersApi
 
     public Task<WebApiResponse> Delete(string barrierId)
     {
-        var dict = new Dictionary<string, string>
-        {
-            {"barrier_id", barrierId}
-        };
-        return _client.MakeUrlEncodedCall("admin.barriers.delete",dict);
+        return _client.SingleValueEncodedCall("admin.barriers.delete", "barrier_id", barrierId);
     }
 }

@@ -249,13 +249,8 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Admin_BarriersDelete()
         {
-            await Utility.AssertEncodedWebApi(
-                c => c.Admin.Barriers.Delete("xxx"),
-                "admin.barriers.delete",
-                nvc =>
-                {
-                    Assert.Equal("xxx",nvc["barrier_id"]);
-                });
+            await Utility.AssertSingleEncodedWebApi(c => c.Admin.Barriers.Delete("xxx"),
+                "admin.barriers.delete", "barrier_id", "xxx");
         }
 
         [Fact]

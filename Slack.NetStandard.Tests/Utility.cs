@@ -10,6 +10,7 @@ using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
+using Slack.NetStandard.WebApi.Admin;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -209,6 +210,16 @@ namespace Slack.NetStandard.Tests
             return response;
         }
 
+        public static async Task<WebApiResponse> AssertSingleEncodedWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, string name, string value)
+        {
+            var response = await CheckApi(func,
+                methodName,
+                nvc => Assert.Equal(value, nvc[name]), WebApiResponse.Success());
+
+            Assert.True(response.OK);
+            return response;
+        }
+
         public static async Task<WebApiResponse> AssertEncodedWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, Action<NameValueCollection> requestAssertion)
         {
             var response = await CheckApi(func,
@@ -217,6 +228,11 @@ namespace Slack.NetStandard.Tests
 
             Assert.True(response.OK);
             return response;
+        }
+
+        public static void CompareJArray<T>(this JObject jobj, string propertyName, params T[] values)
+        {
+            Assert.All(jobj.Value<JArray>(propertyName).Values<T>().Zip(values), tuple => Assert.Equal(tuple.First, tuple.Second));
         }
     }
 }
