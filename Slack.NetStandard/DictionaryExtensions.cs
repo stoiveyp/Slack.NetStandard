@@ -41,5 +41,21 @@ namespace Slack.NetStandard
 
             return dict;
         }
+
+        public static Dictionary<string, string> AddPaging(this Dictionary<string, string> dict, string cursor,
+            int? limit)
+        {
+            if (!string.IsNullOrWhiteSpace(cursor))
+            {
+                dict.Add("cursor", cursor);
+            }
+
+            if (limit.HasValue)
+            {
+                dict.Add("limit", limit.Value.ToString());
+            }
+
+            return dict;
+        }
     }
 }
