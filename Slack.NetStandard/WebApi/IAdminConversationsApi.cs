@@ -22,5 +22,7 @@ namespace Slack.NetStandard.WebApi
         Task<GetTeamsResponse> GetTeams(string channelId, string cursor = null, int? limit = null);
         Task<WebApiResponse> Invite(string channelId, IEnumerable<string> userIds);
         Task<LookupResponse> Lookup(LookupRequest request);
+        Task<WebApiResponse> RemoveCustomRetention(string channelId);
+        Task<WebApiResponse> Rename(string channelId, string name);
     }
 }

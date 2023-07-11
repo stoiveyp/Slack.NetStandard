@@ -206,6 +206,23 @@ public class WebApiTests_AdminConversation
         Assert.Equal(2,response.Channels.Length);
         Assert.Equal("encoded_id_1", response.Channels[0]);
         Assert.Equal("encoded_id_2", response.Channels[1]);
+    }
 
+    [Fact]
+    public async Task Admin_ConversationRemoveCustomRetention()
+    {
+        var response = await Utility.AssertSingleEncodedWebApi(c => c.Admin.Conversations.RemoveCustomRetention("xxx"),
+            "admin.conversations.removeCustomRetention", "channel_id", "xxx");
+    }
+
+    [Fact]
+    public async Task Admin_ConversationRename()
+    {
+        var response = await Utility.AssertEncodedWebApi(c => c.Admin.Conversations.Rename("C234", "newName"),
+            "admin.conversations.rename", nvc =>
+            {
+                Assert.Equal("C234", nvc["channel_id"]);
+                Assert.Equal("newName", nvc["name"]);
+            });
     }
 }

@@ -110,5 +110,20 @@ namespace Slack.NetStandard.WebApi
         {
             return _client.MakeJsonCall<LookupRequest,LookupResponse>("admin.conversations.lookup", request);
         }
+
+        public Task<WebApiResponse> RemoveCustomRetention(string channelId)
+        {
+            return _client.SingleValueEncodedCall("admin.conversations.removeCustomRetention", "channel_id", channelId);
+        }
+
+        public Task<WebApiResponse> Rename(string channelId, string name)
+        {
+            var nvc = new Dictionary<string, string>
+            {
+                { "channel_id", channelId },
+                { "name", name }
+            };
+            return _client.MakeUrlEncodedCall("admin.conversations.rename",nvc);
+        }
     }
 }
