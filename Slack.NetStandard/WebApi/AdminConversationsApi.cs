@@ -125,5 +125,10 @@ namespace Slack.NetStandard.WebApi
             };
             return _client.MakeUrlEncodedCall("admin.conversations.rename",nvc);
         }
+
+        public Task<SearchConversationResponse> Search(SearchConversationRequest request)
+        {
+            return _client.MakeJsonCall<SearchConversationRequest,SearchConversationResponse>("admin.conversations.search", request);
+        }
     }
 }

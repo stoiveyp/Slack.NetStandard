@@ -24,5 +24,6 @@ namespace Slack.NetStandard.WebApi
         Task<LookupResponse> Lookup(LookupRequest request);
         Task<WebApiResponse> RemoveCustomRetention(string channelId);
         Task<WebApiResponse> Rename(string channelId, string name);
+        Task<SearchConversationResponse> Search(SearchConversationRequest request);
     }
 }

@@ -2,6 +2,7 @@
 using Slack.NetStandard.WebApi.Admin;
 using System.Linq;
 using System.Threading.Tasks;
+using Slack.NetStandard.WebApi;
 using Xunit;
 
 namespace Slack.NetStandard.Tests;
@@ -133,11 +134,11 @@ public class WebApiTests_AdminConversation
     public async Task Admin_ConversationsDisconnectShared()
     {
         await Utility.AssertWebApi(
-        c => c.Admin.Conversations.DisconnectShared("C1235",new[] { "xxx", "yyy" }),
+        c => c.Admin.Conversations.DisconnectShared("C1235", new[] { "xxx", "yyy" }),
     "admin.conversations.disconnectShared",
         jobject =>
         {
-            Assert.Equal("C1235",jobject.Value<string>("channel_id"));
+            Assert.Equal("C1235", jobject.Value<string>("channel_id"));
             jobject.CompareJArray("leaving_team_ids", "xxx", "yyy");
         });
     }
@@ -145,13 +146,13 @@ public class WebApiTests_AdminConversation
     [Fact]
     public async Task Admin_ConversationsPrefs()
     {
-        await Utility.AssertSingleEncodedWebApi(c => c.Admin.Conversations.GetConversationPrefs("xxx"), "admin.conversations.getConversationPrefs","channel_id","xxx", new ConversationPrefsResponse{OK = true});
+        await Utility.AssertSingleEncodedWebApi(c => c.Admin.Conversations.GetConversationPrefs("xxx"), "admin.conversations.getConversationPrefs", "channel_id", "xxx", new ConversationPrefsResponse { OK = true });
     }
 
     [Fact]
     public async Task Admin_ConversationsGetCustomRetention()
     {
-        var response = await Utility.AssertSingleEncodedWebApi(c => c.Admin.Conversations.GetCustomRetention("xxx"), "admin.conversations.getCustomRetention", "channel_id", "xxx", new CustomRetentionResponse { OK = true,IsPolicyEnabled=true,DurationDays=70 });
+        var response = await Utility.AssertSingleEncodedWebApi(c => c.Admin.Conversations.GetCustomRetention("xxx"), "admin.conversations.getCustomRetention", "channel_id", "xxx", new CustomRetentionResponse { OK = true, IsPolicyEnabled = true, DurationDays = 70 });
         Assert.True(response.IsPolicyEnabled);
         Assert.Equal(70, response.DurationDays);
     }
@@ -167,7 +168,7 @@ public class WebApiTests_AdminConversation
                 Assert.Equal(5.ToString(), nvc["limit"]);
             });
 
-        Assert.Equal(2,response.TeamIds.Length);
+        Assert.Equal(2, response.TeamIds.Length);
         Assert.Equal("T1234", response.TeamIds[0]);
         Assert.Equal("T5679", response.TeamIds[1]);
     }
@@ -175,7 +176,7 @@ public class WebApiTests_AdminConversation
     [Fact]
     public async Task Admin_ConversationInvite()
     {
-        await Utility.AssertWebApi(c => c.Admin.Conversations.Invite("C1234", new[] { "U1234", "U5678" }),"admin.conversations.invite",
+        await Utility.AssertWebApi(c => c.Admin.Conversations.Invite("C1234", new[] { "U1234", "U5678" }), "admin.conversations.invite",
             jo =>
             {
                 Assert.Equal("C1234", jo.Value<string>("channel_id"));
@@ -189,21 +190,21 @@ public class WebApiTests_AdminConversation
         var request = new LookupRequest
         {
             LastMessageActivityBefore = 12345,
-            TeamIds = new List<string>(new[]{"T1234","T3456"}),
+            TeamIds = new List<string>(new[] { "T1234", "T3456" }),
             Cursor = "C1234",
-            Limit=10,
+            Limit = 10,
             MaxMemberCount = 20
         };
-        var response = await Utility.AssertWebApi(c => c.Admin.Conversations.Lookup(request), "admin.conversations.lookup","Web_ConversationLookup.json",
+        var response = await Utility.AssertWebApi(c => c.Admin.Conversations.Lookup(request), "admin.conversations.lookup", "Web_ConversationLookup.json",
             jo =>
             {
                 Assert.Equal(12345, jo.Value<long>("last_message_activity_before"));
                 Assert.Equal("C1234", jo.Value<string>("cursor"));
                 Assert.Equal(10, jo.Value<long>("limit"));
                 Assert.Equal(20, jo.Value<long>("max_member_count"));
-                jo.CompareJArray("team_ids","T1234","T3456");
+                jo.CompareJArray("team_ids", "T1234", "T3456");
             });
-        Assert.Equal(2,response.Channels.Length);
+        Assert.Equal(2, response.Channels.Length);
         Assert.Equal("encoded_id_1", response.Channels[0]);
         Assert.Equal("encoded_id_2", response.Channels[1]);
     }
@@ -224,5 +225,37 @@ public class WebApiTests_AdminConversation
                 Assert.Equal("C234", nvc["channel_id"]);
                 Assert.Equal("newName", nvc["name"]);
             });
+    }
+
+    [Fact]
+    public async Task Admin_ConversationsSearch()
+    {
+        var request = new SearchConversationRequest
+        {
+            ConnectedTeamIds = new List<string> { "T1234" },
+            Cursor = "C123",
+            Limit = 5,
+            Query = "TEST",
+            SearchChannelTypes = new List<ConversationSearchChannelType>
+ {
+     ConversationSearchChannelType.ExcludeArchived
+ },
+            Sort = ConversationSortMethod.MemberCount,
+            SortDirection = SortDirection.Ascending,
+            TeamIds = new List<string>{"T4567"}
+        };
+        var response = await Utility.AssertWebApi(c => c.Admin.Conversations.Search(request),
+    "admin.conversations.search", "Web_ConversationSearch.json", jo =>
+    {
+        Assert.Equal("TEST", jo.Value<string>("query"));
+        Assert.Equal("C123", jo.Value<string>("cursor"));
+        Assert.Equal(5, jo.Value<int>("limit"));
+        Assert.Equal("member_count", jo.Value<string>("sort"));
+        Assert.Equal("asc", jo.Value<string>("sort_dir"));
+        jo.CompareJArray("search_channel_types","exclude_archived");
+        jo.CompareJArray("connected_team_ids","T1234");
+        jo.CompareJArray("team_ids","T4567");
+    });
+        Assert.Equal(2, response.Conversations.Length);
     }
 }
