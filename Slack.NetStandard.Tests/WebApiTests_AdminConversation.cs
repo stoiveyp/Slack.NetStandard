@@ -69,9 +69,8 @@ public class WebApiTests_AdminConversation
     public async Task Admin_ConversationsSetTeams()
     {
         await Utility.AssertWebApi(
-            c => c.Admin.Conversations.SetTeams(new SetTeamsRequest
+            c => c.Admin.Conversations.SetTeams(new SetTeamsRequest("ABCDEF")
             {
-                Channel = "ABCDEF",
                 OrgChannel = true
             }),
             "admin.conversations.setTeams",
@@ -212,14 +211,14 @@ public class WebApiTests_AdminConversation
     [Fact]
     public async Task Admin_ConversationRemoveCustomRetention()
     {
-        var response = await Utility.AssertSingleEncodedWebApi(c => c.Admin.Conversations.RemoveCustomRetention("xxx"),
+        await Utility.AssertSingleEncodedWebApi(c => c.Admin.Conversations.RemoveCustomRetention("xxx"),
             "admin.conversations.removeCustomRetention", "channel_id", "xxx");
     }
 
     [Fact]
     public async Task Admin_ConversationRename()
     {
-        var response = await Utility.AssertEncodedWebApi(c => c.Admin.Conversations.Rename("C234", "newName"),
+        await Utility.AssertEncodedWebApi(c => c.Admin.Conversations.Rename("C234", "newName"),
             "admin.conversations.rename", nvc =>
             {
                 Assert.Equal("C234", nvc["channel_id"]);
@@ -242,7 +241,7 @@ public class WebApiTests_AdminConversation
  },
             Sort = ConversationSortMethod.MemberCount,
             SortDirection = SortDirection.Ascending,
-            TeamIds = new List<string>{"T4567"}
+            TeamIds = new List<string> { "T4567" }
         };
         var response = await Utility.AssertWebApi(c => c.Admin.Conversations.Search(request),
     "admin.conversations.search", "Web_ConversationSearch.json", jo =>
@@ -252,10 +251,44 @@ public class WebApiTests_AdminConversation
         Assert.Equal(5, jo.Value<int>("limit"));
         Assert.Equal("member_count", jo.Value<string>("sort"));
         Assert.Equal("asc", jo.Value<string>("sort_dir"));
-        jo.CompareJArray("search_channel_types","exclude_archived");
-        jo.CompareJArray("connected_team_ids","T1234");
-        jo.CompareJArray("team_ids","T4567");
+        jo.CompareJArray("search_channel_types", "exclude_archived");
+        jo.CompareJArray("connected_team_ids", "T1234");
+        jo.CompareJArray("team_ids", "T4567");
     });
         Assert.Equal(2, response.Conversations.Length);
+    }
+
+    [Fact]
+    public async Task Admin_ConversationsSetConversationPrefs()
+    {
+        await Utility.AssertEncodedWebApi(c => c.Admin.Conversations.SetConversationPrefs("C234", new SetConversationPrefsRequest
+        {
+            CanHuddle = true,
+            WhoCanPost = "user",
+            CanThread = "test2"
+        }),
+            "admin.conversations.setConversationPrefs", nvc =>
+            {
+                Assert.Equal("C234", nvc["channel_id"]);
+                Assert.Equal("{'who_can_post':'user','can_thread':'test2','can_huddle':true}", nvc["prefs"]);
+            });
+    }
+
+    [Fact]
+    public async Task Admin_ConversationsSetCustomRetention()
+    {
+        await Utility.AssertEncodedWebApi(c => c.Admin.Conversations.SetCustomRetention("C234", 50),
+            "admin.conversations.setCustomRetention", nvc =>
+            {
+                Assert.Equal("C234", nvc["channel_id"]);
+                Assert.Equal(50.ToString(), nvc["duration_days"]);
+            });
+    }
+
+    [Fact]
+    public async Task Admin_ConversationsUnarchive()
+    {
+        await Utility.AssertSingleEncodedWebApi(c => c.Admin.Conversations.Unarchive("xxx"),
+            "admin.conversations.unarchive", "channel_id", "xxx");
     }
 }

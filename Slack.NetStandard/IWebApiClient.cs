@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi;
@@ -20,5 +19,7 @@ namespace Slack.NetStandard
 
         Task<TResponse> MakeMultiPartCall<TResponse>(string methodName, object textData, Dictionary<string,MultipartFile> streams)
             where TResponse : WebApiResponseBase;
+
+        string EncodeJsonForWebApi(object data);
     }
 }

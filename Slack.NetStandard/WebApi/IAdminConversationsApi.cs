@@ -8,6 +8,7 @@ namespace Slack.NetStandard.WebApi
     public interface IAdminConversationsApi
     {
         Task<WebApiResponse> Archive(string channelId);
+        Task<WebApiResponse> Unarchive(string channelId);
         Task<BulkActionResponse> BulkArchive(IEnumerable<string> channelIds);
         Task<BulkActionResponse> BulkDelete(IEnumerable<string> channelIds);
         Task<BulkActionResponse> BulkMove(string targetTeamId, IEnumerable<string> channelIds);
@@ -25,5 +26,7 @@ namespace Slack.NetStandard.WebApi
         Task<WebApiResponse> RemoveCustomRetention(string channelId);
         Task<WebApiResponse> Rename(string channelId, string name);
         Task<SearchConversationResponse> Search(SearchConversationRequest request);
+        Task<WebApiResponse> SetConversationPrefs(string channelId, SetConversationPrefsRequest request);
+        Task<WebApiResponse> SetCustomRetention(string channelId, int durationDays);
     }
 }

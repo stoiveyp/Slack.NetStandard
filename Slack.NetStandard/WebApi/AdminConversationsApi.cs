@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.Objects;
 using Slack.NetStandard.WebApi.Admin;
 
 namespace Slack.NetStandard.WebApi
@@ -18,6 +17,11 @@ namespace Slack.NetStandard.WebApi
         public Task<WebApiResponse> Archive(string channelId)
         {
             return _client.SingleValueEncodedCall("admin.conversations.archive", "channel_id", channelId);
+        }
+
+        public Task<WebApiResponse> Unarchive(string channelId)
+        {
+            return _client.SingleValueEncodedCall("admin.conversations.unarchive", "channel_id", channelId);
         }
 
         public Task<BulkActionResponse> BulkArchive(IEnumerable<string> channelIds)
@@ -129,6 +133,26 @@ namespace Slack.NetStandard.WebApi
         public Task<SearchConversationResponse> Search(SearchConversationRequest request)
         {
             return _client.MakeJsonCall<SearchConversationRequest,SearchConversationResponse>("admin.conversations.search", request);
+        }
+
+        public Task<WebApiResponse> SetConversationPrefs(string channelId, SetConversationPrefsRequest request)
+        {
+            var nvc = new Dictionary<string, string>
+            {
+                { "channel_id", channelId },
+                { "prefs", _client.EncodeJsonForWebApi(request) }
+            };
+            return _client.MakeUrlEncodedCall("admin.conversations.setConversationPrefs", nvc);
+        }
+
+        public Task<WebApiResponse> SetCustomRetention(string channelId, int durationDays)
+        {
+            var nvc = new Dictionary<string, string>
+            {
+                { "channel_id", channelId },
+                { "duration_days", durationDays.ToString() }
+            };
+            return _client.MakeUrlEncodedCall("admin.conversations.setCustomRetention", nvc);
         }
     }
 }

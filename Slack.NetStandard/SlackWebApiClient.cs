@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.ExceptionServices;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -79,8 +80,8 @@ namespace Slack.NetStandard
         private IBookmarksApi _bookmarks;
         public IBookmarksApi Bookmarks => _bookmarks ??= new BookmarksApi(this);
 
-        public static Uri ApiBaseAddress { get; } = new ("https://slack.com/api/", UriKind.Absolute);
-        public static HttpClient DefaultClient { get; } = new ();
+        public static Uri ApiBaseAddress { get; } = new("https://slack.com/api/", UriKind.Absolute);
+        public static HttpClient DefaultClient { get; } = new();
         public HttpClient Client { get; set; }
         public string Token { get; set; }
 
@@ -93,12 +94,12 @@ namespace Slack.NetStandard
             return ((IWebApiClient)this).MakeJsonCall("api.test", data);
         }
 
-        public SlackWebApiClient(string token) : this(null,token)
+        public SlackWebApiClient(string token) : this(null, token)
         {
 
         }
 
-        public SlackWebApiClient(HttpClient client) : this(client,null)
+        public SlackWebApiClient(HttpClient client) : this(client, null)
         {
 
         }
@@ -109,7 +110,7 @@ namespace Slack.NetStandard
             Client = client ?? DefaultClient;
         }
 
-        private static Uri MethodUrl(string methodName) => new (ApiBaseAddress, methodName);
+        private static Uri MethodUrl(string methodName) => new(ApiBaseAddress, methodName);
 
 
         Task<WebApiResponse> IWebApiClient.MakeJsonCall<TRequest>(string methodName, TRequest request)
@@ -126,7 +127,7 @@ namespace Slack.NetStandard
 
                 var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
                 HandleAuth(message);
-                
+
                 var response = await Client.SendAsync(message);
                 return await GenerateResponseFromMessage<TResponse>(response);
             }
@@ -266,6 +267,18 @@ namespace Slack.NetStandard
             }
 
             throw new InvalidOperationException("Processing call failed");
+        }
+
+        string IWebApiClient.EncodeJsonForWebApi(object data)
+        {
+            StringBuilder sb = new StringBuilder(40);
+            using (StringWriter sw = new StringWriter(sb))
+            using (JsonTextWriter writer = new JsonTextWriter(sw){Formatting = Formatting.None, Indentation = 0,QuoteChar = '\''})
+            {
+                Serializer.Serialize(writer, data);
+            }
+
+            return sb.ToString();
         }
     }
 }
