@@ -110,6 +110,9 @@
 		<None Update="Examples\Web_ConversationsAcceptSharedInviteResponse.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Update="Examples\Web_ConversationsRestrictAccessListResponse.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Examples\Web_ConversationsInviteSharedResponse.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
@@ -430,6 +433,9 @@
 		</None>
 		<None Update="Examples\Web_AdminAppsAuthorizations.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Examples\Web_ConversationsEkm.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Examples\Web_ConversationsListConnectInvites.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

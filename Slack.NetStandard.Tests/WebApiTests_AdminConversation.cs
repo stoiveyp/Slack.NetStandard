@@ -291,4 +291,64 @@ public class WebApiTests_AdminConversation
         await Utility.AssertSingleEncodedWebApi(c => c.Admin.Conversations.Unarchive("xxx"),
             "admin.conversations.unarchive", "channel_id", "xxx");
     }
+
+    [Fact]
+    public async Task Admin_ConversationEkmListOriginalConnectedChannelInfo()
+    {
+        var request = new EkmOriginalConnectedRequest
+        {
+            ChannelIds = "C1234,C3456",
+            TeamIds = "T1234,T3456",
+            Cursor = "C1234",
+            Limit = 10,
+        };
+        var response = await Utility.AssertWebApi(c => c.Admin.Conversations.EkmListOriginalConnectedChannelInfo(request), "admin.conversations.ekm.listOriginalConnectedChannelInfo", "Web_ConversationsEkm.json",
+            jo =>
+            {
+                Assert.Equal(10, jo.Value<long>("limit"));
+                Assert.Equal("C1234", jo.Value<string>("cursor"));
+                Assert.Equal("C1234,C3456", jo.Value<string>("channel_ids"));
+                Assert.Equal("T1234,T3456", jo.Value<string>("team_ids"));
+            });
+        var channelInfo = Assert.Single(response.Channels);
+        Assert.Equal("id", channelInfo.Id);
+        Assert.Equal("host_id", channelInfo.OriginalConnectedHostId);
+        Assert.Equal("channel_id", channelInfo.OriginalConnectedChannelId);
+    }
+
+    [Fact]
+    public async Task Admin_ConversationRestrictedAccessAdd()
+    {
+        await Utility.AssertEncodedWebApi(c => c.Admin.Conversations.RestrictAccessAddGroup("C1234", "G1234", "T1234"),
+            "admin.conversations.restrictAccess.addGroup",  nvc =>
+            {
+                Assert.Equal("C1234", nvc["channel_id"]);
+                Assert.Equal("G1234", nvc["group_id"]);
+                Assert.Equal("T1234", nvc["team_id"]);
+            });
+    }
+
+    [Fact]
+    public async Task Admin_ConversationRestrictedAccessRemove()
+    {
+        await Utility.AssertEncodedWebApi(c => c.Admin.Conversations.RestrictAccessRemoveGroup("C1234", "G1234", "T1234"),
+            "admin.conversations.restrictAccess.removeGroup", nvc =>
+            {
+                Assert.Equal("C1234", nvc["channel_id"]);
+                Assert.Equal("G1234", nvc["group_id"]);
+                Assert.Equal("T1234", nvc["team_id"]);
+            });
+    }
+
+    [Fact]
+    public async Task Admin_ConversationRestrictedAccessList()
+    {
+        var response = await Utility.AssertEncodedWebApi(c => c.Admin.Conversations.RestrictAccessListGroups("C1234", "T1234"),
+            "admin.conversations.restrictAccess.listGroups", "Web_ConversationsRestrictAccessListResponse.json", nvc =>
+            {
+                Assert.Equal("C1234", nvc["channel_id"]);
+                Assert.Equal("T1234", nvc["team_id"]);
+            });
+        Assert.Equal("YOUR_GROUP_ID",Assert.Single(response.GroupIds));
+    }
 }

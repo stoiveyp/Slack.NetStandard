@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi.Admin;
@@ -153,6 +154,43 @@ namespace Slack.NetStandard.WebApi
                 { "duration_days", durationDays.ToString() }
             };
             return _client.MakeUrlEncodedCall("admin.conversations.setCustomRetention", nvc);
+        }
+
+        public Task<EkmOriginalConnectedResponse> EkmListOriginalConnectedChannelInfo(EkmOriginalConnectedRequest request)
+        {
+            return _client.MakeJsonCall<EkmOriginalConnectedRequest, EkmOriginalConnectedResponse>("admin.conversations.ekm.listOriginalConnectedChannelInfo", request);
+        }
+
+        public Task<WebApiResponse> RestrictAccessAddGroup(string channelId, string groupId, string teamId = null)
+        {
+            var nvc = new Dictionary<string, string>
+            {
+                { "channel_id", channelId },
+                { "group_id", groupId }
+            };
+            nvc.AddIfValue("team_id", teamId);
+            return _client.MakeUrlEncodedCall("admin.conversations.restrictAccess.addGroup", nvc);
+        }
+
+        public Task<WebApiResponse> RestrictAccessRemoveGroup(string channelId, string groupId, string teamId = null)
+        {
+            var nvc = new Dictionary<string, string>
+            {
+                { "channel_id", channelId },
+                { "group_id", groupId }
+            };
+            nvc.AddIfValue("team_id", teamId);
+            return _client.MakeUrlEncodedCall("admin.conversations.restrictAccess.removeGroup", nvc);
+        }
+
+        public Task<RestrictedAccessListResponse> RestrictAccessListGroups(string channelId, string teamId = null)
+        {
+            var nvc = new Dictionary<string, string>
+            {
+                { "channel_id", channelId }
+            };
+            nvc.AddIfValue("team_id", teamId);
+            return _client.MakeUrlEncodedCall<RestrictedAccessListResponse>("admin.conversations.restrictAccess.listGroups", nvc);
         }
     }
 }

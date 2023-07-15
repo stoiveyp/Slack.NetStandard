@@ -28,5 +28,9 @@ namespace Slack.NetStandard.WebApi
         Task<SearchConversationResponse> Search(SearchConversationRequest request);
         Task<WebApiResponse> SetConversationPrefs(string channelId, SetConversationPrefsRequest request);
         Task<WebApiResponse> SetCustomRetention(string channelId, int durationDays);
+        Task<EkmOriginalConnectedResponse> EkmListOriginalConnectedChannelInfo(EkmOriginalConnectedRequest request);
+        Task<WebApiResponse> RestrictAccessAddGroup(string channelId, string groupId, string teamId = null);
+        Task<WebApiResponse> RestrictAccessRemoveGroup(string channelId, string groupId, string teamId = null);
+        Task<RestrictedAccessListResponse> RestrictAccessListGroups(string channelId, string teamId = null);
     }
 }
