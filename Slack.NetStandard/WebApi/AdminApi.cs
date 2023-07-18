@@ -13,6 +13,8 @@ namespace Slack.NetStandard.WebApi
 
         public IAdminInviteRequestsApi InviteRequests { get; }
 
+        public IAdminRolesApi Roles { get; }
+
         public IAdminTeamsApi Teams { get; }
 
         public IAdminUsersApi Users { get; }
@@ -37,6 +39,7 @@ namespace Slack.NetStandard.WebApi
             AuditAnomaly = new AdminAuditAnomalyApi(client);
             AuthPolicy = new AdminAuthPolicyApi(client);
             Barriers = new AdminBarriersApi(client);
+            Roles = new AdminRolesApi(client);
         }
     }
 }
