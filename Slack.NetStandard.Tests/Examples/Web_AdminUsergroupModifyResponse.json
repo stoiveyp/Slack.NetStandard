@@ -1,0 +1,5 @@
+{
+  "ok": false,
+  "error": "channel_not_found",
+  "invalid_channels": [ "C1234D1R4", "C1234D1R5" ]
+}

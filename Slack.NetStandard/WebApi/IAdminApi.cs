@@ -21,5 +21,7 @@
         IAdminAuthPolicyApi AuthPolicy { get; }
 
         IAdminBarriersApi Barriers { get; }
+
+        IAdminUsergroupsApi Usergroups { get; }
     }
 }
