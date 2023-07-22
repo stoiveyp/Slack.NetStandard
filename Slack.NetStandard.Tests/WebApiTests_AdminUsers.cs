@@ -124,18 +124,6 @@ public class WebApiTests_AdminUsers
     }
 
     [Fact]
-    public async Task Admin_UsersSessionReset()
-    {
-        await Utility.AssertEncodedWebApi(c => c.Admin.Users.ResetSession("ABCDEF", SessionType.WebOnly),
-            "admin.users.session.reset",
-            nvc =>
-            {
-                Assert.Equal("ABCDEF", nvc["user_id"]);
-                Assert.Equal("true", nvc["web_only"]);
-            });
-    }
-
-    [Fact]
     public async Task Admin_UsersUnsupportedVersionsExport()
     {
         var supportDate = DateTime.UtcNow.AddMonths(-1);

@@ -6,6 +6,8 @@ namespace Slack.NetStandard.WebApi
 {
     public interface IAdminUsersApi
     {
+        IAdminUserSessionApi Session { get; }
+
         Task<WebApiResponse> Assign(AssignUserRequest request);
         Task<WebApiResponse> Invite(InviteUserRequest request);
 
@@ -20,7 +22,6 @@ namespace Slack.NetStandard.WebApi
         Task<WebApiResponse> SetOwner(string teamId, string userId);
         Task<WebApiResponse> SetRegular(string teamId, string userId);
 
-        Task<WebApiResponse> ResetSession(string userId, SessionType type);
         Task<WebApiResponse> UnsupportedVersions(DateTime? endOfSupport = null, DateTime? sessionStart = null);
     }
 }

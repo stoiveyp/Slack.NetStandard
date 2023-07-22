@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "datastore": "good_tunes",
+  "items": [
+    {
+      "artist": "Whitney Houston",
+      "song": "I Will Always Love You",
+      "id": "4"
+    },
+    {
+      "artist": "Fred Rogers",
+      "song": "Won't You Be My Neighbor?",
+      "id": "5"
+    }
+  ]
+}

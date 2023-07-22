@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "session_settings": [
+    {
+      "user_id": "U1234",
+      "desktop_app_browser_quit": true,
+      "duration": 315569520
+    }
+  ],
+  "no_settings_applied": []
+}

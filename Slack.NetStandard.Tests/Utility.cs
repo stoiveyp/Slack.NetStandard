@@ -240,6 +240,16 @@ namespace Slack.NetStandard.Tests
             return response;
         }
 
+        public static async Task<T> AssertEncodedWebApi<T>(Func<ISlackApiClient, Task<T>> func, string methodName, Action<NameValueCollection> requestAssertion, T fakeResponse) where T:WebApiResponse
+        {
+            var response = await CheckApi(func,
+                methodName,
+                requestAssertion,fakeResponse);
+
+            Assert.True(response.OK);
+            return response;
+        }
+
         public static void CompareJArray<T>(this JObject jobj, string propertyName, params T[] values)
         {
             Assert.All(jobj.Value<JArray>(propertyName).Values<T>().Zip(values), tuple => Assert.Equal(tuple.First, tuple.Second));
