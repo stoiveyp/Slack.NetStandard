@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "steps_versions": [
+    {
+      "title": "Send a greeting",
+      "workflow_id": "Wf014H7FCWG2",
+      "step_id": "0",
+      "is_deleted": false,
+      "workflow_version_created": "1677282339978193"
+    }
+  ]
+}

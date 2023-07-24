@@ -48,6 +48,8 @@ namespace Slack.NetStandard
 
         ICallsApi Calls { get; }
 
+        IFunctionsApi Functions { get; }
+
         Task<WebApiResponse> Test(object data);
     }
 }
