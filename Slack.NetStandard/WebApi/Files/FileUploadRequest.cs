@@ -28,6 +28,5 @@ namespace Slack.NetStandard.WebApi.Files
 
         [JsonProperty("title",NullValueHandling = NullValueHandling.Ignore)]
         public string Title { get; set; }
-
     }
 }

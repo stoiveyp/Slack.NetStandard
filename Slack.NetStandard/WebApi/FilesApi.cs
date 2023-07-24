@@ -50,6 +50,18 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeUrlEncodedCall<FileResponse>("files.upload", request);
         }
 
+        public Task<GetExternalUploadUrlResponse> GetExternalUploadUrl(GetExternalUploadUrlRequest request)
+        {
+            return _client.MakeJsonCall<GetExternalUploadUrlRequest, GetExternalUploadUrlResponse>(
+                "files.getUploadURLExternal", request);
+        }
+
+        public Task<CompleteExternalUploadResponse> CompleteExternalUpload(CompleteExternalUploadRequest request)
+        {
+            return _client.MakeJsonCall<CompleteExternalUploadRequest, CompleteExternalUploadResponse>(
+                "files.completeUploadExternal", request);
+        }
+
         public IFilesRemoteApi Remote { get; }
     }
 }

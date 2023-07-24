@@ -254,5 +254,11 @@ namespace Slack.NetStandard.Tests
         {
             Assert.All(jobj.Value<JArray>(propertyName).Values<T>().Zip(values), tuple => Assert.Equal(tuple.First, tuple.Second));
         }
+
+        public static void TestPaging(this JObject jobj, string cursor, int limit)
+        {
+            Assert.Equal(cursor, jobj.Value<string>("cursor"));
+            Assert.Equal(limit, jobj.Value<int>("limit"));
+        }
     }
 }

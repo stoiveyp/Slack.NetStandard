@@ -80,6 +80,9 @@ namespace Slack.NetStandard
         private IBookmarksApi _bookmarks;
         public IBookmarksApi Bookmarks => _bookmarks ??= new BookmarksApi(this);
 
+        private ICallsApi _calls;
+        public ICallsApi Calls => _calls ??= new CallsApi(this);
+
         public static Uri ApiBaseAddress { get; } = new("https://slack.com/api/", UriKind.Absolute);
         public static HttpClient DefaultClient { get; } = new();
         public HttpClient Client { get; set; }

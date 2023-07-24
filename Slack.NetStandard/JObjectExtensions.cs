@@ -30,4 +30,19 @@ internal static class JObjectExtensions
 
         return jo;
     }
+
+    public static JObject AddPaging(this JObject jo, string cursor, int? limit)
+    {
+        if (!string.IsNullOrWhiteSpace(cursor))
+        {
+            jo.Add("cursor", cursor);
+        }
+
+        if (limit.HasValue)
+        {
+            jo.Add("limit", limit.Value);
+        }
+
+        return jo;
+    }
 }

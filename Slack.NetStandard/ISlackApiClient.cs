@@ -46,6 +46,8 @@ namespace Slack.NetStandard
 
         IBookmarksApi Bookmarks { get; }
 
+        ICallsApi Calls { get; }
+
         Task<WebApiResponse> Test(object data);
     }
 }
