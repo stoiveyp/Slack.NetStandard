@@ -10,6 +10,7 @@ using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
+using Slack.NetStandard.WebApi.Admin;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -121,7 +122,7 @@ namespace Slack.NetStandard.Tests
         }
 
         public static Task<TResponse> CheckApi<TResponse>(
-            Func<SlackWebApiClient, Task<TResponse>> requestCall,
+            Func<ISlackApiClient, Task<TResponse>> requestCall,
             string url,
             Action<JObject> requestCheck,
             TResponse responseToSend)
@@ -185,6 +186,7 @@ namespace Slack.NetStandard.Tests
                 requestAssertion, ExampleFileContent<TResponse>(responseFile));
             
             Assert.True(CompareJson(response,responseFile));
+            Assert.Null(response.OtherFields);
             return response;
         }
 
@@ -208,6 +210,26 @@ namespace Slack.NetStandard.Tests
             return response;
         }
 
+        public static async Task<WebApiResponse> AssertSingleEncodedWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, string name, string value)
+        {
+            var response = await CheckApi(func,
+                methodName,
+                new Action<NameValueCollection>(nvc => Assert.Equal(value, nvc[name])), WebApiResponse.Success());
+
+            Assert.True(response.OK);
+            return response;
+        }
+
+        public static async Task<T> AssertSingleEncodedWebApi<T>(Func<ISlackApiClient, Task<T>> func, string methodName, string name, string value, T fakeResponse) where T:WebApiResponseBase
+        {
+            var response = await CheckApi(func,
+                methodName,
+                new Action<NameValueCollection>(nvc => Assert.Equal(value, nvc[name])), fakeResponse);
+
+            Assert.True(response.OK);
+            return response;
+        }
+
         public static async Task<WebApiResponse> AssertEncodedWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, Action<NameValueCollection> requestAssertion)
         {
             var response = await CheckApi(func,
@@ -216,6 +238,27 @@ namespace Slack.NetStandard.Tests
 
             Assert.True(response.OK);
             return response;
+        }
+
+        public static async Task<T> AssertEncodedWebApi<T>(Func<ISlackApiClient, Task<T>> func, string methodName, Action<NameValueCollection> requestAssertion, T fakeResponse) where T:WebApiResponse
+        {
+            var response = await CheckApi(func,
+                methodName,
+                requestAssertion,fakeResponse);
+
+            Assert.True(response.OK);
+            return response;
+        }
+
+        public static void CompareJArray<T>(this JObject jobj, string propertyName, params T[] values)
+        {
+            Assert.All(jobj.Value<JArray>(propertyName).Values<T>().Zip(values), tuple => Assert.Equal(tuple.First, tuple.Second));
+        }
+
+        public static void TestPaging(this JObject jobj, string cursor, int limit)
+        {
+            Assert.Equal(cursor, jobj.Value<string>("cursor"));
+            Assert.Equal(limit, jobj.Value<int>("limit"));
         }
     }
 }

@@ -51,16 +51,7 @@ namespace Slack.NetStandard.WebApi
             var dict =new Dictionary<string,string>
             {
                 {"team_id",teamId}
-            };
-            if (!string.IsNullOrWhiteSpace(cursor))
-            {
-                dict.Add("cursor",cursor);
-            }
-
-            if (limit.HasValue)
-            {
-                dict.Add("limit",limit.Value.ToString());
-            }
+            }.AddPaging(cursor,limit);
 
             return _client.MakeUrlEncodedCall<ListAdminsResponse>("admin.teams.admins.list",dict);
         }

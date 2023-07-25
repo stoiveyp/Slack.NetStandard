@@ -1,0 +1,33 @@
+name: Build and Test
+on:
+  push:
+    branches:
+    - beta
+jobs:
+  runner:
+    if: github.event_name == 'push' && contains(toJson(github.event.commits), '***NO_CI***') == false && contains(toJson(github.event.commits), '[ci skip]') == false && contains(toJson(github.event.commits), '[skip ci]') == false
+    name: Package Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+          include-prerelease: true
+      - name: Build Solution
+        run:  dotnet build -c Release
+      - name: Test Solution
+        run:  dotnet test
+      - name: GH Deploy Workaround
+        run: |
+           export REPO_NAME=$(echo ${GITHUB_REPOSITORY} | sed 's/stoiveyp\///')
+           for f in ./${REPO_NAME}/bin/Release/Slack.NetStandard*.nupkg
+           do
+             curl -vX PUT -u "stoiveyp:${{ secrets.GITHUB_TOKEN }}" -F package=@$f https://nuget.pkg.github.com/stoiveyp/
+           done
+        shell: bash
+      - name: Deploy to NuGet
+        run: |
+          export REPO_NAME=$(echo ${GITHUB_REPOSITORY} | sed 's/stoiveyp\///')
+          dotnet nuget push ./${REPO_NAME}/bin/Release/Slack.NetStandard*.nupkg -k ${{ secrets.NUGET_KEY }} -s https://api.nuget.org/v3/index.json

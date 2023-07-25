@@ -37,6 +37,9 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonConverter(typeof(StringEnumConverter))]
         public MessageParsing MessageParsing { get; set; }
 
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
+        public MessageMetadata Metadata { get; set; }
+
         public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
         public bool ShouldSerializeAttachments() => Attachments?.Any() ?? false;
         public bool ShouldSerializeFileIds() => FileIds?.Any() ?? false;

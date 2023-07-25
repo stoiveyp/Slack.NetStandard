@@ -33,7 +33,7 @@ namespace Slack.NetStandard.JsonConverters
             return target;
         }
 
-        public static Dictionary<string, Type> IMessageBlockLookup = new Dictionary<string, Type>
+        public static Dictionary<string, Type> IMessageBlockLookup = new()
         {
             {nameof(Divider).ToLower(), typeof(Divider)},
             {nameof(Section).ToLower(), typeof(Section)},
@@ -44,7 +44,8 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(File).ToLower(),typeof(File) },
             {nameof(Header).ToLower(),typeof(Header) },
             {RichText.MessageBlockType,typeof(RichText) },
-            {nameof(Video).ToLower(), typeof(Video) }
+            {nameof(Video).ToLower(), typeof(Video) },
+            {nameof(Call).ToLower(), typeof(Call) }
         };
 
         private IMessageBlock GetComponent(string type)

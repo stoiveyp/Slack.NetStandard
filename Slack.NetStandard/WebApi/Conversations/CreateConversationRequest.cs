@@ -12,6 +12,9 @@ namespace Slack.NetStandard.WebApi.Conversations
         [JsonProperty("is_private",NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsPrivate { get; set; }
 
+        [JsonProperty("team_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamId { get; set; }
+
         [JsonProperty("user_ids", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> UserIds { get; set; } = new List<string>();
 

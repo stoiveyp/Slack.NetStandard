@@ -14,6 +14,7 @@ namespace Slack.NetStandard.WebApi
         Task<TeamIntegrationLogResponse> IntegrationLogs(IntegrationLogRequest request);
 
         Task<TeamProfileResponse> GetProfile(string visibility);
+        Task<PreferenceListResponse> GetPreferences();
 
         ITeamBillingApi Billing { get; }
     }

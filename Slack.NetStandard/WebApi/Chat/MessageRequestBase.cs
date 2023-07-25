@@ -42,6 +42,9 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("attachments", NullValueHandling = NullValueHandling.Ignore)]
         public IList<Attachment> Attachments { get; set; } = new List<Attachment>();
 
+        [JsonProperty("metadata",NullValueHandling = NullValueHandling.Ignore)]
+        public MessageMetadata Metadata { get; set; }
+
         public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
         public bool ShouldSerializeAttachments() => Attachments?.Any() ?? false;
     }

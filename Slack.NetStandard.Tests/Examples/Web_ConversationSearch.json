@@ -1,0 +1,54 @@
+{
+  "ok": true,
+  "conversations": [
+    {
+      "id": "GSEV0B5PY",
+      "name": "privacy-channel",
+      "purpose": "Group messaging with: @rita @nwhere @meanie",
+      "member_count": -1,
+      "created": 1578423973,
+      "creator_id": "WPQ65MVKK",
+      "is_private": true,
+      "is_archived": true,
+      "is_general": false,
+      "last_activity_ts": 1583198954000200,
+      "is_ext_shared": false,
+      "is_global_shared": true,
+      "is_org_default": false,
+      "is_org_mandatory": false,
+      "is_org_shared": true,
+      "is_frozen": false,
+      "connected_team_ids": [],
+      "internal_team_ids_count": 4,
+      "internal_team_ids_sample_team": "T013F30DBAB",
+      "pending_connected_team_ids": [],
+      "is_pending_ext_shared": false
+    },
+    {
+      "id": "C013JDPD6CR",
+      "name": "proj-decomposed-monolith",
+      "purpose": "",
+      "member_count": 1,
+      "created": 1588786531,
+      "creator_id": "WPQ65MVKK",
+      "is_private": false,
+      "is_archived": false,
+      "is_general": false,
+      "last_activity_ts": 1589854024000200,
+      "is_ext_shared": false,
+      "is_global_shared": false,
+      "is_org_default": false,
+      "is_org_mandatory": false,
+      "is_org_shared": true,
+      "is_frozen": false,
+      "connected_team_ids": [],
+      "internal_team_ids_count": 1,
+      "internal_team_ids_sample_team": "TPQ67R81F",
+      "pending_connected_team_ids": [],
+      "is_pending_ext_shared": false
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": "ABCDEF"
+  }
+}

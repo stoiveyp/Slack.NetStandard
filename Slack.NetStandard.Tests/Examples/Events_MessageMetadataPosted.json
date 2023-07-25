@@ -1,0 +1,20 @@
+{
+  "type": "message_metadata_posted",
+  "app_id": "AQF4F123M",
+  "bot_id": "B8241P2B34D",
+  "user_id": "UA8829BFL",
+  "team_id": "T12F3JCAP",
+  "channel_id": "CJN879K8A",
+  "metadata": {
+    "event_type": "task_created",
+    "event_payload": {
+      "id": "TK-2132",
+      "summary": "New issue with the display of mobile element",
+      "description": "An end user has found a problem with the new mobile container for data entry. It was reproduced in the current version of IOS.",
+      "priority": "HIGH",
+      "resource_type": "TASK"
+    }
+  },
+  "message_ts": "1658903885.673769",
+  "event_ts": "1658903885.673769"
+}

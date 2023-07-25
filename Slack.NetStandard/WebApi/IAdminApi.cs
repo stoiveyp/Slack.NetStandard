@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Slack.NetStandard.WebApi
+﻿namespace Slack.NetStandard.WebApi
 {
     public interface IAdminApi
     {
@@ -12,10 +8,20 @@ namespace Slack.NetStandard.WebApi
 
         IAdminInviteRequestsApi InviteRequests { get; }
 
+        IAdminRolesApi Roles { get; }
+
         IAdminTeamsApi Teams { get; }
 
         IAdminUsersApi Users { get; }
 
         IAdminAnalyticsApi Analytics { get; }
+
+        IAdminAuditAnomalyApi AuditAnomaly { get; }
+
+        IAdminAuthPolicyApi AuthPolicy { get; }
+
+        IAdminBarriersApi Barriers { get; }
+
+        IAdminUsergroupsApi Usergroups { get; }
     }
 }

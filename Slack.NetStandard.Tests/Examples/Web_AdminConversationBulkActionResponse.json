@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "bulk_action_id": "Ab123456",
+  "not_added": [
+    {
+      "channel_id": "C12346",
+      "error": "invalid_channel"
+    }
+  ]
+}

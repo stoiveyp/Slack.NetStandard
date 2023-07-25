@@ -12,7 +12,10 @@ namespace Slack.NetStandard.WebApi
         public AdminUsersApi(IWebApiClient client)
         {
             _client = client;
+            Session = new AdminUserSessionApi(client);
         }
+
+        public IAdminUserSessionApi Session { get; }
 
         public Task<WebApiResponse> Assign(AssignUserRequest request)
         {
@@ -89,23 +92,6 @@ namespace Slack.NetStandard.WebApi
                 TeamId = teamId,
                 UserId = userId
             });
-        }
-
-        public Task<WebApiResponse> ResetSession(string userId, SessionType type)
-        {
-            var dict = new Dictionary<string, string> {{"user_id", userId}};
-
-            if(type == SessionType.MobileOnly)
-            {
-                dict.Add("mobile_only",true.ToString().ToLower());
-            }
-
-            if (type == SessionType.WebOnly)
-            {
-                dict.Add("web_only", true.ToString().ToLower());
-            }
-
-            return _client.MakeUrlEncodedCall("admin.users.session.reset", dict);
         }
 
         public Task<WebApiResponse> UnsupportedVersions(DateTime? endOfSupport = null, DateTime? sessionStart = null)

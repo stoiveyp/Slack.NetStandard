@@ -30,6 +30,9 @@ namespace Slack.NetStandard.WebApi
         [JsonProperty("warning", NullValueHandling = NullValueHandling.Ignore)]
         public string Warning { get; set; }
 
+        [JsonProperty("errors",NullValueHandling = NullValueHandling.Ignore)]
+        public WebApiError[] Errors { get; set; }
+
         [JsonIgnore]
         public TimeSpan? RetryAfter { get; set; }
 

@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "barriers": [
+    {
+      "id": "Ba03T70KB2H3",
+      "enterprise_id": "E03055H6DAS",
+      "primary_usergroup": {
+        "id": "S03TZK4A9H6",
+        "name": "Company That Pays Contracting Teams"
+      },
+      "barriered_from_usergroups": [
+        {
+          "id": "S03TNHF56UR",
+          "name": "External Contracting Team"
+        },
+        {
+          "id": "S03TNHGAUGZ",
+          "name": "Another External Contracting Team"
+        }
+      ],
+      "restricted_subjects": [
+        "im",
+        "mpim",
+        "call"
+      ],
+      "date_update": 1660224825
+    }
+  ]
+}

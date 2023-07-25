@@ -150,19 +150,36 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("C123,C456", nvc["channels"]);
                 });
         }
-    }
 
-    public class WebApiTests_Migration
-    {
         [Fact]
-        public async Task Migration_Exchange()
+        public async Task FilesRemote_GetExternal()
         {
-            await Utility.AssertEncodedWebApi(c => c.Migration.Exchange(new []{"W123", "W456"},true), "migration.exchange",
-                "Web_FilesInfo.json", nvc =>
+            await Utility.AssertWebApi(c => c.Files.GetExternalUploadUrl(new GetExternalUploadUrlRequest("test.jpg",123)
                 {
-                    Assert.Equal("W123,W456", nvc["users"]);
-                    Assert.Equal("true", nvc["to_old"]);
+                    AltTxt = "alt",
+                    SnippetType = "test"
+                }), "files.getUploadURLExternal",
+                "Web_FilesGetExternal.json", jo =>
+                {
+                    Assert.Equal("test", jo.Value<string>("snippet_type"));
+                    Assert.Equal("alt", jo.Value<string>("alt_txt"));
+                    Assert.Equal("test.jpg", jo.Value<string>("filename"));
+                    Assert.Equal(123, jo.Value<int>("length"));
                 });
+        }
+
+        [Fact]
+        public async Task FilesRemote_CompleteExternal()
+        {
+            var response = await Utility.AssertWebApi(c => c.Files.CompleteExternalUpload(new CompleteExternalUploadRequest
+                {
+
+                }), "files.completeUploadExternal",
+                "Web_FilesCompleteExternal.json", jo =>
+                {
+
+                });
+            Assert.Single(response.Files);
         }
     }
 }

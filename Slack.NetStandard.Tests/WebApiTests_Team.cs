@@ -85,5 +85,11 @@ namespace Slack.NetStandard.Tests
             });
             Assert.Null(response.OtherFields);
         }
+
+        [Fact]
+        public async Task Team_PreferenceList()
+        {
+            await Utility.AssertEncodedWebApi(c => c.Team.GetPreferences(), "team.preferences.list", "Web_TeamPreferencesList.json", Assert.Empty);
+        }
     }
 }

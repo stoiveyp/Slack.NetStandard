@@ -12,7 +12,7 @@ var builder = new OAuthV2Builder("clientId")
     State = "stateGoesHere", 
     BotScope = "channels:read"
 };
-var redirectUri = builder.BuildUri();
+var redirectUri = builder.BuildUri(); 
 ```
 
 ## Get OAuth Access Token from Code

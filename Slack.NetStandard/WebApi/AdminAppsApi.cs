@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Slack.NetStandard.ApiCommon;
+using Slack.NetStandard.Objects;
 using Slack.NetStandard.WebApi.Admin;
 
 namespace Slack.NetStandard.WebApi
@@ -57,6 +60,26 @@ namespace Slack.NetStandard.WebApi
             {
                 RequestId = requestId,
                 TeamId = teamId,
+                EnterpriseId = enterpriseId
+            });
+        }
+
+        public Task<WebApiResponse> ClearResolution(string appId, string teamId = null, string enterpriseId = null)
+        {
+            return _client.MakeJsonCall("admin.apps.clearResolution", new AdminAppDecision
+            {
+                AppId = appId,
+                TeamId = teamId,
+                EnterpriseId = enterpriseId
+            });
+        }
+
+        public Task<WebApiResponse> UninstallApp(string appId, List<string> teamIds = null, string enterpriseId = null)
+        {
+            return _client.MakeJsonCall("admin.apps.uninstall", new AdminUninstallRequest
+            {
+                AppId = appId,
+                TeamIds = teamIds,
                 EnterpriseId = enterpriseId
             });
         }
