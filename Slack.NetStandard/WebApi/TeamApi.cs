@@ -86,6 +86,11 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeUrlEncodedCall<TeamProfileResponse>("team.profile.get", dict);
         }
 
+        public Task<PreferenceListResponse> GetPreferences()
+        {
+            return _client.MakeUrlEncodedCall<PreferenceListResponse>("team.preferences.list");
+        }
+
         public ITeamBillingApi Billing { get; }
     }
 }
