@@ -6,7 +6,7 @@
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-		Large update bringing full Web API support
+		Large WebAPI update including admin, call, conversation and datastore APIs
 		Support for Manifest APIs and Message Metadata
         Breaking change as IWebApiClient interface has changed
     </PackageReleaseNotes>
