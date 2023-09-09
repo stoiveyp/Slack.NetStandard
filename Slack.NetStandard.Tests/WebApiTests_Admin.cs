@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Admin;
+using Slack.NetStandard.WebApi.Apps;
 using Xunit;
 using JArray = Newtonsoft.Json.Linq.JArray;
 
@@ -77,6 +78,24 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("DEF", jobject.Value<string>("team_id"));
                     Assert.Equal("ZYX", jobject.Value<string>("enterprise_id"));
                 });
+        }
+
+        [Fact]
+        public async Task Apps_ActivitiesList()
+        {
+            var response = await Utility.AssertWebApi(c => c.Admin.Apps.ListActivities(new ListAdminActivitiesRequest
+            {
+                Limit = 5,
+                MinLogLevel = LogLevel.Warn,
+                Source = "STUFF"
+            }), "admin.apps.activities.list", "Web_AppsListActivitiesResponse.json", jo =>
+            {
+                Assert.Equal(5, jo.Value<int>("limit"));
+                Assert.Equal("warn", jo.Value<string>("min_log_level"));
+                Assert.Equal("STUFF", jo.Value<string>("source"));
+            });
+
+            Assert.IsType<Activity<FunctionExecutionStartedPayload>>(Assert.Single(response.Activities));
         }
 
         [Fact]

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Slack.NetStandard.ApiCommon;
 using Slack.NetStandard.Objects;
 using Slack.NetStandard.WebApi.Admin;
+using Slack.NetStandard.WebApi.Apps;
 
 namespace Slack.NetStandard.WebApi
 {
@@ -97,6 +98,11 @@ namespace Slack.NetStandard.WebApi
         public Task<ListRestrictedAppResponse> ListRestrictedApps(TeamFilter filters)
         {
             return _client.MakeJsonCall<TeamFilter, ListRestrictedAppResponse>("admin.apps.restricted.list", filters);
+        }
+
+        public Task<ListActivitiesResponse> ListActivities(ListAdminActivitiesRequest request)
+        {
+            return _client.MakeJsonCall<ListAdminActivitiesRequest, ListActivitiesResponse>("admin.apps.activities.list", request);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Admin;
+using Slack.NetStandard.WebApi.Apps;
 
 namespace Slack.NetStandard.WebApi
 {
@@ -17,5 +18,6 @@ namespace Slack.NetStandard.WebApi
         Task<ListAppRequestResponse> ListAppRequests(TeamRequestFilter filters);
         Task<ListApprovedAppResponse> ListApprovedApps(TeamFilter filters);
         Task<ListRestrictedAppResponse> ListRestrictedApps(TeamFilter filters);
+        Task<ListActivitiesResponse> ListActivities(ListAdminActivitiesRequest request);
     }
 }

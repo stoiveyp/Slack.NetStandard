@@ -45,6 +45,7 @@ public class ActivityConverter : JsonConverter
         "external_auth_token_fetch_result" => typeof(ExternalAuthTokenFetchResultPayload),
         "external_auth_missing_function" => typeof(ExternalAuthMissingFunctionPayload),
         "external_auth_missing_selected_auth" => typeof(ExternalAuthMissingSelectedAuthPayload),
+        "workflow_billing_result" => typeof(WorkflowBillingResultPayload),
         _ => typeof(Dictionary<string, object>)
     };
 
