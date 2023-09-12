@@ -19,5 +19,7 @@ namespace Slack.NetStandard.WebApi
         Task<ListApprovedAppResponse> ListApprovedApps(TeamFilter filters);
         Task<ListRestrictedAppResponse> ListRestrictedApps(TeamFilter filters);
         Task<ListActivitiesResponse> ListActivities(ListAdminActivitiesRequest request);
+        Task<WebApiResponse> SetConfig(AppConfig config);
+        Task<AppConfigLookupResponse> LookupConfig(IEnumerable<string> appIds);
     }
 }
