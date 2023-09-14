@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Objects;
@@ -6,6 +7,7 @@ using Xunit;
 
 namespace Slack.NetStandard.Tests
 {
+    [Obsolete]
     public class WebApiTests_Workflow
     {
         [Fact]

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Slack.NetStandard.Objects;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
+    [Obsolete("Steps from apps are now deprecated. For more information see https://api.slack.com/changelog/2023-08-workflow-steps-from-apps-step-back")]
     public class WorkflowStepInformation
     {
         [JsonProperty("step_id",NullValueHandling = NullValueHandling.Ignore)]

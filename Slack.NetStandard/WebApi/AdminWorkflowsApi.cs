@@ -1,4 +1,7 @@
-﻿namespace Slack.NetStandard.WebApi;
+﻿using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Admin;
+
+namespace Slack.NetStandard.WebApi;
 
 internal class AdminWorkflowsApi : IAdminWorkflowsApi
 {
@@ -6,5 +9,10 @@ internal class AdminWorkflowsApi : IAdminWorkflowsApi
     public AdminWorkflowsApi(IWebApiClient client)
     {
         _client = client;
+    }
+
+    public Task<WorkflowSearchResponse> Search(WorkflowSearchRequest request)
+    {
+        throw new System.NotImplementedException();
     }
 }
