@@ -40,6 +40,8 @@ namespace Slack.NetStandard.JsonConverters
             {UsergroupElement.ElementName, typeof(UsergroupElement)},
             {DateElement.ElementName, typeof(DateElement)},
             {Broadcast.ElementName, typeof(Broadcast)},
+            {ColorElement.ElementName, typeof(ColorElement)},
+            {WorkflowTokenElement.ElementName, typeof(WorkflowTokenElement)}
         };
 
         private RichTextElement GetComponent(string type)

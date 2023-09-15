@@ -14,6 +14,12 @@ namespace Slack.NetStandard.Messages.Elements.RichText
         public Dictionary<string, object> OtherFields { get; set; }
     }
 
+    public abstract class StyledRichTextElement:RichTextElement
+    {
+        [JsonProperty("style", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, bool> Style { get; set; }
+    }
+
     public class UnknownRichTextElement : RichTextElement
     {
 
