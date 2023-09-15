@@ -34,8 +34,43 @@ namespace Slack.NetStandard.Objects.Workflows
         [JsonProperty("steps",NullValueHandling = NullValueHandling.Ignore)]
         public List<WorkflowStep> Steps { get; set; } = new ();
 
+        [JsonProperty("collaborators", NullValueHandling = NullValueHandling.Ignore)]
+        public List<string> Collaborators { get; set; } = new();
+
+        [JsonProperty("icons", NullValueHandling = NullValueHandling.Ignore)]
+        public Dictionary<string, string> Icons { get; set; } = new();
+
+        [JsonProperty("is_published",NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IsPublished { get; set; }
+
+        [JsonProperty("last_updated_by",NullValueHandling = NullValueHandling.Ignore)]
+        public string LastUpdatedBy { get; set; }
+
+        [JsonProperty("unpublished_change_count",NullValueHandling = NullValueHandling.Ignore)]
+        public int? UnpublishedChangeCount { get; set; }
+
+        [JsonProperty("app_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string AppId { get; set; }
+
+        [JsonProperty("source",NullValueHandling = NullValueHandling.Ignore)]
+        public string Source { get; set; }
+
+        [JsonProperty("billing_type",NullValueHandling = NullValueHandling.Ignore)]
+        public string BillingType { get; set; }
+
+        [JsonProperty("last_published_version_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string LastPublishedVersionId { get; set; }
+
+        [JsonProperty("last_published_date",NullValueHandling = NullValueHandling.Ignore)]
+        public string LastPublishedDate { get; set; }
+
+        [JsonExtensionData]
+        public Dictionary<string,object> OtherFields { get; set; }
+
         public bool ShouldSerializeInputParameters() => InputParameters?.Any() ?? false;
         public bool ShouldSerializeOutputParameters() => OutputParameters?.Any() ?? false;
         public bool ShouldSerializeSteps() => Steps?.Any() ?? false;
+        public bool ShouldSerializeCollaborators() => Collaborators?.Any() ?? false;
+        public bool ShouldSerializeIcons() => Icons?.Any() ?? false;
     }
 }

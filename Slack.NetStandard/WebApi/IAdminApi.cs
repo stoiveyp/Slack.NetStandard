@@ -23,5 +23,9 @@
         IAdminBarriersApi Barriers { get; }
 
         IAdminUsergroupsApi Usergroups { get; }
+
+        IAdminWorkflowsApi Workflows { get; }
+
+        IAdminFunctionsApi Functions { get; }
     }
 }

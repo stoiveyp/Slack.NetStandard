@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>7.0.0</Version>
+    <Version>8.0.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-		Large WebAPI update including admin, call, conversation and datastore APIs
-		Support for Manifest APIs and Message Metadata
-        Breaking change as IWebApiClient interface has changed
+		Update to support new workflow and function admin functions
+        Improved Rich Text Support
+        Steps from Apps APIs and Objects now warning as deprecated
     </PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -39,6 +39,10 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <ProjectReference Include="..\Slack.NetStandard.Analyzers\Slack.NetStandard.Analyzers.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Objects\Workflows\FormElements\" />
   </ItemGroup>
 
 </Project>

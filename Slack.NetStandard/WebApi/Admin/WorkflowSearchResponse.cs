@@ -8,5 +8,5 @@ public class WorkflowSearchResponse : WebApiResponse<ResponseMetadataCursor>
     public int? TotalFound { get; set; }
 
     [JsonProperty("workflows",NullValueHandling = NullValueHandling.Ignore)]
-    public Objects.Workflows.Workflow Workflows { get; set; }
+    public Objects.Workflows.Workflow[] Workflow { get; set; }
 }

@@ -13,6 +13,6 @@ internal class AdminWorkflowsApi : IAdminWorkflowsApi
 
     public Task<WorkflowSearchResponse> Search(WorkflowSearchRequest request)
     {
-        throw new System.NotImplementedException();
+        return _client.MakeJsonCall<WorkflowSearchRequest, WorkflowSearchResponse>("admin.workflows.search", request);
     }
 }
