@@ -33,6 +33,7 @@
               "value": [
                 {
                   "type": "rich_text",
+                  "block_id": "b1",
                   "elements": [
                     {
                       "type": "rich_text_section",

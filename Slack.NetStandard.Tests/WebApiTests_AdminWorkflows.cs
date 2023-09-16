@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Slack.NetStandard.Objects.Workflows;
 using Slack.NetStandard.WebApi.Admin;
 using Xunit;
 
@@ -15,5 +17,9 @@ public class WebApiTests_AdminWorkflows
             {
 
             });
+
+        var allElements = response.Workflow.SelectMany(w => w.Steps).SelectMany(s => s.Inputs.Values.OfType<FormInputValue>())
+            .SelectMany(s => s.Value.Elements);
+        Assert.All(allElements, fe => Assert.Null(fe.OtherFields));
     }
 }

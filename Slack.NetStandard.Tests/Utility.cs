@@ -70,7 +70,11 @@ namespace Slack.NetStandard.Tests
                             ((JArray) expectedJObject[prop.Name]).Remove(e);
                             continue;
                         }
-                        OutputTrimEqual(actualJObject[prop.Name] as JObject, expectedJObject[prop.Name] as JObject, false);
+
+                        if (a is JObject joa && e is JObject joe)
+                        {
+                            OutputTrimEqual(joa, joe);
+                        }
                     }
                 }
 
