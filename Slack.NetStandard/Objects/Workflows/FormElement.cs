@@ -11,6 +11,9 @@ namespace Slack.NetStandard.Objects.Workflows
         [JsonProperty("type")]
         public string Type { get; set; }
 
+        [JsonProperty("name",NullValueHandling = NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
         [JsonProperty("title",NullValueHandling = NullValueHandling.Ignore)]
         public string Title { get; set; }
 

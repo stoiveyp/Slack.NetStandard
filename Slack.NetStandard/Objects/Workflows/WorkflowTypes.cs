@@ -19,6 +19,7 @@ public static class WorkflowTypes
         //https://github.com/slackapi/deno-slack-sdk/blob/main/src/schema/slack/types/custom/message_context.ts
         private const string SlackId = "slack#/types/";
         public const string UserId = SlackId + "user_id";
+        public const string Date = SlackId + "date";
         public const string ChannelId = SlackId + "channel_id";
         public const string UsergroupId = SlackId + "usergroup_id";
         public const string Timestamp = SlackId + "timestamp";
