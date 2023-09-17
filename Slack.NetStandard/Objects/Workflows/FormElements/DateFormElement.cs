@@ -1,6 +1,6 @@
 namespace Slack.NetStandard.Objects.Workflows.FormElements;
 
-public class DateFormElement : FormElement
+public class DateFormElement : TypedFormElement<string>
 {
     public DateFormElement()
     {
