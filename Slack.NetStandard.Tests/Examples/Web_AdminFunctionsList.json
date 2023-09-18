@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "functions": [
+    {
+      "id": "123ABC456DE",
+      "callback_id": "sample_function",
+      "title": "Sample function",
+      "description": "A sample function",
+      "type": "app",
+      "input_parameters": [
+        {
+          "type": "string",
+          "name": "message",
+          "description": "Message to be posted",
+          "title": "Message",
+          "is_required": true
+        },
+        {
+          "type": "slack#/types/user_id",
+          "name": "user",
+          "description": "The user invoking the workflow",
+          "title": "User",
+          "is_required": false
+        }
+      ],
+      "output_parameters": [
+        {
+          "type": "string",
+          "name": "updatedMsg",
+          "description": "Updated message to be posted",
+          "title": "Updated Msg",
+          "is_required": true
+        }
+      ],
+      "app_id": "789FGH1011IJ",
+      "date_created": 1692283027,
+      "date_updated": 1692725035,
+      "date_deleted": 0
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": "aWQ6MTE3MDk1NTIzNDAxOQ=="
+  }
+}

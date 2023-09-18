@@ -7,7 +7,7 @@ namespace Slack.NetStandard.WebApi;
 public interface IAdminWorkflowsApi
 {
     Task<WorkflowSearchResponse> Search(WorkflowSearchRequest request);
-    Task<PermissionLookupResponse> LookupPermissions(IEnumerable<string> workflowIds, int? maxWorkflowTriggers = null);
+    Task<WorkflowPermissionLookupResponse> LookupPermissions(IEnumerable<string> workflowIds, int? maxWorkflowTriggers = null);
     Task<WebApiResponse> Unpublish(IEnumerable<string> workflowIds);
     Task<WebApiResponse> AddCollaborators(IEnumerable<string> collaboratorIds, IEnumerable<string> workflowIds);
     Task<WebApiResponse> RemoveCollaborators(IEnumerable<string> collaboratorIds, IEnumerable<string> workflowIds);

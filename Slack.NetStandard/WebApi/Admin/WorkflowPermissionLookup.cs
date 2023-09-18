@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace Slack.NetStandard.WebApi.Admin
 {
     [AcceptedArray]
-    public class PermissionLookup
+    public class WorkflowPermissionLookup
     {
         [JsonProperty("user_ids",NullValueHandling = NullValueHandling.Ignore)]
         public string[] UserIds { get; set; }

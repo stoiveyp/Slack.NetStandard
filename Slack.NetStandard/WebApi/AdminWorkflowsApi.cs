@@ -19,7 +19,7 @@ internal class AdminWorkflowsApi : IAdminWorkflowsApi
         return _client.MakeJsonCall<WorkflowSearchRequest, WorkflowSearchResponse>("admin.workflows.search", request);
     }
 
-    public Task<PermissionLookupResponse> LookupPermissions(IEnumerable<string> workflowIds, int? maxWorkflowTriggers = null)
+    public Task<WorkflowPermissionLookupResponse> LookupPermissions(IEnumerable<string> workflowIds, int? maxWorkflowTriggers = null)
     {
         var workflowPermissions = new JObject
         {
@@ -31,7 +31,7 @@ internal class AdminWorkflowsApi : IAdminWorkflowsApi
             workflowPermissions.Add("max_workflow_triggers", maxWorkflowTriggers);
         }
 
-        return _client.MakeJsonCall<JObject,PermissionLookupResponse>("admin.workflows.permissions.lookup", workflowPermissions);
+        return _client.MakeJsonCall<JObject,WorkflowPermissionLookupResponse>("admin.workflows.permissions.lookup", workflowPermissions);
     }
 
     public Task<WebApiResponse> Unpublish(IEnumerable<string> workflowIds)
