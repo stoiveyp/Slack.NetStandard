@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "configs": [
+    {
+      "app_id": "A123",
+      "workflow_auth_strategy": "end_user_only",
+      "domain_restrictions": {
+        "emails": [
+          "my-corp.com",
+          "yourcorp.com"
+        ],
+        "urls": [
+          "mycorp.company.com",
+          "mycorp2.company.com"
+        ]
+      }
+    },
+    {
+      "app_id": "A456",
+      "workflow_auth_strategy": "builder_choice",
+      "domain_restrictions": {
+        "emails": [],
+        "urls": []
+      }
+    }
+  ]
+}

@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Slack.NetStandard.ApiCommon;
-using Slack.NetStandard.Objects;
 using Slack.NetStandard.WebApi.Admin;
+using Slack.NetStandard.WebApi.Apps;
 
 namespace Slack.NetStandard.WebApi
 {
-    internal class AdminAppsApi:IAdminAppsApi
+    internal class AdminAppsApi : IAdminAppsApi
     {
         private readonly IWebApiClient _client;
+
         public AdminAppsApi(IWebApiClient client)
         {
             _client = client;
@@ -98,5 +98,24 @@ namespace Slack.NetStandard.WebApi
         {
             return _client.MakeJsonCall<TeamFilter, ListRestrictedAppResponse>("admin.apps.restricted.list", filters);
         }
+
+        public Task<ListActivitiesResponse> ListActivities(ListAdminActivitiesRequest request)
+        {
+            return _client.MakeJsonCall<ListAdminActivitiesRequest, ListActivitiesResponse>(
+                "admin.apps.activities.list", request);
+        }
+
+        public Task<WebApiResponse> SetConfig(AppConfig config)
+        {
+            return _client.MakeJsonCall("admin.apps.config.set", config);
+        }
+
+        public Task<AppConfigLookupResponse> LookupConfig(IEnumerable<string> appIds)
+        {
+            return _client.SingleValueEncodedCall<AppConfigLookupResponse>("admin.apps.config.lookup", "app_ids",
+                string.Join(",", appIds));
+        }
     }
 }
+
+    

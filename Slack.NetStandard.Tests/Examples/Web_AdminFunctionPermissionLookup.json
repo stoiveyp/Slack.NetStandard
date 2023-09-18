@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "permissions": {
+    "Fn0150U36W0K": {
+      "distribution": {
+        "type": "app_collaborators",
+        "user_ids": [
+          "W0G8RUW11"
+        ]
+      },
+      "allowed_entities": {
+        "type": "app_collaborators",
+        "user_ids": [
+          "W0G8RUW11"
+        ]
+      },
+      "allowed_by_admin": {
+        "type": "unset"
+      }
+    }
+  }
+}

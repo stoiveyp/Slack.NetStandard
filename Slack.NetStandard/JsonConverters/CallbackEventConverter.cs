@@ -96,11 +96,13 @@ namespace Slack.NetStandard.JsonConverters
                 TeamRename.EventType => new TeamRename(),
                 TokensRevoked.EventType => new TokensRevoked(),
                 UserChange.EventType => new UserChange(),
+#pragma warning disable CS0618 // Type or member is obsolete
                 WorkflowStepExecute.EventType => new WorkflowStepExecute(),
                 WorkflowPublished.EventType => new WorkflowPublished(),
                 WorkflowUnpublished.EventType => new WorkflowUnpublished(),
                 WorkflowDeleted.EventType => new WorkflowDeleted(),
                 WorkflowStepDeleted.EventType => new WorkflowStepDeleted(),
+#pragma warning restore CS0618 // Type or member is obsolete
                 SharedChannelInviteReceived.EventType => new SharedChannelInviteReceived(),
                 SharedChannelInviteAccepted.EventType => new SharedChannelInviteAccepted(),
                 SharedChannelInviteApproved.EventType => new SharedChannelInviteApproved(),

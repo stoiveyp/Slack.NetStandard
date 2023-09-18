@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Slack.NetStandard.Messages.Elements.RichText
 {
-    public class ChannelElement : RichTextElement
+    public class ChannelElement : StyledRichTextElement
     {
         public const string ElementName = "channel";
 
-        [JsonProperty("channel",NullValueHandling = NullValueHandling.Ignore)]
-        public string Channel { get; set; }
+        [JsonProperty("channel_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string ChannelId { get; set; }
     }
 }

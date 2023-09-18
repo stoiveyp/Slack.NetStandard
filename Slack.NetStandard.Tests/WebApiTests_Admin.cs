@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Admin;
+using Slack.NetStandard.WebApi.Apps;
 using Xunit;
 using JArray = Newtonsoft.Json.Linq.JArray;
 
@@ -34,49 +35,6 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("public_channel", nvc.Get("type"));
                     Assert.Equal("true", nvc.Get("metadata_only"));
                 }, new HttpResponseMessage(HttpStatusCode.OK));
-        }
-
-        [Fact]
-        public async Task Admin_ApproveApp()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.ApproveApp("ABC", "DEF"),
-                "admin.apps.approve",
-                jobject =>
-                {
-                    Assert.Equal(2, jobject.Children().Count());
-                    Assert.Equal("ABC", jobject.Value<string>("app_id"));
-                    Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                });
-        }
-
-        [Fact]
-        public async Task Admin_ApproveRequest()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.ApproveRequest("ABC", "DEF"),
-                "admin.apps.approve",
-                jobject =>
-                {
-                    Assert.Equal(2, jobject.Children().Count());
-                    Assert.Equal("ABC", jobject.Value<string>("request_id"));
-                    Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                });
-        }
-
-        [Fact]
-        public async Task Admin_ClearResolution()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.ClearResolution("ABC", "DEF", "ZYX"),
-                "admin.apps.clearResolution",
-                jobject =>
-                {
-                    Assert.Equal(3, jobject.Children().Count());
-                    Assert.Equal("ABC", jobject.Value<string>("app_id"));
-                    Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                    Assert.Equal("ZYX", jobject.Value<string>("enterprise_id"));
-                });
         }
 
         [Fact]
@@ -251,114 +209,6 @@ namespace Slack.NetStandard.Tests
         {
             await Utility.AssertSingleEncodedWebApi(c => c.Admin.Barriers.Delete("xxx"),
                 "admin.barriers.delete", "barrier_id", "xxx");
-        }
-
-        [Fact]
-        public async Task Admin_RestrictApp()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.RestrictApp("ABC", "DEF"),
-                "admin.apps.restrict",
-                jobject =>
-                {
-                    Assert.Equal(2, jobject.Children().Count());
-                    Assert.Equal("ABC", jobject.Value<string>("app_id"));
-                    Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                });
-        }
-
-        [Fact]
-        public async Task Admin_RestrictRequest()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.RestrictRequest("ABC", "DEF"),
-                "admin.apps.restrict",
-                jobject =>
-                {
-                    Assert.Equal(2, jobject.Children().Count());
-                    Assert.Equal("ABC", jobject.Value<string>("request_id"));
-                    Assert.Equal("DEF", jobject.Value<string>("team_id"));
-                });
-        }
-
-        [Fact]
-        public async Task Admin_Uninstall()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.UninstallApp("ABC", new List<string> { "DEF" }),
-                "admin.apps.uninstall",
-                jobject =>
-                {
-                    Assert.Equal(2, jobject.Children().Count());
-                    Assert.Equal("ABC", jobject.Value<string>("app_id"));
-                    Assert.Equal("DEF", Assert.Single(jobject.Value<JArray>("team_ids").Values<string>()));
-                });
-        }
-
-        [Fact]
-        public async Task Admin_ListAppRequests()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.ListAppRequests(new TeamRequestFilter
-                {
-                    Limit = 20
-                }),
-                "admin.apps.requests.list", "Web_AdminAppsRequestsList.json",
-                jobject =>
-                {
-                    Assert.Single(jobject.Children());
-                    Assert.Equal(20, jobject.Value<int>("limit"));
-                });
-        }
-
-        [Fact]
-        public async Task Admin_AppsCancel()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.CancelRequest("ABC123", "T12345", "E12345"),
-                "admin.apps.requests.cancel",
-                jobject =>
-                {
-                    Assert.Equal("ABC123", jobject.Value<string>("request_id"));
-                    Assert.Equal("E12345", jobject.Value<string>("enterprise_id"));
-                    Assert.Equal("T12345", jobject.Value<string>("team_id"));
-                });
-        }
-
-        [Fact]
-        public async Task Admin_ListAppApproved()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.ListApprovedApps(new TeamFilter
-                {
-                    Limit = 20,
-                    Enterprise = "ABCDEF"
-                }),
-                "admin.apps.approved.list", "Web_AdminAppsApprovedList.json",
-                jobject =>
-                {
-                    Assert.Equal(2, jobject.Children().Count());
-                    Assert.Equal(20, jobject.Value<int>("limit"));
-                    Assert.Equal("ABCDEF", jobject.Value<string>("enterprise_id"));
-                });
-        }
-
-        [Fact]
-        public async Task Admin_ListAppRestricted()
-        {
-            await Utility.AssertWebApi(
-                c => c.Admin.Apps.ListRestrictedApps(new TeamFilter
-                {
-                    Limit = 20,
-                    Enterprise = "ABCDEF"
-                }),
-                "admin.apps.restricted.list", "Web_AdminAppsRestrictedList.json",
-                jobject =>
-                {
-                    Assert.Equal(2, jobject.Children().Count());
-                    Assert.Equal(20, jobject.Value<int>("limit"));
-                    Assert.Equal("ABCDEF", jobject.Value<string>("enterprise_id"));
-                });
         }
 
         [Fact]

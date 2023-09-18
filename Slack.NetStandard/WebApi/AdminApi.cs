@@ -29,6 +29,10 @@ namespace Slack.NetStandard.WebApi
 
         public IAdminUsergroupsApi Usergroups { get; }
 
+        public IAdminWorkflowsApi Workflows { get; }
+
+        public IAdminFunctionsApi Functions { get; }
+
         internal AdminApi(IWebApiClient client)
         {
             Apps = new AdminAppsApi(client);
@@ -43,6 +47,8 @@ namespace Slack.NetStandard.WebApi
             Barriers = new AdminBarriersApi(client);
             Roles = new AdminRolesApi(client);
             Usergroups = new AdminUsergroupsApi(client);
+            Workflows = new AdminWorkflowsApi(client);
+            Functions = new AdminFunctionsApi(client);
         }
     }
 }

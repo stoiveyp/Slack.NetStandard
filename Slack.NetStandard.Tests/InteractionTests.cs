@@ -1,4 +1,5 @@
-﻿using Slack.NetStandard.Interaction;
+﻿using System;
+using Slack.NetStandard.Interaction;
 using Slack.NetStandard.Messages.Elements;
 using System.Linq;
 using Xunit;
@@ -30,6 +31,7 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        [Obsolete]
         public void WorkflowStepEditPayload()
         {
             Assert.Null(Utility.AssertSubType<InteractionPayload, WorkflowStepEditPayload>("WorkflowStepEdit.json").OtherFields);
