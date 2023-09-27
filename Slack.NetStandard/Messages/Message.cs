@@ -2,6 +2,7 @@
 using System.Linq;
 using Newtonsoft.Json;
 using Slack.NetStandard.ApiCommon;
+using Slack.NetStandard.JsonConverters;
 using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.Objects;
 using Slack.NetStandard.WebApi.Bots;
@@ -12,6 +13,7 @@ namespace Slack.NetStandard.Messages
     public class Message
     {
         [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonConverter(typeof(ChannelOrIdConverter))]
         public Channel Channel { get; set; }
 
         [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]

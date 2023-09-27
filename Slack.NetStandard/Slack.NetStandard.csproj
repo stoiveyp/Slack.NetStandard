@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>8.0.0</Version>
+    <Version>8.0.1</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
+        Fix issue with message events
 		Update to support new workflow and function admin functions
         Improved Rich Text Support
         Steps from Apps APIs and Objects now warning as deprecated
