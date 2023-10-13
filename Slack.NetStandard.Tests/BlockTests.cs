@@ -97,6 +97,12 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void RichTextInput()
+        {
+            Utility.AssertSubType<IMessageElement, RichTextInput>("Blocks_RichTextInput.json");
+        }
+
+        [Fact]
         public void OptionExtensions()
         {
             IOption option = new Option();
