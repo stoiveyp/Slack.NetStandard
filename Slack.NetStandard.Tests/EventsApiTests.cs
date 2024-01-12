@@ -400,6 +400,18 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, SubteamUpdated>("Events_SubteamUpdated.json");
         }
+        
+        [Fact]
+        public void TeamAccessGranted()
+        {
+            Utility.AssertSubType<CallbackEvent, TeamAccessGranted>("Events_TeamAccessGranted.json");
+        }
+        
+        [Fact]
+        public void TeamAccessRevoked()
+        {
+            Utility.AssertSubType<CallbackEvent, TeamAccessRevoked>("Events_TeamAccessRevoked.json");
+        }
 
         [Fact]
         public void TeamDomainChange()
