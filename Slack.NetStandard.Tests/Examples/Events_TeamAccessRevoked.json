@@ -1,0 +1,7 @@
+{
+  "type": "team_access_revoked",
+  "team_ids": [
+    "T1XX3",
+    "TXX34"
+  ]
+}
