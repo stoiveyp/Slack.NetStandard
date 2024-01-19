@@ -8,4 +8,6 @@ public class UsergroupElement : RichTextElement
 
     [JsonProperty("usergroup_id",NullValueHandling = NullValueHandling.Ignore)]
     public string UsergroupId { get; set; }
+
+    public override string Type => ElementName;
 }

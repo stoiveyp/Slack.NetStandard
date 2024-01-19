@@ -7,6 +7,8 @@ namespace Slack.NetStandard.Messages.Elements.RichText
         [JsonProperty("text",NullValueHandling = NullValueHandling.Ignore)]
         public string Text { get; set; }
 
+        public override string Type => ElementName;
+
         public const string ElementName = "text";
     }
 }

@@ -14,4 +14,6 @@ public class WorkflowTokenElement : RichTextElement
 
     [JsonProperty("data_type",NullValueHandling = NullValueHandling.Ignore)]
     public string DataType { get; set; }
+
+    public override string Type => ElementName;
 }

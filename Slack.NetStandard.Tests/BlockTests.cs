@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.Messages.Elements;
+using Slack.NetStandard.Messages.Elements.RichText;
 using System;
 using Xunit;
 
@@ -100,6 +101,20 @@ namespace Slack.NetStandard.Tests
         public void RichTextInput()
         {
             Utility.AssertSubType<IMessageElement, RichTextInput>("Blocks_RichTextInput.json");
+        }
+
+        [Fact]
+        public void RichTextSection()
+        {
+            Utility.AssertSubType<IMessageBlock, RichText>("Blocks_RichTextSection.json");
+        }
+
+        [Fact]
+        public void RichTextElements()
+        {
+            var element = new TextElement{Text = "type check"};
+            var json = JObject.FromObject(element);
+            Assert.Equal("text",json.Value<string>("type"));
         }
 
         [Fact]

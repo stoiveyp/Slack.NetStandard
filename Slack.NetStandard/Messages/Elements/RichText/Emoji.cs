@@ -15,5 +15,7 @@ namespace Slack.NetStandard.Messages.Elements.RichText
 
         [JsonProperty("unicode",NullValueHandling = NullValueHandling.Ignore)]
         public string Unicode { get; set; }
+
+        public override string Type => ElementName;
     }
 }

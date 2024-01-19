@@ -8,7 +8,7 @@ namespace Slack.NetStandard.Messages.Elements.RichText
     public abstract class RichTextElement
     {
         [JsonProperty("type")]
-        public string Type { get; }
+        public abstract string Type { get; }
 
         [JsonExtensionData]
         public Dictionary<string, object> OtherFields { get; set; }
@@ -22,6 +22,6 @@ namespace Slack.NetStandard.Messages.Elements.RichText
 
     public class UnknownRichTextElement : RichTextElement
     {
-
+        public override string Type {get; }
     }
 }
