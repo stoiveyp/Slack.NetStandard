@@ -1,0 +1,15 @@
+{
+  "type": "rich_text",
+  "block_id": "d2ff47786b264d7389c67a5695a587a0",
+  "elements": [
+    {
+      "type": "rich_text_section",
+      "elements": [
+        {
+          "text": "Hello World",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}

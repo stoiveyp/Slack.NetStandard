@@ -8,4 +8,6 @@ public class ColorElement : RichTextElement
 
     [JsonProperty("value",NullValueHandling = NullValueHandling.Ignore)]
     public string Value { get; set; }
+
+    public override string Type => ElementName;
 }

@@ -9,4 +9,6 @@ public class TeamElement : StyledRichTextElement
 
     [JsonProperty("team_id",NullValueHandling = NullValueHandling.Ignore)]
     public string TeamId { get; set; }
+
+    public override string Type => ElementName;
 }

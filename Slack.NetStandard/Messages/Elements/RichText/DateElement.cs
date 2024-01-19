@@ -8,5 +8,7 @@ namespace Slack.NetStandard.Messages.Elements.RichText
 
         [JsonProperty("timestamp",NullValueHandling = NullValueHandling.Ignore)]
         public long Timestamp { get; set; }
+
+        public override string Type => ElementName;
     }
 }
