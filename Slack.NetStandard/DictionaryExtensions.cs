@@ -1,61 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Slack.NetStandard
 {
     internal static class DictionaryExtensions
     {
-        public static Dictionary<string, string> AddIfValue(this Dictionary<string, string> dict, string name, string value)
+        public static Dictionary<string, string> AddIfValue(this Dictionary<string, string> dict, string name,
+            string value)
         {
+            dict ??= new Dictionary<string, string>();
+
             if (string.IsNullOrWhiteSpace(value))
             {
                 return dict;
             }
 
-            dict ??= new Dictionary<string, string>();
-
             dict.Add(name, value);
-
-
             return dict;
         }
 
-        public static Dictionary<string, string> AddIfValue<T>(this Dictionary<string, string> dict, string name, T? value) where T : struct
+        public static Dictionary<string, string> AddIfValue(this Dictionary<string, string> dict, string name,
+            bool? value)
         {
-            if (!value.HasValue)
-            {
-                return dict;
-            }
+            return dict.AddIfValue(name, value.GetValueOrDefault().ToString().ToLower());
+        }
 
-            dict ??= new Dictionary<string, string>();
-
-            if (value is bool?)
-            {
-                dict.Add(name, value.Value.ToString().ToLower());
-            }
-            else
-            {
-                dict.Add(name, value.Value.ToString());
-            }
-
-            return dict;
+        public static Dictionary<string, string> AddIfValue(this Dictionary<string, string> dict, string name,
+            int? value)
+        {
+            return dict.AddIfValue(name, value.GetValueOrDefault().ToString());
+        }
+        
+        public static Dictionary<string, string> AddIfValue(this Dictionary<string, string> dict, string name,
+            long? value)
+        {
+            return dict.AddIfValue(name, value.GetValueOrDefault().ToString());
         }
 
         public static Dictionary<string, string> AddPaging(this Dictionary<string, string> dict, string cursor,
             int? limit)
         {
-            if (!string.IsNullOrWhiteSpace(cursor))
-            {
-                dict.Add("cursor", cursor);
-            }
-
-            if (limit.HasValue)
-            {
-                dict.Add("limit", limit.Value.ToString());
-            }
-
-            return dict;
+            dict.AddIfValue("cursor", cursor);
+            return dict.AddIfValue("limit", limit);
         }
     }
 }

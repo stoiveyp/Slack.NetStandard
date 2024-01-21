@@ -21,34 +21,14 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeJsonCall<UsergroupCreateRequest, UsergroupResponse>("usergroups.create", request);
         }
 
-        public Task<UsergroupResponse> Disable(string usergroup, bool? includeCount = null)
+        public Task<UsergroupResponse> Disable(UsergroupDisableRequest request)
         {
-            var dict = new Dictionary<string, string>
-            {
-                {nameof(usergroup), usergroup}
-            };
-
-            if (includeCount.HasValue)
-            {
-                dict.Add("include_count",includeCount.Value.ToString().ToLower());
-            }
-
-            return _client.MakeUrlEncodedCall<UsergroupResponse>("usergroups.disable", dict);
+            return _client.MakeUrlEncodedCall<UsergroupResponse>("usergroups.disable", request);
         }
 
-        public Task<UsergroupResponse> Enable(string usergroup, bool? includeCount = null)
+        public Task<UsergroupResponse> Enable(UsergroupEnableRequest request)
         {
-            var dict = new Dictionary<string, string>
-            {
-                {nameof(usergroup), usergroup}
-            };
-
-            if (includeCount.HasValue)
-            {
-                dict.Add("include_count", includeCount.Value.ToString().ToLower());
-            }
-
-            return _client.MakeUrlEncodedCall<UsergroupResponse>("usergroups.enable", dict);
+            return _client.MakeUrlEncodedCall<UsergroupResponse>("usergroups.enable", request);
         }
 
         public Task<UsergroupResponse> Update(UsergroupUpdateRequest request)
@@ -56,26 +36,9 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeJsonCall<UsergroupUpdateRequest, UsergroupResponse>("usergroups.update", request);
         }
 
-        public Task<UsergroupListResponse> List(bool? includeCount = null, bool? includeDisabled = null, bool? includeUsers = null)
+        public Task<UsergroupListResponse> List(UsergroupListRequest request)
         {
-            var dict = new Dictionary<string, string>();
-
-            if (includeCount.HasValue)
-            {
-                dict.Add("include_count", includeCount.Value.ToString().ToLower());
-            }
-
-            if (includeDisabled.HasValue)
-            {
-                dict.Add("include_disabled", includeDisabled.Value.ToString().ToLower());
-            }
-
-            if (includeUsers.HasValue)
-            {
-                dict.Add("include_users", includeUsers.Value.ToString().ToLower());
-            }
-
-            return _client.MakeUrlEncodedCall<UsergroupListResponse>("usergroups.list", dict);
+            return _client.MakeUrlEncodedCall<UsergroupListResponse>("usergroups.list", request);
         }
     }
 }

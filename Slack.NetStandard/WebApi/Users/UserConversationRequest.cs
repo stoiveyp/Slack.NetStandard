@@ -21,5 +21,8 @@ namespace Slack.NetStandard.WebApi.Users
 
         [JsonProperty("user",NullValueHandling = NullValueHandling.Ignore)]
         public string User { get; set; }
+        
+        [JsonProperty("team_id",NullValueHandling = NullValueHandling.Ignore)]
+        public int? TeamId { get; set; }
     }
 }

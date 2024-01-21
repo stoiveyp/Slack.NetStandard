@@ -30,11 +30,12 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Reactions_List()
         {
-            await Utility.AssertEncodedWebApi(c => c.Reactions.List("C123", "12345", 10), "reactions.list","Web_MessageItems.json", nvc =>
+            await Utility.AssertEncodedWebApi(c => c.Reactions.List("C123", "12345", 10, "T12345"), "reactions.list","Web_MessageItems.json", nvc =>
             {
                 Assert.Equal("C123", nvc["user"]);
                 Assert.Equal("12345", nvc["cursor"]);
                 Assert.Equal("10", nvc["limit"]);
+                Assert.Equal("T12345", nvc["team_id"]);
             });
         }
 

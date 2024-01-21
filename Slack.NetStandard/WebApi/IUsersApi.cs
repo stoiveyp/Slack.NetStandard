@@ -14,9 +14,7 @@ namespace Slack.NetStandard.WebApi
         Task<UserIdentityResponse> Identity();
 
         Task<UserResponse> Info(string user, bool? includeLocale = null);
-        Task<UserListResponse> List(string cursor, bool? includeLocale = null);
-        Task<UserListResponse> List(int limit, bool? includeLocale = null);
-        Task<UserListResponse> List(string cursor = null, int? limit = null, bool? includeLocale = null);
+        Task<UserListResponse> List(UserListRequest request);
 
         Task<UserResponse> LookupByEmail(string email);
 

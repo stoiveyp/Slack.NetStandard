@@ -13,15 +13,10 @@ namespace Slack.NetStandard.WebApi
             _client = client;
         }
 
-        public Task<InfoResponse> Info(string bot = null)
+        public Task<InfoResponse> Info(string bot = null, string teamId = null)
         {
-            var dict = new Dictionary<string,string>();
-            if (!string.IsNullOrWhiteSpace(bot))
-            {
-                dict.Add("bot",bot);
-            }
-
-            return _client.MakeUrlEncodedCall<InfoResponse>("bots.info",dict);
+            var dict = new Dictionary<string, string>().AddIfValue("bot", bot).AddIfValue("team_id", teamId);
+            return _client.MakeUrlEncodedCall<InfoResponse>("bots.info", dict);
         }
     }
 }

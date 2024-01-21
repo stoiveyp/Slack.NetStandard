@@ -21,5 +21,8 @@ namespace Slack.NetStandard.WebApi.Search
 
         [JsonProperty("sort_dir",NullValueHandling = NullValueHandling.Ignore)]
         public string SortDirection { get; set; }
+        
+        [JsonProperty("team_id",NullValueHandling = NullValueHandling.Ignore)]
+        public string TeamId { get; set; }
     }
 }

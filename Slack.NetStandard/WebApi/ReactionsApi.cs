@@ -39,38 +39,11 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeUrlEncodedCall<ReactionGetResponse>("reactions.get", dict);
         }
 
-        public Task<ReactionListResponse> List(string user)
+        public Task<ReactionListResponse> List(string user, string cursor = null, int? limit = null,
+            string teamId = null)
         {
-            return List(user, null, null);
-        }
-
-        public Task<ReactionListResponse> List(string user, string cursor)
-        {
-            return List(user, cursor, null);
-        }
-
-        public Task<ReactionListResponse> List(string user, int limit)
-        {
-            return List(user, null, limit);
-        }
-
-        public Task<ReactionListResponse> List(string user, string cursor, int? limit)
-        {
-            var dict = new Dictionary<string, string>
-            {
-                {nameof(user), user}
-            };
-
-            if (!string.IsNullOrWhiteSpace(cursor))
-            {
-                dict.Add(nameof(cursor),cursor);
-            }
-
-            if (limit.HasValue)
-            {
-                dict.Add(nameof(limit), limit.ToString());
-            }
-
+            var dict = new Dictionary<string, string> { { nameof(user), user } }.AddIfValue("team_id", teamId)
+                .AddPaging(cursor, limit);
             return _client.MakeUrlEncodedCall<ReactionListResponse>("reactions.list", dict);
         }
 

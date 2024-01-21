@@ -28,24 +28,26 @@ namespace Slack.NetStandard.WebApi
             });
         }
 
-        public Task<ChannelResponse> Create(string name, bool isPrivate = false)
-        {
-            return _client.MakeJsonCall<CreateConversationRequest, ChannelResponse>("conversations.create",
-                new CreateConversationRequest
-                {
-                    Name = name,
-                    IsPrivate = isPrivate
-                });
-        }
-
-        public Task<ChannelResponse> Create(string name, string[] userIds, bool isPrivate = false)
+        public Task<ChannelResponse> Create(string name, bool isPrivate = false, string teamId = null)
         {
             return _client.MakeJsonCall<CreateConversationRequest, ChannelResponse>("conversations.create",
                 new CreateConversationRequest
                 {
                     Name = name,
                     IsPrivate = isPrivate,
-                    UserIds = userIds
+                    TeamId = teamId
+                });
+        }
+
+        public Task<ChannelResponse> Create(string name, string[] userIds, bool isPrivate = false, string teamId = null)
+        {
+            return _client.MakeJsonCall<CreateConversationRequest, ChannelResponse>("conversations.create",
+                new CreateConversationRequest
+                {
+                    Name = name,
+                    IsPrivate = isPrivate,
+                    UserIds = userIds,
+                    TeamId = teamId
                 });
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Conversations;
@@ -37,13 +38,31 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Conversations_Create()
         {
-            var response = await Utility.AssertWebApi(c => c.Conversations.Create("test this", true),
+            var response = await Utility.AssertWebApi(c => c.Conversations.Create("test this", true, "T12345"),
                 "conversations.create", "Web_ConversationsCreate.json", j =>
                 {
                     Assert.Equal("test this", j.Value<string>("name"));
                     Assert.True(j.Value<bool>("is_private"));
+                    Assert.Equal("T12345", j.Value<string>("team_id"));
                 });
         }
+
+        [Fact]
+        public async Task Conversations_Create_With_Users()
+        {
+            var response = await Utility.AssertWebApi(
+                c => c.Conversations.Create("test this", new[] { "U1", "U2" }, true, "T12345"), "conversations.create",
+                "Web_ConversationsCreate.json", j =>
+                {
+                    var users = j.Value<JArray>("user_ids").Select(t => t.Value<string>()).ToList();
+                    
+                    Assert.Equal("test this", j.Value<string>("name"));
+                    Assert.True(new[] { "U1", "U2" }.SequenceEqual(users));
+                    Assert.True(j.Value<bool>("is_private"));
+                    Assert.Equal("T12345", j.Value<string>("team_id"));
+                });
+        }
+
 
         [Fact]
         public async Task Conversations_History()
@@ -62,7 +81,7 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
-        public async Task Conversations_info()
+        public async Task ConversationsInfo()
         {
             await Utility.AssertEncodedWebApi(c => c.Conversations.Info("C1234567890",null,true), "conversations.info",
                 "Web_ConversationsInfo.json", nvc =>
@@ -73,7 +92,7 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
-        public async Task ConversationsInfo()
+        public async Task ConversationsInvite()
         {
             await Utility.AssertEncodedWebApi(c => c.Conversations.Invite("C1234567890", "W123","U456"), "conversations.invite", "Web_ConversationsInfo.json",
                 nvc =>
@@ -124,7 +143,8 @@ namespace Slack.NetStandard.Tests
                 Cursor = "ABCDEF",
                 ExcludeArchived = true,
                 Types = "private_channel",
-                Limit = 10
+                Limit = 10,
+                TeamId = "T12345"
             };
             await Utility.AssertEncodedWebApi(c => c.Conversations.List(request), "conversations.list",
                 "Web_ConversationsList.json",
@@ -134,6 +154,7 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal(10.ToString(), nvc["limit"]);
                     Assert.Equal("true", nvc["exclude_archived"]);
                     Assert.Equal("private_channel", nvc["types"]);
+                    Assert.Equal("T12345", nvc["team_id"]);
                 });
         }
 

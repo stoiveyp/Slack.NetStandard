@@ -26,7 +26,7 @@ namespace Slack.NetStandard.Tests
             var request = new FileListRequest
             {
                 Cursor = "BBB",
-                ShowFilesHidenByLimit = true,
+                ShowFilesHiddenByLimit = true,
                 User = "W123"
             };
             await Utility.AssertEncodedWebApi(c => c.Files.List(request), "files.list", "Web_FilesList.json", nvc =>

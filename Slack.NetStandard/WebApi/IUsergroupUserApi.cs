@@ -5,7 +5,9 @@ namespace Slack.NetStandard.WebApi
 {
     public interface IUsergroupUserApi
     {
-        Task<UsergroupUserListResponse> List(string usergroup, bool? includeDisabled = null);
-        Task<UsergroupResponse> Update(string usergroup, string[] users,bool? includeCount = null);
+        Task<UsergroupUserListResponse> List(string usergroup, bool? includeDisabled = null, string teamId = null);
+
+        Task<UsergroupResponse> Update(string usergroup, string[] users, bool? includeCount = null,
+            string teamId = null);
     }
 }

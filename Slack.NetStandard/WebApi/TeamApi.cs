@@ -14,45 +14,14 @@ namespace Slack.NetStandard.WebApi
             Billing = new TeamBillingApi(client);
         }
 
-       public Task<TeamAccessLogResponse> AccessLogs(long before)
-       {
-           return AccessLogs(before, null, null);
-       }
-
-        public Task<TeamAccessLogResponse> AccessLogs(int count, int page)
+        public Task<TeamAccessLogResponse> AccessLogs(TeamAccessLogRequest request)
         {
-            return AccessLogs(null, count, page);
+            return _client.MakeUrlEncodedCall<TeamAccessLogResponse>("team.accessLogs", request);
         }
 
-        public Task<TeamAccessLogResponse> AccessLogs(long? before, int? count, int? page)
+        public Task<BillableInfoResponse> BillableInfo(string user = null, string teamId = null)
         {
-            var dict = new Dictionary<string, string>();
-            if (before.HasValue)
-            {
-                dict.Add(nameof(before),before.Value.ToString());
-            }
-
-            if (count.HasValue)
-            {
-                dict.Add(nameof(count), count.Value.ToString());
-            }
-
-            if (page.HasValue)
-            {
-                dict.Add(nameof(page),page.ToString());
-            }
-
-            return _client.MakeUrlEncodedCall<TeamAccessLogResponse>("team.accessLogs", dict);
-        }
-
-        public Task<BillableInfoResponse> BillableInfo(string user = null)
-        {
-            var dict = new Dictionary<string, string>();
-            if (!string.IsNullOrWhiteSpace(user))
-            {
-                dict.Add(nameof(user),user);
-            }
-
+            var dict = new Dictionary<string, string>().AddIfValue("user", user).AddIfValue("team_id", teamId);
             return _client.MakeUrlEncodedCall<BillableInfoResponse>("team.billableInfo", dict);
         }
 
@@ -75,14 +44,10 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeUrlEncodedCall<TeamIntegrationLogResponse>("team.integrationLogs", request);
         }
 
-        public Task<TeamProfileResponse> GetProfile(string visibility = null)
+        public Task<TeamProfileResponse> GetProfile(string visibility = null, string teamId = null)
         {
-            var dict = new Dictionary<string,string>();
-            if (!string.IsNullOrWhiteSpace(visibility))
-            {
-                dict.Add("visibility",visibility);
-            }
-
+            var dict = new Dictionary<string, string>().AddIfValue("visibility", visibility)
+                .AddIfValue("team_id", teamId);
             return _client.MakeUrlEncodedCall<TeamProfileResponse>("team.profile.get", dict);
         }
 

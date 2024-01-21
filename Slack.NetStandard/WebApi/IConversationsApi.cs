@@ -8,8 +8,8 @@ namespace Slack.NetStandard.WebApi
         Task<WebApiResponse> Archive(string channel);
         Task<CloseConversationResponse> Close(string channel);
 
-        Task<ChannelResponse> Create(string name, bool isPrivate = false);
-        Task<ChannelResponse> Create(string name, string[] userIds, bool isPrivate = false);
+        Task<ChannelResponse> Create(string name, bool isPrivate = false, string teamId = null);
+        Task<ChannelResponse> Create(string name, string[] userIds, bool isPrivate = false, string teamId = null);
 
         Task<ConversationHistoryResponse> History(ConversationHistoryRequest request);
 
