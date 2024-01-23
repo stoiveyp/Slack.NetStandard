@@ -13,10 +13,23 @@ namespace Slack.NetStandard.WebApi
             _client = client;
             Billing = new TeamBillingApi(client);
         }
-
-        public Task<TeamAccessLogResponse> AccessLogs(TeamAccessLogRequest request)
+        
+        public Task<TeamAccessLogResponse> AccessLogs(long before, string teamId = null)
         {
-            return _client.MakeUrlEncodedCall<TeamAccessLogResponse>("team.accessLogs", request);
+            return AccessLogs(before, null, null, teamId);
+        }
+
+        public Task<TeamAccessLogResponse> AccessLogs(int count, int page, string teamId = null)
+        {
+            return AccessLogs(null, count, page, teamId);
+        }
+
+        public Task<TeamAccessLogResponse> AccessLogs(long? before, int? count, int? page, string teamId = null)
+        {
+            var dict = new Dictionary<string, string>().AddIfValue("before", before).AddIfValue("team_id", teamId)
+                .AddIfValue("count", count).AddIfValue("page", page);
+
+            return _client.MakeUrlEncodedCall<TeamAccessLogResponse>("team.accessLogs", dict);
         }
 
         public Task<BillableInfoResponse> BillableInfo(string user = null, string teamId = null)
@@ -31,7 +44,8 @@ namespace Slack.NetStandard.WebApi
             if (!string.IsNullOrWhiteSpace(team))
             {
                 dict.Add(nameof(team), team);
-            }else if (!string.IsNullOrWhiteSpace(domain))
+            }
+            else if (!string.IsNullOrWhiteSpace(domain))
             {
                 dict.Add(nameof(domain), domain);
             }

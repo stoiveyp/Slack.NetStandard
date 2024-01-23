@@ -20,6 +20,6 @@ namespace Slack.NetStandard.WebApi.Chat
         public int? Limit { get; set; }
 
         [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
-        public int? TeamId { get; set; }
+        public string TeamId { get; set; }
     }
 }

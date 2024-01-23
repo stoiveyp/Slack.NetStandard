@@ -10,12 +10,13 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Users_Conversations()
         {
-            await Utility.AssertEncodedWebApi(c => c.Users.Conversations(new UserConversationRequest{
-                User= "W0B2345D"
-            }), "users.conversations", "Web_ConversationsList.json", nvc =>
-            {
-                Assert.Equal("W0B2345D", nvc["user"]);
-            });
+            await Utility.AssertEncodedWebApi(
+                c => c.Users.Conversations(new UserConversationRequest { User = "W0B2345D", TeamId = "T12345" }),
+                "users.conversations", "Web_ConversationsList.json", nvc =>
+                {
+                    Assert.Equal("W0B2345D", nvc["user"]);
+                    Assert.Equal("T12345", nvc["team_id"]);
+                });
         }
 
         [Fact]

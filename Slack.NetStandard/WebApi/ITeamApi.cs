@@ -5,7 +5,9 @@ namespace Slack.NetStandard.WebApi
 {
     public interface ITeamApi
     {
-        Task<TeamAccessLogResponse> AccessLogs(TeamAccessLogRequest request);
+        Task<TeamAccessLogResponse> AccessLogs(long before, string teamId = null);
+        Task<TeamAccessLogResponse> AccessLogs(int count, int page, string teamId = null);
+        Task<TeamAccessLogResponse> AccessLogs(long? before, int? count, int? page, string teamId = null);
 
         Task<BillableInfoResponse> BillableInfo(string user = null, string teamId = null);
         Task<InfoResponse> Info(string team = null, string domain = null);

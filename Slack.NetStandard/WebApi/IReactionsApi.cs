@@ -7,8 +7,8 @@ namespace Slack.NetStandard.WebApi
     {
         Task<WebApiResponse> Add(string channel, Timestamp timestamp, string name);
         Task<ReactionGetResponse> Get(string channel, Timestamp timestamp, bool? full = null);
-        
-        Task<ReactionListResponse> List(string user, string cursor = null, int? limit = null, string teamId = null);
+
+        Task<ReactionListResponse> List(ReactionListRequest request);
 
         Task<WebApiResponse> Remove(string channel, Timestamp timestamp, string name);
     }

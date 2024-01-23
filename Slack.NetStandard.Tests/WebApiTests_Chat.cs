@@ -168,13 +168,15 @@ namespace Slack.NetStandard.Tests
             {
                 Channel = "C123456",
                 Latest = 123456,
+                TeamId = "T12345"
             }),
                 "chat.scheduledMessages.list",
                 jobject =>
                 {
-                    Assert.Equal(2, jobject.Children().Count());
+                    Assert.Equal(3, jobject.Children().Count());
                     Assert.Equal("C123456", jobject.Value<string>("channel"));
                     Assert.Equal(123456, jobject.Value<long>("latest"));
+                    Assert.Equal("T12345", jobject.Value<string>("team_id"));
                 },
                 new ScheduledMessageListResponse
                 {

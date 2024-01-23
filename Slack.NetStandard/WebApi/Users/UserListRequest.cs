@@ -14,6 +14,6 @@ namespace Slack.NetStandard.WebApi.Users
         public bool? IncludeLocale { get; set; }
                 
         [JsonProperty("team_id",NullValueHandling = NullValueHandling.Ignore)]
-        public int? TeamId { get; set; }
+        public string TeamId { get; set; }
     }
 }

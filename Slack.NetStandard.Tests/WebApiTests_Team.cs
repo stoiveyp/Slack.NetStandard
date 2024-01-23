@@ -9,11 +9,8 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Team_AccessLogs()
         {
-            await Utility.AssertEncodedWebApi(
-                c => c.Team.AccessLogs(new TeamAccessLogRequest
-                {
-                    Before = 1234, Page = 1, Count = 10, TeamId = "T12345"
-                }), "team.accessLogs", "Web_TeamAccessLogs.json", nvc =>
+            await Utility.AssertEncodedWebApi(c => c.Team.AccessLogs(1234, 10, 1, "T12345"), "team.accessLogs",
+                "Web_TeamAccessLogs.json", nvc =>
                 {
                     Assert.Equal(1234.ToString(), nvc["before"]);
                     Assert.Equal(10.ToString(), nvc["count"]);

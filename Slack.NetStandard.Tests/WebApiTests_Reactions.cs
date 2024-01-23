@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Reaction;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -30,10 +31,16 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Reactions_List()
         {
-            await Utility.AssertEncodedWebApi(c => c.Reactions.List("C123", "12345", 10, "T12345"), "reactions.list","Web_MessageItems.json", nvc =>
+            await Utility.AssertEncodedWebApi(c => c.Reactions.List(new ReactionListRequest
+            {
+                Cursor = "13245",
+                Limit = 10,
+                User = "C123",
+                TeamId = "T12345"
+            }), "reactions.list","Web_MessageItems.json", nvc =>
             {
                 Assert.Equal("C123", nvc["user"]);
-                Assert.Equal("12345", nvc["cursor"]);
+                Assert.Equal("13245", nvc["cursor"]);
                 Assert.Equal("10", nvc["limit"]);
                 Assert.Equal("T12345", nvc["team_id"]);
             });
