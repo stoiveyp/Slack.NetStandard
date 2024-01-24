@@ -26,6 +26,9 @@
 		<None Update="Examples\Blocks_Email.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Update="Examples\Blocks_Files.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Examples\Blocks_Url.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

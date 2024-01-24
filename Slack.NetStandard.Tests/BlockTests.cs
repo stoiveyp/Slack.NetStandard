@@ -104,6 +104,12 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void FileInput()
+        {
+            Utility.AssertSubType<IMessageElement, Files>("Blocks_Files.json");
+        }
+
+        [Fact]
         public void RichTextSection()
         {
             Utility.AssertSubType<IMessageBlock, RichText>("Blocks_RichTextSection.json");
