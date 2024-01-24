@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>8.2.1</Version>
+    <Version>9.0.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-		Add support for team_access_granted and team_access_revoked events (thank you @lucaghersi!)
-    Fix rich text elements serialization
+		Changes and additions to ensure slack client supports org-wide tokens with new team_id parameter where necessary (thank you for your hard work @lucaghersi!)
+    Ensure rich text block has optional block_id
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
