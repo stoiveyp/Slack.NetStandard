@@ -3,7 +3,10 @@ using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.Messages.Elements;
 using Slack.NetStandard.Messages.Elements.RichText;
+using Slack.NetStandard.Objects;
 using System;
+using System.Data.Common;
+using System.Text.Json;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -104,9 +107,29 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void FileInput()
+        {
+            Utility.AssertSubType<IMessageElement, Files>("Blocks_Files.json");
+        }
+
+        [Fact]
         public void RichTextSection()
         {
             Utility.AssertSubType<IMessageBlock, RichText>("Blocks_RichTextSection.json");
+        }
+
+        [Fact]
+        public void ImageSlackFile()
+        {
+            var img = Utility.AssertSubType<IMessageBlock, Messages.Blocks.Image>("Blocks_ImageSlackFile.json");
+            Assert.Equal("https://files.slack.com/files-pri/T0123456-F0123456/xyz.png", img.SlackFile.Url);
+        }
+
+        [Fact]
+        public void ImageElementSlackFile()
+        {
+            var img = Utility.AssertSubType<IMessageElement, Messages.Elements.Image>("Blocks_ImageElementSlackFile.json");
+            Assert.Equal("https://files.slack.com/files-pri/T0123456-F0123456/xyz.png", img.SlackFile.Url);
         }
 
         [Fact]
@@ -147,6 +170,18 @@ namespace Slack.NetStandard.Tests
 
             var result = JsonConvert.DeserializeObject<PlainTextInput>(expected.ToString());
             Assert.Equal(ActionTrigger.OnEnterPressed, result.DispatchActionConfig.TriggerActionsOn[0]);
+        }
+
+        [Fact]
+        public void SlackFiles(){
+            var sfUrl = "https://files.slack.com/files-pri/T0123456-F0123456/xyz.png";
+            var sfId = "F0123456";
+
+            var file1 = new JObject(new JProperty("url",sfUrl));
+            var file2 = new JObject(new JProperty("id",sfId));
+
+            Assert.True(JToken.DeepEquals(JObject.FromObject(new SlackFile{Url=sfUrl}),file1));
+            Assert.True(JToken.DeepEquals(JObject.FromObject(new SlackFile{Id=sfId}),file2));
         }
     }
 }

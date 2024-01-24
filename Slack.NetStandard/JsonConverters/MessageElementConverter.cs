@@ -56,7 +56,8 @@ namespace Slack.NetStandard.JsonConverters
             {Email.ElementType,typeof(Email) },
             {DateTimePicker.ElementType,typeof(DateTimePicker) },
             {Number.ElementType, typeof(Number)},
-            {RichTextInput.ElementType, typeof(RichTextInput)}
+            {RichTextInput.ElementType, typeof(RichTextInput)},
+            {Files.ElementType, typeof(Files)}
         };
 
         private IMessageElement GetComponent(string type)
