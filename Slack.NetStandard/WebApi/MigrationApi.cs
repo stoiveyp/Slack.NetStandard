@@ -4,25 +4,19 @@ using Slack.NetStandard.WebApi.Migration;
 
 namespace Slack.NetStandard.WebApi
 {
-    internal class MigrationApi:IMigrationApi
+    internal class MigrationApi : IMigrationApi
     {
-        private IWebApiClient _client;
+        private readonly IWebApiClient _client;
 
         public MigrationApi(IWebApiClient client)
         {
             _client = client;
         }
 
-        public Task<ExchangeResponse> Exchange(string[] users, bool? toOld = null)
+        public Task<ExchangeResponse> Exchange(string[] users, bool? toOld = null, string teamId = null)
         {
-            var dict = new Dictionary<string, string>
-            {
-                {"users", string.Join(",", users)}
-            };
-            if(toOld.HasValue)
-            {
-                dict.Add("to_old",toOld.Value.ToString().ToLower());
-            }
+            var dict = new Dictionary<string, string> { { "users", string.Join(",", users) } }
+                .AddIfValue("to_old", toOld).AddIfValue("team_id", teamId);
 
             return _client.MakeUrlEncodedCall<ExchangeResponse>("migration.exchange", dict);
         }

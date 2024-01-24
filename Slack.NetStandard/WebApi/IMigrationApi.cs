@@ -7,6 +7,6 @@ namespace Slack.NetStandard.WebApi
 {
     public interface IMigrationApi
     {
-        Task<ExchangeResponse> Exchange(string[] users, bool? toOld = null);
+        Task<ExchangeResponse> Exchange(string[] users, bool? toOld = null, string teamId = null);
     }
 }

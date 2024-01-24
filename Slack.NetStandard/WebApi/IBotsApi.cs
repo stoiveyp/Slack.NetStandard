@@ -5,6 +5,6 @@ namespace Slack.NetStandard.WebApi
 {
     public interface IBotsApi
     {
-        Task<InfoResponse> Info(string bot = null);
+        Task<InfoResponse> Info(string bot = null, string teamId = null);
     }
 }

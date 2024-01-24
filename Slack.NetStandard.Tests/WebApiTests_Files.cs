@@ -26,15 +26,16 @@ namespace Slack.NetStandard.Tests
             var request = new FileListRequest
             {
                 Cursor = "BBB",
-                ShowFilesHidenByLimit = true,
-                User = "W123"
+                ShowFilesHiddenByLimit = true,
+                User = "W123",
+                TeamId = "T12345"
             };
             await Utility.AssertEncodedWebApi(c => c.Files.List(request), "files.list", "Web_FilesList.json", nvc =>
             {
                 Assert.Equal("BBB", nvc["cursor"]);
                 Assert.Equal("W123", nvc["user"]);
                 Assert.Equal("true", nvc["show_files_hidden_by_limit"]);
-
+                Assert.Equal("T12345", nvc["team_id"]);
             });
         }
 

@@ -9,10 +9,10 @@ namespace Slack.NetStandard.WebApi.Conversations
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("is_private",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("is_private", NullValueHandling = NullValueHandling.Ignore)]
         public bool? IsPrivate { get; set; }
 
-        [JsonProperty("team_id",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamId { get; set; }
 
         [JsonProperty("user_ids", NullValueHandling = NullValueHandling.Ignore)]
