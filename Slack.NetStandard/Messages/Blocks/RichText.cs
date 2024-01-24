@@ -18,7 +18,7 @@ namespace Slack.NetStandard.Messages.Blocks
 
         [JsonProperty("type")] public string Type => MessageBlockType;
 
-        [JsonProperty("block_id")]
+        [JsonProperty("block_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BlockId { get; set; }
 
         [JsonProperty("elements", NullValueHandling = NullValueHandling.Ignore)]
