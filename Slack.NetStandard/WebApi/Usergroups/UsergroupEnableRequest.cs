@@ -5,7 +5,7 @@ namespace Slack.NetStandard.WebApi.Usergroups
     public class UsergroupEnableRequest
     {
         [JsonProperty("usergroup")]
-        public string Name { get; set; }
+        public string Usergroup { get; set; }
 
         [JsonProperty("include_count",NullValueHandling = NullValueHandling.Ignore)]
         public bool? IncludeCount { get; set; }

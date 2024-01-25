@@ -27,7 +27,7 @@ namespace Slack.NetStandard.Tests
             await Utility.AssertEncodedWebApi(
                 c => c.Usergroups.Disable(new UsergroupDisableRequest
                 {
-                    Name = "S060", IncludeCount = true, TeamId = "T12345"
+                    Usergroup = "S060", IncludeCount = true, TeamId = "T12345"
                 }), "usergroups.disable", "Web_UsergroupResponse.json", nvc =>
                 {
                     Assert.Equal("S060", nvc["usergroup"]);
@@ -42,7 +42,7 @@ namespace Slack.NetStandard.Tests
             await Utility.AssertEncodedWebApi(
                 c => c.Usergroups.Enable(new UsergroupEnableRequest
                 {
-                    Name = "S060", IncludeCount = true, TeamId = "T12345"
+                    Usergroup = "S060", IncludeCount = true, TeamId = "T12345"
                 }), "usergroups.enable", "Web_UsergroupResponse.json", nvc =>
                 {
                     Assert.Equal("S060", nvc["usergroup"]);
