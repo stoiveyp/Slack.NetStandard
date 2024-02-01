@@ -3,11 +3,31 @@
   "teams": [
     {
       "name": "Shinichi's workspace",
-      "id": "T12345678"
+      "id": "T12345678",
+      "icon": {
+        "image_default": "true",
+        "image_34": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-34.png",
+        "image_44": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-44.png",
+        "image_68": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-68.png",
+        "image_88": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-88.png",
+        "image_102": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-102.png",
+        "image_230": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-230.png",
+        "image_132": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-132.png"
+      }
     },
     {
       "name": "Migi's workspace",
-      "id": "T12345679"
+      "id": "T12345679",
+      "icon": {
+        "image_default": "true",
+        "image_34": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-34.png",
+        "image_44": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-44.png",
+        "image_68": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-68.png",
+        "image_88": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-88.png",
+        "image_102": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-102.png",
+        "image_230": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-230.png",
+        "image_132": "https://a.slack-edge.com/80588/img/avatars-teams/ava_0009-132.png"
+      }
     }
   ],
   "response_metadata": {
