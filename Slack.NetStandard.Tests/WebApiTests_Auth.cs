@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -30,7 +31,9 @@ namespace Slack.NetStandard.Tests
                     Assert.True(jo.Value<bool>("include_icon"));
                     jo.TestPaging("C123",5);
                 });
+            
             Assert.Equal(2,response.Teams.Length);
+            Assert.True(response.Teams[0].Icon.Count > 0);
         }
     }
 }
