@@ -2,13 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>9.1.1</Version>
+    <Version>9.2.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-    Files Message element added for file upload functionality
-    SlackFile support added to Image block and Image element
-    Changes and additions to ensure slack client supports org-wide tokens with new team_id parameter where necessary (thank you for your hard work @lucaghersi!)
+	    Add enterprise user object to user.info response (thank you @lucaghersi!)
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
