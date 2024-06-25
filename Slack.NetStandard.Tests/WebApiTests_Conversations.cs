@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
+using Slack.NetStandard.WebApi.Canvases;
 using Slack.NetStandard.WebApi.Conversations;
 using Xunit;
 
@@ -361,6 +362,22 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("T1234", job.Value<string>("team_id"));
                     Assert.Equal("ABC123", job.Value<string>("cursor_id"));
                     Assert.Equal(13, job.Value<int>("count"));
+                });
+        }
+
+        public const string MARKDOWN_TEXT = "> channel canvas!";
+
+        [Fact]
+        public async Task Conversations_CanvasCreate()
+        {
+            await Utility.AssertWebApi(
+                c => c.Conversations.CreateCanvas("C1232", new MarkdownContent(MARKDOWN_TEXT)),
+                "conversations.canvases.create", jo =>
+                {
+                    Assert.Equal("C1232", jo.Value<string>("channel_id"));
+                    var content = jo.Value<JObject>("document_content");
+                    Assert.Equal("markdown", content.Value<string>("type"));
+                    Assert.Equal(MARKDOWN_TEXT, content.Value<string>("markdown"));
                 });
         }
 

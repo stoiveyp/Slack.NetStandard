@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Slack.NetStandard.WebApi.Canvases;
 using Slack.NetStandard.WebApi.Conversations;
 
 namespace Slack.NetStandard.WebApi
@@ -52,5 +53,6 @@ namespace Slack.NetStandard.WebApi
 
         Task<ListConnectInviteResponse> ListConnectInvitesForTeam(string teamId, int count);
         Task<ListConnectInviteResponse> ListConnectInvitesForTeam(string teamId, string cursorId = null, int? count = null);
+        Task<CanvasesCreateResponse> CreateCanvas(string channelId, CanvasContent content = null);
     }
 }
