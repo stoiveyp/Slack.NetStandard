@@ -50,6 +50,8 @@ namespace Slack.NetStandard
 
         IFunctionsApi Functions { get; }
 
+        ICanvasesApi Canvases { get; }
+
         Task<WebApiResponse> Test(object data);
     }
 }

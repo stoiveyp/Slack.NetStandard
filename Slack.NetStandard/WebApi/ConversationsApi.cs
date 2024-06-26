@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Slack.NetStandard.WebApi.Canvases;
 using Slack.NetStandard.WebApi.Conversations;
 
 namespace Slack.NetStandard.WebApi
@@ -304,6 +305,16 @@ namespace Slack.NetStandard.WebApi
             }
 
             return _client.MakeJsonCall<JObject,ListConnectInviteResponse>("conversations.listConnectInvites", request);
+        }
+
+        public Task<CanvasesCreateResponse> CreateCanvas(string channelId, CanvasContent content = null)
+        {
+            var request = new CreateConversationChannelRequest
+            {
+                ChannelId = channelId,
+                Content = content
+            };
+            return _client.MakeJsonCall<CreateConversationChannelRequest,CanvasesCreateResponse>("conversations.canvases.create", request);
         }
     }
 }

@@ -2,7 +2,6 @@
 using Slack.NetStandard.WebApi.Admin;
 using Slack.NetStandard.WebApi.Apps;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
