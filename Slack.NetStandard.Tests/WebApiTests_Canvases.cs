@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi.Canvases;
+using Slack.NetStandard.WebApi.Canvases.Operations;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -41,7 +43,8 @@ namespace Slack.NetStandard.Tests
                     ChannelIds = new List<string> { "Cxxx" },
                     UserIds = new List<string> { "Uxxx" },
                 }),
-                "canvases.access.set",jo => {
+                "canvases.access.set", jo =>
+                {
                     Assert.Equal("C132", jo.Value<string>("canvas_id"));
                     Assert.Equal("write", jo.Value<string>("access_level"));
                     jo.CompareJArray("channel_ids", "Cxxx");
@@ -58,10 +61,42 @@ namespace Slack.NetStandard.Tests
                     ChannelIds = new List<string> { "Cxxx" },
                     UserIds = new List<string> { "Uxxx" },
                 }),
-                "canvases.access.delete", jo => {
+                "canvases.access.delete", jo =>
+                {
                     Assert.Equal("C132", jo.Value<string>("canvas_id"));
                     jo.CompareJArray("channel_ids", "Cxxx");
                     jo.CompareJArray("user_ids", "Uxxx");
+                });
+        }
+
+        [Fact]
+        public async Task Canvases_Section_Lookup()
+        {
+            await Utility.AssertWebApi(
+                c => c.Canvases.SectionLookup("C132", new LookupCriteria
+                {
+                    SectionTypes = new[] { "H2" }.ToList(),
+                    ContainsText = "Grocery List"
+                }),
+                "canvases.sections.lookup", jo =>
+                {
+                    Assert.Equal("C132", jo.Value<string>("canvas_id"));
+                    var crit = jo.Value<JObject>("criteria");
+                    crit.CompareJArray("section_types", "H2");
+                    Assert.Equal("Grocery List", crit.Value<string>("contains_text"));
+                });
+        }
+
+        [Fact]
+        public async Task Canvases_Edit()
+        {
+            await Utility.AssertWebApi(
+                c => c.Canvases.Edit("F0166DCSTS7", new InsertAfter { 
+                    SectionId = "temp:C:VXX8e648e6984e441c6aa8c61173",
+                    DocumentContent = new MarkdownContent("- [ ] asparagus\n- [ ] coffee\n")
+                }),
+                "canvases.edit",jo => {
+                    Assert.True(Utility.CompareJson(jo, "Web_CanvasesEdit.json"));
                 });
         }
     }

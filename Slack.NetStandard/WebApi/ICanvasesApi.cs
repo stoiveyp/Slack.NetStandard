@@ -9,5 +9,7 @@ namespace Slack.NetStandard.WebApi
         Task<WebApiResponse> Delete(string id);
         Task<WebApiResponse> SetAccess(CanvasSetAccessRequest request);
         Task<WebApiResponse> DeleteAccess(CanvasDeleteAccessRequest request);
+        Task<SectionLookupResponse> SectionLookup(string canvasId, LookupCriteria criteria);
+        Task<WebApiResponse> Edit(string canvasId, params CanvasOperation[] changes);
     }
 }
