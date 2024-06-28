@@ -7,7 +7,7 @@ namespace Slack.NetStandard.Messages.Elements
     public class Option:IOption
     {
         [JsonProperty("text")]
-        public PlainText Text { get; set; }
+        public TextObject Text { get; set; }
 
         [JsonProperty("value")]
         public string Value { get; set; }
@@ -16,6 +16,6 @@ namespace Slack.NetStandard.Messages.Elements
         public string Url { get; set; }
 
         [JsonProperty("description",NullValueHandling = NullValueHandling.Ignore)]
-        public PlainText Description { get; set; }
+        public TextObject Description { get; set; }
     }
 }
