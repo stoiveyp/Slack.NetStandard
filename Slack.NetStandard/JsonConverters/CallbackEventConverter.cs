@@ -115,6 +115,7 @@ namespace Slack.NetStandard.JsonConverters
                 UserHuddleChanged.EventType => new UserHuddleChanged(),
                 UserStatusChanged.EventType => new UserStatusChanged(),
                 UserProfileChanged.EventType => new UserProfileChanged(),
+                FunctionExecuted.EventType => new FunctionExecuted(),
                 _ => new CallbackEvent()
             };
         }
