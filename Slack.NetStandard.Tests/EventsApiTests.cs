@@ -553,5 +553,12 @@ namespace Slack.NetStandard.Tests
             var result = Utility.AssertSubType<CallbackEvent, MessageMetadataUpdated>("Events_MessageMetadataUpdated.json");
             Assert.Null(result.OtherFields);
         }
+
+        [Fact]
+        public void FunctionExecuted()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, FunctionExecuted>("Events_FunctionExecuted.json");
+            Assert.Null(result.OtherFields);
+        }
     }
 }
