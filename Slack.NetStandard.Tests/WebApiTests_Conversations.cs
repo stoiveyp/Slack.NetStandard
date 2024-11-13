@@ -71,13 +71,15 @@ namespace Slack.NetStandard.Tests
             var request = new ConversationHistoryRequest
             {
                 Channel= "C1234567890",
-                Latest = "1234567890.123456"
+                Latest = "1234567890.123456",
+                IncludeAllMetadata = true
             };
             await Utility.AssertEncodedWebApi(c => c.Conversations.History(request),
                 "conversations.history", "Web_ConversationsHistory.json", nvc =>
                 {
                     Assert.Equal("C1234567890", nvc["channel"]);
                     Assert.Equal("1234567890.123456", nvc["latest"]);
+                    Assert.Equal("true", nvc["include_all_metadata"]);
                 });
         }
 
