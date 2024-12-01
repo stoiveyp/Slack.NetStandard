@@ -42,6 +42,9 @@ namespace Slack.NetStandard.Objects
         [JsonProperty("notify_on_submit",NullValueHandling = NullValueHandling.Ignore)]
         public bool? NotifyOnSubmit { get; set; }
 
+        [JsonProperty("notify_on_close", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? NotifyOnClose { get; set; }
+
         [JsonProperty("external_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ExternalId { get; set; }
 
