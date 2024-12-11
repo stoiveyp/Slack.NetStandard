@@ -8,6 +8,11 @@ namespace Slack.NetStandard
     {
         public static async Task<T> RateLimited<T>(this ISlackApiClient api, Func<ISlackApiClient, Task<T>> action, int maxRetries = 3) where T:WebApiResponseBase
         {
+            if(maxRetries == 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(maxRetries), "maxRetries must be greater than 0");
+            }
+
             var retries = 0;
             var lastResponse = default(T);
 
