@@ -8,18 +8,24 @@ namespace Slack.NetStandard
     {
         public static async Task<T> RateLimited<T>(this ISlackApiClient api, Func<ISlackApiClient, Task<T>> action, int maxRetries = 3) where T:WebApiResponseBase
         {
-            var attempts = 0;
+            var retries = 0;
             var lastResponse = default(T);
 
-            while(++attempts <= maxRetries)
+            while(retries < maxRetries)
             {
+                if (lastResponse != null)
+                {
+                    await Task.Delay(lastResponse.RetryAfter.Value);
+                    retries++;
+                }
+
                 var response = await action(api);
                 if (response.OK || !response.RetryAfter.HasValue)
                 {
                     return response;
                 }
+
                 lastResponse = response;
-                await Task.Delay(response.RetryAfter.Value);
             }
 
             return lastResponse;

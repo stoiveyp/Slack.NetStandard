@@ -37,10 +37,10 @@ namespace Slack.NetStandard.Tests
         }
 
         [Theory]
-        [InlineData(1, 1)]
-        [InlineData(3, 3)]
-        [InlineData(5, 5)]
-        public async Task RetryReturnsFailedResponseAfterMaxAttempts(int attempts, int expected)
+        [InlineData(1, 2)]
+        [InlineData(3, 4)]
+        [InlineData(5, 6)]
+        public async Task RetryReturnsFailedResponseAfterMaxAttempts(int retries, int expected)
         {
             var response = new WebApiResponse();
             response.OK = false;
@@ -50,17 +50,19 @@ namespace Slack.NetStandard.Tests
             var client = new SlackWebApiClient(http);
             var called = 0;
 
-            await TakesAtLeast(client.RateLimited(c => { called++; return Task.FromResult(response); }, attempts),TimeSpan.FromSeconds(attempts));
+            await TakesAtLeast(client.RateLimited(c => { called++; return Task.FromResult(response); }, retries),TimeSpan.FromSeconds(retries));
             Assert.Equal(expected, called);
         }
 
         private async Task TakesAtLeast(Task method, TimeSpan minDuration)
         {
-            var result = await Task.WhenAny(method, Task.Delay(minDuration));
+            var delay = Task.Delay(minDuration);
+            var result = await Task.WhenAny(method, delay);
             if(result == method)
             {
                 throw new InvalidOperationException("Method completed before minimum duration");
             }
+            await method;
         }
 
 
