@@ -50,17 +50,20 @@ namespace Slack.NetStandard.Tests
             var client = new SlackWebApiClient(http);
             var called = 0;
 
-            await TakesAtLeast(client.RateLimited(c => { called++; return Task.FromResult(response); }, retries),TimeSpan.FromSeconds(retries));
+            await TakesAtLeast(client.RateLimited(c => { called++; return Task.FromResult(response); }, retries),TimeSpan.FromSeconds(retries).Add(TimeSpan.FromMilliseconds(-100)));
             Assert.Equal(expected, called);
         }
 
         private async Task TakesAtLeast(Task method, TimeSpan minDuration)
         {
+            var stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
             var delay = Task.Delay(minDuration);
             var result = await Task.WhenAny(method, delay);
             if(result == method)
             {
-                throw new InvalidOperationException("Method completed before minimum duration");
+                stopwatch.Stop();
+                throw new InvalidOperationException("Method completed before minimum duration: " + stopwatch.Elapsed.ToString());
             }
             await method;
         }
