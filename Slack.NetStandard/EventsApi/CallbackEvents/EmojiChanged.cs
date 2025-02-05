@@ -9,7 +9,7 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
     {
         public const string EventType = "emoji_changed";
 
-        [JsonProperty("sub_type",NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("subtype",NullValueHandling = NullValueHandling.Ignore)]
         public string SubType { get; set; }
 
         [JsonProperty("name",NullValueHandling = NullValueHandling.Ignore)]
