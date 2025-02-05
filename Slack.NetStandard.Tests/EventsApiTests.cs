@@ -168,7 +168,8 @@ namespace Slack.NetStandard.Tests
         public void EmojiChanged()
         {
             Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedAdd.json");
-            Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedRemove.json");
+            var removed = Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedRemove.json");
+            Assert.Null(removed.OtherFields);
         }
 
 
