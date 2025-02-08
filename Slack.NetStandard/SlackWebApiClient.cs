@@ -5,9 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
@@ -145,6 +147,53 @@ namespace Slack.NetStandard
                 var source = ExceptionDispatchInfo.Capture(ex);
                 return ProcessSlackException<TResponse>(ex, source);
             }
+        }
+
+        async Task<TResponse> IWebApiClient.MakeGetCall<TRequest, TResponse>(string methodName, TRequest request)
+        {
+            try
+            {
+                var message = new HttpRequestMessage(HttpMethod.Get, $"{MethodUrl(methodName)}?{ConvertToQueryString(request)}");
+                HandleAuth(message);
+
+                var response = await Client.SendAsync(message);
+                return await GenerateResponseFromMessage<TResponse>(response);
+            }
+            catch (WebException ex)
+            {
+                var source = ExceptionDispatchInfo.Capture(ex);
+                return ProcessSlackException<TResponse>(ex, source);
+            }
+        }
+
+        public static string ConvertToQueryString<TRequest>(TRequest request)
+        {
+            var properties = typeof(TRequest).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+
+            foreach (var property in properties)
+            {
+                var value = property.GetValue(request);
+                if (value != null)
+                {
+                    var jsonPropertyAttribute = property.GetCustomAttribute<JsonPropertyAttribute>();
+                    var propertyName = jsonPropertyAttribute?.PropertyName ?? property.Name.ToLowerInvariant();
+
+                    var jsonConverterAttribute = property.GetCustomAttribute<JsonConverterAttribute>();
+                    if (jsonConverterAttribute != null)
+                    {
+                        var converter = (JsonConverter)Activator.CreateInstance(jsonConverterAttribute.ConverterType);
+                        var serializedValue = JToken.FromObject(value, new JsonSerializer { Converters = { converter } }).ToString();
+                        queryString[propertyName] = serializedValue;
+                    }
+                    else
+                    {
+                        queryString[propertyName] = value.ToString();
+                    }
+                }
+            }
+
+            return queryString.ToString();
         }
 
         private void HandleAuth(HttpRequestMessage message)

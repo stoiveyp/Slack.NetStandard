@@ -145,6 +145,31 @@ namespace Slack.NetStandard.Tests
             return requestCall(client);
         }
 
+        public static Task<TResponse> CheckApiGet<TResponse>(
+            Func<ISlackApiClient, Task<TResponse>> requestCall,
+            string url,
+            Action<JObject> queryStringCheck,
+            TResponse responseToSend)
+        {
+            var guid = Guid.NewGuid().ToString("N");
+            var http = new HttpClient(new ActionHandler(request =>
+            {
+                Assert.Equal("Bearer", request.Headers.Authorization.Scheme);
+                Assert.Equal(guid, request.Headers.Authorization.Parameter);
+                Assert.StartsWith("https://slack.com/api/" + url, request.RequestUri.ToString());
+                var queryString = request.RequestUri.Query;
+                var queryParameters = HttpUtility.ParseQueryString(queryString);
+                var jObject = new JObject();
+                foreach (var key in queryParameters.AllKeys)
+                {
+                    jObject[key] = queryParameters[key];
+                }
+                queryStringCheck(jObject);
+            }, responseToSend));
+            var client = new SlackWebApiClient(http, guid);
+            return requestCall(client);
+        }
+
         public static Task<TResponse> CheckApi<TResponse>(
             Func<ISlackApiClient, Task<TResponse>> requestCall,
             string url,

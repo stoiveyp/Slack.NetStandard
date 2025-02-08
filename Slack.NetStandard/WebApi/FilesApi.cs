@@ -52,7 +52,7 @@ namespace Slack.NetStandard.WebApi
 
         public Task<GetExternalUploadUrlResponse> GetExternalUploadUrl(GetExternalUploadUrlRequest request)
         {
-            return _client.MakeJsonCall<GetExternalUploadUrlRequest, GetExternalUploadUrlResponse>(
+            return _client.MakeGetCall<GetExternalUploadUrlRequest, GetExternalUploadUrlResponse>(
                 "files.getUploadURLExternal", request);
         }
 
