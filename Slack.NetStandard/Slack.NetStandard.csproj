@@ -2,13 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>9.7.2</Version>
+    <Version>9.7.3</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
 		Update View to support notify_on_close
 		Add ISlackApiClent.RateLimited to automatically handle and retry failed requests with a Retry-After header
 		Fix SubType property in emoji_changed event (thanks @KStachowiakRelativity!)
+		Fix files.getUploadURLExternal to generate a GET request (thanks @MartyMcFlaye)
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>

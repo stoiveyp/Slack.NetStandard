@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -129,14 +128,10 @@ namespace Slack.NetStandard
             return ((IWebApiClient)this).MakeJsonCall<TRequest, WebApiResponse>(methodName, request);
         }
 
-        async Task<TResponse> IWebApiClient.MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request)
+        private async Task<TResponse> MakeCall<TResponse>(HttpRequestMessage message) where TResponse : WebApiResponseBase
         {
             try
             {
-                var content = new StringContent(JsonConvert.SerializeObject(request));
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
-
-                var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
                 HandleAuth(message);
 
                 var response = await Client.SendAsync(message);
@@ -149,48 +144,33 @@ namespace Slack.NetStandard
             }
         }
 
-        async Task<TResponse> IWebApiClient.MakeGetCall<TRequest, TResponse>(string methodName, TRequest request)
+        Task<TResponse> IWebApiClient.MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request)
         {
-            try
-            {
-                var message = new HttpRequestMessage(HttpMethod.Get, $"{MethodUrl(methodName)}?{ConvertToQueryString(request)}");
-                HandleAuth(message);
+            var content = new StringContent(JsonConvert.SerializeObject(request));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
 
-                var response = await Client.SendAsync(message);
-                return await GenerateResponseFromMessage<TResponse>(response);
-            }
-            catch (WebException ex)
-            {
-                var source = ExceptionDispatchInfo.Capture(ex);
-                return ProcessSlackException<TResponse>(ex, source);
-            }
+            var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
+            return MakeCall<TResponse>(message);
         }
 
-        public static string ConvertToQueryString<TRequest>(TRequest request)
+        Task<TResponse> IWebApiClient.MakeGetCall<TRequest, TResponse>(string methodName, TRequest request)
         {
-            var properties = typeof(TRequest).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var query = ConvertToQueryString(request);
+            if(!string.IsNullOrWhiteSpace(query))
+            {
+                query = "?" + query;
+            }
+            var message = new HttpRequestMessage(HttpMethod.Get, $"{MethodUrl(methodName)}{query}");
+            return MakeCall<TResponse>(message);
+        }
+
+        private string ConvertToQueryString<TRequest>(TRequest request)
+        {
             var queryString = HttpUtility.ParseQueryString(string.Empty);
-
-            foreach (var property in properties)
+            var obj = JObject.FromObject(request, Serializer);
+            foreach(var token in obj.Properties())
             {
-                var value = property.GetValue(request);
-                if (value != null)
-                {
-                    var jsonPropertyAttribute = property.GetCustomAttribute<JsonPropertyAttribute>();
-                    var propertyName = jsonPropertyAttribute?.PropertyName ?? property.Name.ToLowerInvariant();
-
-                    var jsonConverterAttribute = property.GetCustomAttribute<JsonConverterAttribute>();
-                    if (jsonConverterAttribute != null)
-                    {
-                        var converter = (JsonConverter)Activator.CreateInstance(jsonConverterAttribute.ConverterType);
-                        var serializedValue = JToken.FromObject(value, new JsonSerializer { Converters = { converter } }).ToString();
-                        queryString[propertyName] = serializedValue;
-                    }
-                    else
-                    {
-                        queryString[propertyName] = value.ToString();
-                    }
-                }
+                queryString[token.Name] = token.Value.ToString();
             }
 
             return queryString.ToString();

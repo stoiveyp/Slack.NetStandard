@@ -156,7 +156,7 @@ namespace Slack.NetStandard.Tests
             {
                 Assert.Equal("Bearer", request.Headers.Authorization.Scheme);
                 Assert.Equal(guid, request.Headers.Authorization.Parameter);
-                Assert.StartsWith("https://slack.com/api/" + url, request.RequestUri.ToString());
+                Assert.Equal("https://slack.com/api/" + url, request.RequestUri.GetLeftPart(UriPartial.Path));
                 var queryString = request.RequestUri.Query;
                 var queryParameters = HttpUtility.ParseQueryString(queryString);
                 var jObject = new JObject();

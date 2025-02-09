@@ -137,7 +137,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task FilesRemote_Share()
         {
-            await Utility.AssertEncodedWebApi(c => c.Files.Remote.ShareByExternalId("ABCD","C123","C456"), "files.remote.share",
+            await Utility.AssertEncodedWebApi(c => c.Files.Remote.ShareByExternalId("ABCD", "C123", "C456"), "files.remote.share",
                 "Web_FilesInfo.json", nvc =>
                 {
                     Assert.Equal("ABCD", nvc["external_id"]);
@@ -155,18 +155,18 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task FilesRemote_GetExternal()
         {
-            var request = new GetExternalUploadUrlRequest("test.jpg", 123)
+            await Utility.CheckApiGet(c => c.Files.GetExternalUploadUrl(new GetExternalUploadUrlRequest("test.jpg", 123)
             {
                 AltTxt = "alt",
                 SnippetType = "test"
-            };
-            await Utility.CheckApiGet(c => c.Files.GetExternalUploadUrl(request), $"files.getUploadURLExternal",
+            }), "files.getUploadURLExternal",
                  jo =>
                  {
                      Assert.Equal("test", jo.Value<string>("snippet_type"));
                      Assert.Equal("alt", jo.Value<string>("alt_txt"));
                      Assert.Equal("test.jpg", jo.Value<string>("filename"));
                      Assert.Equal(123, jo.Value<int>("length"));
+                     Assert.Equal(4, jo.Count);
                  },
                 Utility.ExampleFileContent<GetExternalUploadUrlResponse>("Web_FilesGetExternal.json"));
         }
@@ -175,9 +175,9 @@ namespace Slack.NetStandard.Tests
         public async Task FilesRemote_CompleteExternal()
         {
             var response = await Utility.AssertWebApi(c => c.Files.CompleteExternalUpload(new CompleteExternalUploadRequest
-                {
+            {
 
-                }), "files.completeUploadExternal",
+            }), "files.completeUploadExternal",
                 "Web_FilesCompleteExternal.json", jo =>
                 {
 
