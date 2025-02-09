@@ -155,18 +155,20 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task FilesRemote_GetExternal()
         {
-            await Utility.AssertWebApi(c => c.Files.GetExternalUploadUrl(new GetExternalUploadUrlRequest("test.jpg",123)
-                {
-                    AltTxt = "alt",
-                    SnippetType = "test"
-                }), "files.getUploadURLExternal",
-                "Web_FilesGetExternal.json", jo =>
-                {
-                    Assert.Equal("test", jo.Value<string>("snippet_type"));
-                    Assert.Equal("alt", jo.Value<string>("alt_txt"));
-                    Assert.Equal("test.jpg", jo.Value<string>("filename"));
-                    Assert.Equal(123, jo.Value<int>("length"));
-                });
+            var request = new GetExternalUploadUrlRequest("test.jpg", 123)
+            {
+                AltTxt = "alt",
+                SnippetType = "test"
+            };
+            await Utility.CheckApiGet(c => c.Files.GetExternalUploadUrl(request), $"files.getUploadURLExternal",
+                 jo =>
+                 {
+                     Assert.Equal("test", jo.Value<string>("snippet_type"));
+                     Assert.Equal("alt", jo.Value<string>("alt_txt"));
+                     Assert.Equal("test.jpg", jo.Value<string>("filename"));
+                     Assert.Equal(123, jo.Value<int>("length"));
+                 },
+                Utility.ExampleFileContent<GetExternalUploadUrlResponse>("Web_FilesGetExternal.json"));
         }
 
         [Fact]
