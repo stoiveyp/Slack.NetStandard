@@ -119,6 +119,12 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
+        public void Markdown()
+        {
+            Utility.AssertSubType<IMessageBlock, Markdown>("Blocks_Markdown.json");
+        }
+
+        [Fact]
         public void ImageSlackFile()
         {
             var img = Utility.AssertSubType<IMessageBlock, Messages.Blocks.Image>("Blocks_ImageSlackFile.json");
