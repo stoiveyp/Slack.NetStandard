@@ -570,5 +570,12 @@ namespace Slack.NetStandard.Tests
             var result = Utility.AssertSubType<CallbackEvent, AssistantThreadStarted>("Events_AssistantThreadStarted.json");
             Assert.Null(result.OtherFields);
         }
+
+        [Fact]
+        public void AssistantThreadContextChanged()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, AssistantThreadContextChanged>("Events_AssistantThreadContextChanged.json");
+            Assert.Null(result.OtherFields);
+        }
     }
 }
