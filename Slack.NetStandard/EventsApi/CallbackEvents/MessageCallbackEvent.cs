@@ -14,6 +14,6 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
         public Timestamp EventTimestamp { get; set; }
 
         [JsonProperty("assistant_thread", NullValueHandling =NullValueHandling.Ignore)]
-        public AssistantThread AssistantThread { get; set; }
+        public AssistantThreadToken AssistantThread { get; set; }
     }
 }
