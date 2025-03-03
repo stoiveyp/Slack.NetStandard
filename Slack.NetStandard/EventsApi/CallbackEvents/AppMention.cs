@@ -17,5 +17,8 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
 
         [JsonProperty("channel",NullValueHandling = NullValueHandling.Ignore)]
         public string Channel { get; set; }
+
+        [JsonProperty("assistant_thread", NullValueHandling = NullValueHandling.Ignore)]
+        public AssistantThread AssistantThread { get; set; }
     }
 }

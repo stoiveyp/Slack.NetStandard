@@ -322,7 +322,9 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void Message()
         {
-            Utility.AssertSubType<ICallbackEvent, MessageCallbackEvent>("Events_Message.json");
+            var msg = Utility.AssertSubType<ICallbackEvent, MessageCallbackEvent>("Events_Message.json");
+            Assert.Null(msg.OtherFields);
+
             Utility.AssertSubType<ICallbackEvent, BotMessage>("Events_Message_Bot.json");
             Utility.AssertSubType<ICallbackEvent, EkmAccessDenied>("Events_Message_EkmAccessDenied.json");
             Utility.AssertSubType<ICallbackEvent, MeMessage>("Events_Message_Me.json");
