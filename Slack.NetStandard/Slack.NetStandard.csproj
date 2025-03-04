@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>9.8.0</Version>
+    <Version>9.9.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-		Adds support for the Markdown block
+		Adds Support for the Data Access API (SlackWebApiClient.Assistant)
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
