@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
-using Slack.NetStandard.Messages.Blocks;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
@@ -14,5 +12,8 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
 
         [JsonProperty("event_ts", NullValueHandling = NullValueHandling.Ignore)]
         public Timestamp EventTimestamp { get; set; }
+
+        [JsonProperty("assistant_thread", NullValueHandling =NullValueHandling.Ignore)]
+        public AssistantThreadToken AssistantThread { get; set; }
     }
 }

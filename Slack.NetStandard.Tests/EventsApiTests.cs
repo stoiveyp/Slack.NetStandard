@@ -322,7 +322,9 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void Message()
         {
-            Utility.AssertSubType<ICallbackEvent, MessageCallbackEvent>("Events_Message.json");
+            var msg = Utility.AssertSubType<ICallbackEvent, MessageCallbackEvent>("Events_Message.json");
+            Assert.Null(msg.OtherFields);
+
             Utility.AssertSubType<ICallbackEvent, BotMessage>("Events_Message_Bot.json");
             Utility.AssertSubType<ICallbackEvent, EkmAccessDenied>("Events_Message_EkmAccessDenied.json");
             Utility.AssertSubType<ICallbackEvent, MeMessage>("Events_Message_Me.json");
@@ -559,6 +561,20 @@ namespace Slack.NetStandard.Tests
         public void FunctionExecuted()
         {
             var result = Utility.AssertSubType<CallbackEvent, FunctionExecuted>("Events_FunctionExecuted.json");
+            Assert.Null(result.OtherFields);
+        }
+
+        [Fact]
+        public void AssistantThreadStarted()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, AssistantThreadStarted>("Events_AssistantThreadStarted.json");
+            Assert.Null(result.OtherFields);
+        }
+
+        [Fact]
+        public void AssistantThreadContextChanged()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, AssistantThreadContextChanged>("Events_AssistantThreadContextChanged.json");
             Assert.Null(result.OtherFields);
         }
     }

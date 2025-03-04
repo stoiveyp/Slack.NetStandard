@@ -90,6 +90,9 @@ namespace Slack.NetStandard
         private ICanvasesApi _canvases;
         public ICanvasesApi Canvases => _canvases ??= new CanvasesApi(this);
 
+        private IAssistantApi _assistant;
+        public IAssistantApi Assistant => _assistant ??= new AssistantApi(this);
+
         public static Uri ApiBaseAddress { get; } = new("https://slack.com/api/", UriKind.Absolute);
         public static HttpClient DefaultClient { get; } = new();
         public HttpClient Client { get; set; }
