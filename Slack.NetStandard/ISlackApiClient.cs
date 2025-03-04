@@ -52,6 +52,8 @@ namespace Slack.NetStandard
 
         ICanvasesApi Canvases { get; }
 
+        IAssistantApi Assistant { get; }
+
         Task<WebApiResponse> Test(object data);
     }
 }
