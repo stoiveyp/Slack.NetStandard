@@ -1,4 +1,4 @@
-﻿using Slack.NetStandard.WebApi.Assistant;
+using Slack.NetStandard.WebApi.Assistant;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
@@ -77,12 +77,13 @@ namespace Slack.NetStandard.Tests
         public async Task SetStatus()
         {
             await Utility.AssertWebApi(
-                c => c.Assistant.ForThread("C123", "123.45").SetStatus("testStatus"),
+                c => c.Assistant.ForThread("C123", "123.45").SetStatus("testStatus", "Load1", "Load2"),
                 "assistant.threads.setStatus", jo =>
                 {
                     Assert.Equal("C123", jo.Value<string>("channel_id"));
                     Assert.Equal("123.45", jo.Value<string>("thread_ts"));
                     Assert.Equal("testStatus", jo.Value<string>("status"));
+                    jo.CompareJArray("loading_messages", "Load1", "Load2");
                 });
         }
     }
