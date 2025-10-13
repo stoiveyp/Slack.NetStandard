@@ -1,6 +1,7 @@
-using Slack.NetStandard.WebApi.Assistant;
+﻿using Slack.NetStandard.WebApi.Assistant;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -33,6 +34,26 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal(555, jo.Value<int>("limit"));
                     Assert.True(jo.Value<bool>("include_bots"));
                 });
+        }
+        
+        [Fact]
+        public async Task SearchInfo()
+        {
+            var response = await Utility.CheckApi(
+                c => c.Assistant.SearchInfo(),
+                "assistant.search.info",
+                jobject =>
+                {
+                    // No call values
+                    Assert.False(jobject.HasValues);
+                },
+                new SearchInfoResponse()
+                    {
+                        OK = true,
+                        IsIaSearchEnabled = true
+                    });
+            Assert.True(response.OK);
+            Assert.True(response.IsIaSearchEnabled);
         }
 
         [Fact]
