@@ -189,5 +189,15 @@ namespace Slack.NetStandard.Tests
             Assert.True(JToken.DeepEquals(JObject.FromObject(new SlackFile{Url=sfUrl}),file1));
             Assert.True(JToken.DeepEquals(JObject.FromObject(new SlackFile{Id=sfId}),file2));
         }
+        
+        [Fact]
+        public void IconButton(){
+            Utility.AssertSubType<IContextActionsElement, IconButton>("Blocks_IconButton.json");
+        }
+        
+        [Fact]
+        public void FeedbackButtons(){
+            Utility.AssertSubType<IContextActionsElement, FeedbackButtons>("Blocks_FeedbackButtons.json");
+        }
     }
 }

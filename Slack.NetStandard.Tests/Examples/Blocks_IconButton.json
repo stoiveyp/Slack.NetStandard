@@ -1,0 +1,9 @@
+{
+  "type": "icon_button",
+  "action_id": "remove",
+  "icon": "trash",
+  "text": {
+    "type": "plain_text",
+    "text": "Remove"
+  }
+}
