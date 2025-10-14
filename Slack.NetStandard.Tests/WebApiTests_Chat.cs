@@ -230,7 +230,7 @@ namespace Slack.NetStandard.Tests
                             })
                     }
                 }),
-                "chat.appendStream",
+                "chat.stopStream",
                 jobject =>
                 {
                     Assert.NotNull(jobject.Value<JArray>("blocks"));
