@@ -204,7 +204,7 @@ namespace Slack.NetStandard.Tests
                 jobject =>
                 {
                     Assert.Equal("C024BE91L", jobject.Value<string>("channel"));
-                    Assert.Equal("1401383885.000061", jobject.Value<string>("thread_ts"));
+                    Assert.Equal("1401383885.000061", jobject.Value<string>("ts"));
                     Assert.Equal(newText, jobject.Value<string>("markdown_text"));
                 },
                 new AppendStreamResponse { OK = true, Channel = "C024BE91L", Timestamp = "1401383885.000061" });
@@ -235,7 +235,7 @@ namespace Slack.NetStandard.Tests
                 {
                     Assert.NotNull(jobject.Value<JArray>("blocks"));
                     Assert.Equal("C024BE91L", jobject.Value<string>("channel"));
-                    Assert.Equal("1401383885.000061", jobject.Value<string>("thread_ts"));
+                    Assert.Equal("1401383885.000061", jobject.Value<string>("ts"));
                     Assert.Equal(newText, jobject.Value<string>("markdown_text"));
                 },
                 new StopStreamResponse { OK = true, Channel = "C024BE91L", Timestamp = "1401383885.000061", Message = new Message()
