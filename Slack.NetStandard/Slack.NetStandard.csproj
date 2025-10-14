@@ -2,11 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>9.9.0</Version>
+    <Version>9.10.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-		Adds Support for the Data Access API (SlackWebApiClient.Assistant)
+			Improved Support for AI API
+			Support for Contact Actions Block
+			Support for Feedback Buttons and Icon button elements
+			(All thanks to @TonioOoOo!)
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
