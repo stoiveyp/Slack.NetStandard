@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
+using Slack.NetStandard.Messages.Elements;
 using Slack.NetStandard.WebApi;
 using Slack.NetStandard.WebApi.Chat;
 using Xunit;
@@ -159,6 +160,92 @@ namespace Slack.NetStandard.Tests
             Assert.Equal("C024BE91L", response.Channel);
             Assert.Equal("1401383885.000061", response.Timestamp);
             Assert.Equal(newText, response.Text);
+        }
+
+
+        [Fact]
+        public async Task Chat_StartStream()
+        {
+            var newText = "Start text you carefully authored";
+            var response = await Utility.CheckApi(c => c.Chat.StartStream(new StartStreamRequest()
+                {
+                    Channel = "C024BE91L",
+                    ThreadTimestamp = "1401383885.000061",
+                    MarkdownText = newText,
+                    RecipientTeamId = "T0123456789",
+                    RecipientUserId = "F013GL22D0T"
+                }),
+                "chat.startStream",
+                jobject =>
+                {
+                    Assert.Equal("C024BE91L", jobject.Value<string>("channel"));
+                    Assert.Equal("1401383885.000061", jobject.Value<string>("thread_ts"));
+                    Assert.Equal(newText, jobject.Value<string>("markdown_text"));
+                    Assert.Equal("F013GL22D0T", jobject.Value<string>("recipient_user_id"));
+                    Assert.Equal("T0123456789", jobject.Value<string>("recipient_team_id"));
+                },
+                new StartStreamResponse { OK = true, Channel = "C024BE91L", Timestamp = "1401383885.000061" });
+            Assert.True(response.OK);
+            Assert.Equal("C024BE91L", response.Channel);
+            Assert.Equal("1401383885.000061", response.Timestamp);
+        }
+        
+        [Fact]
+        public async Task Chat_AppendStream()
+        {
+            var newText = "Append text you carefully authored";
+            var response = await Utility.CheckApi(c => c.Chat.AppendStream(new AppendStreamRequest()
+                {
+                    Channel = "C024BE91L",
+                    Timestamp = "1401383885.000061",
+                    MarkdownText = newText
+                }),
+                "chat.appendStream",
+                jobject =>
+                {
+                    Assert.Equal("C024BE91L", jobject.Value<string>("channel"));
+                    Assert.Equal("1401383885.000061", jobject.Value<string>("thread_ts"));
+                    Assert.Equal(newText, jobject.Value<string>("markdown_text"));
+                },
+                new AppendStreamResponse { OK = true, Channel = "C024BE91L", Timestamp = "1401383885.000061" });
+            Assert.True(response.OK);
+            Assert.Equal("C024BE91L", response.Channel);
+            Assert.Equal("1401383885.000061", response.Timestamp);
+        }
+        
+        [Fact]
+        public async Task Chat_StopStream()
+        {
+            var newText = "Stop stream you carefully authored";
+            var response = await Utility.CheckApi(c => c.Chat.StopStream(new StopStreamRequest()
+                {
+                    Channel = "C024BE91L",
+                    Timestamp = "1401383885.000061",
+                    MarkdownText = newText,
+                    Blocks = new List<IMessageBlock>
+                    {
+                        new ContextActions(new IconButton("trash", "Remove", "a_trash"),
+                            new FeedbackButtons(new FeedbackButton("Good Response", "positive"), new FeedbackButton("Bad Response", "negative")){
+                                ActionId = "feedback"
+                            })
+                    }
+                }),
+                "chat.appendStream",
+                jobject =>
+                {
+                    Assert.NotNull(jobject.Value<JArray>("blocks"));
+                    Assert.Equal("C024BE91L", jobject.Value<string>("channel"));
+                    Assert.Equal("1401383885.000061", jobject.Value<string>("thread_ts"));
+                    Assert.Equal(newText, jobject.Value<string>("markdown_text"));
+                },
+                new StopStreamResponse { OK = true, Channel = "C024BE91L", Timestamp = "1401383885.000061", Message = new Message()
+                {
+                    Text = newText
+                }});
+            Assert.True(response.OK);
+            Assert.Equal("C024BE91L", response.Channel);
+            Assert.Equal("1401383885.000061", response.Timestamp);
+            Assert.Equal(newText, response.Message.Text);
         }
 
         [Fact]

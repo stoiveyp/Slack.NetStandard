@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi.Assistant;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,10 +8,14 @@ namespace Slack.NetStandard.WebApi
 {
     public class AssistantThreadApi(IWebApiClient client, string channelId, Timestamp threadTimestamp) : IAssistantThreadApi
     {
-        public Task<WebApiResponse> SetStatus(string status)
+        public Task<WebApiResponse> SetStatus(string status, params string[] loadingMessages)
         {
             var jo = ThreadObject();
             jo.Add(new JProperty("status", status));
+            if (loadingMessages is {Length: > 0})
+            {
+                jo.Add("loading_messages", new JArray(loadingMessages));
+            }
             return client.MakeJsonCall("assistant.threads.setStatus", jo);
         }
 

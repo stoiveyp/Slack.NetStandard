@@ -1,5 +1,6 @@
 ﻿using Slack.NetStandard.WebApi.Assistant;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Slack.NetStandard.WebApi
 {
@@ -20,6 +21,12 @@ namespace Slack.NetStandard.WebApi
         public Task<SearchContextResponse> SearchContext(SearchContextRequest request)
         {
             return _client.MakeJsonCall<SearchContextRequest, SearchContextResponse>("assistant.search.context", request);
+        }
+        
+        public Task<SearchInfoResponse> SearchInfo()
+        {
+            // Empty call
+            return _client.MakeJsonCall<JObject, SearchInfoResponse>("assistant.search.info", new JObject());
         }
     }
 }
