@@ -42,8 +42,6 @@ namespace Slack.NetStandard
 
         IUsersApi Users { get; }
 
-        IWorkflowApi Workflow { get; }
-
         IBookmarksApi Bookmarks { get; }
 
         ICallsApi Calls { get; }

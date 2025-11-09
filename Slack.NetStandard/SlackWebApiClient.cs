@@ -75,9 +75,6 @@ namespace Slack.NetStandard
         private IUsersApi _users;
         public IUsersApi Users => _users ??= new UsersApi(this);
 
-        private IWorkflowApi _workflow;
-        public IWorkflowApi Workflow => _workflow ??= new WorkflowApi(this);
-
         private IBookmarksApi _bookmarks;
         public IBookmarksApi Bookmarks => _bookmarks ??= new BookmarksApi(this);
 

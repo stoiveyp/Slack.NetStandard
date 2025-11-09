@@ -87,9 +87,6 @@ namespace Slack.NetStandard.Tests
         public async Task Permission_List()
         {
             var triggerId = "Ft0000000001";
-            var user1 = "U014KLZE350";
-            var user2 = "U01565LTEBD";
-            var channel1 = "C014LMDP71R";
 
             var response = await Utility.AssertWebApi(
                 c => c.Workflows.Triggers.Permissions.List(triggerId),
