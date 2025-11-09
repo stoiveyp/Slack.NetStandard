@@ -1,12 +1,10 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace Slack.NetStandard.WebApi.Teams;
 
 public class PreferenceListResponse : WebApiResponse
 {
-    [JsonProperty("allow_message_deletion",NullValueHandling = NullValueHandling.Ignore)]
-    public bool? AllowMessageDeletion { get; set; }
-
     [JsonProperty("display_real_names",NullValueHandling = NullValueHandling.Ignore)]
     public bool? DisplayRealNames { get; set; }
 
