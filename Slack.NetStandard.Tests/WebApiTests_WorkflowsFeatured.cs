@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
-using Slack.NetStandard.Objects;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
 {
-    public class WebApiTests_Workflows
+    public class WebApiTests_WorkflowsFeatured
     {
         [Fact]
         public async Task FeaturedWorkflow_Add()
@@ -38,7 +36,7 @@ namespace Slack.NetStandard.Tests
                     jobject.CompareJArray("trigger_ids", triggerId);
                 });
         }
-        //Web_WorkflowsFeaturedList.json
+        
         [Fact]
         public async Task FeaturedWorkflow_Set()
         {
