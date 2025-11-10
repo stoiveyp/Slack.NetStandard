@@ -199,5 +199,11 @@ namespace Slack.NetStandard.Tests
         public void FeedbackButtons(){
             Utility.AssertSubType<IContextActionsElement, FeedbackButtons>("Blocks_FeedbackButtons.json");
         }
+
+        [Fact]
+        public void Table()
+        {
+            Utility.AssertSubType<IMessageBlock, Table>("Blocks_Table.json");
+        }
     }
 }
