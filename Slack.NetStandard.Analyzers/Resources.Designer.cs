@@ -88,6 +88,33 @@ namespace Slack.NetStandard.Analyzers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All cell definitions should have one basic (columnId,rowId) constructor and one helper constructor..
+        /// </summary>
+        internal static string CellDefinitionDescription {
+            get {
+                return ResourceManager.GetString("CellDefinitionDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cell definition type &apos;{0}&apos; is missing either a basic or helper constructor.
+        /// </summary>
+        internal static string CellDefinitionMessageFormat {
+            get {
+                return ResourceManager.GetString("CellDefinitionMessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cell Definition does not adhere to constructor rules.
+        /// </summary>
+        internal static string CellDefinitionTitle {
+            get {
+                return ResourceManager.GetString("CellDefinitionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All element types should have at least one empty and one helper constructors..
         /// </summary>
         internal static string ElementTypeDescription {

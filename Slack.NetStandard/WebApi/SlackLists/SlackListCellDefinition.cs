@@ -5,7 +5,10 @@ namespace Slack.NetStandard.WebApi.SlackLists
     public class SlackListCellDefinition : ISlackCellCreateDefinition, ISlackCellUpdateDefinition
     {
         public SlackListCellDefinition(string columnId, string rowId = null)
-        { }
+        { 
+            ColumnId = columnId;
+            RowId = rowId;
+        }
 
         [JsonProperty("column_id")]
         public string ColumnId { get; set; }
