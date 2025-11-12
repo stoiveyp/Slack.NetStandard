@@ -44,6 +44,7 @@
 
   <ItemGroup>
     <Folder Include="WebApi\SlackLists\Cells\" />
+    <Folder Include="WebApi\SlackLists\CellDefinition\" />
   </ItemGroup>
 
 </Project>
