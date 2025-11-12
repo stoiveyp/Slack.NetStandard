@@ -93,6 +93,9 @@ namespace Slack.NetStandard
         private IWorkflowsApi _workflows;
         public IWorkflowsApi Workflows => _workflows ??= new WorkflowsApi(this);
 
+        private ISlackListsApi _slackLists;
+        public ISlackListsApi SlackLists => _slackLists ??= new SlackListsApi(this);
+
         public static Uri ApiBaseAddress { get; } = new("https://slack.com/api/", UriKind.Absolute);
         public static HttpClient DefaultClient { get; } = new();
         public HttpClient Client { get; set; }

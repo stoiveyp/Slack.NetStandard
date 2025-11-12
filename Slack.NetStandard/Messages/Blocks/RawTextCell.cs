@@ -3,15 +3,15 @@
 namespace Slack.NetStandard.Messages.Blocks
 {
 
-    public class TableRowRawText : ITableRowItem
+    public class RawTextCell : ITableRowCell
     {
-        public TableRowRawText(string text)
+        public RawTextCell(string text)
         {
             Text = text;
         }
         public string Text { get; set; }
 
-        public object GenerateRowItem() => new JObject(
+        public object GenerateCell() => new JObject(
             new JProperty("type", "raw_text"),
             new JProperty("text", Text)
             );

@@ -54,6 +54,8 @@ namespace Slack.NetStandard
 
         IWorkflowsApi Workflows { get; }
 
+        ISlackListsApi SlackLists { get; }
+
         Task<WebApiResponse> Test(object data);
     }
 }

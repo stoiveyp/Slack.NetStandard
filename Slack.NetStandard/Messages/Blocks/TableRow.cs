@@ -7,6 +7,6 @@ namespace Slack.NetStandard.Messages.Blocks
     [JsonConverter(typeof(TableRowConverter))]
     public class TableRow
     {
-        public List<ITableRowItem> Items { get; set; } = new();
+        public List<ITableRowCell> Cells { get; set; } = new();
     }
 }

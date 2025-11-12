@@ -16,13 +16,13 @@ namespace Slack.NetStandard.JsonConverters
                 var jObject = JObject.Load(reader);
                 if(jObject.Value<string>("type") == "raw_text")
                 {
-                    tableRow.Items.Add(new TableRowRawText(jObject.Value<string>("text")));
+                    tableRow.Cells.Add(new RawTextCell(jObject.Value<string>("text")));
                 }
                 else if(jObject.Value<string>("type") == "rich_text")
                 {
                     var richItem = new RichText();
                     serializer.Populate(jObject.CreateReader(), richItem);
-                    tableRow.Items.Add(new TableRowRichText(richItem));
+                    tableRow.Cells.Add(new RichTextCell(richItem));
                 }
 
                 reader.Read();
@@ -35,9 +35,9 @@ namespace Slack.NetStandard.JsonConverters
         {
             writer.WriteStartArray();
 
-            foreach(var item in value.Items)
+            foreach(var item in value.Cells)
             {
-                serializer.Serialize(writer, item.GenerateRowItem());
+                serializer.Serialize(writer, item.GenerateCell());
             }
 
             writer.WriteEndArray();
