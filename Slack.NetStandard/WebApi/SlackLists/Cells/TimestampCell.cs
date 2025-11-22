@@ -3,11 +3,10 @@ using Newtonsoft.Json.Serialization;
 
 namespace Slack.NetStandard.WebApi.SlackLists.Cells
 {
-    public class UserCell:SlackListsCell
+    public class TimestampCell : SlackListsCell
     {
         [AcceptedArray]
-        [JsonProperty("user")]
-        public string[] Users { get; set; }
+        [JsonProperty("timestamp")]
+        public string[] Timestamps { get; set; }
     }
-
 }

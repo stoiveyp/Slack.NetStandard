@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi.SlackLists;
+using Slack.NetStandard.WebApi.SlackLists.Cells;
 using System;
 using System.Collections.Generic;
 
@@ -19,31 +20,35 @@ namespace Slack.NetStandard.JsonConverters
             JsonSerializer serializer)
         {
             var jObject = JObject.Load(reader);
-            var componentType = jObject.Value<string>("type");
-            if (string.IsNullOrWhiteSpace(componentType))
+
+            foreach(var key in SlackListsCellLookup.Keys)
             {
-                return null;
+                if (jObject.ContainsKey(key))
+                {
+                    return jObject.ToObject(SlackListsCellLookup[key], serializer) as SlackListsCell;
+                }
             }
-            var target = GetComponent(componentType);
-            if (target == null)
-            {
-                throw new ArgumentOutOfRangeException($"MessageBlock type {componentType} not supported");
-            }
-            serializer.Populate(jObject.CreateReader(), target);
-            return target;
+
+            return jObject.ToObject<SlackListsCell>(serializer);
         }
 
         public static Dictionary<string, Type> SlackListsCellLookup = new()
         {
-            
+            {"rich_text", typeof(RichTextCell) },
+            {"message", typeof(MessageCell) },
+            {"number", typeof(NumberCell) },
+            {"select", typeof(SelectCell) },
+            {"date", typeof(DateCell) },
+            {"user", typeof(UserCell) },
+            {"channel", typeof(ChannelCell) },
+            {"attachment", typeof(AttachmentCell) },
+            {"checkbox", typeof(CheckboxCell) },
+            {"email", typeof(EmailCell) },
+            {"phone", typeof(PhoneCell) },
+            {"rating", typeof(RatingCell) },
+            {"timestamp", typeof(TimestampCell) },
+            {"link", typeof(LinkCell) },
+            {"reference", typeof(ReferenceCell) },
         };
-
-        private SlackListsCell GetComponent(string type)
-        {
-            return (SlackListsCell)(
-                SlackListsCellLookup.ContainsKey(type)
-                    ? Activator.CreateInstance(SlackListsCellLookup[type])
-                    : new SlackListsCell());
-        }
     }
 }

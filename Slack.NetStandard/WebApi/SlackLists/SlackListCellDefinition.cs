@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.JsonConverters;
+using System.Collections.Generic;
 
 namespace Slack.NetStandard.WebApi.SlackLists
 {
+    [JsonConverter(typeof(SlackListsCellDefinitionConverter))]
     public class SlackListCellDefinition : ISlackCellCreateDefinition, ISlackCellUpdateDefinition
     {
         public SlackListCellDefinition(string columnId, string rowId = null)
@@ -15,5 +18,8 @@ namespace Slack.NetStandard.WebApi.SlackLists
 
         [JsonProperty("row_id", NullValueHandling = NullValueHandling.Ignore)]
         public string RowId { get; set; }
+
+        [JsonExtensionData]
+        public Dictionary<string, object> OtherFields { get; set; } = new();
     }
 }

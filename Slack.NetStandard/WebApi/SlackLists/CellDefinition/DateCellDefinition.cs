@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Slack.NetStandard.JsonConverters;
+using System;
 using System.Collections.Generic;
 
 namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
@@ -13,9 +15,9 @@ namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
         }
 
         [JsonProperty("date")]
-        [JsonConverter(typeof(CellDateConverter))]]
+        [JsonConverter(typeof(CellDateConverter))]
         public List<DateTime> Dates { get; private set; } = new();
 
-        public bool ShouldSerializeUserIds() => true;
+        public bool ShouldSerializeDates() => true;
     }
 }
