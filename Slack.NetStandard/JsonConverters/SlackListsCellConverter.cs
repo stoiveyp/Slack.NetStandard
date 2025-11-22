@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Slack.NetStandard.EventsApi.CallbackEvents;
+using Slack.NetStandard.Messages.TextEntities;
 using Slack.NetStandard.WebApi.SlackLists;
 using Slack.NetStandard.WebApi.SlackLists.Cells;
 using System;
@@ -25,11 +27,15 @@ namespace Slack.NetStandard.JsonConverters
             {
                 if (jObject.ContainsKey(key))
                 {
-                    return jObject.ToObject(SlackListsCellLookup[key], serializer) as SlackListsCell;
+                    var known = Activator.CreateInstance(SlackListsCellLookup[key]);
+                    serializer.Populate(jObject.CreateReader(), known);
+                    return known as SlackListsCell;
                 }
             }
 
-            return jObject.ToObject<SlackListsCell>(serializer);
+            var defaultCell = new SlackListsCell();
+            serializer.Populate(jObject.CreateReader(), defaultCell);
+            return defaultCell;
         }
 
         public static Dictionary<string, Type> SlackListsCellLookup = new()

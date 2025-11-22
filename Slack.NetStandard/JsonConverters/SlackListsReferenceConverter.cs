@@ -25,11 +25,15 @@ namespace Slack.NetStandard.JsonConverters
             {
                 if (jObject.ContainsKey(key))
                 {
-                    return jObject.ToObject(SlackListsReferenceLookup[key], serializer) as SlackListsReference;
+                    var known = Activator.CreateInstance(SlackListsReferenceLookup[key]);
+                    serializer.Populate(jObject.CreateReader(), known);
+                    return known as SlackListsReference;
                 }
             }
 
-            return jObject.ToObject<SlackListsReference>(serializer);
+            var defaultReference = new SlackListsReference();
+            serializer.Populate(jObject.CreateReader(), defaultReference);
+            return defaultReference;
         }
 
         public static Dictionary<string, Type> SlackListsReferenceLookup = new()
@@ -37,7 +41,7 @@ namespace Slack.NetStandard.JsonConverters
             {"list_record", typeof(ListReference) },
             {"message", typeof(MessageReference) },
             {"file", typeof(FileReference) },
-            {"canvas_section", typeof(CanvasSectionReference) }
+            {"canvas_section", typeof(CanvasReference) }
         };
     }
 }

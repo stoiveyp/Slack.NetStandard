@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Slack.NetStandard.WebApi.SlackLists;
+using System.Threading.Tasks;
 
 namespace Slack.NetStandard.WebApi
 {

@@ -121,7 +121,8 @@ namespace Slack.NetStandard.Tests
         }
         public static string ExampleFileContent(string expectedFile)
         {
-            return File.ReadAllText(Path.Combine(ExamplesPath, expectedFile));
+            var finalPath = Path.Combine(AppContext.BaseDirectory, ExamplesPath, expectedFile);
+            return File.ReadAllText(finalPath);
         }
 
         public static Task<TResponse> CheckApi<TResponse>(

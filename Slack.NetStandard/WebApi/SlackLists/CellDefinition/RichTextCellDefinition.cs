@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.JsonConverters;
 using Slack.NetStandard.Messages.Blocks;
 
 namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
@@ -12,6 +13,7 @@ namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
         }
 
         [JsonProperty("rich_text")]
+        [JsonConverter(typeof(SingleOrArrayConverter<RichText>), true)]
         public RichText RichText { get; set; }
     }
 }

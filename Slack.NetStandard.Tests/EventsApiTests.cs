@@ -447,41 +447,6 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
-        [Obsolete]
-        public void WorkflowStepExecute()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowStepExecute>("Events_Workflow.json");
-        }
-
-        [Fact]
-        [Obsolete]
-        public void WorkflowPublished()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowPublished>("Events_WorkflowPublished.json");
-        }
-
-        [Fact]
-        [Obsolete]
-        public void WorkflowUnpublished()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowUnpublished>("Events_WorkflowUnpublished.json");
-        }
-
-        [Fact]
-        [Obsolete]
-        public void WorkflowDeleted()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowDeleted>("Events_WorkflowDeleted.json");
-        }
-
-        [Fact]
-        [Obsolete]
-        public void WorkflowStepDeleted()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowStepDeleted>("Events_WorkflowStepDeleted.json");
-        }
-
-        [Fact]
         public void SharedChannelInviteReceived()
         {
             var result = Utility.AssertSubType<CallbackEvent, SharedChannelInviteReceived>("Events_SharedChannelInviteReceived.json");

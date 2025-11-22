@@ -19,11 +19,13 @@ namespace Slack.NetStandard.JsonConverters
             {
                 if (jObject.ContainsKey(key))
                 {
-                    return jObject.ToObject(ISlackListsCellDefinitionLookup[key], serializer) as SlackListsCellDefinition;
+                    var known = Activator.CreateInstance(ISlackListsCellDefinitionLookup[key]);
+                    serializer.Populate(jObject.CreateReader(), known);
+                    return known as SlackListsCellDefinition;
                 }
             }
 
-            return jObject.ToObject<SlackListsCellDefinition>(serializer);
+            return null;
         }
 
         public override void WriteJson(JsonWriter writer, SlackListsCellDefinition value, JsonSerializer serializer)

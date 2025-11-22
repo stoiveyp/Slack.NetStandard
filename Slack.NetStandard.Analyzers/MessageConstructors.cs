@@ -63,7 +63,7 @@ namespace Slack.NetStandard.Analyzers
             var namedTypeSymbol = (INamedTypeSymbol)context.Symbol;
 
             //Specific exception - entire point of UnknownBlock is that it's unknown
-            if (namedTypeSymbol.Name == "SlackListCellDefinition")
+            if (namedTypeSymbol.Name == "SlackListsCellDefinition")
             {
                 return;
             }
