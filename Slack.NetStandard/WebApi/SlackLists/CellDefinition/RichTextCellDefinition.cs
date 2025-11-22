@@ -3,7 +3,7 @@ using Slack.NetStandard.Messages.Blocks;
 
 namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
 {
-    internal class RichTextCellDefinition : SlackListCellDefinition
+    public class RichTextCellDefinition : SlackListsCellDefinition
     {
         public RichTextCellDefinition(string columnId, string rowId = null) :base(columnId, rowId) { }
         public RichTextCellDefinition(string columnId, RichText richText, string rowId = null) : this(columnId, rowId)

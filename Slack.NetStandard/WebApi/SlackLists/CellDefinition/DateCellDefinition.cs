@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
 {
-    public class DateCellDefinition : SlackListCellDefinition
+    public class DateCellDefinition : SlackListsCellDefinition
     {
         public DateCellDefinition(string columnId, string rowId = null) : base(columnId, rowId) { }
 

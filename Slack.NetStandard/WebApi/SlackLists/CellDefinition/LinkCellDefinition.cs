@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
 {
-    public class LinkCellDefinition:SlackListCellDefinition
+    public class LinkCellDefinition:SlackListsCellDefinition
     {
         public LinkCellDefinition(string columnId, string rowId = null) : base(columnId, rowId) { }
 

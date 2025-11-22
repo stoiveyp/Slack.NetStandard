@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace Slack.NetStandard.JsonConverters
 {
-    public class SlackListsCellDefinitionConverter:JsonConverter<SlackListCellDefinition>
+    public class SlackListsCellDefinitionConverter:JsonConverter<SlackListsCellDefinition>
     {
         public override bool CanWrite => false;
 
-        public override SlackListCellDefinition ReadJson(JsonReader reader, Type objectType, SlackListCellDefinition existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override SlackListsCellDefinition ReadJson(JsonReader reader, Type objectType, SlackListsCellDefinition existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             var jObject = JObject.Load(reader);
 
@@ -19,14 +19,14 @@ namespace Slack.NetStandard.JsonConverters
             {
                 if (jObject.ContainsKey(key))
                 {
-                    return jObject.ToObject(ISlackListsCellDefinitionLookup[key], serializer) as SlackListCellDefinition;
+                    return jObject.ToObject(ISlackListsCellDefinitionLookup[key], serializer) as SlackListsCellDefinition;
                 }
             }
 
-            return jObject.ToObject<SlackListCellDefinition>(serializer);
+            return jObject.ToObject<SlackListsCellDefinition>(serializer);
         }
 
-        public override void WriteJson(JsonWriter writer, SlackListCellDefinition value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, SlackListsCellDefinition value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }

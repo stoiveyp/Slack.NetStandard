@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
 {
-    internal class NumberCellDefinition:SlackListCellDefinition
+    public class NumberCellDefinition:SlackListsCellDefinition
     {
         public NumberCellDefinition(string columnId, string rowId = null) : base(columnId, rowId) { }
 

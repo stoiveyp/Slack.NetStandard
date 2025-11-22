@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
 {
-    public class TimestampCellDefinition : SlackListCellDefinition
+    public class TimestampCellDefinition : SlackListsCellDefinition
     {
         public TimestampCellDefinition(string columnId, string rowId = null) : base(columnId, rowId) { }
 

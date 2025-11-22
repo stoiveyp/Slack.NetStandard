@@ -3,7 +3,7 @@ using Slack.NetStandard.JsonConverters;
 
 namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
 {
-    public class RatingCellDefinition : SlackListCellDefinition
+    public class RatingCellDefinition : SlackListsCellDefinition
     {
         public RatingCellDefinition(string columnId, string rowId = null) : base(columnId, rowId) { }
 

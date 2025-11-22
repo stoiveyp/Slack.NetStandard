@@ -5,9 +5,9 @@ using System.Collections.Generic;
 namespace Slack.NetStandard.WebApi.SlackLists
 {
     [JsonConverter(typeof(SlackListsCellDefinitionConverter))]
-    public class SlackListCellDefinition : ISlackCellCreateDefinition, ISlackCellUpdateDefinition
+    public class SlackListsCellDefinition : ISlackCellCreateDefinition, ISlackCellUpdateDefinition
     {
-        public SlackListCellDefinition(string columnId, string rowId = null)
+        public SlackListsCellDefinition(string columnId, string rowId = null)
         { 
             ColumnId = columnId;
             RowId = rowId;
