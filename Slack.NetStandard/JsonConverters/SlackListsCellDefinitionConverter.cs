@@ -15,11 +15,13 @@ namespace Slack.NetStandard.JsonConverters
         {
             var jObject = JObject.Load(reader);
 
+            var colId = jObject.Value<string>("column_id") ?? "unknown_column";
+
             foreach(var key in ISlackListsCellDefinitionLookup.Keys)
             {
                 if (jObject.ContainsKey(key))
                 {
-                    var known = Activator.CreateInstance(ISlackListsCellDefinitionLookup[key]);
+                    var known = Activator.CreateInstance(ISlackListsCellDefinitionLookup[key], colId, null);
                     serializer.Populate(jObject.CreateReader(), known);
                     return known as SlackListsCellDefinition;
                 }

@@ -5,7 +5,6 @@ namespace Slack.NetStandard.JsonConverters
 {
     public abstract class SingleAsArrayConverter<T> : JsonConverter<T>
     {
-        public abstract JsonToken IdentityToken { get; }
         public abstract T ReadSingle(JsonReader reader, JsonSerializer serializer);
 
         public override T ReadJson(JsonReader reader, Type objectType, T existingValue, bool hasExistingValue, JsonSerializer serializer)

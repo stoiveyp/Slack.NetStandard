@@ -13,7 +13,7 @@ namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
         }
 
         [JsonProperty("rich_text")]
-        [JsonConverter(typeof(SingleOrArrayConverter<RichText>), true)]
+        [JsonConverter(typeof(RichTextCellConverter))]
         public RichText RichText { get; set; }
     }
 }

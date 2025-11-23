@@ -13,7 +13,7 @@ namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
         }
 
         [JsonProperty("rating")]
-        [JsonConverter(typeof(SingleOrArrayConverter<int>), true)]
+        [JsonConverter(typeof(RatingCellConverter))]
         public int Rating { get; set; }
     }
 }
