@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.EventsApi.CallbackEvents;
-using Slack.NetStandard.Messages.TextEntities;
 using Slack.NetStandard.WebApi.SlackLists;
 using Slack.NetStandard.WebApi.SlackLists.Cells;
 using System;

@@ -33,7 +33,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void Cell_Checkbox()
         {
-            Utility.AssertSubType<SlackListsCell, SelectCell>("Cells_Checkbox.json");
+            Utility.AssertSubType<SlackListsCell, CheckboxCell>("Cells_Checkbox.json");
         }
 
         [Fact]

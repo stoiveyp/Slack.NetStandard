@@ -7,6 +7,6 @@ namespace Slack.NetStandard.WebApi.SlackLists.Cells
     {
         [AcceptedArray]
         [JsonProperty("number")]
-        public string[] Numers { get; set; }
+        public int[] Numers { get; set; }
     }
 }

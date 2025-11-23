@@ -7,6 +7,6 @@ namespace Slack.NetStandard.WebApi.SlackLists.Cells
     {
         [AcceptedArray]
         [JsonProperty("timestamp")]
-        public string[] Timestamps { get; set; }
+        public long[] Timestamps { get; set; }
     }
 }

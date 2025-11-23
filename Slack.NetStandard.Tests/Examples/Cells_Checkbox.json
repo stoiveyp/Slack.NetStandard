@@ -1,0 +1,9 @@
+{
+  "key": "test_key",
+  "value": "[\"F123456789\"]",
+  "text": "Test Text",
+  "checkbox": [
+    true
+  ],
+  "column_id": "Col018B8C91TM"
+}

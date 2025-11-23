@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.JsonConverters;
 using System;
 
 namespace Slack.NetStandard.WebApi.SlackLists.Cells
@@ -7,6 +8,7 @@ namespace Slack.NetStandard.WebApi.SlackLists.Cells
     {
         [AcceptedArray]
         [JsonProperty("date")]
+        [JsonConverter(typeof(CellDateConverter))]
         public DateTime[] Dates { get; set; }
     }
 }
