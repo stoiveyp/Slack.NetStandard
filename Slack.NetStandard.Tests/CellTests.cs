@@ -1,5 +1,7 @@
 ﻿using Slack.NetStandard.WebApi.SlackLists;
 using Slack.NetStandard.WebApi.SlackLists.Cells;
+using Slack.NetStandard.WebApi.SlackLists.References;
+using System.Linq;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -93,7 +95,8 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void Cell_Reference()
         {
-            Utility.AssertSubType<SlackListsCell, ReferenceCell>("Cells_Reference.json");
+            var refCell = Utility.AssertSubType<SlackListsCell, ReferenceCell>("Cells_Reference.json");
+            Assert.IsType<ListReference>(refCell.Reference.First());
         }
     }
 }
