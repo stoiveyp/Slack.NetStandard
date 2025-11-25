@@ -1,5 +1,4 @@
 ﻿using Slack.NetStandard.WebApi.SlackLists;
-using Slack.NetStandard.WebApi.SlackLists.CellDefinition;
 using System.Threading.Tasks;
 using Xunit;
 

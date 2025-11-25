@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi.SlackLists;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,19 @@ namespace Slack.NetStandard.WebApi
 {
     internal class SlackListsAccessApi : ISlackListsAccessApi
     {
+        private class AccessRequest
+        {
+            [JsonProperty("list_id")]
+            public string ListId { get; set; }
+
+            [JsonProperty("access_level", NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(StringEnumConverter))]
+            public ListAccessLevel? AccessLevel { get; set; }
+
+            [JsonExtensionData]
+            public Dictionary<string, object> AdditionalData { get; set; } = new();
+        }
+
         private readonly IWebApiClient _client;
 
         public SlackListsAccessApi(IWebApiClient client)
@@ -17,23 +32,21 @@ namespace Slack.NetStandard.WebApi
 
         private Task<WebApiResponse> Delete(string listId, string idProperty, IEnumerable<string> ids)
         {
-            var jo = new JObject(
-                new JProperty("list_id", listId),
-                new JProperty(idProperty, ids)
-            );
+            var ar = new AccessRequest();
+            ar.ListId = listId;
+            ar.AdditionalData.Add(idProperty, ids);
 
-            return _client.MakeJsonCall("slackLists.access.delete", jo);
+            return _client.MakeJsonCall("slackLists.access.delete", ar);
         }
 
         private Task<WebApiResponse> Set(string listId, ListAccessLevel accessLevel, string idProperty, IEnumerable<string> ids)
         {
-            var jo = new JObject(
-                new JProperty("list_id", listId),
-                new JProperty("access_level", accessLevel),
-                new JProperty(idProperty, ids)
-            );
+            var ar = new AccessRequest();
+            ar.ListId = listId;
+            ar.AccessLevel = accessLevel;
+            ar.AdditionalData.Add(idProperty, ids);
 
-            return _client.MakeJsonCall("slackLists.access.set", jo);
+            return _client.MakeJsonCall("slackLists.access.set", ar);
         }
 
         public Task<WebApiResponse> DeleteChannels(string listId, params string[] channelIds)
