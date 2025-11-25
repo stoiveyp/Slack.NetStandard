@@ -1,0 +1,174 @@
+{
+  "name": "All Column Types",
+  "schema": [
+    {
+      "key": "title",
+      "name": "Title",
+      "type": "text",
+      "is_primary_column": true
+    },
+    {
+      "key": "rich_text_notes",
+      "name": "Notes",
+      "type": "rich_text"
+    },
+    {
+      "key": "message_link",
+      "name": "Message",
+      "type": "message"
+    },
+    {
+      "key": "ranking",
+      "name": "Ranking",
+      "type": "number",
+      "options": {
+        "precision": 2
+      }
+    },
+    {
+      "key": "status",
+      "name": "Status",
+      "type": "select",
+      "options": {
+        "format": "single_select",
+        "choices": [
+          {
+            "value": "not_started",
+            "label": "Not Started",
+            "color": "red"
+          },
+          {
+            "value": "in_progress",
+            "label": "In Progress",
+            "color": "yellow"
+          },
+          {
+            "value": "completed",
+            "label": "Completed",
+            "color": "green"
+          }
+        ]
+      }
+    },
+    {
+      "key": "labels",
+      "name": "Labels",
+      "type": "multi_select",
+      "options": {
+        "format": "multi_select",
+        "choices": [
+          {
+            "value": "p0",
+            "label": "P0",
+            "color": "red"
+          },
+          {
+            "value": "p1",
+            "label": "P1",
+            "color": "yellow"
+          },
+          {
+            "value": "p2",
+            "label": "P2",
+            "color": "green"
+          }
+        ]
+      }
+    },
+    {
+      "key": "date",
+      "name": "Date",
+      "type": "date"
+    },
+    {
+      "key": "owner",
+      "name": "Owner",
+      "type": "user",
+      "options": {
+        "format": "single_entity"
+      }
+    },
+    {
+      "key": "attachments",
+      "name": "Attachments",
+      "type": "attachment"
+    },
+    {
+      "key": "ready",
+      "name": "Ready?",
+      "type": "checkbox"
+    },
+    {
+      "key": "email",
+      "name": "Email",
+      "type": "email"
+    },
+    {
+      "key": "phone",
+      "name": "Phone",
+      "type": "phone"
+    },
+    {
+      "key": "channel",
+      "name": "Channel",
+      "type": "channel"
+    },
+    {
+      "key": "rating",
+      "name": "Rating",
+      "type": "rating",
+      "options": {
+        "emoji": ":star:",
+        "max": 5
+      }
+    },
+    {
+      "key": "vote",
+      "name": "Vote",
+      "type": "vote"
+    },
+    {
+      "key": "assignee",
+      "name": "Assignee",
+      "type": "assignee"
+    },
+    {
+      "key": "due_date",
+      "name": "Due Date",
+      "type": "due_date"
+    },
+    {
+      "key": "completed",
+      "name": "Completed",
+      "type": "completed"
+    },
+    {
+      "key": "canvas",
+      "name": "Canvas",
+      "type": "canvas"
+    },
+    {
+      "key": "link",
+      "name": "Link",
+      "type": "link"
+    }
+  ],
+  "include_copied_list_records": false,
+  "copy_from_list_id": "F012ABCD3EF",
+  "description_blocks": [
+    {
+      "type": "rich_text",
+      "elements": [
+        {
+          "type": "rich_text_section",
+          "elements": [
+            {
+              "type": "text",
+              "text": "List of favorite shows"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

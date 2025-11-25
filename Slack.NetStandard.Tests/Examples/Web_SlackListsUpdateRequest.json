@@ -1,0 +1,21 @@
+{
+  "name": "Sprint Board",
+  "todo_mode": false,
+  "description_blocks": [
+    {
+      "type": "rich_text",
+      "elements": [
+        {
+          "type": "rich_text_section",
+          "elements": [
+            {
+              "type": "text",
+              "text": "Work for this sprint"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "id": "F012ABCD3EF"
+}

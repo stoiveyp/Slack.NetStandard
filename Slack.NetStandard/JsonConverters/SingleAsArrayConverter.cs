@@ -22,7 +22,7 @@ namespace Slack.NetStandard.JsonConverters
         public override void WriteJson(JsonWriter writer, T value, JsonSerializer serializer)
         {
             writer.WriteStartArray();
-            writer.WriteValue(value);
+            serializer.Serialize(writer, value);
             writer.WriteEndArray();
         }
     }

@@ -24,12 +24,12 @@ namespace Slack.NetStandard.WebApi
 
         public Task<SlackListCreateResponse> Create(SlackListCreateRequest request)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeJsonCall<SlackListCreateRequest, SlackListCreateResponse>("slackLists.create", request);
         }
 
         public Task<WebApiResponse> Update(SlackListUpdateRequest request)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeJsonCall("slackLists.update", request);
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using Slack.NetStandard.WebApi.SlackLists;
+﻿using Newtonsoft.Json.Linq;
+using Slack.NetStandard.WebApi.SlackLists;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Slack.NetStandard.WebApi
@@ -15,52 +17,83 @@ namespace Slack.NetStandard.WebApi
 
         public Task<SlackListItemCreateResponse> Create(SlackListItemCreateRequest request)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeJsonCall<SlackListItemCreateRequest, SlackListItemCreateResponse>("slackLists.items.create", request);
         }
 
         public Task<WebApiResponse> Delete(string listId, string itemId)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeUrlEncodedCall<WebApiResponse>("slackLists.items.delete", new Dictionary<string, object>
+            {
+                {"list_id", listId },
+                {"item_id", itemId }
+            });
         }
 
         public Task<WebApiResponse> DeleteMultiple(string listId, params string[] itemIds)
         {
-            throw new System.NotImplementedException();
+            return DeleteMultiple(listId, itemIds.ToList());
         }
 
         public Task<WebApiResponse> DeleteMultiple(string listId, List<string> itemids)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeJsonCall("slackLists.items.deleteMultiple", new JObject()
+            {
+                new JProperty("list_id",listId),
+                new JProperty("ids", itemids)
+            });
         }
 
         public Task<SlackListsItemInfoResponse> Info(string listId, string itemId, bool? includeIsSubscribed = null)
         {
-            throw new System.NotImplementedException();
+            var jo = new JObject()
+            {
+                new JProperty("list_id",listId),
+                new JProperty("id", itemId)
+            };
+
+            if (includeIsSubscribed.HasValue) { 
+                jo.Add("include_is_subscribed", includeIsSubscribed.Value);
+            }
+
+            return _client.MakeJsonCall<JObject, SlackListsItemInfoResponse>("slackLists.items.info", jo);
         }
 
         public Task<SlackListsItemsListResponse> List(string listId)
         {
-            throw new System.NotImplementedException();
+            return List(listId, null, null, null);
         }
 
         public Task<SlackListsItemsListResponse> List(string listId, string cursor)
         {
-            throw new System.NotImplementedException();
+            return List(listId, cursor, null, null);
         }
 
         public Task<SlackListsItemsListResponse> List(string listId, int limit)
         {
-            throw new System.NotImplementedException();
+            return List(listId, null, limit, null);
         }
 
         public Task<SlackListsItemsListResponse> List(string listId, string cursor = null, int? limit = null, bool? archived = null)
         {
-            throw new System.NotImplementedException();
+            var jo = new JObject
+            {
+                { "list_id", listId }
+            };
+            if (archived.HasValue)
+            {
+                jo.Add("archived", archived.Value);
+            }
+            jo.AddPaging(cursor, limit);
+            return _client.MakeJsonCall<JObject, SlackListsItemsListResponse>("slackLists.items.list", jo);
         }
 
         public Task<SlackListItemUpdateResponse> Update(string listId, List<SlackListsCellDefinition> cells)
         {
-            throw new System.NotImplementedException();
+            return _client.MakeJsonCall<JObject,SlackListItemUpdateResponse>("slackLists.items.update", new JObject()
+            {
+                new JProperty("list_id",listId),
+                new JProperty("cells", cells)
+            });
         }
     }
 }
