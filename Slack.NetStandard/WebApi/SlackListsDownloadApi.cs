@@ -34,7 +34,7 @@ namespace Slack.NetStandard.WebApi
                 jo.Add("include_archived", includeArchived.Value);
             }
 
-            return _client.MakeJsonCall<JObject, SlackListsDownloadStartResponse>("slackLists.download.get", jo);
+            return _client.MakeJsonCall<JObject, SlackListsDownloadStartResponse>("slackLists.download.start", jo);
         }
     }
 }
