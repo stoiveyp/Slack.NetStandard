@@ -88,5 +88,19 @@ namespace Slack.NetStandard.Tests
                     jo.CompareJArray("ids", itemId, itemId2);
                 });
         }
+
+        [Fact]
+        public async Task List()
+        {
+            var fileId = "F1234567";
+            await Utility.AssertWebApi(c => c.SlackLists.Items.List(fileId, "ABC123",10,true),
+                "slackLists.items.list",
+                jo =>
+                {
+                    Assert.Equal(fileId, jo.Value<string>("list_id"));
+                    Assert.True(jo.Value<bool>("archived"));
+                    jo.TestPaging("ABC123", 10);
+                });
+        }
     }
 }
