@@ -20,6 +20,7 @@ namespace Slack.NetStandard.Tests
             var viewSubmissionPayload = Utility.AssertSubType<InteractionPayload, ViewSubmissionPayload>("ViewSubmissionPayload.json");
 
             Assert.Null(viewSubmissionPayload.OtherFields);
+            Assert.Null(viewSubmissionPayload.View.OtherFields);
             Assert.All(viewSubmissionPayload.View.State.Values.SelectMany(v => v.Value.Values),
                 elementValue => Assert.Null(elementValue.OtherFields));
         }

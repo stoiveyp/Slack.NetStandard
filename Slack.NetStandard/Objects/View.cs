@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Slack.NetStandard.Objects
 {
@@ -65,6 +66,33 @@ namespace Slack.NetStandard.Objects
 
         [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public ViewState State { get; set; }
+
+        [JsonProperty("entity_url", NullValueHandling = NullValueHandling.Ignore)]
+        public string EntityUrl { get; set; }
+
+        [JsonProperty("external_ref", NullValueHandling = NullValueHandling.Ignore)]
+        public ExternalRef ExternalRef { get; set; }
+
+        [JsonProperty("message_ts", NullValueHandling = NullValueHandling.Ignore)]
+        public Timestamp MessageTimestamp { get; set; }
+
+        [JsonProperty("thread_ts", NullValueHandling = NullValueHandling.Ignore)]
+        public Timestamp ThreadTimestamp { get; set; }
+
+        [JsonProperty("channel", NullValueHandling = NullValueHandling.Ignore)]
+        public string Channel { get; set; }
+
+        [JsonProperty("app_unfurl_url", NullValueHandling = NullValueHandling.Ignore)]
+        public string AppUnfurlUrl { get; set; }
+
+        [JsonProperty("bot_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string BotId { get; set; }
+
+        [JsonProperty("app_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string AppId { get; set; }
+
+        [JsonProperty("app_installed_team_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string AppInstalledTeamId { get; set; }
 
         [JsonExtensionData]
         public Dictionary<string, object> OtherFields { get; set; }
