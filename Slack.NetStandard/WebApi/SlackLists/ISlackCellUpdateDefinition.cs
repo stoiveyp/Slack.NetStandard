@@ -2,7 +2,7 @@
 
 namespace Slack.NetStandard.WebApi.SlackLists
 {
-    internal interface ISlackCellUpdateDefinition
+    public interface ISlackCellUpdateDefinition
     {
         [JsonProperty("column_id")]
         public string ColumnId { get; set; }

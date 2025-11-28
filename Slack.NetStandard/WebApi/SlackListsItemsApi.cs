@@ -25,7 +25,7 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeUrlEncodedCall<WebApiResponse>("slackLists.items.delete", new Dictionary<string, object>
             {
                 {"list_id", listId },
-                {"item_id", itemId }
+                {"id", itemId }
             });
         }
 
@@ -87,13 +87,9 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeJsonCall<JObject, SlackListsItemsListResponse>("slackLists.items.list", jo);
         }
 
-        public Task<SlackListsItemUpdateResponse> Update(string listId, List<SlackListsCellDefinition> cells)
+        public Task<SlackListsItemUpdateResponse> Update(string listId, List<ISlackCellUpdateDefinition> cells)
         {
-            return _client.MakeJsonCall<JObject,SlackListsItemUpdateResponse>("slackLists.items.update", new JObject()
-            {
-                new JProperty("list_id",listId),
-                new JProperty("cells", cells)
-            });
+            return _client.MakeJsonCall<SlackListsItemUpdateRequest,SlackListsItemUpdateResponse>("slackLists.items.update", new SlackListsItemUpdateRequest(listId, cells));
         }
     }
 }

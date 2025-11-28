@@ -16,6 +16,6 @@ namespace Slack.NetStandard.WebApi
         Task<SlackListsItemsListResponse> List(string listId, int limit);
         Task<SlackListsItemsListResponse> List(string listId, string cursor = null, int? limit = null, bool? archived = null);
 
-        Task<SlackListsItemUpdateResponse> Update(string listId, List<SlackListsCellDefinition> cells);
+        Task<SlackListsItemUpdateResponse> Update(string listId, List<ISlackCellUpdateDefinition> cells);
     }
 }
