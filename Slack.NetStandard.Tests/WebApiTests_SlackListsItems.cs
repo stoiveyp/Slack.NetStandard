@@ -27,13 +27,13 @@ namespace Slack.NetStandard.Tests
         {
             var fileId = "F1234567";
             var itemId = "Rec014K005UQJ";
-            await Utility.AssertWebApi(c => c.SlackLists.Items.Create(new SlackListItemCreateRequest
+            await Utility.AssertWebApi(c => c.SlackLists.Items.Create(new SlackListsItemCreateRequest
             {
                 ListId = fileId,
                 ParentItemId = itemId,
                 InitialFields = [new SelectCellDefinition("Col1000000",["OptHIGH123"])]
             }), "slackLists.items.create",
-                "Web_SlackListsInfoResponse.json", jo =>
+                "Web_SlackListsItemsCreateResponse.json", jo =>
                 {
                     Assert.Equal(fileId, jo.Value<string>("list_id"));
                     Assert.Equal(itemId, jo.Value<string>("parent_item_id"));

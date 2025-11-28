@@ -22,9 +22,9 @@ namespace Slack.NetStandard.WebApi
 
         public ISlackListsItemsApi Items { get; }
 
-        public Task<SlackListCreateResponse> Create(SlackListCreateRequest request)
+        public Task<SlackListsCreateResponse> Create(SlackListsCreateRequest request)
         {
-            return _client.MakeJsonCall<SlackListCreateRequest, SlackListCreateResponse>("slackLists.create", request);
+            return _client.MakeJsonCall<SlackListsCreateRequest, SlackListsCreateResponse>("slackLists.create", request);
         }
 
         public Task<WebApiResponse> Update(SlackListUpdateRequest request)

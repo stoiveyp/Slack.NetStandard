@@ -15,9 +15,9 @@ namespace Slack.NetStandard.WebApi
             _client = client;
         }
 
-        public Task<SlackListItemCreateResponse> Create(SlackListItemCreateRequest request)
+        public Task<SlackListItemsCreateResponse> Create(SlackListsItemCreateRequest request)
         {
-            return _client.MakeJsonCall<SlackListItemCreateRequest, SlackListItemCreateResponse>("slackLists.items.create", request);
+            return _client.MakeJsonCall<SlackListsItemCreateRequest, SlackListItemsCreateResponse>("slackLists.items.create", request);
         }
 
         public Task<WebApiResponse> Delete(string listId, string itemId)
@@ -87,9 +87,9 @@ namespace Slack.NetStandard.WebApi
             return _client.MakeJsonCall<JObject, SlackListsItemsListResponse>("slackLists.items.list", jo);
         }
 
-        public Task<SlackListItemUpdateResponse> Update(string listId, List<SlackListsCellDefinition> cells)
+        public Task<SlackListsItemUpdateResponse> Update(string listId, List<SlackListsCellDefinition> cells)
         {
-            return _client.MakeJsonCall<JObject,SlackListItemUpdateResponse>("slackLists.items.update", new JObject()
+            return _client.MakeJsonCall<JObject,SlackListsItemUpdateResponse>("slackLists.items.update", new JObject()
             {
                 new JProperty("list_id",listId),
                 new JProperty("cells", cells)

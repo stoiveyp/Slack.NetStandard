@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Slack.NetStandard.WebApi.SlackLists
 {
-    public class SlackListItemCreateRequest
+    public class SlackListsItemCreateRequest
     {
         [JsonProperty("list_id")]
         public string ListId { get; set; }

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Slack.NetStandard.WebApi.SlackLists
 {
-    public class SlackListCreateRequest
+    public class SlackListsCreateRequest
     {
         [JsonProperty("name")]
         public string Name { get; set; }

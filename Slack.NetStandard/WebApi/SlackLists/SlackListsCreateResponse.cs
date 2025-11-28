@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Slack.NetStandard.WebApi.SlackLists
 {
-    public class SlackListCreateResponse : WebApiResponse
+    public class SlackListsCreateResponse : WebApiResponse
     {
         [JsonProperty("list_id")]
         public string ListId { get; set; }

@@ -1,7 +1,6 @@
 ﻿namespace Slack.NetStandard.WebApi.SlackLists
 {
-    public class SlackListItemCreateResponse:WebApiResponse
+    public class SlackListsItemUpdateResponse: WebApiResponse
     {
-
     }
 }

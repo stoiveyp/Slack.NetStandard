@@ -6,5 +6,8 @@ namespace Slack.NetStandard.WebApi.SlackLists
     {
         [JsonProperty("list", NullValueHandling = NullValueHandling.Ignore)]
         public SlackListsList List { get; set; }
+
+        [JsonProperty("record")]
+        public SlackListsItem Record { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Slack.NetStandard.WebApi
         ISlackListsAccessApi Access { get; }
         ISlackListsDownloadApi Downloads { get; }
         ISlackListsItemsApi Items { get; }
-        Task<SlackListCreateResponse> Create(SlackListCreateRequest request);
+        Task<SlackListsCreateResponse> Create(SlackListsCreateRequest request);
         Task<WebApiResponse> Update(SlackListUpdateRequest request);
         
     }

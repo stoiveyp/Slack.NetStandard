@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "item": {
+    "id": "Rec018ALFLNTU",
+    "list_id": "F1234567",
+    "date_created": 1758744345,
+    "created_by": "W0AB1CDE2",
+    "updated_by": "W0AB1CDE2",
+    "fields": [
+      {
+        "key": "rich_text_notes",
+        "value": "[{\"type\":\"rich_text\",\"block_id\":\"k0zIi\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Fix bug\"}]}]}]",
+        "text": "Fix bug",
+        "rich_text": [
+          {
+            "type": "rich_text",
+            "block_id": "k0zIi",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "text": "Fix bug",
+                    "type": "text"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "column_id": "Col018B8C91TM"
+      }
+    ],
+    "updated_timestamp": 1758744345
+  }
+}

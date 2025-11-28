@@ -9,7 +9,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Create()
         {
-            var request = Utility.ExampleFileContent<SlackListCreateRequest>("Web_SlackListsCreateRequest.json");
+            var request = Utility.ExampleFileContent<SlackListsCreateRequest>("Web_SlackListsCreateRequest.json");
             await Utility.AssertWebApi(c => c.SlackLists.Create(request), "slackLists.create",
                 "Web_SlackListsCreateResponse.json", jo =>
                 {
