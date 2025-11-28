@@ -15,5 +15,8 @@ namespace Slack.NetStandard.WebApi.Chat
 
         [JsonProperty("unfurl_media", NullValueHandling = NullValueHandling.Ignore)]
         public bool? UnfurlMedia { get; set; }
+
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
+        public UnfurlMetadata Metadata { get; set; }
     }
 }

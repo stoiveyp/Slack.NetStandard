@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
+using Slack.NetStandard.Objects.WorkObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

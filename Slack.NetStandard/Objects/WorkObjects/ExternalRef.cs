@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Slack.NetStandard.Objects
+namespace Slack.NetStandard.Objects.WorkObjects
 {
     public class ExternalRef
     {

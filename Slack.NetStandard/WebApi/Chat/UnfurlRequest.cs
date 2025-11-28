@@ -31,6 +31,15 @@ namespace Slack.NetStandard.WebApi.Chat
         [JsonProperty("user_auth_url",NullValueHandling = NullValueHandling.Ignore)]
         public string UserAuthUrl { get; set; }
 
+        [JsonProperty("unfurl_id", NullValueHandling = NullValueHandling.Ignore)]
+        public string UnfurlId { get; set; }
+
+        [JsonProperty("source", NullValueHandling = NullValueHandling.Ignore)]
+        public string Source { get; set; }
+
+        [JsonProperty("metadata", NullValueHandling = NullValueHandling.Ignore)]
+        public UnfurlMetadata Metadata { get; set; }
+
         public bool ShouldSerializeUserAuthBlocks() => UserAuthBlocks?.Any() ?? false;
     }
 }
