@@ -26,12 +26,17 @@ namespace Slack.NetStandard.Analyzers
         private static readonly LocalizableString ElementTypeMessageFormat = new LocalizableResourceString(nameof(Resources.ElementTypeMessageFormat), Resources.ResourceManager, typeof(Resources));
         private static readonly LocalizableString ElementTypeDescription = new LocalizableResourceString(nameof(Resources.ElementTypeDescription), Resources.ResourceManager, typeof(Resources));
 
+        private static readonly LocalizableString CellDefinitionTitle = new LocalizableResourceString(nameof(Resources.CellDefinitionTitle), Resources.ResourceManager, typeof(Resources));
+        private static readonly LocalizableString CellDefinitionMessageFormat = new LocalizableResourceString(nameof(Resources.CellDefinitionMessageFormat), Resources.ResourceManager, typeof(Resources));
+        private static readonly LocalizableString CellDefinitionDescription = new LocalizableResourceString(nameof(Resources.CellDefinitionDescription), Resources.ResourceManager, typeof(Resources));
+
         private const string Category = "CodingStandard";
 
         private static readonly DiagnosticDescriptor BlockRule = new DiagnosticDescriptor(DiagnosticId, BlockTypeTitle, BlockTypeMessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: BlockTypeDescription);
         private static readonly DiagnosticDescriptor ElementRule = new DiagnosticDescriptor(DiagnosticId, ElementTypeTitle, ElementTypeMessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: ElementTypeDescription);
+        private static readonly DiagnosticDescriptor CellRule = new DiagnosticDescriptor(DiagnosticId, CellDefinitionTitle, CellDefinitionMessageFormat, Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, description: CellDefinitionDescription);
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(BlockRule, ElementRule);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(BlockRule, ElementRule, CellRule);
 
         public override void Initialize(AnalysisContext context)
         {
@@ -41,6 +46,7 @@ namespace Slack.NetStandard.Analyzers
             // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/Analyzer%20Actions%20Semantics.md for more information
             context.RegisterSymbolAction(CheckBlockConstructors, SymbolKind.NamedType);
             context.RegisterSymbolAction(CheckElementConstructors, SymbolKind.NamedType);
+            context.RegisterSymbolAction(CheckCellDefinitionConstructors, SymbolKind.NamedType);
         }
 
         private static void CheckBlockConstructors(SymbolAnalysisContext context) =>
@@ -48,6 +54,36 @@ namespace Slack.NetStandard.Analyzers
 
         private static void CheckElementConstructors(SymbolAnalysisContext context) =>
             CheckTypeConstructors(context, "Slack.NetStandard.Messages.Elements.IMessageElement", ElementRule);
+
+        private static void CheckCellDefinitionConstructors(SymbolAnalysisContext context) =>
+            CheckDefinitionConstructor(context, "Slack.NetStandard.WebApi.SlackLists.ISlackCellCreateDefinition", CellRule);
+
+        private static void CheckDefinitionConstructor(SymbolAnalysisContext context, string type, DiagnosticDescriptor rule)
+        {
+            var namedTypeSymbol = (INamedTypeSymbol)context.Symbol;
+
+            //Specific exception - entire point of UnknownBlock is that it's unknown
+            if (namedTypeSymbol.Name == "SlackListsCellDefinition")
+            {
+                return;
+            }
+
+            if (namedTypeSymbol.TypeKind != TypeKind.Class || 
+                !namedTypeSymbol.AllInterfaces.Contains(context.Compilation.GetTypeByMetadataName(type)))
+            {
+                return;
+            }
+
+            var constructors = namedTypeSymbol.Constructors;
+
+            if (constructors.Length >= 2 && constructors.Any(c => c.Parameters.Select(p => p.Name).Except(new[] { "columnId", "rowId" }).Any()))
+            {
+                return;
+            }
+
+            var incorrectCellDefinitionConstructor = Diagnostic.Create(rule, namedTypeSymbol.Locations[0], namedTypeSymbol.Name);
+            context.ReportDiagnostic(incorrectCellDefinitionConstructor);
+        }
 
         private static void CheckTypeConstructors(SymbolAnalysisContext context, string type, DiagnosticDescriptor rule)
         {
@@ -59,7 +95,7 @@ namespace Slack.NetStandard.Analyzers
                 return;
             }
 
-            if (namedTypeSymbol.TypeKind != TypeKind.Class || 
+            if (namedTypeSymbol.TypeKind != TypeKind.Class ||
                 !namedTypeSymbol.AllInterfaces.Contains(context.Compilation.GetTypeByMetadataName(type)))
             {
                 return;

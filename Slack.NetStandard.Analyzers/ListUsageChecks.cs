@@ -18,7 +18,7 @@ namespace Slack.NetStandard.Analyzers
             var node = (IPropertySymbol)symbolAnalysis.Symbol;
             var propType = node.Type;
 
-            if (!propType.Name.Contains("List"))
+            if (!propType.Name.Contains("List") || !propType.AllInterfaces.Any(i => i.Name == "IEnumerable"))
             {
                 //only want list properties
                 return;

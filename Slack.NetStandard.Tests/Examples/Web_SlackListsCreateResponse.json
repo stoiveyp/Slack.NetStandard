@@ -1,0 +1,212 @@
+{
+  "ok": true,
+  "list_id": "F1234ABCD",
+  "list_metadata": {
+    "schema": [
+      {
+        "key": "title",
+        "name": "Title",
+        "is_primary_column": true,
+        "type": "text",
+        "id": "Col012A3BCDE4"
+      },
+      {
+        "key": "rich_text_notes",
+        "name": "Notes",
+        "is_primary_column": false,
+        "type": "rich_text",
+        "id": "Col056A7BCDE8"
+      },
+      {
+        "key": "message_link",
+        "name": "Message",
+        "is_primary_column": false,
+        "type": "message",
+        "id": "Col090A1BCDE2"
+      },
+      {
+        "key": "ranking",
+        "name": "Ranking",
+        "is_primary_column": false,
+        "type": "number",
+        "options": {
+          "precision": 2,
+          "show_member_name": true
+        },
+        "id": "Col034A5BCDE6"
+      },
+      {
+        "key": "status",
+        "name": "Status",
+        "is_primary_column": false,
+        "type": "select",
+        "options": {
+          "choices": [
+            {
+              "value": "not_started",
+              "label": "Not Started",
+              "color": "red"
+            },
+            {
+              "value": "in_progress",
+              "label": "In Progress",
+              "color": "yellow"
+            },
+            {
+              "value": "completed",
+              "label": "Completed",
+              "color": "green"
+            }
+          ],
+          "format": "single_select",
+          "show_member_name": true
+        },
+        "id": "Col078A9BCDE0"
+      },
+      {
+        "key": "labels",
+        "name": "Labels",
+        "is_primary_column": false,
+        "type": "multi_select",
+        "options": {
+          "choices": [
+            {
+              "value": "p0",
+              "label": "P0",
+              "color": "red"
+            },
+            {
+              "value": "p1",
+              "label": "P1",
+              "color": "yellow"
+            },
+            {
+              "value": "p2",
+              "label": "P2",
+              "color": "green"
+            }
+          ],
+          "format": "multi_select",
+          "show_member_name": true
+        },
+        "id": "Col112A2BCDE3"
+      },
+      {
+        "key": "date",
+        "name": "Date",
+        "is_primary_column": false,
+        "type": "date",
+        "id": "Col223A3BCDE4"
+      },
+      {
+        "key": "owner",
+        "name": "Owner",
+        "is_primary_column": false,
+        "type": "user",
+        "options": {
+          "format": "single_entity",
+          "show_member_name": true
+        },
+        "id": "Col334A4BCDE5"
+      },
+      {
+        "key": "attachments",
+        "name": "Attachments",
+        "is_primary_column": false,
+        "type": "attachment",
+        "id": "Col556A6BCDE7"
+      },
+      {
+        "key": "ready",
+        "name": "Ready?",
+        "is_primary_column": false,
+        "type": "checkbox",
+        "id": "Col778A8BCDE9"
+      },
+      {
+        "key": "email",
+        "name": "Email",
+        "is_primary_column": false,
+        "type": "email",
+        "id": "Col990A0BCDE1"
+      },
+      {
+        "key": "phone",
+        "name": "Phone",
+        "is_primary_column": false,
+        "type": "phone",
+        "id": "Col111A1BCDE1"
+      },
+      {
+        "key": "channel",
+        "name": "Channel",
+        "is_primary_column": false,
+        "type": "channel",
+        "id": "Col222A2BCDE2"
+      },
+      {
+        "key": "rating",
+        "name": "Rating",
+        "is_primary_column": false,
+        "type": "rating",
+        "options": {
+          "emoji": ":star:",
+          "max": 5,
+          "show_member_name": true
+        },
+        "id": "Col333A3BCDE3"
+      },
+      {
+        "key": "vote",
+        "name": "Vote",
+        "is_primary_column": false,
+        "type": "vote",
+        "id": "Co444A4BCDE4"
+      },
+      {
+        "key": "assignee",
+        "name": "Assignee",
+        "is_primary_column": false,
+        "type": "assignee",
+        "id": "Col555A5BCDE5"
+      },
+      {
+        "key": "due_date",
+        "name": "Due Date",
+        "is_primary_column": false,
+        "type": "due_date",
+        "id": "Col666A6BCDE6"
+      },
+      {
+        "key": "completed",
+        "name": "Completed",
+        "is_primary_column": false,
+        "type": "completed",
+        "id": "Col777A7BCDE7"
+      },
+      {
+        "key": "canvas",
+        "name": "Canvas",
+        "is_primary_column": false,
+        "type": "canvas",
+        "id": "Col888A8BCDE8"
+      },
+      {
+        "key": "link",
+        "name": "Link",
+        "is_primary_column": false,
+        "type": "link",
+        "id": "Col999A9BCDE9"
+      }
+    ],
+    "subtask_schema": [
+      {
+        "key": "title",
+        "name": "Title",
+        "is_primary_column": true,
+        "type": "text",
+        "id": "Col000A0BCDE0"
+      }
+    ]
+  }
+}

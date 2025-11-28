@@ -75,9 +75,6 @@ namespace Slack.NetStandard
         private IUsersApi _users;
         public IUsersApi Users => _users ??= new UsersApi(this);
 
-        private IWorkflowApi _workflow;
-        public IWorkflowApi Workflow => _workflow ??= new WorkflowApi(this);
-
         private IBookmarksApi _bookmarks;
         public IBookmarksApi Bookmarks => _bookmarks ??= new BookmarksApi(this);
 
@@ -92,6 +89,12 @@ namespace Slack.NetStandard
 
         private IAssistantApi _assistant;
         public IAssistantApi Assistant => _assistant ??= new AssistantApi(this);
+
+        private IWorkflowsApi _workflows;
+        public IWorkflowsApi Workflows => _workflows ??= new WorkflowsApi(this);
+
+        private ISlackListsApi _slackLists;
+        public ISlackListsApi SlackLists => _slackLists ??= new SlackListsApi(this);
 
         public static Uri ApiBaseAddress { get; } = new("https://slack.com/api/", UriKind.Absolute);
         public static HttpClient DefaultClient { get; } = new();

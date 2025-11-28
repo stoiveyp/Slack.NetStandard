@@ -40,9 +40,6 @@ namespace Slack.NetStandard.JsonConverters
                 InteractionType.BlockActions => new BlockActionsPayload(),
                 InteractionType.ViewClosed => new ViewClosedPayload(),
                 InteractionType.ViewSubmission => new ViewSubmissionPayload(),
-#pragma warning disable CS0618 // Type or member is obsolete
-                InteractionType.WorkflowStepEdit => new WorkflowStepEditPayload(),
-#pragma warning restore CS0618 // Type or member is obsolete
                 InteractionType.BlockSuggestion => new SuggestionPayload(),
                 InteractionType.DialogSuggestion => new SuggestionPayload(),
                 _ => (InteractionPayload)null

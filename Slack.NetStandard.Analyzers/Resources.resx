@@ -171,4 +171,13 @@
   <data name="InvalidArrayFixTitle" xml:space="preserve">
     <value>Convert to list</value>
   </data>
+  <data name="CellDefinitionDescription" xml:space="preserve">
+    <value>All cell definitions should have one basic (columnId,rowId) constructor and one helper constructor.</value>
+  </data>
+  <data name="CellDefinitionMessageFormat" xml:space="preserve">
+    <value>Cell definition type '{0}' is missing either a basic or helper constructor</value>
+  </data>
+  <data name="CellDefinitionTitle" xml:space="preserve">
+    <value>Cell Definition does not adhere to constructor rules</value>
+  </data>
 </root>
