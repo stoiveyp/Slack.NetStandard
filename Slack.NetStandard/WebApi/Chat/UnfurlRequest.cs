@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
 using System.Linq;
+using Slack.NetStandard.Objects.WorkObjects;
 
 namespace Slack.NetStandard.WebApi.Chat
 {

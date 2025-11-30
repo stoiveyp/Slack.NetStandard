@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Slack.NetStandard.WebApi.Chat
+namespace Slack.NetStandard.Objects.WorkObjects
 {
     public class UnfurlMetadata
     {
