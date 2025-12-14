@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics.Contracts;
 
-namespace Slack.NetStandard.Objects.WorkObjects
+namespace Slack.NetStandard.Objects.WorkObjects.Fields
 {
-    public class EntityPayloadFieldUser
+    public class UserField
     {
         [JsonProperty("user")]
         public EntityPayloadFieldInnerUser User { get; set; }

@@ -1,30 +1,30 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Slack.NetStandard.Objects.WorkObjects;
 using Slack.NetStandard.Objects.WorkObjects.EntityTypes;
+using Slack.NetStandard.Objects.WorkObjects.Fields;
 using System;
 using System.Collections.Generic;
 
 namespace Slack.NetStandard.JsonConverters
 {
-    internal class EntityPayloadCustomFieldConverter : JsonConverter<EntityPayloadCustomField>
+    internal class UnfurlMetadataEntityConverter : JsonConverter<CustomField>
     {
         public override bool CanWrite => false;
-        public override EntityPayloadCustomField ReadJson(JsonReader reader, Type objectType, EntityPayloadCustomField existingValue, bool hasExistingValue, JsonSerializer serializer)
+        public override CustomField ReadJson(JsonReader reader, Type objectType, CustomField existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
             var jObject = JObject.Load(reader);
-            var val = jObject.Value<string>("type");
+            var val = jObject.Value<string>("entity_type");
             if (EntityPayloadCustomFieldLookup.ContainsKey(val))
             {
                 var known = Activator.CreateInstance(EntityPayloadCustomFieldLookup[val]);
                 serializer.Populate(jObject.CreateReader(), known);
-                return known as EntityPayloadCustomField;
+                return known as CustomField;
             }
 
             return null;
         }
 
-        public override void WriteJson(JsonWriter writer, EntityPayloadCustomField value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, CustomField value, JsonSerializer serializer)
         {
             throw new NotImplementedException();
         }

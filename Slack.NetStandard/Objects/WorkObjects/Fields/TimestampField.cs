@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace Slack.NetStandard.Objects.WorkObjects
+namespace Slack.NetStandard.Objects.WorkObjects.Fields
 {
-    public class EntityPayloadFieldTimestamp
+    public class TimestampField
     {
         [JsonProperty("value")]
         public long Value { get; set; }

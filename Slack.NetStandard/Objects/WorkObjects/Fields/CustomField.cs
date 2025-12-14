@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Slack.NetStandard.JsonConverters;
 
-namespace Slack.NetStandard.Objects.WorkObjects
+namespace Slack.NetStandard.Objects.WorkObjects.Fields
 {
-    [JsonConverter(typeof(EntityPayloadCustomFieldConverter))]
-    public class EntityPayloadCustomField
+    [JsonConverter(typeof(UnfurlMetadataEntityConverter))]
+    public class CustomField:EntityPayloadField
     {
         [JsonProperty("key")]
         public string Key { get; set; }
@@ -18,6 +18,4 @@ namespace Slack.NetStandard.Objects.WorkObjects
         [JsonProperty("type")]
         public string Type { get; set; }
     }
-
-    public class EntityPayloadCustom
 }

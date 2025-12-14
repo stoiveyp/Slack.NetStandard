@@ -1,18 +1,19 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.Objects.WorkObjects.Fields;
 using System.Collections.Generic;
 
 namespace Slack.NetStandard.Objects.WorkObjects
 {
-    public class EntityPayload<T> where T: EntityPayloadField
+    public class EntityPayload
     {
         [JsonProperty("attributes")]
         public EntityPayloadAttributes Attributes { get; set; }
 
         [JsonProperty("fields")]
-        public T Fields { get; set; }
+        public Dictionary<string,EntityPayloadField> Fields { get; set; }
 
         [JsonProperty("custom_fields", NullValueHandling = NullValueHandling.Ignore)]
-        public List<EntityPayloadCustomField> CustomFields = [];
+        public List<EntityPayloadField> CustomFields = [];
 
         [JsonProperty("display_order", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> DisplayOrder = [];
