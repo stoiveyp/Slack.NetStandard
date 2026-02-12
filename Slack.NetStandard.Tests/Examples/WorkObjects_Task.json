@@ -1,39 +1,54 @@
 ﻿{
-  "entity_type": "slack#/entities/task",
-  "entity_payload": {
-    "attributes": {
-      "title": {
-        "text": "Update links in login page",
-        "edit": {
-          "enabled": true
-          // The title is always required (i.e., optional: false)
-        }
-      }
+  "description": {
+    "type": "string",
+    "value": "task description here",
+    "format": "markdown" // optional
+  },
+  "created_by": {
+    // You can identify a user in one of two ways:
+    // - Use "user_id" with a Slack user ID (e.g., "U123ABC456") if known
+    // - Use "text" with the user's display name if the Slack user ID is not available
+    "user": {
+      "user_id": "U0123456"
     },
-    "fields": {
-      "description": {
-        "type":  "string",
-        "value": "We need to update the links in the login page to use our new branding",
-        "edit": {
-          "enabled": true,
-          "text": {
-            "min_length": 15
-          }
-        }
-      }
+    "type": "slack#/types/user"
+  },
+  "date_created": {
+    "type": "slack#/types/timestamp",
+    "value": 1741164235 // value in UNIX timestamp
+  },
+  "date_updated": {
+    "type": "slack#/types/timestamp",
+    "value": 1741164235 // value in UNIX timestamp
+  },
+  "assignee": {
+    // You can identify a user in one of two ways:
+    // - Use "user_id" with a Slack user ID (e.g., "U123ABC456") if known
+    // - Use "text" with the user's display name if the Slack user ID is not available
+    "user": {
+      "text": "John Smith",
+      "email": "johnsmith@example.com"
     },
-    "custom_fields": [
-      {
-        "key": "story_points",
-        "label": "Story points",
-        "type": "integer",
-        "edit": {
-          "enabled": true,
-          "number": {
-            "max_value": 10
-          }
-        }
-      }
-    ]
+    "type": "slack#/types/user"
+  },
+  "status": {
+    "type":  "string",
+    "value": "open", // the status of the task
+    "tag_color": "blue", // used to provide a colored "chip" around the text
+    "link": "https://example.com/tasks?status=open"
+  },
+  "due_date": {
+    "value": "2025-06-10", // date in the format 'YYYY-MM-DD', or an integer unix timestamp if the type is "slack#/types/timestamp"
+    "type": "slack#/types/date" // this can also be type "slack#/types/timestamp"
+  },
+  "priority": {
+    "type": "string",
+    "value": "high", // the priority level of the task
+    "icon": {
+      // the icon will be rendered to the left of the text
+      "alt_text": "Icon to indicate a high priority item",
+      "url": "https://example.com/icon/high-priority.png"
+    },
+    "link": "https://example.com/tasks?priority=high"
   }
 }

@@ -1,0 +1,45 @@
+﻿{
+  "status": {
+    "type": "string",
+    "value": "open" // the status of the incident 
+  },
+  "severity": {
+    "type": "string",
+    "value": "high" // severity level of the incident
+  },
+  "created_by": {
+    // You can identify a user in one of two ways:
+    // - Use "user_id" with a Slack user ID (e.g., "U123ABC456") if known
+    // - Use "text" with the user's display name if the Slack user ID is not available
+    "user": {
+      "user_id": "U0123456"
+    },
+    "type": "slack#/types/user"
+  },
+  "assigned_to": {
+    // You can identify a user in one of two ways:
+    // - Use "user_id" with a Slack user ID (e.g., "U123ABC456") if known
+    // - Use "text" with the user's display name if the Slack user ID is not available
+    "user": {
+      "text": "John Smith",
+      "email": "johnsmith@example.com"
+    },
+    "type": "slack#/types/user"
+  },
+  "date_created": {
+    "type": "slack#/types/timestamp",
+    "value": 1741164235 // value in UNIX timestamp
+  },
+  "date_updated": {
+    "type": "slack#/types/timestamp",
+    "value": 1741164235 // value in UNIX timestamp
+  },
+  "description": {
+    "type": "string",
+    "value": "incident description here"
+  },
+  "service": {
+    "type": "string",
+    "value": "backend" // the service that is affected by the incident
+  }
+}

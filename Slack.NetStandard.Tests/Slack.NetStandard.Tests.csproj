@@ -20,6 +20,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Examples\WorkObjects_Incident.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Examples\WorkObjects_Task.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
