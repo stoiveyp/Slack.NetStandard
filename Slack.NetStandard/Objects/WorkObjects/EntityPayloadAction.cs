@@ -13,7 +13,7 @@ public class EntityPayloadAction
 
     [JsonProperty("style", NullValueHandling = NullValueHandling.Ignore)]
     [JsonConverter(typeof(StringEnumConverter))]
-    public PayloadActionStyle Style { get; set; }
+    public PayloadActionStyle? Style { get; set; }
 
     [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
     public string Value { get; set; }

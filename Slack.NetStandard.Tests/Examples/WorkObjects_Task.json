@@ -1,0 +1,39 @@
+﻿{
+  "entity_type": "slack#/entities/task",
+  "entity_payload": {
+    "attributes": {
+      "title": {
+        "text": "Update links in login page",
+        "edit": {
+          "enabled": true
+          // The title is always required (i.e., optional: false)
+        }
+      }
+    },
+    "fields": {
+      "description": {
+        "type":  "string",
+        "value": "We need to update the links in the login page to use our new branding",
+        "edit": {
+          "enabled": true,
+          "text": {
+            "min_length": 15
+          }
+        }
+      }
+    },
+    "custom_fields": [
+      {
+        "key": "story_points",
+        "label": "Story points",
+        "type": "integer",
+        "edit": {
+          "enabled": true,
+          "number": {
+            "max_value": 10
+          }
+        }
+      }
+    ]
+  }
+}

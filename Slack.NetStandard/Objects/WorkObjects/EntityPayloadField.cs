@@ -10,6 +10,12 @@ namespace Slack.NetStandard.Objects.WorkObjects
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public virtual string Type { get; set; }
 
+        [JsonProperty("key", NullValueHandling = NullValueHandling.Ignore)]
+        public string Key { get; set; }
+
+        [JsonProperty("label", NullValueHandling = NullValueHandling.Ignore)]
+        public string Label { get; set; }
+
         [JsonProperty("edit", NullValueHandling = NullValueHandling.Ignore)]
         public EditOptions Edit { get; set; }
     }

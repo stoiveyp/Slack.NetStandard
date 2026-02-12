@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Diagnostics.Contracts;
 
 namespace Slack.NetStandard.Objects.WorkObjects.Fields;
 
@@ -7,7 +8,10 @@ public class StringField : EntityPayloadField
     public const string TypeName = "string";
 
     public override string Type => TypeName;
+    public StringField() { }
     public StringField(string value) { Value = value; }
+
+    [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
     public string Value { get; set; }
 
     [JsonProperty("icon", NullValueHandling = NullValueHandling.Ignore)]

@@ -1,0 +1,19 @@
+{
+  "trigger_id": "1234567890123.1234567890123.abcdef01234567890abcdef012345689",
+  "error": {
+    "status": "custom_partial_view",
+    "custom_title": "Ruh roh",
+    "custom_message": ":hand: This item is *restricted* per our [company policy](https://example.com). Don't worry though, you can request access using the button below.",
+    "message_format": "markdown",
+    "actions": [
+      {
+        "text": "Request access",
+        "action_id": "request_access",
+        "value": "some_val",
+        "processing_state": {
+          "enabled": true // This can be enabled to disable the button and show a loading state for up to 30 seconds or until your app responds with another call to the `entity.presentDetails` API method.
+        }
+      }
+    ]
+  }
+}

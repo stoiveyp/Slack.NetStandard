@@ -8,7 +8,7 @@ namespace Slack.NetStandard.Objects.WorkObjects
     public class AppUnfurl
     {
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        public long? Id { get; set; }
 
         [JsonProperty("bot_id", NullValueHandling = NullValueHandling.Ignore)] 
         public string BotId { get; set; }

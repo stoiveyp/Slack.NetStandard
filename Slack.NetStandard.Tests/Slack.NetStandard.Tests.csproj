@@ -20,6 +20,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Examples\WorkObjects_Task.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Examples\Cells_Channel.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
@@ -108,6 +111,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Examples\Events_AssistantThreadStarted.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Examples\Events_EntityDetailsRequested.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Examples\Events_FunctionExecuted.json">
@@ -579,6 +585,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Examples\Web_ConversationGetTeams.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Examples\Web_EntityPresentDetails.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Examples\Web_FilesCompleteExternal.json">

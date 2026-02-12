@@ -103,8 +103,37 @@
         "text": "Action A",
         "emoji": true
       },
-      "selected_users": ["U1234","U2345"], 
+      "selected_users": [ "U1234", "U2345" ],
       "action_ts": "1571318425.267782"
     }
-  ]
+  ],
+  "app_unfurl": {
+    "id": 1,
+    "bot_id": "B123ABC456",
+    "bot_team_id": "T123ABC456",
+    "app_unfurl_url": "https://github.com/KrishnaPatel1/github-function-test/issues/139",
+    "is_app_unfurl": true,
+    "fallback": "Create Capybara login page\n Issue in GitHub",
+    "text": "Issue in GitHub",
+    "title": "Create Capybara login page",
+    "title_link": "https://github.com/issues/139",
+    "service_name": "Work Objects Demo App",
+    "fields": [
+      {
+        "value": "open",
+        "title": "Status",
+        "short": true
+      },
+      {
+        "value": "KrishnaPatel1",
+        "title": "Assignee",
+        "short": true
+      },
+      {
+        "value": "FY26 Q2",
+        "title": "Milestone",
+        "short": true
+      }
+    ]
+  }
 }

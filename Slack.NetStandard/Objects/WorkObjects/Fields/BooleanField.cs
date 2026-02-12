@@ -6,8 +6,11 @@ public class BooleanField : EntityPayloadField
 {
     public const string TypeName = "boolean";
     public override string Type => TypeName;
+
+    public BooleanField() { }
     public BooleanField(bool value) { Value = value; }
-    public bool Value { get; set; }
+    [JsonProperty("value", NullValueHandling = NullValueHandling.Ignore)]
+    public bool? Value { get; set; }
 
     [JsonProperty("boolean", NullValueHandling = NullValueHandling.Ignore)]
     public BooleanOptions Options { get; set; }
