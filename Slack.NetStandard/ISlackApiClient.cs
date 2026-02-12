@@ -56,6 +56,8 @@ namespace Slack.NetStandard
 
         ISlackListsApi SlackLists { get; }
 
+        IEntityApi Entity { get; }
+
         Task<WebApiResponse> Test(object data);
     }
 }

@@ -18,6 +18,9 @@ namespace Slack.NetStandard.Objects.WorkObjects
         [JsonProperty("display_order", NullValueHandling = NullValueHandling.Ignore)]
         public List<string> DisplayOrder = [];
 
+        [JsonProperty("actions", NullValueHandling = NullValueHandling.Ignore)]
+        public EntityPayloadActions Actions { get; set; }
+
         public bool ShouldSerializeDisplayOrder() => DisplayOrder?.Count > 0;
         public bool ShouldSerializeCustomFields() => CustomFields?.Count > 0;
     }
