@@ -11,5 +11,8 @@ namespace Slack.NetStandard.Objects.WorkObjects.Fields
 
         [JsonProperty("value")]
         public long Value { get; set; }
+
+        [JsonProperty("link", NullValueHandling = NullValueHandling.Ignore)]
+        public string Link { get; set; }
     }
 }

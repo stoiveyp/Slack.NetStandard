@@ -11,4 +11,7 @@ public class DateField : EntityPayloadField
 
     [JsonProperty("value")]
     public string Value { get; set; }
+
+    [JsonProperty("link", NullValueHandling = NullValueHandling.Ignore)]
+    public string Link { get; set; }
 }

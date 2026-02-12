@@ -17,4 +17,7 @@ public class ImageField : EntityPayloadField
 
     [JsonProperty("slack_file", NullValueHandling = NullValueHandling.Ignore)]
     public SlackFile SlackFile { get; set; }
+
+    [JsonProperty("alt_text", NullValueHandling = NullValueHandling.Ignore)]
+    public string AltText { get; set; }
 }

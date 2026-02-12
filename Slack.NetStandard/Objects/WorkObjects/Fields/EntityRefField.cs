@@ -21,6 +21,6 @@ public class EntityRefField: EntityPayloadField
     [JsonProperty("display_type", NullValueHandling = NullValueHandling.Ignore)]
     public string DisplayType { get; set; }
 
-    [JsonProperty("Icon", NullValueHandling = NullValueHandling.Ignore)]
+    [JsonProperty("icon", NullValueHandling = NullValueHandling.Ignore)]
     public EntityPayloadIcon Icon { get; set; }
 }
