@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.Objects.WorkObjects;
 
 namespace Slack.NetStandard.WebApi.Chat
 {

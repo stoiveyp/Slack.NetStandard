@@ -55,6 +55,7 @@ namespace Slack.NetStandard.JsonConverters
                 DndUpdatedUser.EventType => new DndUpdatedUser(),
                 EmailDomainChanged.EventType => new EmailDomainChanged(),
                 EmojiChanged.EventType => new EmojiChanged(),
+                EntityDetailsRequested.EventType => new EntityDetailsRequested(),
                 FileChange.EventType => new FileChange(),
                 FileCreated.EventType => new FileCreated(),
                 FileDeleted.EventType => new FileDeleted(),

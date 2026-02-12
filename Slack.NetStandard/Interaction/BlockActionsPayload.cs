@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Objects;
+using Slack.NetStandard.Objects.WorkObjects;
 
 namespace Slack.NetStandard.Interaction
 {
@@ -26,5 +27,8 @@ namespace Slack.NetStandard.Interaction
 
         [JsonProperty("state", NullValueHandling = NullValueHandling.Ignore)]
         public ViewState State { get; set; }
+
+        [JsonProperty("app_unfurl", NullValueHandling = NullValueHandling.Ignore)]
+        public AppUnfurl AppUnfurl { get; set; }
     }
 }

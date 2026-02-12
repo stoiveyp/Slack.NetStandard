@@ -96,6 +96,9 @@ namespace Slack.NetStandard
         private ISlackListsApi _slackLists;
         public ISlackListsApi SlackLists => _slackLists ??= new SlackListsApi(this);
 
+        private IEntityApi _entity;
+        public IEntityApi Entity => _entity ??= new EntityApi(this);
+
         public static Uri ApiBaseAddress { get; } = new("https://slack.com/api/", UriKind.Absolute);
         public static HttpClient DefaultClient { get; } = new();
         public HttpClient Client { get; set; }

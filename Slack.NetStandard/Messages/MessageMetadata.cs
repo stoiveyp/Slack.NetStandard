@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Slack.NetStandard.Objects.WorkObjects;
 using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+using System.Linq;
 
 namespace Slack.NetStandard.Messages
 {
@@ -12,5 +12,10 @@ namespace Slack.NetStandard.Messages
 
         [JsonProperty("event_payload",NullValueHandling = NullValueHandling.Ignore)]
         public object EventPayload { get; set; }
+
+        [JsonProperty("entities")]
+        public List<MetadataEntity> Entities { get; set; } = [];
+
+        public bool ShouldSerializeEntities() => Entities?.Any() ?? false;
     }
 }
