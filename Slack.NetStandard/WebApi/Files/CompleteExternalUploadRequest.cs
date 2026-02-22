@@ -16,6 +16,9 @@ public class CompleteExternalUploadRequest
 
     [JsonProperty("thread_ts",NullValueHandling = NullValueHandling.Ignore)]
     public Timestamp ThreadTimestamp { get; set; }
+    
+    [JsonProperty("channels", NullValueHandling = NullValueHandling.Ignore)]
+    public string Channels { get; set; }
 
     public bool ShouldSerializeFiles() => Files?.Any() ?? false;
 }
