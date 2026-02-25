@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Linq;
+using Slack.NetStandard.Messages.Blocks;
 
 namespace Slack.NetStandard.WebApi.Files;
 
@@ -20,5 +21,9 @@ public class CompleteExternalUploadRequest
     [JsonProperty("channels", NullValueHandling = NullValueHandling.Ignore)]
     public string Channels { get; set; }
 
+    [JsonProperty("blocks", NullValueHandling = NullValueHandling.Ignore)]
+    public List<IMessageBlock> Blocks { get; set; } = new();
+
     public bool ShouldSerializeFiles() => Files?.Any() ?? false;
+    public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
 }

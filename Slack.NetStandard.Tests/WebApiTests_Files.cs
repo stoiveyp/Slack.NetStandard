@@ -174,13 +174,11 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task FilesRemote_CompleteExternal()
         {
-            var response = await Utility.AssertWebApi(c => c.Files.CompleteExternalUpload(new CompleteExternalUploadRequest
-            {
-
-            }), "files.completeUploadExternal",
+            var request = Utility.ExampleFileContent<CompleteExternalUploadRequest>("Web_FilesCompleteExternalRequest.json");
+            var response = await Utility.AssertWebApi(c => c.Files.CompleteExternalUpload(request), "files.completeUploadExternal",
                 "Web_FilesCompleteExternal.json", jo =>
                 {
-
+                    Assert.True(Utility.CompareJson(jo, "Web_FilesCompleteExternalRequest.json"));
                 });
             Assert.Single(response.Files);
         }

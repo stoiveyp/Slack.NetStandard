@@ -1,0 +1,19 @@
+{
+  "channels": "ABC123,CDE456",
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "plain_text",
+        "text": "Hello world"
+      }
+    }
+  ],
+  "files": [
+    {
+      "id": "F044GKUHN9Z",
+      "title": "slack-test"
+    }
+  ],
+  "thread_ts": "1524523204.000192"
+}
