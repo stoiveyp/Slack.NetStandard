@@ -141,9 +141,9 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void RichTextElements()
         {
-            var element = new TextElement{Text = "type check"};
+            var element = new TextElement { Text = "type check" };
             var json = JObject.FromObject(element);
-            Assert.Equal("text",json.Value<string>("type"));
+            Assert.Equal("text", json.Value<string>("type"));
         }
 
         [Fact]
@@ -167,8 +167,9 @@ namespace Slack.NetStandard.Tests
                     new JProperty("trigger_actions_on", new JArray("on_enter_pressed"))
                     )
                 )
-			);
-            var actual = new PlainTextInput() {
+            );
+            var actual = new PlainTextInput()
+            {
                 DispatchActionConfig = new DispatchActionConfig(new ActionTrigger[] { ActionTrigger.OnEnterPressed })
             };
 
@@ -179,24 +180,27 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
-        public void SlackFiles(){
+        public void SlackFiles()
+        {
             var sfUrl = "https://files.slack.com/files-pri/T0123456-F0123456/xyz.png";
             var sfId = "F0123456";
 
-            var file1 = new JObject(new JProperty("url",sfUrl));
-            var file2 = new JObject(new JProperty("id",sfId));
+            var file1 = new JObject(new JProperty("url", sfUrl));
+            var file2 = new JObject(new JProperty("id", sfId));
 
-            Assert.True(JToken.DeepEquals(JObject.FromObject(new SlackFile{Url=sfUrl}),file1));
-            Assert.True(JToken.DeepEquals(JObject.FromObject(new SlackFile{Id=sfId}),file2));
+            Assert.True(JToken.DeepEquals(JObject.FromObject(new SlackFile { Url = sfUrl }), file1));
+            Assert.True(JToken.DeepEquals(JObject.FromObject(new SlackFile { Id = sfId }), file2));
         }
-        
+
         [Fact]
-        public void IconButton(){
+        public void IconButton()
+        {
             Utility.AssertSubType<IContextActionsElement, IconButton>("Blocks_IconButton.json");
         }
-        
+
         [Fact]
-        public void FeedbackButtons(){
+        public void FeedbackButtons()
+        {
             Utility.AssertSubType<IContextActionsElement, FeedbackButtons>("Blocks_FeedbackButtons.json");
         }
 
@@ -204,6 +208,18 @@ namespace Slack.NetStandard.Tests
         public void Table()
         {
             Utility.AssertSubType<IMessageBlock, Table>("Blocks_Table.json");
+        }
+
+        [Fact]
+        public void TaskCard()
+        {
+            Utility.AssertSubType<IMessageBlock, TaskCard>("Blocks_TaskCard.json");
+        }
+
+        [Fact]
+        public void Plan()
+        {
+            Utility.AssertSubType<IMessageBlock, Plan>("Blocks_Plan.json","type");
         }
     }
 }

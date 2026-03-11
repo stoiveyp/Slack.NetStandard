@@ -20,11 +20,22 @@ namespace Slack.NetStandard.JsonConverters
         {
             var jObject = JObject.Load(reader);
             var componentType = jObject.Value<string>("type");
+            IMessageBlock target;
             if (string.IsNullOrWhiteSpace(componentType))
             {
-                return null;
+                if(objectType != typeof(IMessageBlock)){
+                    target = (IMessageBlock)Activator.CreateInstance(objectType);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            var target = GetComponent(componentType);
+            else
+            {
+                target = GetComponent(componentType);
+            }
+            
             if (target == null)
             {
                 throw new ArgumentOutOfRangeException($"MessageBlock type {componentType} not supported");
@@ -48,7 +59,9 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Video).ToLower(), typeof(Video) },
             {nameof(Call).ToLower(), typeof(Call) },
             {nameof(Markdown).ToLower(), typeof(Markdown) },
-            {nameof(Table).ToLower(), typeof(Table) }
+            {nameof(Table).ToLower(), typeof(Table) },
+            {TaskCard.MessageBlockType, typeof(TaskCard)  },
+            {nameof(Plan).ToLower(), typeof(Plan)}
         };
 
         private IMessageBlock GetComponent(string type)
