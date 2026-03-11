@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>10.2.0</Version>
+    <Version>11.0.0</Version>
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-		Add Entity API
-		Add Work Objects support
-		Adding missing fields for files.completeUploadExternal (thanks @mapitman!)
+		Add TaskCard and Plan Message Blocks
+		Add New Rich Text elements (language synax, tables, task lists, dividers, headers)
+		Correct several Rich Text elements incorrectly labelled as IMessageElement
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
