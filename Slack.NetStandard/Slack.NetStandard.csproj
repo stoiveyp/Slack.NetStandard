@@ -7,8 +7,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
 		Add TaskCard and Plan Message Blocks
-		Add New Rich Text elements (language synax, tables, task lists, dividers, headers)
-		Correct several Rich Text elements incorrectly labelled as IMessageElement
+		Correct RichText element types incorrectly implementing as IMessageElement
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
