@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
-using Slack.NetStandard.Messages.Elements.RichText;
 using System.Linq;
 
-namespace Slack.NetStandard.Messages.Elements
+namespace Slack.NetStandard.Messages.Elements.RichText
 {
-    public class RichTextList : IMessageElement
+    public class ListElement : RichTextElement
     {
-        public const string ElementType = "rich_text_list";
-        public string Type => ElementType;
+        public const string ElementName = "rich_text_list";
+        public override string Type => ElementName;
 
         [JsonProperty("elements", NullValueHandling = NullValueHandling.Ignore)]
         public IList<RichTextElement> Elements { get; set; } = new List<RichTextElement>();
@@ -20,6 +19,12 @@ namespace Slack.NetStandard.Messages.Elements
 
         [JsonProperty("indent", NullValueHandling = NullValueHandling.Ignore)]
         public int? Indent { get; set; }
+
+        [JsonProperty("offset", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Offset { get; set; }
+
+        [JsonProperty("border", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Border { get; set; }
 
         public bool ShouldSerializeElements() => Elements.Any();
     }

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Slack.NetStandard.Messages.Elements;
 using System.Linq;
+using Slack.NetStandard.Messages.Elements.RichText;
 
 namespace Slack.NetStandard.Messages.Blocks
 {
@@ -9,7 +10,7 @@ namespace Slack.NetStandard.Messages.Blocks
     {
         public RichText(){}
 
-        public RichText(params IMessageElement[] elements)
+        public RichText(params RichTextElement[] elements)
         {
             Elements = elements;
         }
@@ -20,7 +21,7 @@ namespace Slack.NetStandard.Messages.Blocks
         public string BlockId { get; set; }
 
         [JsonProperty("elements", NullValueHandling = NullValueHandling.Ignore)]
-        public IList<IMessageElement> Elements { get; set; } = new List<IMessageElement>();
+        public IList<RichTextElement> Elements { get; set; } = new List<RichTextElement>();
 
         public const string MessageBlockType = "rich_text";
 
