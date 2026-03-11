@@ -103,7 +103,13 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void RichTextInput()
         {
-            Utility.AssertSubType<IMessageElement, RichTextInput>("Blocks_RichTextInput.json");
+            var element = Utility.AssertSubType<IMessageElement, RichTextInput>("Blocks_RichTextInput.json");
+        }
+
+        [Fact]
+        public void RichTextPreformatted()
+        {
+            Utility.AssertSubType<RichTextElement, PreformattedElement>("Blocks_RichTextPreformatted.json");
         }
 
         [Fact]
@@ -219,7 +225,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void Plan()
         {
-            Utility.AssertSubType<IMessageBlock, Plan>("Blocks_Plan.json","type");
+            Utility.AssertSubType<IMessageBlock, Plan>("Blocks_Plan.json", "type");
         }
     }
 }

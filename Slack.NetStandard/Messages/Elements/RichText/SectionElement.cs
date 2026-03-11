@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
-using Slack.NetStandard.Messages.Elements.RichText;
 using System.Linq;
 
-namespace Slack.NetStandard.Messages.Elements
+namespace Slack.NetStandard.Messages.Elements.RichText
 {
-    public class RichTextSection:IMessageElement
+    public class SectionElement:RichTextElement
     {
-        public const string ElementType = "rich_text_section";
-        public string Type => ElementType;
+        public const string ElementName = "rich_text_section";
+        public override string Type => ElementName;
 
         [JsonProperty("elements",NullValueHandling = NullValueHandling.Ignore)]
         public IList<RichTextElement> Elements { get; set; } = new List<RichTextElement>();

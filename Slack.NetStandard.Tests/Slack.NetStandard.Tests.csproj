@@ -23,6 +23,9 @@
 		<None Update="Examples\Blocks_Plan.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Update="Examples\Blocks_RichTextPreformatted.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Examples\Blocks_TaskCard.json">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
