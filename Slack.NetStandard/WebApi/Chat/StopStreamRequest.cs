@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Slack.NetStandard.Messages;
 using Slack.NetStandard.Messages.Blocks;
 using System.Linq;
+using Slack.NetStandard.Messages.StreamChunks;
 
 namespace Slack.NetStandard.WebApi.Chat;
 
@@ -24,6 +25,9 @@ public class StopStreamRequest
     [JsonProperty("markdown_text", NullValueHandling = NullValueHandling.Ignore)]
     public string MarkdownText { get; set; }
     
+    [JsonProperty("chunks", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public IList<IStreamChunk> Chunks { get; set; } = null;
+    
     /// <summary>
     /// A list of blocks that will be rendered at the bottom of the finalized message.
     /// </summary>
@@ -37,4 +41,5 @@ public class StopStreamRequest
     public MessageMetadata Metadata { get; set; }
 
     public bool ShouldSerializeBlocks() => Blocks?.Any() ?? false;
+    public bool ShouldSerializeChunks() => Chunks?.Any() ?? false;
 }

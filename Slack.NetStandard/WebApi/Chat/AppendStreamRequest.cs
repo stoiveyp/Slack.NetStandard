@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Linq;
+using Slack.NetStandard.Messages.StreamChunks;
 
 namespace Slack.NetStandard.WebApi.Chat;
 
@@ -19,4 +22,9 @@ public class AppendStreamRequest
     /// </summary>
     [JsonProperty("markdown_text")]
     public string MarkdownText { get; set; }
+
+    [JsonProperty("chunks", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public IList<IStreamChunk> Chunks { get; set; } = null;
+
+    public bool ShouldSerializeChunks() => Chunks?.Any() ?? false;
 }

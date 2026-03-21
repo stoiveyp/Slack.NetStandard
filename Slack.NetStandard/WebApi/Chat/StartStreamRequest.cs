@@ -1,4 +1,9 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Linq;
+using Newtonsoft.Json.Converters;
+using Slack.NetStandard.Emums;
+using Slack.NetStandard.Messages.StreamChunks;
 
 namespace Slack.NetStandard.WebApi.Chat;
 
@@ -20,6 +25,9 @@ public class StartStreamRequest
     [JsonProperty("markdown_text", NullValueHandling = NullValueHandling.Ignore)]
     public string MarkdownText { get; set; }
     
+    [JsonProperty("chunks", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public IList<IStreamChunk> Chunks { get; set; } = null;
+    
     /// <summary>
     /// The encoded ID of the user to receive the streaming text. Required when streaming to channels.
     /// </summary>
@@ -31,4 +39,12 @@ public class StartStreamRequest
     /// </summary>
     [JsonProperty("recipient_team_id", NullValueHandling = NullValueHandling.Ignore)]
     public string RecipientTeamId { get; set; }
+    
+    /// <summary>
+    /// Specifies how tasks are displayed in the message. A timeline displays individual tasks with text in sequential order, and plan displays all tasks together, with the first tasks's placement determining the placement of the rest of the tasks.
+    /// </summary>
+    [JsonProperty("task_display_mode", NullValueHandling = NullValueHandling.Ignore),JsonConverter(typeof(StringEnumConverter))]
+    public TaskDisplayModeType TaskDisplayMode { get; set; }
+    
+    public bool ShouldSerializeChunks() => Chunks?.Any() ?? false;
 }

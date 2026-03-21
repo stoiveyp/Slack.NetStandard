@@ -8,13 +8,13 @@ namespace Slack.NetStandard.WebApi.SlackLists
         [JsonProperty("list_id")]
         public string ListId { get; set; }
 
-        [JsonProperty("parent_item_id")]
+        [JsonProperty("parent_item_id", NullValueHandling = NullValueHandling.Ignore)]
         public string ParentItemId { get; set; }
 
-        [JsonProperty("duplicated_item_id")]
+        [JsonProperty("duplicated_item_id", NullValueHandling = NullValueHandling.Ignore)]
         public string DuplicatedItemId { get; set; }
 
-        [JsonProperty("initial_fields")]
+        [JsonProperty("initial_fields", NullValueHandling = NullValueHandling.Ignore)]
         public List<ISlackCellCreateDefinition> InitialFields { get; set; } = new List<ISlackCellCreateDefinition>();
 
         public bool ShouldSerializeInitialFields() => true;

@@ -13,7 +13,6 @@ namespace Slack.NetStandard.WebApi.SlackLists.CellDefinition
         }
 
         [JsonProperty("checkbox")]
-        [JsonConverter(typeof(CheckboxCellConverter))]
         public bool Checkbox { get; set; }
     }
 }

@@ -69,7 +69,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void CellDefinition_Message()
         {
-            Utility.AssertSubType<SlackListsCellDefinition, MessageCellDefinition>("Cells_Message.json");
+            Utility.AssertSubType<SlackListsCellDefinition, MessageCellDefinition>("CellsDef_Message.json");
         }
 
         [Fact]
