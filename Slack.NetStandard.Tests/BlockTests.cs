@@ -227,5 +227,23 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<IMessageBlock, Plan>("Blocks_Plan.json", "type");
         }
+
+        [Fact]
+        public void Alert()
+        {
+            Utility.AssertSubType<IMessageBlock, Alert>("Blocks_Alert.json");
+        }
+
+        [Fact]
+        public void Card()
+        {
+            Utility.AssertSubType<IMessageBlock, Card>("Blocks_Card.json");
+        }
+
+        [Fact]
+        public void Carousel()
+        {
+            Utility.AssertSubType<IMessageBlock, Carousel>("Blocks_Carousel.json");
+        }
     }
 }
