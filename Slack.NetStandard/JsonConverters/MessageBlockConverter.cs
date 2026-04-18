@@ -61,7 +61,10 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Markdown).ToLower(), typeof(Markdown) },
             {nameof(Table).ToLower(), typeof(Table) },
             {TaskCard.MessageBlockType, typeof(TaskCard)  },
-            {nameof(Plan).ToLower(), typeof(Plan)}
+            {nameof(Plan).ToLower(), typeof(Plan)},
+            {nameof(Alert).ToLower(), typeof(Alert)},
+            {nameof(Card).ToLower(), typeof(Card)},
+            {nameof(Carousel).ToLower(), typeof(Carousel)}
         };
 
         private IMessageBlock GetComponent(string type)

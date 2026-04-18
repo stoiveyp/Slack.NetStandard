@@ -1,0 +1,9 @@
+{
+  "type": "alert",
+  "text": {
+    "type": "mrkdwn",
+    "text": "The work is mysterious and important.",
+    "verbatim": false
+  },
+  "level": "info"
+}

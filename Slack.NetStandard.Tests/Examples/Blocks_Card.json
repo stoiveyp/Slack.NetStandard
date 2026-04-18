@@ -1,0 +1,39 @@
+{
+  "type": "card",
+  "icon": {
+    "type": "image",
+    "image_url": "https://picsum.photos/36/36",
+    "alt_text": "Icon"
+  },
+  "title": {
+    "type": "mrkdwn",
+    "text": "Lumon Industries",
+    "verbatim": false
+  },
+  "subtitle": {
+    "type": "mrkdwn",
+    "text": "Committed to work-life balance",
+    "verbatim": false
+  },
+  "hero_image": {
+    "type": "image",
+    "image_url": "https://picsum.photos/400/300",
+    "alt_text": "Sample hero image"
+  },
+  "body": {
+    "type": "mrkdwn",
+    "text": "Please enjoy each card equally.",
+    "verbatim": false
+  },
+  "actions": [
+    {
+      "type": "button",
+      "text": {
+        "type": "plain_text",
+        "text": "Action Button",
+        "emoji": false
+      },
+      "action_id": "button_action"
+    }
+  ]
+}
