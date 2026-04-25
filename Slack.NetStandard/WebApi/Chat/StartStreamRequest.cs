@@ -46,5 +46,14 @@ public class StartStreamRequest
     [JsonProperty("task_display_mode", NullValueHandling = NullValueHandling.Ignore),JsonConverter(typeof(StringEnumConverter))]
     public TaskDisplayModeType TaskDisplayMode { get; set; }
     
+    [JsonProperty("icon_emoji", NullValueHandling = NullValueHandling.Ignore)]
+    public string IconEmoji { get; set; }
+
+    [JsonProperty("icon_url", NullValueHandling = NullValueHandling.Ignore)]
+    public string IconUrl { get; set; }
+    
+    [JsonProperty("username", NullValueHandling = NullValueHandling.Ignore)]
+    public string Username { get; set; }
+    
     public bool ShouldSerializeChunks() => Chunks?.Any() ?? false;
 }
