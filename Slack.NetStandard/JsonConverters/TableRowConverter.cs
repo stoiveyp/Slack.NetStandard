@@ -14,15 +14,60 @@ namespace Slack.NetStandard.JsonConverters
             while(reader.TokenType != JsonToken.EndArray)
             {
                 var jObject = JObject.Load(reader);
-                if(jObject.Value<string>("type") == "raw_text")
+                var type = jObject.Value<string>("type");
+                switch (type)
                 {
-                    tableRow.Cells.Add(new RawTextCell(jObject.Value<string>("text")));
-                }
-                else if(jObject.Value<string>("type") == "rich_text")
-                {
-                    var richItem = new RichText();
-                    serializer.Populate(jObject.CreateReader(), richItem);
-                    tableRow.Cells.Add(new RichTextCell(richItem));
+                    case "raw_number":
+                    {
+                        var valueToken = jObject["value"];
+                        var text = jObject.Value<string>("text");
+                        if (valueToken != null)
+                        {
+                            switch (valueToken.Type)
+                            {
+                            case JTokenType.Integer:
+                            {
+                                var intVal = valueToken.Value<int>();
+                                if (text != null)
+                                    tableRow.Cells.Add(new RawNumberCell(intVal, text));
+                                else
+                                    tableRow.Cells.Add(new RawNumberCell(intVal));
+                                break;
+                            }
+                            case JTokenType.Float:
+                            {
+                                var decVal = valueToken.Value<decimal>();
+                                if (text != null)
+                                    tableRow.Cells.Add(new RawNumberCell(decVal, text));
+                                else
+                                    tableRow.Cells.Add(new RawNumberCell(decVal));
+                                break;
+                            }
+                            default:
+                            {
+                                // value must be numeric; attempt a decimal conversion for other numeric-like tokens
+                                var decVal = valueToken.Value<decimal>();
+                                if (text != null) tableRow.Cells.Add(new RawNumberCell(decVal, text));
+                                else tableRow.Cells.Add(new RawNumberCell(decVal));
+                                break;
+                            }
+                            }
+                        }
+
+                        break;
+                    }
+                    case "raw_text":
+                    {
+                        tableRow.Cells.Add(new RawTextCell(jObject.Value<string>("text")));
+                        break;
+                    }
+                    case "rich_text":
+                    {
+                        var richItem = new RichText();
+                        serializer.Populate(jObject.CreateReader(), richItem);
+                        tableRow.Cells.Add(new RichTextCell(richItem));
+                        break;
+                    }
                 }
 
                 reader.Read();
