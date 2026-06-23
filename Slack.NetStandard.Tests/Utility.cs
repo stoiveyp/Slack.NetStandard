@@ -19,9 +19,14 @@ namespace Slack.NetStandard.Tests
         private const string ExamplesPath = "Examples";
         public static bool CompareJson(object actual, string expectedFile, params string[] exclude)
         {
-            var actualJObject = JObject.FromObject(actual);
             var expected = File.ReadAllText(Path.Combine(ExamplesPath, expectedFile));
             var expectedJObject = JObject.Parse(expected);
+            return CompareJson(actual, expectedJObject, exclude);
+        }
+        
+        public static bool CompareJson(object actual, JObject expectedJObject, params string[] exclude)
+        {
+            var actualJObject = JObject.FromObject(actual);
 
             foreach (var item in exclude)
             {

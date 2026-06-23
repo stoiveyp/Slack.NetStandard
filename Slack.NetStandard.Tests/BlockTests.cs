@@ -251,5 +251,45 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<IMessageBlock, DataTable>("Blocks_DataTable.json");
         }
+
+        [Fact]
+        public void DataVisualizationPie()
+        {
+            var visual = Utility.AssertSubType<IMessageBlock, DataVisualization>("Blocks_DataVisualization_Pie.json");
+            var pie = Assert.IsType<PieChart>(visual.Chart);
+            
+            var json = JObject.Parse(Utility.ExampleFileContent("Blocks_DataVisualization_Pie.json"));
+            Utility.CompareJson(pie,json.Value<JObject>("chart"));
+        }
+
+        [Fact]
+        public void DataVisualizationBar()
+        {
+            var visual = Utility.AssertSubType<IMessageBlock, DataVisualization>("Blocks_DataVisualization_Bar.json");
+            var bar = Assert.IsType<BarChart>(visual.Chart);
+
+            var json = JObject.Parse(Utility.ExampleFileContent("Blocks_DataVisualization_Bar.json"));
+            Utility.CompareJson(bar, json.Value<JObject>("chart"));
+        }
+
+        [Fact]
+        public void DataVisualizationLine()
+        {
+            var visual = Utility.AssertSubType<IMessageBlock, DataVisualization>("Blocks_DataVisualization_Line.json");
+            var line = Assert.IsType<LineChart>(visual.Chart);
+
+            var json = JObject.Parse(Utility.ExampleFileContent("Blocks_DataVisualization_Line.json"));
+            Utility.CompareJson(line, json.Value<JObject>("chart"));
+        }
+
+        [Fact]
+        public void DataVisualizationArea()
+        {
+            var visual = Utility.AssertSubType<IMessageBlock, DataVisualization>("Blocks_DataVisualization_Area.json");
+            var area = Assert.IsType<AreaChart>(visual.Chart);
+
+            var json = JObject.Parse(Utility.ExampleFileContent("Blocks_DataVisualization_Area.json"));
+            Utility.CompareJson(area, json.Value<JObject>("chart"));
+        }
     }
 }
