@@ -25,6 +25,11 @@
     "text": "Please enjoy each card equally.",
     "verbatim": false
   },
+  "subtext": {
+    "type": "mrkdwn",
+    "text": "This is a card footer.",
+    "verbatim": false
+  },
   "actions": [
     {
       "type": "button",
