@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -66,6 +66,7 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Card).ToLower(), typeof(Card)},
             {nameof(Carousel).ToLower(), typeof(Carousel)},
             {nameof(Container).ToLower(), typeof(Container)},
+            {nameof(Callout).ToLower(), typeof(Callout)},
             {DataTable.MessageBlockType, typeof(DataTable) },
             {DataVisualization.MessageBlockType, typeof(DataVisualization) }
         };
