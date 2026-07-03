@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.Messages.Blocks;
 using Slack.NetStandard.Messages.Elements;
@@ -46,6 +46,11 @@ namespace Slack.NetStandard.Tests
             Utility.AssertSubType<IMessageBlock, Call>("Blocks_Call.json");
         }
 
+        [Fact]
+        public void Container()
+        {
+            Utility.AssertSubType<IMessageBlock, Container>("Blocks_Container.json");
+        }
         [Fact]
         public void RadioButtons()
         {
