@@ -36,6 +36,21 @@
     "is_bot": false,
     "updated": 1502138686,
     "is_app_user": false,
-    "has_2fa": false
+    "has_2fa": false,
+    "is_email_confirmed": true,
+    "locale": "en",
+    "who_can_share_contact_card": "EVERYONE",
+    "enterprise_user": {
+      "id": "U123ABC456",
+      "enterprise_id": "E123ABC456",
+      "enterprise_name": "Sherlock Holmes Detective Agency",
+      "is_admin": false,
+      "is_owner": false,
+      "is_primary_owner": false,
+      "teams": [
+        "T123ABC456",
+        "T789DEF000"
+      ]
+    }
   }
 }

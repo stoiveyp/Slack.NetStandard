@@ -26,15 +26,16 @@ namespace Slack.NetStandard.Tests
             var request = new FileListRequest
             {
                 Cursor = "BBB",
-                ShowFilesHidenByLimit = true,
-                User = "W123"
+                ShowFilesHiddenByLimit = true,
+                User = "W123",
+                TeamId = "T12345"
             };
             await Utility.AssertEncodedWebApi(c => c.Files.List(request), "files.list", "Web_FilesList.json", nvc =>
             {
                 Assert.Equal("BBB", nvc["cursor"]);
                 Assert.Equal("W123", nvc["user"]);
                 Assert.Equal("true", nvc["show_files_hidden_by_limit"]);
-
+                Assert.Equal("T12345", nvc["team_id"]);
             });
         }
 
@@ -136,7 +137,7 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task FilesRemote_Share()
         {
-            await Utility.AssertEncodedWebApi(c => c.Files.Remote.ShareByExternalId("ABCD","C123","C456"), "files.remote.share",
+            await Utility.AssertEncodedWebApi(c => c.Files.Remote.ShareByExternalId("ABCD", "C123", "C456"), "files.remote.share",
                 "Web_FilesInfo.json", nvc =>
                 {
                     Assert.Equal("ABCD", nvc["external_id"]);
@@ -150,19 +151,36 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("C123,C456", nvc["channels"]);
                 });
         }
-    }
 
-    public class WebApiTests_Migration
-    {
         [Fact]
-        public async Task Migration_Exchange()
+        public async Task FilesRemote_GetExternal()
         {
-            await Utility.AssertEncodedWebApi(c => c.Migration.Exchange(new []{"W123", "W456"},true), "migration.exchange",
-                "Web_FilesInfo.json", nvc =>
+            await Utility.CheckApiGet(c => c.Files.GetExternalUploadUrl(new GetExternalUploadUrlRequest("test.jpg", 123)
+            {
+                AltTxt = "alt",
+                SnippetType = "test"
+            }), "files.getUploadURLExternal",
+                 jo =>
+                 {
+                     Assert.Equal("test", jo.Value<string>("snippet_type"));
+                     Assert.Equal("alt", jo.Value<string>("alt_txt"));
+                     Assert.Equal("test.jpg", jo.Value<string>("filename"));
+                     Assert.Equal(123, jo.Value<int>("length"));
+                     Assert.Equal(4, jo.Count);
+                 },
+                Utility.ExampleFileContent<GetExternalUploadUrlResponse>("Web_FilesGetExternal.json"));
+        }
+
+        [Fact]
+        public async Task FilesRemote_CompleteExternal()
+        {
+            var request = Utility.ExampleFileContent<CompleteExternalUploadRequest>("Web_FilesCompleteExternalRequest.json");
+            var response = await Utility.AssertWebApi(c => c.Files.CompleteExternalUpload(request), "files.completeUploadExternal",
+                "Web_FilesCompleteExternal.json", jo =>
                 {
-                    Assert.Equal("W123,W456", nvc["users"]);
-                    Assert.Equal("true", nvc["to_old"]);
+                    Assert.True(Utility.CompareJson(jo, "Web_FilesCompleteExternalRequest.json"));
                 });
+            Assert.Single(response.Files);
         }
     }
 }

@@ -8,5 +8,7 @@ namespace Slack.NetStandard.WebApi
         Task<RevokedResponse> Revoke(bool? test = null);
 
         Task<TestResponse> Test();
+
+        Task<TeamsListResponse> TeamsList(bool? includeIcon = null, string cursor = null, int? limit = null);
     }
 }

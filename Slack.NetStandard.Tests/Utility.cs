@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
+using Slack.NetStandard.WebApi.Admin;
 using Xunit;
 
 namespace Slack.NetStandard.Tests
@@ -19,9 +19,14 @@ namespace Slack.NetStandard.Tests
         private const string ExamplesPath = "Examples";
         public static bool CompareJson(object actual, string expectedFile, params string[] exclude)
         {
-            var actualJObject = JObject.FromObject(actual);
             var expected = File.ReadAllText(Path.Combine(ExamplesPath, expectedFile));
             var expectedJObject = JObject.Parse(expected);
+            return CompareJson(actual, expectedJObject, exclude);
+        }
+        
+        public static bool CompareJson(object actual, JObject expectedJObject, params string[] exclude)
+        {
+            var actualJObject = JObject.FromObject(actual);
 
             foreach (var item in exclude)
             {
@@ -69,7 +74,11 @@ namespace Slack.NetStandard.Tests
                             ((JArray) expectedJObject[prop.Name]).Remove(e);
                             continue;
                         }
-                        OutputTrimEqual(actualJObject[prop.Name] as JObject, expectedJObject[prop.Name] as JObject, false);
+
+                        if (a is JObject joa && e is JObject joe)
+                        {
+                            OutputTrimEqual(joa, joe);
+                        }
                     }
                 }
 
@@ -117,11 +126,12 @@ namespace Slack.NetStandard.Tests
         }
         public static string ExampleFileContent(string expectedFile)
         {
-            return File.ReadAllText(Path.Combine(ExamplesPath, expectedFile));
+            var finalPath = Path.Combine(AppContext.BaseDirectory, ExamplesPath, expectedFile);
+            return File.ReadAllText(finalPath);
         }
 
         public static Task<TResponse> CheckApi<TResponse>(
-            Func<SlackWebApiClient, Task<TResponse>> requestCall,
+            Func<ISlackApiClient, Task<TResponse>> requestCall,
             string url,
             Action<JObject> requestCheck,
             TResponse responseToSend)
@@ -137,6 +147,31 @@ namespace Slack.NetStandard.Tests
                 requestCheck(jobject);
             }, responseToSend));
             var client = new SlackWebApiClient(http,guid);
+            return requestCall(client);
+        }
+
+        public static Task<TResponse> CheckApiGet<TResponse>(
+            Func<ISlackApiClient, Task<TResponse>> requestCall,
+            string url,
+            Action<JObject> queryStringCheck,
+            TResponse responseToSend)
+        {
+            var guid = Guid.NewGuid().ToString("N");
+            var http = new HttpClient(new ActionHandler(request =>
+            {
+                Assert.Equal("Bearer", request.Headers.Authorization.Scheme);
+                Assert.Equal(guid, request.Headers.Authorization.Parameter);
+                Assert.Equal("https://slack.com/api/" + url, request.RequestUri.GetLeftPart(UriPartial.Path));
+                var queryString = request.RequestUri.Query;
+                var queryParameters = HttpUtility.ParseQueryString(queryString);
+                var jObject = new JObject();
+                foreach (var key in queryParameters.AllKeys)
+                {
+                    jObject[key] = queryParameters[key];
+                }
+                queryStringCheck(jObject);
+            }, responseToSend));
+            var client = new SlackWebApiClient(http, guid);
             return requestCall(client);
         }
 
@@ -209,6 +244,26 @@ namespace Slack.NetStandard.Tests
             return response;
         }
 
+        public static async Task<WebApiResponse> AssertSingleEncodedWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, string name, string value)
+        {
+            var response = await CheckApi(func,
+                methodName,
+                new Action<NameValueCollection>(nvc => Assert.Equal(value, nvc[name])), WebApiResponse.Success());
+
+            Assert.True(response.OK);
+            return response;
+        }
+
+        public static async Task<T> AssertSingleEncodedWebApi<T>(Func<ISlackApiClient, Task<T>> func, string methodName, string name, string value, T fakeResponse) where T:WebApiResponseBase
+        {
+            var response = await CheckApi(func,
+                methodName,
+                new Action<NameValueCollection>(nvc => Assert.Equal(value, nvc[name])), fakeResponse);
+
+            Assert.True(response.OK);
+            return response;
+        }
+
         public static async Task<WebApiResponse> AssertEncodedWebApi(Func<ISlackApiClient, Task<WebApiResponse>> func, string methodName, Action<NameValueCollection> requestAssertion)
         {
             var response = await CheckApi(func,
@@ -217,6 +272,27 @@ namespace Slack.NetStandard.Tests
 
             Assert.True(response.OK);
             return response;
+        }
+
+        public static async Task<T> AssertEncodedWebApi<T>(Func<ISlackApiClient, Task<T>> func, string methodName, Action<NameValueCollection> requestAssertion, T fakeResponse) where T:WebApiResponse
+        {
+            var response = await CheckApi(func,
+                methodName,
+                requestAssertion,fakeResponse);
+
+            Assert.True(response.OK);
+            return response;
+        }
+
+        public static void CompareJArray<T>(this JObject jobj, string propertyName, params T[] values)
+        {
+            Assert.All(jobj.Value<JArray>(propertyName).Values<T>().Zip(values), tuple => Assert.Equal(tuple.First, tuple.Second));
+        }
+
+        public static void TestPaging(this JObject jobj, string cursor, int limit)
+        {
+            Assert.Equal(cursor, jobj.Value<string>("cursor"));
+            Assert.Equal(limit, jobj.Value<int>("limit"));
         }
     }
 }

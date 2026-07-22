@@ -1,52 +1,54 @@
 {
   "type": "view_submission",
   "team": {
-    "id": "TXXXXXX",
-    "domain": "coverbands"
+    "id": "T123ABC456",
+    "domain": "slack-domain-12343",
+    "enterprise_id": "E1234",
+    "enterprise_name": "Acme Corp"
   },
   "user": {
-    "id": "UXXXXXX",
-    "name": "dreamweaver"
+    "id": "U1234",
+    "username": "jennifer_hynes",
+    "name": "jennifer_hynes",
+    "team_id": "T123ABC456"
   },
+  "api_app_id": "A123ABC456",
+  "token": "vrv7tNLHMRT8hdqLZjuM10St",
+  "trigger_id": "1234567890123.1234567890123.abcdef01234567890abcdef012345689",
   "view": {
-    "id": "VNHU13V36",
-    "type": "modal",
-    "title": "Hello world",
-    "submit": {
-      "type": "plain_text",
-      "text": "Title"
-    },
-    "private_metadata": "shhh-its-secret",
-    "callback_id": "modal-with-inputs",
+    "id": "V08UHA2RFFF",
+    "team_id": "E123ABC456",
+    "type": "entity_detail",
+    "private_metadata": "",
+    "callback_id": "",
     "state": {
       "values": {
-        "question1": {
-          "1ea72d25-5d37-405b-85b6-27eae722ac2c": {
-            "type": "static_select",
-            "selected_option": {
-              "text": {
-                "type": "plain_text",
-                "text": "Anne+aBC",
-                "emoji": true
-              },
-              "value": "U017E89XY33"
-            }
-          }
-        },
-        "multi-line": {
-          "ml-value": {
+        "description": {
+          "description.input": {
             "type": "plain_text_input",
-            "value": "This is my example inputted value"
-          }
-        },
-        "user-select": {
-          "select-user": {
-            "type": "users_select",
-            "selected_user": "U12345678"
+            "value": "We need to implement a login page using **Capybara** for our testing framework. This page will be used for testing user authentication and login functionality within the application. hello\\n\\n### Requirements:\\n- Create a simple login page with fields for:\\n  - **Username**\\n  - **Password**\\n  - **Login button**\\n- Implement basic form validation to ensure both fields are populated before submitting.\\n- Ensure the page is responsive and works well on both desktop and mobile views.\\n- Use **Capybara** to automate the interaction with the login form for testing purposes.\\n  - Automate filling out the username and password fields.\\n  - Simulate clicking the login button and validating the redirect or success message.\\n\\n![Image](https://github.com/user-attachments/assets/f94f0a80-993d-46c5-be4c-1d3f3cd8312d)"
           }
         }
       }
     },
-    "hash": "156663117.cd33ad1f"
+    "hash": "1748539925.7JuMmoCH",
+    "external_ref": {
+      "id": "139"
+    },
+    "entity_url": "https://github.com/repos/{user}/{repo}/issues/139",
+    "message_ts": "1758902242.754879",
+    "thread_ts": "1758901978.959789",
+    "channel": "C123ABC456",
+    "app_unfurl_url": "https://github.com/repos/{user}/{repo}/issues/139?myquery=param",
+    "app_id": "A123ABC456",
+    "external_id": "",
+    "app_installed_team_id": "E123ABC456",
+    "bot_id": "B0123456"
+  },
+  "response_urls": [],
+  "is_enterprise_install": false,
+  "enterprise": {
+    "id": "E1234",
+    "name": "Acme Corp"
   }
 }

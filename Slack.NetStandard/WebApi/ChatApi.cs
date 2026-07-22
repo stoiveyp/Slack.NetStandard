@@ -64,5 +64,19 @@ namespace Slack.NetStandard.WebApi
         {
             return _client.MakeJsonCall<UpdateMessageRequest, UpdateMessageResponse>("chat.update", request);
         }
+        
+        public Task<AppendStreamResponse> AppendStream(AppendStreamRequest request)
+        {
+            return _client.MakeJsonCall<AppendStreamRequest, AppendStreamResponse>("chat.appendStream", request);
+        }
+        public Task<StartStreamResponse> StartStream(StartStreamRequest request)
+        {
+            return _client.MakeJsonCall<StartStreamRequest, StartStreamResponse>("chat.startStream", request);
+        }
+        public Task<StopStreamResponse> StopStream(StopStreamRequest request)
+        {
+            return _client.MakeJsonCall<StopStreamRequest, StopStreamResponse>("chat.stopStream", request);
+        }
+        
     }
 }

@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "allow_message_deletion": true,
+  "display_real_names": false,
+  "disable_file_uploads": "disable_all",
+  "msg_edit_window_mins": 25,
+  "who_can_post_general": "everyone"
+}

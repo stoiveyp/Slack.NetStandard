@@ -1,0 +1,18 @@
+{
+  "type": "feedback_buttons",
+  "action_id": "feedback",
+  "positive_button": {
+    "text": {
+      "type": "plain_text",
+      "text": "Good Response"
+    },
+    "value": "positive"
+  },
+  "negative_button": {
+    "text": {
+      "type": "plain_text",
+      "text": "Bad Response"
+    },
+    "value": "negative"
+  }
+}

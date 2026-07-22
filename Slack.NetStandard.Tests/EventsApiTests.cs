@@ -168,7 +168,8 @@ namespace Slack.NetStandard.Tests
         public void EmojiChanged()
         {
             Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedAdd.json");
-            Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedRemove.json");
+            var removed = Utility.AssertSubType<CallbackEvent, EmojiChanged>("Events_EmojiChangedRemove.json");
+            Assert.Null(removed.OtherFields);
         }
 
 
@@ -321,14 +322,16 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public void Message()
         {
-            Utility.AssertSubType<ICallbackEvent, MessageCallbackEvent>("Events_Message.json","channel");
-            Utility.AssertSubType<ICallbackEvent, BotMessage>("Events_Message_Bot.json", "channel");
-            Utility.AssertSubType<ICallbackEvent, EkmAccessDenied>("Events_Message_EkmAccessDenied.json", "channel");
-            Utility.AssertSubType<ICallbackEvent, MeMessage>("Events_Message_Me.json", "channel");
-            Utility.AssertSubType<ICallbackEvent, MessageChanged>("Events_Message_MessageChanged.json", "channel");
-            Utility.AssertSubType<ICallbackEvent, MessageDeleted>("Events_Message_MessageDeleted.json", "channel");
-            Utility.AssertSubType<ICallbackEvent, MessageReplied>("Events_Message_MessageReplied.json", "channel");
-            Utility.AssertSubType<ICallbackEvent, ThreadBroadcast>("Events_Message_ThreadBroadcast.json", "channel");
+            var msg = Utility.AssertSubType<ICallbackEvent, MessageCallbackEvent>("Events_Message.json");
+            Assert.Null(msg.OtherFields);
+
+            Utility.AssertSubType<ICallbackEvent, BotMessage>("Events_Message_Bot.json");
+            Utility.AssertSubType<ICallbackEvent, EkmAccessDenied>("Events_Message_EkmAccessDenied.json");
+            Utility.AssertSubType<ICallbackEvent, MeMessage>("Events_Message_Me.json");
+            Utility.AssertSubType<ICallbackEvent, MessageChanged>("Events_Message_MessageChanged.json");
+            Utility.AssertSubType<ICallbackEvent, MessageDeleted>("Events_Message_MessageDeleted.json");
+            Utility.AssertSubType<ICallbackEvent, MessageReplied>("Events_Message_MessageReplied.json");
+            Utility.AssertSubType<ICallbackEvent, ThreadBroadcast>("Events_Message_ThreadBroadcast.json");
         }
 
         [Fact]
@@ -400,6 +403,18 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<CallbackEvent, SubteamUpdated>("Events_SubteamUpdated.json");
         }
+        
+        [Fact]
+        public void TeamAccessGranted()
+        {
+            Utility.AssertSubType<CallbackEvent, TeamAccessGranted>("Events_TeamAccessGranted.json");
+        }
+        
+        [Fact]
+        public void TeamAccessRevoked()
+        {
+            Utility.AssertSubType<CallbackEvent, TeamAccessRevoked>("Events_TeamAccessRevoked.json");
+        }
 
         [Fact]
         public void TeamDomainChange()
@@ -429,36 +444,6 @@ namespace Slack.NetStandard.Tests
         public void UserChange()
         {
             Utility.AssertSubType<CallbackEvent, UserChange>("Events_UserChange.json");
-        }
-
-        [Fact]
-        public void WorkflowStepExecute()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowStepExecute>("Events_Workflow.json");
-        }
-
-        [Fact]
-        public void WorkflowPublished()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowPublished>("Events_WorkflowPublished.json");
-        }
-
-        [Fact]
-        public void WorkflowUnpublished()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowUnpublished>("Events_WorkflowUnpublished.json");
-        }
-
-        [Fact]
-        public void WorkflowDeleted()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowDeleted>("Events_WorkflowDeleted.json");
-        }
-
-        [Fact]
-        public void WorkflowStepDeleted()
-        {
-            Utility.AssertSubType<CallbackEvent, WorkflowStepDeleted>("Events_WorkflowStepDeleted.json");
         }
 
         [Fact]
@@ -534,6 +519,34 @@ namespace Slack.NetStandard.Tests
         public void MessageMetadataUpdated()
         {
             var result = Utility.AssertSubType<CallbackEvent, MessageMetadataUpdated>("Events_MessageMetadataUpdated.json");
+            Assert.Null(result.OtherFields);
+        }
+
+        [Fact]
+        public void FunctionExecuted()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, FunctionExecuted>("Events_FunctionExecuted.json");
+            Assert.Null(result.OtherFields);
+        }
+
+        [Fact]
+        public void AssistantThreadStarted()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, AssistantThreadStarted>("Events_AssistantThreadStarted.json");
+            Assert.Null(result.OtherFields);
+        }
+
+        [Fact]
+        public void AssistantThreadContextChanged()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, AssistantThreadContextChanged>("Events_AssistantThreadContextChanged.json");
+            Assert.Null(result.OtherFields);
+        }
+
+        [Fact]
+        public void EntityDetailsRequested()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, EntityDetailsRequested>("Events_EntityDetailsRequested.json");
             Assert.Null(result.OtherFields);
         }
     }

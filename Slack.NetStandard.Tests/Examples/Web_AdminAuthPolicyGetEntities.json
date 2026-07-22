@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "entities": [
+    {
+      "entity_type": "USER",
+      "entity_id": "U1234",
+      "date_added": 1620836993
+    }
+  ],
+  "entity_total_count": 1
+}

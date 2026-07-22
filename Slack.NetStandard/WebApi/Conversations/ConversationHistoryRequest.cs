@@ -24,5 +24,8 @@ namespace Slack.NetStandard.WebApi.Conversations
 
         [JsonProperty("limit",NullValueHandling = NullValueHandling.Ignore)]
         public int? Limit { get; set; }
+
+        [JsonProperty("include_all_metadata", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? IncludeAllMetadata { get; set; }
     }
 }

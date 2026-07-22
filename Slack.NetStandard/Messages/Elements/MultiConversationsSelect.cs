@@ -26,6 +26,9 @@ namespace Slack.NetStandard.Messages.Elements
         [JsonProperty("initial_conversations", NullValueHandling = NullValueHandling.Ignore)]
         public IList<string> InitialConversation { get; set; } = new List<string>();
 
+        [JsonProperty("default_to_current_conversation", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? DefaultToCurrentConversation { get; set; }
+
         [JsonProperty("confirm", NullValueHandling = NullValueHandling.Ignore)]
         public Confirmation Confirm { get; set; }
 

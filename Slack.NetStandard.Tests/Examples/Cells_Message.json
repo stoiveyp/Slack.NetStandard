@@ -1,0 +1,14 @@
+{
+  "key": "test_key",
+  "value": "[\"F123456789\"]",
+  "text": "Test Text",
+  "message": [
+    {
+      "value": "https://test.message.url",
+      "channel_id": "C12345",
+      "ts": "1517414896.001003",
+      "thread_ts": "1517414896.001003"
+    }
+  ],
+  "column_id": "Col018B8C91TM"
+}

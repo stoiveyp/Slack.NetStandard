@@ -1,0 +1,38 @@
+{
+  "ok": true,
+  "role_assignments": [
+    {
+      "role_id": "Rl0C",
+      "entity_id": "T123ABC456",
+      "user_id": "U123ABC456",
+      "date_create": 1677038902
+    },
+    {
+      "role_id": "Rl0C",
+      "entity_id": "T123ABC456",
+      "user_id": "U123ABC456",
+      "date_create": 1677038902
+    },
+    {
+      "role_id": "Rl0A",
+      "entity_id": "C123ABC456",
+      "user_id": "U123ABC456",
+      "date_create": 1666624374
+    },
+    {
+      "role_id": "Rl03",
+      "entity_id": "E123ABC456",
+      "user_id": "U123ABC456",
+      "date_create": 1663617026
+    },
+    {
+      "role_id": "Rl01",
+      "entity_id": "E123ABC456",
+      "user_id": "U123ABC456",
+      "date_create": 1643231331
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": "dXNlcl9pZDozMDA1NjIwNTc0MjYyO2VudGl0eV90eXBlOjE7ZW50aXR5X2lkOjMwMDUxODcyMTczNjY7ZGF0ZV9jcmVhdGU6MTY0MzIzMTMzMQ=="
+  }
+}

@@ -36,6 +36,8 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(DatePicker).ToLower(),typeof(DatePicker)},
             {nameof(Checkboxes).ToLower(), typeof(Checkboxes)},
             {nameof(TimePicker).ToLower(), typeof(TimePicker) },
+            {IconButton.ElementType, typeof(IconButton) },
+            {FeedbackButtons.ElementType, typeof(FeedbackButtons) },
             {RadioButtons.ElementType, typeof(RadioButtons)},
             {StaticSelect.ElementType,typeof(StaticSelect) },
             {ExternalSelect.ElementType,typeof(ExternalSelect) },
@@ -43,10 +45,6 @@ namespace Slack.NetStandard.JsonConverters
             {ConversationsSelect.ElementType,typeof(ConversationsSelect) },
             {ChannelsSelect.ElementType,typeof(ChannelsSelect) },
             {PlainTextInput.ElementType,typeof(PlainTextInput) },
-            {RichTextSection.ElementType,typeof(RichTextSection) },
-            {RichTextPreformatted.ElementType,typeof(RichTextPreformatted) },
-            {RichTextList.ElementType,typeof(RichTextList) },
-            {RichTextQuote.ElementType,typeof(RichTextQuote) },
             {MultiStaticSelect.ElementType,typeof(MultiStaticSelect) },
             {MultiExternalSelect.ElementType,typeof(MultiExternalSelect) },
             {MultiUsersSelect.ElementType,typeof(MultiUsersSelect) },
@@ -55,7 +53,9 @@ namespace Slack.NetStandard.JsonConverters
             {Url.ElementType,typeof(Url) },
             {Email.ElementType,typeof(Email) },
             {DateTimePicker.ElementType,typeof(DateTimePicker) },
-            {Number.ElementType, typeof(Number)}
+            {Number.ElementType, typeof(Number)},
+            {RichTextInput.ElementType, typeof(RichTextInput)},
+            {Files.ElementType, typeof(Files)}
         };
 
         private IMessageElement GetComponent(string type)

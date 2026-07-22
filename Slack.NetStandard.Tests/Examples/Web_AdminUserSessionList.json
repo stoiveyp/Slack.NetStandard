@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "active_sessions": [
+    {
+      "user_id": "U012S9M77JP",
+      "team_id": "E011E2SBBFC",
+      "session_id": 1112275520242,
+      "recent": {
+        "device_hardware": "Intel",
+        "os": "OS X",
+        "os_version": "10.15.7",
+        "slack_client_version": "91.0.4472.77",
+        "ip": "24.6.145.138"
+      },
+      "created": {
+        "device_hardware": "Intel",
+        "os": "OS X",
+        "os_version": "10.15.7",
+        "slack_client_version": "91.0.4472.77",
+        "ip": "24.6.145.138"
+      }
+    }
+  ]
+}

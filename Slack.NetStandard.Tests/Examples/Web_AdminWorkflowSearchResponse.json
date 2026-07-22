@@ -1,0 +1,221 @@
+{
+  "ok": true,
+  "total_found": 2,
+  "workflows": [
+    {
+      "id": "Wf014FQ97ZT5",
+      "workflow_function_id": "Fn014EPW7SBU",
+      "callback_id": "untitled_workflow",
+      "title": "Hello there",
+      "description": "A brand new workflow",
+      "input_parameters": {
+        "Ft014FQ980RZ__user_id": {
+          "type": "slack#/types/user_id",
+          "name": "Ft014FQ980RZ__user_id",
+          "description": "User who reacted to the message",
+          "title": "User who reacted to the message",
+          "is_required": false
+        },
+        "Ft014FQ980RZ__message_context": {
+          "type": "slack#/types/message_context",
+          "name": "Ft014FQ980RZ__message_context",
+          "description": "Reference to the message that was reacted to",
+          "title": "Reference to the message that was reacted to",
+          "is_required": true
+        }
+      },
+      "steps": [
+        {
+          "id": "a1468ed7-82a2-4d3a-8598-d67194a10148",
+          "function_id": "Fn010P",
+          "inputs": {
+            "message": {
+              "value": [
+                {
+                  "type": "rich_text",
+                  "block_id": "b1",
+                  "elements": [
+                    {
+                      "type": "rich_text_section",
+                      "elements": [
+                        {
+                          "text": "Hello ",
+                          "type": "text"
+                        },
+                        {
+                          "id": "{{inputs.Ft014FQ980RZ__user_id}}",
+                          "type": "workflowtoken",
+                          "property": "",
+                          "data_type": "slack#/types/user_id"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "hidden": false,
+              "locked": false
+            },
+            "message_context": {
+              "value": "{{inputs.Ft014FQ980RZ__message_context}}",
+              "hidden": false,
+              "locked": false
+            },
+            "reply_broadcast": {
+              "value": "false",
+              "hidden": false,
+              "locked": false
+            }
+          }
+        }
+      ],
+      "collaborators": [
+        "U014FM2DQF5"
+      ],
+      "icons": {
+        "image_96": "https://slack-pantry.dev.slack.com/11d89af/img/apps/workflows_96.png",
+        "image_192": "https://slack-pantry.dev.slack.com/11d89af/img/apps/workflows_192.png"
+      },
+      "is_published": true,
+      "last_updated_by": "U014FM2DQF5",
+      "unpublished_change_count": 0,
+      "app_id": "A014EPW7S3U",
+      "source": "workflow_builder",
+      "billing_type": "simple",
+      "last_published_version_id": "Wfv014FQ9NHCK",
+      "last_published_date": "1674675746"
+    },
+    {
+      "id": "Wf014HH0GN9G",
+      "workflow_function_id": "Fn014HH0GN82",
+      "callback_id": "give_kudos_workflow",
+      "title": "Give kudos",
+      "description": "Acknowledge the impact someone had on you",
+      "input_parameters": {
+        "interactivity": {
+          "type": "slack#/types/interactivity",
+          "name": "interactivity",
+          "title": "Interactivity",
+          "is_required": true
+        }
+      },
+      "steps": [
+        {
+          "id": "0",
+          "function_id": "Fn010N",
+          "inputs": {
+            "title": {
+              "value": "Give someone kudos",
+              "hidden": false,
+              "locked": false
+            },
+            "fields": {
+              "value": {
+                "elements": [
+                  {
+                    "name": "doer_of_good_deeds",
+                    "type": "slack#/types/user_id",
+                    "title": "Whose deeds are deemed worthy of a kudo?",
+                    "description": "Recognizing such deeds is dazzlingly desirable of you!"
+                  },
+                  {
+                    "name": "kudo_channel",
+                    "type": "slack#/types/channel_id",
+                    "title": "Where should this message be shared?"
+                  },
+                  {
+                    "long": true,
+                    "name": "kudo_message",
+                    "type": "string",
+                    "title": "What would you like to say?"
+                  },
+                  {
+                    "enum": [
+                      "Appreciation for someone \ud83e\udec2",
+                      "Celebrating a victory \ud83c\udfc6",
+                      "Thankful for great teamwork \u26bd\ufe0f",
+                      "Amazed at awesome work \u2604\ufe0f",
+                      "Excited for the future \ud83c\udf89",
+                      "No vibes, just plants \ud83e\udeb4"
+                    ],
+                    "name": "kudo_vibe",
+                    "type": "string",
+                    "title": "What is this kudo's \"vibe\"?",
+                    "description": "What sorts of energy is given off?"
+                  }
+                ],
+                "required": [
+                  "doer_of_good_deeds",
+                  "kudo_channel",
+                  "kudo_message"
+                ]
+              },
+              "hidden": false,
+              "locked": false
+            },
+            "description": {
+              "value": "Continue the positive energy through your written word",
+              "hidden": false,
+              "locked": false
+            },
+            "submit_label": {
+              "value": "Share",
+              "hidden": false,
+              "locked": false
+            },
+            "interactivity": {
+              "value": "{{inputs.interactivity}}",
+              "hidden": false,
+              "locked": false
+            }
+          }
+        },
+        {
+          "id": "1",
+          "function_id": "Fn014JHDUP3M",
+          "inputs": {
+            "vibe": {
+              "value": "{{steps.0.fields.kudo_vibe}}",
+              "hidden": false,
+              "locked": false
+            }
+          }
+        },
+        {
+          "id": "2",
+          "function_id": "Fn0102",
+          "inputs": {
+            "message": {
+              "value": "*Hey <@{{steps.0.fields.doer_of_good_deeds}}>!* Someone wanted to share some kind words with you :otter:\n> {{steps.0.fields.kudo_message}}\n{{steps.1.URL}}",
+              "hidden": false,
+              "locked": false
+            },
+            "channel_id": {
+              "value": "{{steps.0.fields.kudo_channel}}",
+              "hidden": false,
+              "locked": false
+            }
+          }
+        }
+      ],
+      "collaborators": [
+        "U014ELP4Z9Q"
+      ],
+      "icons": {
+        "image_96": "https://example.com/avatars/2023-03-01/1153578567186_dd65b1ee58919c5d8665_96.png",
+        "image_192": "https://example.com/avatars/2023-03-01/1153578567186_dd65b1ee58919c5d8665_192.png"
+      },
+      "is_published": true,
+      "last_updated_by": "U014ELP4Z9Q",
+      "unpublished_change_count": 0,
+      "app_id": "A014HH0GN7L",
+      "source": "app",
+      "billing_type": "complex",
+      "last_published_version_id": "Wfv014JHDUP4K",
+      "last_published_date": "1677682235"
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": "aWQ6MTE1MzU3ODU2NjMyMg=="
+  }
+}

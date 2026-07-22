@@ -13,31 +13,22 @@ namespace Slack.NetStandard.WebApi
             _client = client;
         }
 
-        public Task<UsergroupUserListResponse> List(string usergroup, bool? includeDisabled = null)
+        public Task<UsergroupUserListResponse> List(string usergroup, bool? includeDisabled = null,
+            string teamId = null)
         {
-            var dict = new Dictionary<string, string>{{nameof(usergroup),usergroup}};
-
-            if (includeDisabled.HasValue)
-            {
-                dict.Add("include_disabled", includeDisabled.Value.ToString().ToLower());
-            }
+            var dict = new Dictionary<string, string>().AddIfValue("usergroup", usergroup)
+                .AddIfValue("include_disabled", includeDisabled).AddIfValue("team_id", teamId);
 
             return _client.MakeUrlEncodedCall<UsergroupUserListResponse>("usergroups.users.list", dict);
         }
 
-        public Task<UsergroupResponse> Update(string usergroup, string[] users, bool? includeCount = null)
+        public Task<UsergroupResponse> Update(string usergroup, string[] users, bool? includeCount = null,
+            string teamId = null)
         {
-            var dict = new Dictionary<string, string>
-            {
-                {nameof(usergroup), usergroup},
-                {nameof(users),string.Join(",",users)}
-            };
-
-            if (includeCount.HasValue)
-            {
-                dict.Add("include_count", includeCount.Value.ToString().ToLower());
-            }
-
+            var dict = new Dictionary<string, string>().AddIfValue("usergroup", usergroup)
+                .AddIfValue("users", string.Join(",", users)).AddIfValue("include_count", includeCount)
+                .AddIfValue("team_id", teamId);
+                
             return _client.MakeUrlEncodedCall<UsergroupResponse>("usergroups.users.update", dict);
         }
     }

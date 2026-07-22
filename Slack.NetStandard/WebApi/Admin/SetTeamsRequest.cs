@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using System.Linq;
+using Slack.NetStandard.EventsApi.CallbackEvents;
+using Slack.NetStandard.Objects;
 
 namespace Slack.NetStandard.WebApi.Admin
 {
     public class SetTeamsRequest
     {
+        public SetTeamsRequest(string channelId)
+        {
+            Channel = channelId;
+        }
+
         [JsonProperty("channel_id")]
         public string Channel { get; set; }
 

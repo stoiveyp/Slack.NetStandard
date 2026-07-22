@@ -1,0 +1,34 @@
+{
+    "type": "data_visualization",
+    "title": "Weekly Paper Sales",
+    "chart": {
+        "type": "line",
+        "series": [
+            {
+                "name": "Dunder Mifflin Infinity Website",
+                "data": [
+                    { "label": "Week 1", "value": 32000 },
+                    { "label": "Week 2", "value": 35000 },
+                    { "label": "Week 3", "value": 29000 },
+                    { "label": "Week 4", "value": 41000 },
+                    { "label": "Week 5", "value": 45000 }
+                ]
+            },
+            {
+                "name": "Dunder Mifflin In-store",
+                "data": [
+                    { "label": "Week 1", "value": 32000 },
+                    { "label": "Week 2", "value": 35000 },
+                    { "label": "Week 3", "value": 29000 },
+                    { "label": "Week 4", "value": 41000 },
+                    { "label": "Week 5", "value": 45000 }
+                ]
+            }
+        ],
+        "axis_config": {
+            "categories": ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
+            "x_label": "Week",
+            "y_label": "Paper Sales (USD)"
+        }
+    }
+}

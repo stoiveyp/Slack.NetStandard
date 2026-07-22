@@ -31,6 +31,9 @@ namespace Slack.NetStandard.Messages.Blocks
         [JsonProperty("block_id",NullValueHandling = NullValueHandling.Ignore)]
         public string BlockId { get; set; }
 
+        [JsonProperty("expand", NullValueHandling = NullValueHandling.Ignore)]
+        public bool? Expand { get; set; }
+
         [JsonProperty("fields",NullValueHandling = NullValueHandling.Ignore)]
         public IList<TextObject> Fields { get; set; } = new List<TextObject>();
 

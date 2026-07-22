@@ -16,8 +16,6 @@ namespace Slack.NetStandard.Interaction
         ViewSubmission,
         [EnumMember(Value="view_closed")]
         ViewClosed,
-        [EnumMember(Value = "workflow_step_edit")]
-        WorkflowStepEdit,
         [EnumMember(Value = "block_suggestion")]
         BlockSuggestion,
         [EnumMember(Value = "dialog_suggestion")]

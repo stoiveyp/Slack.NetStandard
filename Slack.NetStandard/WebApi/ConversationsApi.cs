@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Slack.NetStandard.WebApi.Canvases;
 using Slack.NetStandard.WebApi.Conversations;
 
 namespace Slack.NetStandard.WebApi
@@ -28,24 +29,26 @@ namespace Slack.NetStandard.WebApi
             });
         }
 
-        public Task<ChannelResponse> Create(string name, bool isPrivate = false)
-        {
-            return _client.MakeJsonCall<CreateConversationRequest, ChannelResponse>("conversations.create",
-                new CreateConversationRequest
-                {
-                    Name = name,
-                    IsPrivate = isPrivate
-                });
-        }
-
-        public Task<ChannelResponse> Create(string name, string[] userIds, bool isPrivate = false)
+        public Task<ChannelResponse> Create(string name, bool isPrivate = false, string teamId = null)
         {
             return _client.MakeJsonCall<CreateConversationRequest, ChannelResponse>("conversations.create",
                 new CreateConversationRequest
                 {
                     Name = name,
                     IsPrivate = isPrivate,
-                    UserIds = userIds
+                    TeamId = teamId
+                });
+        }
+
+        public Task<ChannelResponse> Create(string name, string[] userIds, bool isPrivate = false, string teamId = null)
+        {
+            return _client.MakeJsonCall<CreateConversationRequest, ChannelResponse>("conversations.create",
+                new CreateConversationRequest
+                {
+                    Name = name,
+                    IsPrivate = isPrivate,
+                    UserIds = userIds,
+                    TeamId = teamId
                 });
         }
 
@@ -302,6 +305,16 @@ namespace Slack.NetStandard.WebApi
             }
 
             return _client.MakeJsonCall<JObject,ListConnectInviteResponse>("conversations.listConnectInvites", request);
+        }
+
+        public Task<CanvasesCreateResponse> CreateCanvas(string channelId, CanvasContent content = null)
+        {
+            var request = new CreateConversationChannelRequest
+            {
+                ChannelId = channelId,
+                Content = content
+            };
+            return _client.MakeJsonCall<CreateConversationChannelRequest,CanvasesCreateResponse>("conversations.canvases.create", request);
         }
     }
 }

@@ -1,0 +1,30 @@
+{
+  "key": "rich_text_notes",
+  "value": "[{\"type\":\"rich_text\",\"block_id\":\"UXkfa\",\"elements\":[{\"type\":\"rich_text_section\",\"elements\":[{\"type\":\"text\",\"text\":\"Onboard new hire \"},{\"type\":\"text\",\"text\":\"(week 1)\",\"style\":{\"bold\":true}}]}]}]",
+  "text": "Onboard new hire *(week 1)*",
+  "rich_text": [
+    {
+      "type": "rich_text",
+      "block_id": "UXkfa",
+      "elements": [
+        {
+          "type": "rich_text_section",
+          "elements": [
+            {
+              "text": "Onboard new hire ",
+              "type": "text"
+            },
+            {
+              "text": "(week 1)",
+              "type": "text",
+              "style": {
+                "bold": true
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "column_id": "Col018B8C91TM"
+}

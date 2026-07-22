@@ -1,0 +1,14 @@
+{
+  "type": "rich_text_input",
+  "action_id": "rich_text_input-action",
+  "dispatch_action_config": {
+    "trigger_actions_on": [
+      "on_character_entered"
+    ]
+  },
+  "focus_on_load": true,
+  "placeholder": {
+    "type": "plain_text",
+    "text": "Enter text"
+  }
+}

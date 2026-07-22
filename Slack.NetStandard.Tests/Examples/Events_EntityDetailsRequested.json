@@ -1,0 +1,32 @@
+{
+  "type": "entity_details_requested",
+  "user": "U0123456", // user who opened the flexpane
+  "external_ref": {
+    // `external_ref` that was set in the `metadata` of `chat.unfurl`.
+    // This is not guaranteed to be set in all cases. For example,
+    // when a work object is opened from an Enterprise Search result
+    // provided by a Slack-developed search provider, we cannot provide
+    // an `external_ref`.
+    "id": "123",
+    "type": "my-type" // optional
+  },
+
+  // This is the URL that identifies the entity in the developer's system. In the entity metadata, this property is called `url`.
+  "entity_url": "https://example.com/document/123",
+  "link": {
+    "url": "https://example.com/document/123",
+    "domain": "example.com" // domain of the URL
+  },
+  // This is the exact URL that was unfurled in the Slack message. It could be the same as `entity_url`, or different.
+  "app_unfurl_url": "https://example.com/document/123?myquery=param",
+
+  "event_ts": "123456789.1234566", // event timestamp
+  "trigger_id": "1234567890123.1234567890123.abcdef01234567890abcdef012345689", // event trigger ID
+  "user_locale": "en-US",
+
+  // These fields will not be provided when the entity details are opened
+  // from outside of a message context (i.e., Enterprise Search) 
+  "channel": "C123ABC456", // ID of the channel where the source message was posted 
+  "message_ts": "1755035323.759739", // timestamp of the source message
+  "thread_ts": "1755035323.759739" // timestamp of the root message, if the source message is part of a thread
+}

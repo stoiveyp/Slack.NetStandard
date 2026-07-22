@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Slack.NetStandard.Messages.Elements.RichText
 {
-    public class Link : RichTextElement
+    public class Link : StyledRichTextElement
     {
         public const string ElementName = "link";
 
@@ -13,7 +13,6 @@ namespace Slack.NetStandard.Messages.Elements.RichText
         [JsonProperty("text",NullValueHandling = NullValueHandling.Ignore)]
         public string Text { get; set; }
 
-        [JsonProperty("style",NullValueHandling = NullValueHandling.Ignore)]
-        public Dictionary<string,bool> Style { get; set; }
+        public override string Type => ElementName;
     }
 }

@@ -29,5 +29,16 @@ namespace Slack.NetStandard.WebApi
         {
             return _client.MakeUrlEncodedCall<TestResponse>("auth.test", new Dictionary<string, string>());
         }
+
+        public Task<TeamsListResponse> TeamsList(bool? includeIcon = null, string cursor = null, int? limit = null)
+        {
+            var jo = new JObject();
+            if (includeIcon.HasValue)
+            {
+                jo.Add("include_icon",includeIcon.Value);
+            }
+            jo.AddPaging(cursor, limit);
+            return _client.MakeJsonCall<JObject,TeamsListResponse>("auth.teams.list", jo);
+        }
     }
 }

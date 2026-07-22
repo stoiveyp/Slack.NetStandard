@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "permissions": {
+    "Wf123": {
+      "who_can_run": {
+        "permission_type": "everyone"
+      },
+      "complete": true
+    },
+    "Wf456": {
+      "who_can_run": {
+        "permission_type": "named_entities"
+      },
+      "user_ids": [
+        "U123"
+      ],
+      "channel_ids": [
+        "C123"
+      ],
+      "complete": false
+    }
+  }
+}

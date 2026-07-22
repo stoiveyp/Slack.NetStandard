@@ -1,0 +1,59 @@
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Linq;
+using Newtonsoft.Json.Converters;
+using Slack.NetStandard.Emums;
+using Slack.NetStandard.Messages.StreamChunks;
+
+namespace Slack.NetStandard.WebApi.Chat;
+
+/// <summary>
+/// Starts a new streaming conversation.
+/// </summary>
+/// <remarks>https://docs.slack.dev/reference/methods/chat.startStream</remarks>
+public class StartStreamRequest
+{
+    [JsonProperty("channel")]
+    public string Channel { get; set; }
+
+    [JsonProperty("thread_ts")]
+    public Timestamp ThreadTimestamp { get; set; }
+    
+    /// <summary>
+    /// Accepts message text formatted in markdown. Limit this field to 12,000 characters. This text is what will be appended to the message received so far.
+    /// </summary>
+    [JsonProperty("markdown_text", NullValueHandling = NullValueHandling.Ignore)]
+    public string MarkdownText { get; set; }
+    
+    [JsonProperty("chunks", NullValueHandling = NullValueHandling.Ignore, DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public IList<IStreamChunk> Chunks { get; set; } = null;
+    
+    /// <summary>
+    /// The encoded ID of the user to receive the streaming text. Required when streaming to channels.
+    /// </summary>
+    [JsonProperty("recipient_user_id", NullValueHandling = NullValueHandling.Ignore)]
+    public string RecipientUserId { get; set; }
+    
+    /// <summary>
+    /// The encoded ID of the team the user receiving the streaming text belongs to. Required when streaming to channels.
+    /// </summary>
+    [JsonProperty("recipient_team_id", NullValueHandling = NullValueHandling.Ignore)]
+    public string RecipientTeamId { get; set; }
+    
+    /// <summary>
+    /// Specifies how tasks are displayed in the message. A timeline displays individual tasks with text in sequential order, and plan displays all tasks together, with the first tasks's placement determining the placement of the rest of the tasks.
+    /// </summary>
+    [JsonProperty("task_display_mode", NullValueHandling = NullValueHandling.Ignore),JsonConverter(typeof(StringEnumConverter))]
+    public TaskDisplayModeType TaskDisplayMode { get; set; }
+    
+    [JsonProperty("icon_emoji", NullValueHandling = NullValueHandling.Ignore)]
+    public string IconEmoji { get; set; }
+
+    [JsonProperty("icon_url", NullValueHandling = NullValueHandling.Ignore)]
+    public string IconUrl { get; set; }
+    
+    [JsonProperty("username", NullValueHandling = NullValueHandling.Ignore)]
+    public string Username { get; set; }
+    
+    public bool ShouldSerializeChunks() => Chunks?.Any() ?? false;
+}

@@ -6,7 +6,9 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.ExceptionServices;
+using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
@@ -73,14 +75,32 @@ namespace Slack.NetStandard
         private IUsersApi _users;
         public IUsersApi Users => _users ??= new UsersApi(this);
 
-        private IWorkflowApi _workflow;
-        public IWorkflowApi Workflow => _workflow ??= new WorkflowApi(this);
-
         private IBookmarksApi _bookmarks;
         public IBookmarksApi Bookmarks => _bookmarks ??= new BookmarksApi(this);
 
-        public static Uri ApiBaseAddress { get; } = new ("https://slack.com/api/", UriKind.Absolute);
-        public static HttpClient DefaultClient { get; } = new ();
+        private ICallsApi _calls;
+        public ICallsApi Calls => _calls ??= new CallsApi(this);
+
+        private IFunctionsApi _functions;
+        public IFunctionsApi Functions => _functions ??= new FunctionsApi(this);
+
+        private ICanvasesApi _canvases;
+        public ICanvasesApi Canvases => _canvases ??= new CanvasesApi(this);
+
+        private IAssistantApi _assistant;
+        public IAssistantApi Assistant => _assistant ??= new AssistantApi(this);
+
+        private IWorkflowsApi _workflows;
+        public IWorkflowsApi Workflows => _workflows ??= new WorkflowsApi(this);
+
+        private ISlackListsApi _slackLists;
+        public ISlackListsApi SlackLists => _slackLists ??= new SlackListsApi(this);
+
+        private IEntityApi _entity;
+        public IEntityApi Entity => _entity ??= new EntityApi(this);
+
+        public static Uri ApiBaseAddress { get; } = new("https://slack.com/api/", UriKind.Absolute);
+        public static HttpClient DefaultClient { get; } = new();
         public HttpClient Client { get; set; }
         public string Token { get; set; }
 
@@ -93,12 +113,12 @@ namespace Slack.NetStandard
             return ((IWebApiClient)this).MakeJsonCall("api.test", data);
         }
 
-        public SlackWebApiClient(string token) : this(null,token)
+        public SlackWebApiClient(string token) : this(null, token)
         {
 
         }
 
-        public SlackWebApiClient(HttpClient client) : this(client,null)
+        public SlackWebApiClient(HttpClient client) : this(client, null)
         {
 
         }
@@ -109,7 +129,7 @@ namespace Slack.NetStandard
             Client = client ?? DefaultClient;
         }
 
-        private static Uri MethodUrl(string methodName) => new (ApiBaseAddress, methodName);
+        private static Uri MethodUrl(string methodName) => new(ApiBaseAddress, methodName);
 
 
         Task<WebApiResponse> IWebApiClient.MakeJsonCall<TRequest>(string methodName, TRequest request)
@@ -117,16 +137,12 @@ namespace Slack.NetStandard
             return ((IWebApiClient)this).MakeJsonCall<TRequest, WebApiResponse>(methodName, request);
         }
 
-        async Task<TResponse> IWebApiClient.MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request)
+        private async Task<TResponse> MakeCall<TResponse>(HttpRequestMessage message) where TResponse : WebApiResponseBase
         {
             try
             {
-                var content = new StringContent(JsonConvert.SerializeObject(request));
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
-
-                var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
                 HandleAuth(message);
-                
+
                 var response = await Client.SendAsync(message);
                 return await GenerateResponseFromMessage<TResponse>(response);
             }
@@ -135,6 +151,38 @@ namespace Slack.NetStandard
                 var source = ExceptionDispatchInfo.Capture(ex);
                 return ProcessSlackException<TResponse>(ex, source);
             }
+        }
+
+        Task<TResponse> IWebApiClient.MakeJsonCall<TRequest, TResponse>(string methodName, TRequest request)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(request));
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json") { CharSet = "utf-8" };
+
+            var message = new HttpRequestMessage(HttpMethod.Post, MethodUrl(methodName)) { Content = content };
+            return MakeCall<TResponse>(message);
+        }
+
+        Task<TResponse> IWebApiClient.MakeGetCall<TRequest, TResponse>(string methodName, TRequest request)
+        {
+            var query = ConvertToQueryString(request);
+            if(!string.IsNullOrWhiteSpace(query))
+            {
+                query = "?" + query;
+            }
+            var message = new HttpRequestMessage(HttpMethod.Get, $"{MethodUrl(methodName)}{query}");
+            return MakeCall<TResponse>(message);
+        }
+
+        private string ConvertToQueryString<TRequest>(TRequest request)
+        {
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            var obj = JObject.FromObject(request, Serializer);
+            foreach(var token in obj.Properties())
+            {
+                queryString[token.Name] = token.Value.ToString();
+            }
+
+            return queryString.ToString();
         }
 
         private void HandleAuth(HttpRequestMessage message)
@@ -266,6 +314,18 @@ namespace Slack.NetStandard
             }
 
             throw new InvalidOperationException("Processing call failed");
+        }
+
+        string IWebApiClient.EncodeJsonForWebApi(object data)
+        {
+            StringBuilder sb = new StringBuilder(40);
+            using (StringWriter sw = new StringWriter(sb))
+            using (JsonTextWriter writer = new JsonTextWriter(sw){Formatting = Formatting.None, Indentation = 0,QuoteChar = '\''})
+            {
+                Serializer.Serialize(writer, data);
+            }
+
+            return sb.ToString();
         }
     }
 }

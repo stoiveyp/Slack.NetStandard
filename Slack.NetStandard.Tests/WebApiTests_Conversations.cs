@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Slack.NetStandard.WebApi;
+using Slack.NetStandard.WebApi.Canvases;
 using Slack.NetStandard.WebApi.Conversations;
 using Xunit;
 
@@ -37,13 +39,31 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Conversations_Create()
         {
-            var response = await Utility.AssertWebApi(c => c.Conversations.Create("test this", true),
+            var response = await Utility.AssertWebApi(c => c.Conversations.Create("test this", true, "T12345"),
                 "conversations.create", "Web_ConversationsCreate.json", j =>
                 {
                     Assert.Equal("test this", j.Value<string>("name"));
                     Assert.True(j.Value<bool>("is_private"));
+                    Assert.Equal("T12345", j.Value<string>("team_id"));
                 });
         }
+
+        [Fact]
+        public async Task Conversations_Create_With_Users()
+        {
+            var response = await Utility.AssertWebApi(
+                c => c.Conversations.Create("test this", new[] { "U1", "U2" }, true, "T12345"), "conversations.create",
+                "Web_ConversationsCreate.json", j =>
+                {
+                    var users = j.Value<JArray>("user_ids").Select(t => t.Value<string>()).ToList();
+                    
+                    Assert.Equal("test this", j.Value<string>("name"));
+                    Assert.True(new[] { "U1", "U2" }.SequenceEqual(users));
+                    Assert.True(j.Value<bool>("is_private"));
+                    Assert.Equal("T12345", j.Value<string>("team_id"));
+                });
+        }
+
 
         [Fact]
         public async Task Conversations_History()
@@ -51,18 +71,20 @@ namespace Slack.NetStandard.Tests
             var request = new ConversationHistoryRequest
             {
                 Channel= "C1234567890",
-                Latest = "1234567890.123456"
+                Latest = "1234567890.123456",
+                IncludeAllMetadata = true
             };
             await Utility.AssertEncodedWebApi(c => c.Conversations.History(request),
                 "conversations.history", "Web_ConversationsHistory.json", nvc =>
                 {
                     Assert.Equal("C1234567890", nvc["channel"]);
                     Assert.Equal("1234567890.123456", nvc["latest"]);
+                    Assert.Equal("true", nvc["include_all_metadata"]);
                 });
         }
 
         [Fact]
-        public async Task Conversations_info()
+        public async Task ConversationsInfo()
         {
             await Utility.AssertEncodedWebApi(c => c.Conversations.Info("C1234567890",null,true), "conversations.info",
                 "Web_ConversationsInfo.json", nvc =>
@@ -73,7 +95,7 @@ namespace Slack.NetStandard.Tests
         }
 
         [Fact]
-        public async Task ConversationsInfo()
+        public async Task ConversationsInvite()
         {
             await Utility.AssertEncodedWebApi(c => c.Conversations.Invite("C1234567890", "W123","U456"), "conversations.invite", "Web_ConversationsInfo.json",
                 nvc =>
@@ -124,7 +146,8 @@ namespace Slack.NetStandard.Tests
                 Cursor = "ABCDEF",
                 ExcludeArchived = true,
                 Types = "private_channel",
-                Limit = 10
+                Limit = 10,
+                TeamId = "T12345"
             };
             await Utility.AssertEncodedWebApi(c => c.Conversations.List(request), "conversations.list",
                 "Web_ConversationsList.json",
@@ -134,6 +157,7 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal(10.ToString(), nvc["limit"]);
                     Assert.Equal("true", nvc["exclude_archived"]);
                     Assert.Equal("private_channel", nvc["types"]);
+                    Assert.Equal("T12345", nvc["team_id"]);
                 });
         }
 
@@ -340,6 +364,22 @@ namespace Slack.NetStandard.Tests
                     Assert.Equal("T1234", job.Value<string>("team_id"));
                     Assert.Equal("ABC123", job.Value<string>("cursor_id"));
                     Assert.Equal(13, job.Value<int>("count"));
+                });
+        }
+
+        public const string MARKDOWN_TEXT = "> channel canvas!";
+
+        [Fact]
+        public async Task Conversations_CanvasCreate()
+        {
+            await Utility.AssertWebApi(
+                c => c.Conversations.CreateCanvas("C1232", new MarkdownContent(MARKDOWN_TEXT)),
+                "conversations.canvases.create", jo =>
+                {
+                    Assert.Equal("C1232", jo.Value<string>("channel_id"));
+                    var content = jo.Value<JObject>("document_content");
+                    Assert.Equal("markdown", content.Value<string>("type"));
+                    Assert.Equal(MARKDOWN_TEXT, content.Value<string>("markdown"));
                 });
         }
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Slack.NetStandard.WebApi.Users;
 
@@ -48,27 +47,10 @@ namespace Slack.NetStandard.WebApi
 
             return _client.MakeUrlEncodedCall<UserResponse>("users.info", dict);
         }
-
-        public Task<UserListResponse> List(string cursor, bool? includeLocale = null)
+        
+        public Task<UserListResponse> List(UserListRequest request)
         {
-            return List(cursor, null, includeLocale);
-        }
-
-        public Task<UserListResponse> List(int limit, bool? includeLocale = null)
-        {
-            return List(null, limit, includeLocale);
-        }
-
-        public Task<UserListResponse> List(string cursor = null, int? limit = null, bool? includeLocale = null)
-        {
-            var dict = new Dictionary<string, string>( );
-
-            dict
-                .AddIfValue(nameof(cursor), cursor)
-                .AddIfValue(nameof(limit),limit)
-                .AddIfValue("include_locale", includeLocale);
-            
-            return _client.MakeUrlEncodedCall<UserListResponse>("users.list", dict);
+            return _client.MakeUrlEncodedCall<UserListResponse>("users.list", request);
         }
 
         public Task<UserResponse> LookupByEmail(string email)

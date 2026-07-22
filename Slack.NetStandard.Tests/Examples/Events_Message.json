@@ -5,6 +5,9 @@
   "text": "Hello world",
   "ts": "1355517523.000005",
   "is_starred": true,
+  "assistant_thread": {
+    "action_token": "1234567.abcdefg"
+  },
   "pinned_to": [ "C024BE7LT", "..." ],
   "reactions": [
     {

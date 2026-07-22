@@ -8,5 +8,7 @@ namespace Slack.NetStandard.Messages.Elements.RichText
 
         [JsonProperty("range",NullValueHandling = NullValueHandling.Ignore)]
         public string Range { get; set; }
+
+        public override string Type => ElementName;
     }
 }

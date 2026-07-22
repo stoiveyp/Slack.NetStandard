@@ -1,4 +1,6 @@
 # Slack.NetStandard
+[![Latest NuGet version](https://img.shields.io/nuget/v/Slack.NetStandard.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/Slack.NetStandard)
+
 .NET Core NuGet package that helps with Slack interactions
 Available at https://www.nuget.org/packages/Slack.NetStandard
 

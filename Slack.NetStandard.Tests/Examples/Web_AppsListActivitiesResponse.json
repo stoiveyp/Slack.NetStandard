@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "activities": [
+    {
+      "level": "info",
+      "event_type": "function_execution_started",
+      "source": "slack",
+      "component_type": "functions",
+      "component_id": "Fn123",
+      "payload": {
+        "function_name": "Reverse",
+        "function_type": "app"
+      },
+      "created": 1650463798824317,
+      "trace_id": "Tr123"
+    }
+  ],
+  "response_metadata": {
+    "next_cursor": ""
+  }
+}

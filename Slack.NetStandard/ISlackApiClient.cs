@@ -42,9 +42,21 @@ namespace Slack.NetStandard
 
         IUsersApi Users { get; }
 
-        IWorkflowApi Workflow { get; }
-
         IBookmarksApi Bookmarks { get; }
+
+        ICallsApi Calls { get; }
+
+        IFunctionsApi Functions { get; }
+
+        ICanvasesApi Canvases { get; }
+
+        IAssistantApi Assistant { get; }
+
+        IWorkflowsApi Workflows { get; }
+
+        ISlackListsApi SlackLists { get; }
+
+        IEntityApi Entity { get; }
 
         Task<WebApiResponse> Test(object data);
     }

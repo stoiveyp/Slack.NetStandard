@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "channels": [
+    {
+      "id": "C024BE91L",
+      "name": "fun",
+      "team_id": "T024BE911",
+      "num_members": 34
+    },
+    {
+      "id": "C024BE91K",
+      "name": "more fun",
+      "team_id": "T024BE912"
+    },
+    {
+      "id": "C024BE91M",
+      "name": "public-channel",
+      "team_id": "T024BE911",
+      "is_redacted": true,
+      "num_members": 34
+    },
+    {
+      "id": "C024BE91N",
+      "name": "some more fun",
+      "team_id": "T024BE921"
+    }
+  ]
+}

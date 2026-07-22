@@ -1,0 +1,12 @@
+{
+    "type": "image",
+    "title": {
+      "type": "plain_text",
+      "text": "This image block contains a reference to a Slack image file."
+    },
+    "block_id": "image4",
+    "slack_file": {
+      "url": "https://files.slack.com/files-pri/T0123456-F0123456/xyz.png"
+    },
+    "alt_text": "Slack file object."
+}

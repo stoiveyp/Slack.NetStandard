@@ -1,0 +1,10 @@
+{
+  "ok": false,
+  "error": "failed_for_some_entities",
+  "rejected_entities": [
+    {
+      "id": "E123ABC456",
+      "error": "invalid_auth"
+    }
+  ]
+}

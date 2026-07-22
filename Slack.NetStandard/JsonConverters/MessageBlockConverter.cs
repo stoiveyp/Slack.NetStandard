@@ -20,11 +20,22 @@ namespace Slack.NetStandard.JsonConverters
         {
             var jObject = JObject.Load(reader);
             var componentType = jObject.Value<string>("type");
+            IMessageBlock target;
             if (string.IsNullOrWhiteSpace(componentType))
             {
-                return null;
+                if(objectType != typeof(IMessageBlock)){
+                    target = (IMessageBlock)Activator.CreateInstance(objectType);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            var target = GetComponent(componentType);
+            else
+            {
+                target = GetComponent(componentType);
+            }
+            
             if (target == null)
             {
                 throw new ArgumentOutOfRangeException($"MessageBlock type {componentType} not supported");
@@ -33,18 +44,30 @@ namespace Slack.NetStandard.JsonConverters
             return target;
         }
 
-        public static Dictionary<string, Type> IMessageBlockLookup = new Dictionary<string, Type>
+        public static Dictionary<string, Type> IMessageBlockLookup = new()
         {
             {nameof(Divider).ToLower(), typeof(Divider)},
             {nameof(Section).ToLower(), typeof(Section)},
             {nameof(Image).ToLower(),typeof(Image) },
             {nameof(Actions).ToLower(),typeof(Actions) },
+            {ContextActions.MessageBlockType,typeof(ContextActions) },
             {nameof(Context).ToLower(),typeof(Context) },
             {nameof(Input).ToLower(),typeof(Input) },
             {nameof(File).ToLower(),typeof(File) },
             {nameof(Header).ToLower(),typeof(Header) },
             {RichText.MessageBlockType,typeof(RichText) },
-            {nameof(Video).ToLower(), typeof(Video) }
+            {nameof(Video).ToLower(), typeof(Video) },
+            {nameof(Call).ToLower(), typeof(Call) },
+            {nameof(Markdown).ToLower(), typeof(Markdown) },
+            {nameof(Table).ToLower(), typeof(Table) },
+            {TaskCard.MessageBlockType, typeof(TaskCard)  },
+            {nameof(Plan).ToLower(), typeof(Plan)},
+            {nameof(Alert).ToLower(), typeof(Alert)},
+            {nameof(Card).ToLower(), typeof(Card)},
+            {nameof(Carousel).ToLower(), typeof(Carousel)},
+            {nameof(Container).ToLower(), typeof(Container)},
+            {DataTable.MessageBlockType, typeof(DataTable) },
+            {DataVisualization.MessageBlockType, typeof(DataVisualization) }
         };
 
         private IMessageBlock GetComponent(string type)

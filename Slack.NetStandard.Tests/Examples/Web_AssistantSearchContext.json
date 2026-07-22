@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "results": {
+    "messages": [
+      {
+        "author_user_id": "U0123456",
+        "team_id": "T0123456",
+        "channel_id": "C0123456",
+        "message_ts": "123456.7890",
+        "content": "Hey team, we'll be kicking off our mobile UX revamp for the Gizmo App...",
+        "is_author_bot": false,
+        "permalink": "https://mycompany.slack.com/archives/C012345ABC/p123456789"
+      }
+    ]
+  },
+  "response_metadata": {
+    "next_cursor": "Q1VSUkVOVF9QQUdFOjI="
+  }
+}

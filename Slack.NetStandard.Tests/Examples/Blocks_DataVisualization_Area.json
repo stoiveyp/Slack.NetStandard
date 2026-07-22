@@ -1,0 +1,34 @@
+{
+    "type": "data_visualization",
+    "title": "Daily Active Users",
+    "chart": {
+        "type": "area",
+        "series": [
+            {
+                "name": "Pied Piper Free Tier",
+                "data": [
+                    { "label": "Mon", "value": 12000 },
+                    { "label": "Tues", "value": 13500 },
+                    { "label": "Wed", "value": 15200 },
+                    { "label": "Thurs", "value": 14800 },
+                    { "label": "Fri", "value": 16400 }
+                ]
+            },
+            {
+                "name": "Pied Piper Paid Tier",
+                "data": [
+                    { "label": "Mon", "value": 4500 },
+                    { "label": "Tues", "value": 4800 },
+                    { "label": "Wed", "value": 5100 },
+                    { "label": "Thurs", "value": 5600 },
+                    { "label": "Fri", "value": 6200 }
+                ]
+            }
+        ],
+        "axis_config": {
+            "categories": ["Mon", "Tues", "Wed", "Thur", "Fri"],
+            "x_label": "Day",
+            "y_label": "Users"
+        }
+    }
+}

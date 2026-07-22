@@ -10,12 +10,13 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Users_Conversations()
         {
-            await Utility.AssertEncodedWebApi(c => c.Users.Conversations(new UserConversationRequest{
-                User= "W0B2345D"
-            }), "users.conversations", "Web_ConversationsList.json", nvc =>
-            {
-                Assert.Equal("W0B2345D", nvc["user"]);
-            });
+            await Utility.AssertEncodedWebApi(
+                c => c.Users.Conversations(new UserConversationRequest { User = "W0B2345D", TeamId = "T12345" }),
+                "users.conversations", "Web_ConversationsList.json", nvc =>
+                {
+                    Assert.Equal("W0B2345D", nvc["user"]);
+                    Assert.Equal("T12345", nvc["team_id"]);
+                });
         }
 
         [Fact]
@@ -53,11 +54,17 @@ namespace Slack.NetStandard.Tests
         [Fact]
         public async Task Users_List()
         {
-            await Utility.AssertEncodedWebApi(c => c.Users.List("W1234",null,true), "users.list", "Web_UsersList.json",
+            await Utility.AssertEncodedWebApi(c => c.Users.List(new UserListRequest
+                {
+                    Cursor = "W1234",
+                    IncludeLocale = true,
+                    Limit = 10
+                }), "users.list", "Web_UsersList.json",
                 nvc =>
                 {
                     Assert.Equal("W1234", nvc["cursor"]);
                     Assert.Equal("true", nvc["include_locale"]);
+                    Assert.Equal("10", nvc["limit"]);
                 });
         }
 

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Slack.NetStandard.Objects.WorkObjects;
 
 namespace Slack.NetStandard.Interaction
 {
@@ -21,6 +22,12 @@ namespace Slack.NetStandard.Interaction
 
         [JsonProperty("is_app_unfurl")]
         public bool AppUnfurl { get; set; }
+
+        [JsonProperty("app_unfurl_url")]
+        public string AppUnfurlUrl { get; set; }
+
+        [JsonProperty("external_ref", NullValueHandling = NullValueHandling.Ignore)]
+        public ExternalRef ExternalRef { get; set; }
 
         //"container": {
         //    "type": "message_attachment",
