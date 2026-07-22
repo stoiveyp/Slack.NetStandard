@@ -6,8 +6,7 @@
     <Description>.NET Core package that helps with Slack interactions, events and web API</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>
-		Add support for container block (thanks @TonioOoOo!)
-		Fixed missing properties in cards (thanks again @TonioOoOo)
+		Add support for callout block (thanks @TonioOoOo!)
 	</PackageReleaseNotes>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
