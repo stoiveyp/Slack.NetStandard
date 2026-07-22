@@ -26,5 +26,8 @@ namespace Slack.NetStandard.Messages.Blocks
 
         [JsonProperty("block_id", NullValueHandling = NullValueHandling.Ignore)]
         public string BlockId { get; set; }
+        
+        [JsonProperty("level", NullValueHandling = NullValueHandling.Ignore)]
+        public int? Level { get; set; }
     }
 }

@@ -1,0 +1,37 @@
+{
+  "type": "container",
+  "block_id": "bkb_container_standard",
+  "title": {
+    "type": "plain_text",
+    "text": "Standard Width Container"
+  },
+  "subtitle": {
+    "type": "plain_text",
+    "text": "Best sub title ever"
+  },
+  "width": "standard",
+  "child_blocks": [
+    {
+      "type": "rich_text",
+      "block_id": "rt-simple",
+      "elements": [
+        {
+          "type": "rich_text_section",
+          "elements": [
+            {
+              "type": "text",
+              "text": "This is a simple rich text block inside a container."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "icon": {
+    "type": "image",
+    "image_url": "https://picsum.photos/36/36",
+    "alt_text": "Icon"
+  },
+  "is_collapsible": false,
+  "default_collapsed": true
+}

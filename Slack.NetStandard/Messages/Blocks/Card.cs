@@ -34,7 +34,13 @@ namespace Slack.NetStandard.Messages.Blocks
 
         [JsonProperty("body", NullValueHandling = NullValueHandling.Ignore)]
         public TextObject Body { get; set; }
+        
+        [JsonProperty("slack_icon", NullValueHandling = NullValueHandling.Ignore)]
+        public SlackIcon SlackIcon { get; set; }
 
+        [JsonProperty("subtext", NullValueHandling = NullValueHandling.Ignore)]
+        public TextObject Subtext { get; set; }
+        
         [JsonProperty("actions", NullValueHandling = NullValueHandling.Ignore)]
         public IList<IMessageElement> Actions { get; set; } = new List<IMessageElement>();
 

@@ -65,6 +65,8 @@ namespace Slack.NetStandard.JsonConverters
             {nameof(Alert).ToLower(), typeof(Alert)},
             {nameof(Card).ToLower(), typeof(Card)},
             {nameof(Carousel).ToLower(), typeof(Carousel)},
+            {nameof(Container).ToLower(), typeof(Container)},
+            {nameof(Callout).ToLower(), typeof(Callout)},
             {DataTable.MessageBlockType, typeof(DataTable) },
             {DataVisualization.MessageBlockType, typeof(DataVisualization) }
         };

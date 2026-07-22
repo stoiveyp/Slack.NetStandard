@@ -45,6 +45,18 @@ namespace Slack.NetStandard.Tests
         {
             Utility.AssertSubType<IMessageBlock, Call>("Blocks_Call.json");
         }
+        
+        [Fact]
+        public void Container()
+        {
+            Utility.AssertSubType<IMessageBlock, Container>("Blocks_Container.json");
+        }
+        
+        [Fact]
+        public void Callout()
+        {
+            Utility.AssertSubType<IMessageBlock, Callout>("Blocks_Callout.json");
+        }
 
         [Fact]
         public void RadioButtons()
