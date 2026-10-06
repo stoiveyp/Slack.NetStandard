@@ -549,5 +549,55 @@ namespace Slack.NetStandard.Tests
             var result = Utility.AssertSubType<CallbackEvent, EntityDetailsRequested>("Events_EntityDetailsRequested.json");
             Assert.Null(result.OtherFields);
         }
+
+        [Fact]
+        public void AppContextChanged_ChannelId()
+        {
+            var appContext = Utility.AssertSubType<CallbackEvent, AppContextChanged>("Events_AppContextChanged_ChannelId.json");
+            var context = appContext.Context;
+
+            Assert.Null(appContext.OtherFields);
+            Assert.NotNull(context);
+            Assert.Single(context.Entities);
+            Assert.IsType<ChannelIdEntity>(context.Entities[0]);
+
+            var e = (ChannelIdEntity)context.Entities[0];
+            Assert.Equal("C12345", e.Value);
+            Assert.Equal("T1", e.TeamId);
+            Assert.Equal("E1", e.EnterpriseId);
+        }
+
+        [Fact]
+        public void AppContextChanged_MessageContext()
+        {
+            var appContext = Utility.AssertSubType<CallbackEvent, AppContextChanged>("Events_AppContextChanged_MessageContext.json");
+            var context = appContext.Context;
+
+            Assert.Null(appContext.OtherFields);
+            Assert.NotNull(context);
+            Assert.Single(context.Entities);
+            Assert.IsType<MessageContextEntity>(context.Entities[0]);
+
+            var e = (MessageContextEntity)context.Entities[0];
+            Assert.NotNull(e.Value);
+            Assert.Equal("123.456", e.Value.MessageTs);
+            Assert.Equal("C6789", e.Value.ChannelId);
+            Assert.Equal("T2", e.TeamId);
+        }
+
+        [Fact]
+        public void AppContextChanged_UnknownType()
+        {
+            var appContext = Utility.AssertSubType<CallbackEvent, AppContextChanged>("Events_AppContextChanged_Unknown.json");
+            var context = appContext.Context;
+
+            Assert.NotNull(context);
+            Assert.Single(context.Entities);
+            Assert.IsType<UnknownContextEntity>(context.Entities[0]);
+
+            var e = (UnknownContextEntity)context.Entities[0];
+            Assert.NotNull(e.Raw);
+            Assert.Equal("slack#/types/unknown_type", (string)e.Raw["type"]);
+        }
     }
 }

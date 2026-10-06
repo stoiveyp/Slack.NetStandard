@@ -1,0 +1,13 @@
+{
+  "type": "app_context_changed",
+  "context": {
+    "entities": [
+      {
+        "type": "slack#/types/channel_id",
+        "value": "C12345",
+        "team_id": "T1",
+        "enterprise_id": "E1"
+      }
+    ]
+  }
+ }

@@ -1,0 +1,11 @@
+{
+  "type": "app_context_changed",
+  "context": {
+    "entities": [
+      {
+        "type": "slack#/types/unknown_type",
+        "value": "X"
+      }
+    ]
+  }
+}

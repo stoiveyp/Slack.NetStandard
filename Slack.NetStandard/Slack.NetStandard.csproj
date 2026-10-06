@@ -40,4 +40,8 @@
     <ProjectReference Include="..\Slack.NetStandard.Analyzers\Slack.NetStandard.Analyzers.csproj" PrivateAssets="all" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EventsApi\CallbackEvents\ContextEntities\" />
+  </ItemGroup>
+
 </Project>

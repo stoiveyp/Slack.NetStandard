@@ -1,0 +1,77 @@
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
+namespace Slack.NetStandard.EventsApi.CallbackEvents
+{
+    public class AppContextChanged : CallbackEvent
+    {
+        public const string EventType = "app_context_changed";
+
+        [JsonProperty("context")]
+        public AppContextChangedContext Context { get; set; }
+    }
+
+    [JsonConverter(typeof(Slack.NetStandard.JsonConverters.ContextEntityConverter))]
+    public abstract class ContextEntity
+    {
+        [JsonProperty("team_id")]
+        public string TeamId { get; set; }
+
+        [JsonProperty("enterprise_id")]
+        public string EnterpriseId { get; set; }
+    }
+
+    public class ChannelIdEntity : ContextEntity
+    {
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        [JsonProperty("value")]
+        public string Value { get; set; }
+    }
+
+    public class CanvasIdEntity : ContextEntity
+    {
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        [JsonProperty("value")]
+        public string Value { get; set; }
+    }
+
+    public class ListIdEntity : ContextEntity
+    {
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        [JsonProperty("value")]
+        public string Value { get; set; }
+    }
+
+    public class MessageContextEntity : ContextEntity
+    {
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        [JsonProperty("value")]
+        public MessageValue Value { get; set; }
+    }
+
+    public class MessageValue
+    {
+        [JsonProperty("message_ts")]
+        public string MessageTs { get; set; }
+
+        [JsonProperty("channel_id")]
+        public string ChannelId { get; set; }
+    }
+
+    public class UnknownContextEntity : ContextEntity
+    {
+        [JsonProperty("type")]
+        public string Type { get; set; }
+
+        [JsonIgnore]
+        public Newtonsoft.Json.Linq.JObject Raw { get; set; }
+    }
+}

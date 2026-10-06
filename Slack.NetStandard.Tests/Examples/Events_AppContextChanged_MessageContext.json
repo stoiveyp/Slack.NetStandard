@@ -1,0 +1,15 @@
+{
+  "type": "app_context_changed",
+  "context": {
+    "entities": [
+      {
+        "type": "slack#/types/message_context",
+        "value": {
+          "message_ts": "123.456",
+          "channel_id": "C6789"
+        },
+        "team_id": "T2"
+      }
+  }
+  ]
+}
