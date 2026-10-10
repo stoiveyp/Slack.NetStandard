@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
 {
@@ -14,10 +15,10 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
     [JsonConverter(typeof(Slack.NetStandard.JsonConverters.ContextEntityConverter))]
     public abstract class ContextEntity
     {
-        [JsonProperty("team_id")]
+        [JsonProperty("team_id", NullValueHandling = NullValueHandling.Ignore)]
         public string TeamId { get; set; }
 
-        [JsonProperty("enterprise_id")]
+        [JsonProperty("enterprise_id", NullValueHandling = NullValueHandling.Ignore)]
         public string EnterpriseId { get; set; }
     }
 
@@ -68,10 +69,7 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
 
     public class UnknownContextEntity : ContextEntity
     {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonIgnore]
-        public Newtonsoft.Json.Linq.JObject Raw { get; set; }
+        [JsonExtensionData]
+        public Dictionary<string, object> OtherFields { get; set; } = new();
     }
 }

@@ -17,7 +17,7 @@ namespace Slack.NetStandard.JsonConverters
             { "slack#/types/message_context", typeof(MessageContextEntity) }
         };
 
-        public override bool CanWrite => true;
+        public override bool CanWrite => false;
 
         public override ContextEntity ReadJson(JsonReader reader, Type objectType, ContextEntity existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
@@ -27,32 +27,19 @@ namespace Slack.NetStandard.JsonConverters
 
             var type = jo.Value<string>("type");
 
-            if (type != null && TypeMap.TryGetValue(type, out var targetType))
+            if (type == null || !TypeMap.TryGetValue(type, out var targetType))
             {
-                var obj = (ContextEntity)jo.ToObject(targetType, serializer);
-                return obj;
+                targetType = typeof(UnknownContextEntity);
             }
 
-            var unknown = jo.ToObject<UnknownContextEntity>(serializer) ?? new UnknownContextEntity();
-            unknown.Raw = jo;
-            return unknown;
+            var obj = (ContextEntity)Activator.CreateInstance(targetType);
+            serializer.Populate(jo.CreateReader(), obj);
+            return obj;
         }
 
         public override void WriteJson(JsonWriter writer, ContextEntity value, JsonSerializer serializer)
         {
-            if (value == null)
-            {
-                writer.WriteNull();
-                return;
-            }
-
-            if (value is UnknownContextEntity unknown && unknown.Raw != null)
-            {
-                unknown.Raw.WriteTo(writer);
-                return;
-            }
-
-            serializer.Serialize(writer, value, value.GetType());
+            throw new NotImplementedException();
         }
     }
 }

@@ -593,11 +593,9 @@ namespace Slack.NetStandard.Tests
 
             Assert.NotNull(context);
             Assert.Single(context.Entities);
-            Assert.IsType<UnknownContextEntity>(context.Entities[0]);
+            var unknown = Assert.IsType<UnknownContextEntity>(context.Entities[0]);
 
-            var e = (UnknownContextEntity)context.Entities[0];
-            Assert.NotNull(e.Raw);
-            Assert.Equal("slack#/types/unknown_type", (string)e.Raw["type"]);
+            Assert.NotEmpty(unknown.OtherFields);
         }
     }
 }
