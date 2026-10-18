@@ -1,0 +1,10 @@
+{
+  "channel": "C0123ABC456",
+  "event_ts": "1783536983.783769",
+  "previous_title": "Scuba diving research",
+  "team_id": "T0123ABC456",
+  "thread_ts": "1782234671.392669",
+  "title": "Bora Bora trip prep",
+  "type": "agent_session_title_changed",
+  "user": "U123ABC456"
+}

@@ -113,6 +113,8 @@ namespace Slack.NetStandard.JsonConverters
                 AssistantThreadStarted.EventType => new AssistantThreadStarted(),
                 AssistantThreadContextChanged.EventType => new AssistantThreadContextChanged(),
                 AppContextChanged.EventType => new AppContextChanged(),
+                AgentSessionTitleChanged.EventType => new AgentSessionTitleChanged(),
+                AgentSessionStopped.EventType => new AgentSessionStopped(),
                 _ => new CallbackEvent()
             };
         }

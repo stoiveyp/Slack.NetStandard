@@ -597,5 +597,33 @@ namespace Slack.NetStandard.Tests
 
             Assert.NotEmpty(unknown.OtherFields);
         }
+
+        [Fact]
+        public void AgentSessionTitleChanged()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, AgentSessionTitleChanged>("Events_AgentSessionTitleChanged.json");
+            Assert.Null(result.OtherFields);
+            Assert.Equal("C0123ABC456", result.Channel);
+            Assert.Equal("Bora Bora trip prep", result.Title);
+            Assert.Equal("Scuba diving research", result.PreviousTitle);
+            Assert.Equal("U123ABC456", result.User);
+            Assert.Equal("T0123ABC456", result.TeamId);
+            Assert.Equal("1782234671.392669", result.ThreadTimestamp.ToString());
+            Assert.Equal("1783536983.783769", result.EventTimestamp.ToString());
+        }
+
+        [Fact]
+        public void AgentSessionStopped()
+        {
+            var result = Utility.AssertSubType<CallbackEvent, AgentSessionStopped>("Events_AgentSessionStopped.json");
+            Assert.Null(result.OtherFields);
+            Assert.Equal("C0123ABC456", result.Channel);
+            Assert.Equal("U123ABC456", result.User);
+            Assert.Equal("1782234671.392669", result.ThreadTimestamp.ToString());
+            Assert.Equal("1783536983.783769", result.EventTimestamp.ToString());
+            Assert.NotNull(result.StreamingMessageTs);
+            Assert.Single(result.StreamingMessageTs);
+            Assert.Equal("1782234987.693923", result.StreamingMessageTs[0].ToString());
+        }
     }
 }
