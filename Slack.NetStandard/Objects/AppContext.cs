@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using Slack.NetStandard.EventsApi.CallbackEvents;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Slack.NetStandard.EventsApi.CallbackEvents
+namespace Slack.NetStandard.Objects
 {
-    public class AppContextChangedContext
+    public class AppContext
     {
         [JsonProperty("entities")]
         public List<ContextEntity> Entities { get; set; } = new List<ContextEntity>();

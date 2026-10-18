@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Slack.NetStandard.Objects;
 using System.Collections.Generic;
 
 namespace Slack.NetStandard.EventsApi.CallbackEvents
@@ -9,7 +10,7 @@ namespace Slack.NetStandard.EventsApi.CallbackEvents
         public const string EventType = "app_context_changed";
 
         [JsonProperty("context")]
-        public AppContextChangedContext Context { get; set; }
+        public AppContext Context { get; set; }
     }
 
     [JsonConverter(typeof(Slack.NetStandard.JsonConverters.ContextEntityConverter))]

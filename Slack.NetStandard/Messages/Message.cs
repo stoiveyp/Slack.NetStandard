@@ -25,6 +25,9 @@ namespace Slack.NetStandard.Messages
         [JsonProperty("channel_type", NullValueHandling = NullValueHandling.Ignore)]
         public string ChannelType { get; set; }
 
+        [JsonProperty("context", NullValueHandling = NullValueHandling.Ignore)]
+        public AppContext Context { get; set; }
+
         [JsonProperty("user", NullValueHandling = NullValueHandling.Ignore)]
         public string User { get; set; }
 
